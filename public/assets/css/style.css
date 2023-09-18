@@ -20,6 +20,7 @@
 
 :root {
     --primary-color: 226, 92, 39;
+    --light-color: 255, 255, 255;
     --dark-color: 48, 48, 48;
     --red-color: 213, 80, 81;
     --yellow-color: 246, 196, 106;
@@ -46,9 +47,89 @@
     font-family: var(--urbanist-medium);
 }
 
+button,
+input {
+    border: none;
+    outline: none;
+    stroke: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin-bottom: 0;
+}
+
 body {
     overflow-x: hidden;
 }
 
 /* LOGIN PAGE */
+.login .banner-login {
+    background-image: url('../img/login/banner.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.login .content-login {
+    width: 100%;
+    height: 100vh;
+    padding: 40px;
+}
+
+.login .login-brand {
+    width: 260px;
+    margin-bottom: 48px;
+}
+
+.login .input-wrapper {
+    position: relative;
+}
+
+.login .input-wrapper label {
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    font-size: 0.813rem;
+    font-family: var(--urbanist-regular);
+    color: rgba(var(--dark-color), 0.52);
+    padding: 0 10px;
+    background-color: rgba(var(--light-color), 1);
+    z-index: 2;
+}
+
+.login .input-wrapper input {
+    position: relative;
+    padding: 20px;
+    border-radius: var(--rounded-md);
+    border: var(--border-style);
+    outline: none;
+    stroke: none;
+    color: rgba(var(--dark-color), 1);
+    font-size: 0.938rem;
+    background-color: rgba(var(--light-color), 1);
+    width: 100%;
+}
+
+.login .row-button {
+    margin-bottom: 24px;
+}
+
+.login .button-primary-full {
+    padding: 19px;
+    border-radius: var(--rounded-md);
+    background-color: rgba(var(--primary-color), 1);
+    color: rgba(var(--light-color), 1);
+    font-size: 0.938rem;
+    width: 100%;
+    text-align: center;
+}
+
+.login .button-primary-full:hover {
+    filter: contrast(120%);
+}
 /* END LOGIN PAGE */
