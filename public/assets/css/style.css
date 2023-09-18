@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'urbanist-bold';
+    src: url('../font/Urbanist-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'urbanist-semibold';
+    src: url('../font/Urbanist-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'urbanist-medium';
+    src: url('../font/Urbanist-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'urbanist-regular';
+    src: url('../font/Urbanist-Regular.ttf') format('truetype');
+}
+
+:root {
+    --primary-color: 226, 92, 39;
+    --dark-color: 48, 48, 48;
+    --red-color: 213, 80, 81;
+    --yellow-color: 246, 196, 106;
+    --blue-color: 84, 125, 226;
+    --green-color: 17, 159, 137;
+
+    --urbanist-bold: 'urbanist-bold', Arial, Helvetica, sans-serif;
+    --urbanist-semibold: 'urbanist-semibold', Arial, Helvetica, sans-serif;
+    --urbanist-medium: 'urbanist-medium', Arial, Helvetica, sans-serif;
+    --urbanist-regular: 'urbanist-regular', Arial, Helvetica, sans-serif;
+
+    --animation-duration: 250ms;
+    --border-style: 1px solid rgba(48, 48, 48, 0.12);
+    --rounded-xl: 12px;
+    --rounded-lg: 10px;
+    --rounded-md: 8px;
+    --rounded-sm: 6px;
+    --rounded-sx: 4px;
+}
+
+* {
+    transition: var(--animation-duration);
+    color: rgba(var(--dark-color), 1);
+    font-family: var(--urbanist-medium);
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* LOGIN PAGE */
+/* END LOGIN PAGE */
