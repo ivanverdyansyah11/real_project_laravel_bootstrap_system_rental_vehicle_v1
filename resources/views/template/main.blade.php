@@ -15,34 +15,13 @@
 
 <body>
 
-    <div class="container-fluid p-0 login">
-        <div class="row justify-content-center justify-content-lg-end">
-            <div class="col banner-login d-none d-lg-inline-block"></div>
-            <div class="col-md-9 col-lg-5 col-xl-4">
-                <div class="content-login d-flex align-items-center flex-column">
-                    <img src="{{ asset('assets/img/brand/brand-text.svg') }}" alt="Brand Nusa Kendala Logo Teks"
-                        class="img-fluid login-brand" draggable="false">
-                    <form class="form d-inline-block w-100">
-                        <div class="row">
-                            <div class="col-12 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="email">Email</label>
-                                    <input type="email" id="email" class="input" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-12 row-button">
-                                <div class="input-wrapper">
-                                    <label for="password">Password</label>
-                                    <input type="password" id="password" class="input" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="button-primary-full">Login</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <div class="container-fluid dashboard p-0 d-flex">
+        @include('components.sidebar')
+
+        <div class="content-dashboard">
+            @include('components.topbar')
+
+            @yield('container')
         </div>
     </div>
 

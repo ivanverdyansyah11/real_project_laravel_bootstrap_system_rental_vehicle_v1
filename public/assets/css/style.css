@@ -133,3 +133,205 @@ body {
     filter: contrast(120%);
 }
 /* END LOGIN PAGE */
+
+
+/* SIDEBAR STYLE */
+.sidebar {
+    width: 230px;
+    border-right: var(--border-style);
+    background-color: rgba(var(--light-color), 1);
+    min-height: 100vh;
+    padding: 0 26px;
+}
+
+.sidebar .sidebar-scroll {
+    overflow-y: scroll;
+    width: 100%;
+    height: 100vh;
+    padding: 40px 0;
+}
+
+.sidebar .sidebar-menu-bottom {
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: var(--border-style);
+}
+
+.sidebar .brand-logo {
+    width: 72px;
+    margin-bottom: 36px;
+}
+
+.sidebar .link-wrapper {
+    gap: 6px;
+}
+
+.sidebar .menu-link {
+    background-color: rgba(var(--dark-color), 0.05);
+    border-radius: 12px;
+    padding: 7px 14px 7px 7px;
+    gap: 8px;
+}
+
+.sidebar .link-item,
+.sidebar .link-item .wrapper {
+    gap: 16px;
+    border: none;
+    outline: none;
+    stroke: none;
+    background-color: transparent;
+}
+
+.sidebar .link-item p {
+    color: rgba(var(--dark-color), 0.62);
+    font-size: 0.938rem;
+}
+
+.sidebar .menu-link.active .link-item p,
+.sidebar .menu-link:hover .link-item p {
+    color: rgba(var(--dark-color), 1);
+}
+
+.sidebar .icon-sidebar-wrapper {
+    padding: 11px;
+    background-color: transparent;
+    border-radius: 8px;
+}
+
+.sidebar .menu-link.active .icon-sidebar-wrapper,
+.sidebar .menu-link:hover .icon-sidebar-wrapper {
+    /* background-color: rgba(var(--dark-color), 0.05); */
+    background-color:rgba(28, 163, 222, 1);
+}
+
+.sidebar .sidebar-icon {
+    width: 18px;
+    height: 18px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.sidebar .sidebar-icon.dashboard-icon {
+    background-image: url('../img/sidebar/dashboard.svg');
+}
+
+.sidebar .sidebar-icon.beranda-icon {
+    background-image: url('../img/sidebar/beranda.svg');
+}
+
+.sidebar .sidebar-icon.profil-icon {
+    background-image: url('../img/sidebar/profil.svg');
+}
+
+.sidebar .sidebar-icon.akademik-icon {
+    background-image: url('../img/sidebar/akademik.svg');
+}
+
+.sidebar .sidebar-icon.kesiswaan-icon {
+    background-image: url('../img/sidebar/kesiswaan.svg');
+}
+
+.sidebar .sidebar-icon.sarana-icon {
+    background-image: url('../img/sidebar/sarana.svg');
+}
+
+.sidebar .sidebar-icon.humas-icon {
+    background-image: url('../img/sidebar/humas.svg');
+}
+
+.sidebar .sidebar-icon.setting-icon {
+    background-image: url('../img/sidebar/setting.svg');
+}
+
+.sidebar .sidebar-icon.logout-icon {
+    background-image: url('../img/sidebar/logout.svg');
+}
+
+.sidebar .menu-link.active .sidebar-icon.dashboard-icon,
+.sidebar .menu-link:hover .sidebar-icon.dashboard-icon {
+    background-image: url('../img/sidebar/dashboard-active.svg');
+}
+
+.sidebar .menu-link.active .sidebar-icon.beranda-icon,
+.sidebar .menu-link:hover .sidebar-icon.beranda-icon {
+    background-image: url('../img/sidebar/beranda-active.svg');
+}
+
+.sidebar .menu-link.active .sidebar-icon.profil-icon,
+.sidebar .menu-link:hover .sidebar-icon.profil-icon {
+    background-image: url('../img/sidebar/profil-active.svg');
+}
+
+.sidebar .menu-link.active .sidebar-icon.akademik-icon,
+.sidebar .menu-link:hover .sidebar-icon.akademik-icon {
+    background-image: url('../img/sidebar/akademik-active.svg');
+}
+
+.sidebar .menu-link.active .sidebar-icon.kesiswaan-icon,
+.sidebar .menu-link:hover .sidebar-icon.kesiswaan-icon {
+    background-image: url('../img/sidebar/kesiswaan-active.svg');
+}
+
+.sidebar .menu-link.active .sidebar-icon.sarana-icon,
+.sidebar .menu-link:hover .sidebar-icon.sarana-icon {
+    background-image: url('../img/sidebar/sarana-active.svg');
+}
+
+.sidebar .menu-link.active .sidebar-icon.humas-icon,
+.sidebar .menu-link:hover .sidebar-icon.humas-icon {
+    background-image: url('../img/sidebar/humas-active.svg');
+}
+
+.sidebar .menu-link.active .sidebar-icon.setting-icon,
+.sidebar .menu-link:hover .sidebar-icon.setting-icon {
+    background-image: url('../img/sidebar/setting-active.svg');
+}
+
+.sidebar .menu-link.active .sidebar-icon.logout-icon,
+.sidebar .menu-link:hover .sidebar-icon.logout-icon {
+    background-image: url('../img/sidebar/logout-active.svg');
+}
+
+.sidebar .wrapper-arrow {
+    padding: 5px;
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+.sidebar .menu-link.active .wrapper-arrow,
+.sidebar .menu-link:hover .wrapper-arrow {
+    background-color: rgba(var(--dark-color), 0.05);
+}
+
+.sidebar .arrow-sidebar-icon {
+    width: 9px;
+    height: 9px;
+    background-image: url('../img/icon/arrow-down.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.62;
+}
+
+.sidebar .menu-link.active .arrow-sidebar-icon,
+.sidebar .menu-link:hover .arrow-sidebar-icon {
+    opacity: 1;
+}
+
+.sidebar .link-child {
+    padding: 11px 11px 11px 56px;
+    font-size: 0.875rem;
+    color: rgba(var(--dark-color), 0.62);
+    display: none;
+}
+
+.sidebar .menu-link.active .link-child {
+    display: inline-block;
+}
+
+.sidebar .link-child.active,
+.sidebar .link-child:hover {
+    color: rgba(var(--dark-color), 1);
+}
+/* END SIDEBAR STYLE */
