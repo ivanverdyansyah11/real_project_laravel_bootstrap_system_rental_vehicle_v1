@@ -19,9 +19,9 @@
         @include('components.sidebar')
 
         <div class="content-dashboard">
-            @include('components.topbar')
+            {{-- @include('components.topbar') --}}
 
-            @yield('container')
+            @yield('content')
         </div>
     </div>
 
