@@ -18,8 +18,8 @@
     <div class="container-fluid dashboard p-0 d-flex">
         @include('components.sidebar')
 
-        <div class="content-dashboard">
-            {{-- @include('components.topbar') --}}
+        <div class="content-dashboard w-100">
+            @include('components.topbar')
 
             @yield('content')
         </div>

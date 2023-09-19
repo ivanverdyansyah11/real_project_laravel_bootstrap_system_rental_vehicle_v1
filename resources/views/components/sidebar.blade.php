@@ -79,6 +79,27 @@
                         <p>Laporan</p>
                     </div>
                 </a>
+                <a href=""
+                    class="menu-link d-inline-block d-lg-none flex-column {{ Request::is('pengguna*') ? 'active' : '' }}">
+                    <div class="link-item d-flex align-items-center">
+                        <div class="icon-sidebar-wrapper">
+                            <div class="sidebar-icon pengguna-icon"></div>
+                        </div>
+                        <p>Pengguna</p>
+                    </div>
+                </a>
+                <form class="w-100">
+                    @csrf
+                    <button type="submit"
+                        class="menu-link w-100 d-inline-block d-lg-none flex-column {{ Request::is('logout*') ? 'active' : '' }}">
+                        <div class="link-item d-flex align-items-center">
+                            <div class="icon-sidebar-wrapper">
+                                <div class="sidebar-icon logout-icon"></div>
+                            </div>
+                            <p>Logout</p>
+                        </div>
+                    </button>
+                </form>
             </div>
         </div>
     </div>

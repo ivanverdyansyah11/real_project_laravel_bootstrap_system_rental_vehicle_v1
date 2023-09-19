@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/login');
-
 Route::fallback(function () {
     return redirect('/login');
 });
