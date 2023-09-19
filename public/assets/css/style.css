@@ -218,8 +218,8 @@ body {
 }
 
 .sidebar .sidebar-icon {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -356,7 +356,6 @@ body {
     padding: 24px 60px 24px 50px;
     border-bottom: var(--border-style);
     width: 100%;
-    margin-bottom: 32px;
 }
 
 .topbar .title {
@@ -502,6 +501,81 @@ body {
 /* END TOPBAR STYLE */
 
 
+/* ALERT STYLE */
+.alert.alert-success.alert-dashboard {
+    background-color: rgba(var(--primary-color), 0.08) !important;
+    border: 1px solid rgba(var(--primary-color), 0.16) !important;
+}
+
+.alert.alert-success.alert-dashboard .link-alert {
+    font-size: 0.875rem;
+    color: rgba(var(--primary-color), 1);
+    text-decoration: none;
+}
+
+.alert.alert-success.alert-dashboard .link-alert:hover {
+    text-decoration: underline;
+}
+/* END ALERT STYLE */
+
+
+/* CONTENT DASHBOARD STYLE */
+.content {
+    padding: 32px 60px 32px 50px;
+    width: 100%;
+}
+
+.content .card-default {
+    padding: 16px;
+    background-color: rgba(var(--light-color), 1);
+    border-radius: var(--rounded-lg);
+    border: var(--border-style);
+}
+
+.content .card-caption .caption-name {
+    font-size: 0.938rem;
+    color: rgba(var(--dark-color), 0.52);
+    margin-bottom: 24px;
+}
+
+.content .card-caption .caption-value {
+    font-size: 1.5rem;
+    font-family: var(--urbanist-semibold);
+    color: rgba(var(--dark-color), 1);
+}
+
+.content .card-default .wrapper-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--rounded-md);
+    border: 1px solid rgba(var(--primary-color), 0.16);
+    background-color: rgba(var(--primary-color), 0.08);
+}
+
+.content .card-default.card-other .caption-name {
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+
+.content .card-default.card-other .link-dashboard {
+    font-size: 0.813rem;
+    color: rgba(var(--dark-color), 0.52);
+    text-decoration: none;
+    height: fit-content;
+    width: fit-content;
+}
+
+.content .card-default.card-other .link-dashboard:hover {
+    text-decoration: underline;
+}
+
+.content .card-default.card-other .caption-value span {
+    font-size: 0.875rem;
+    color: rgba(var(--dark-color), 0.52);
+}
+/* END CONTENT DASHBOARD STYLE */
+
+
 /* BREAKPOINT STYLE */
 @media (max-width: 991.98px) {
     .sidebar {
@@ -515,6 +589,10 @@ body {
     }
 
     .topbar {
+        padding: 24px;
+    }
+
+    .content {
         padding: 24px;
     }
 }
