@@ -18,7 +18,8 @@
         </div>
         <div class="popup-topbar position-absolute d-flex flex-column">
             <div class="modal-topbar">
-                <a href="" class="wrapper d-flex align-items-center mb-2">
+                <a href=""
+                    class="wrapper d-flex align-items-center mb-2 {{ Request::is('pengguna*') ? 'active' : '' }}">
                     <div class="wrapper-topbar">
                         <div class="pengguna-topbar"></div>
                     </div>

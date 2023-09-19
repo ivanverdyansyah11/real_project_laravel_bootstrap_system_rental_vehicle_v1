@@ -89,53 +89,6 @@ body {
     width: 260px;
     margin-bottom: 48px;
 }
-
-.login .input-wrapper {
-    position: relative;
-}
-
-.login .input-wrapper label {
-    position: absolute;
-    top: -8px;
-    left: 12px;
-    font-size: 0.813rem;
-    font-family: var(--urbanist-regular);
-    color: rgba(var(--dark-color), 0.52);
-    padding: 0 10px;
-    background-color: rgba(var(--light-color), 1);
-    z-index: 2;
-}
-
-.login .input-wrapper input {
-    position: relative;
-    padding: 20px;
-    border-radius: var(--rounded-md);
-    border: var(--border-style);
-    outline: none;
-    stroke: none;
-    color: rgba(var(--dark-color), 1);
-    font-size: 0.938rem;
-    background-color: rgba(var(--light-color), 1);
-    width: 100%;
-}
-
-.login .row-button {
-    margin-bottom: 24px;
-}
-
-.login .button-primary-full {
-    padding: 19px;
-    border-radius: var(--rounded-md);
-    background-color: rgba(var(--primary-color), 1);
-    color: rgba(var(--light-color), 1);
-    font-size: 0.938rem;
-    width: 100%;
-    text-align: center;
-}
-
-.login .button-primary-full:hover {
-    filter: contrast(120%);
-}
 /* END LOGIN PAGE */
 
 
@@ -147,6 +100,7 @@ body {
     background-color: rgba(var(--light-color), 1);
     min-height: 100vh;
     padding: 0 26px;
+    z-index: 10;
 }
 
 .sidebar .sidebar-scroll {
@@ -490,11 +444,14 @@ body {
     color: rgba(var(--dark-color), 0.52);
 }
 
+.topbar .popup-topbar .modal-topbar .wrapper.active > .wrapper-topbar .pengguna-topbar,
+.topbar .popup-topbar .modal-topbar .wrapper.active > .wrapper-topbar .logout-topbar,
 .topbar .popup-topbar .modal-topbar .wrapper:hover > .wrapper-topbar .pengguna-topbar,
 .topbar .popup-topbar .modal-topbar .wrapper:hover > .wrapper-topbar .logout-topbar {
     opacity: 1;
 }
 
+.topbar .popup-topbar .modal-topbar .wrapper.active > p,
 .topbar .popup-topbar .modal-topbar .wrapper:hover > p {
     color: rgba(var(--dark-color), 1);
 }
@@ -503,6 +460,7 @@ body {
 
 /* ALERT STYLE */
 .alert.alert-success.alert-dashboard {
+    z-index: 2 !important;
     background-color: rgba(var(--primary-color), 0.08) !important;
     border: 1px solid rgba(var(--primary-color), 0.16) !important;
 }
@@ -574,6 +532,188 @@ body {
     color: rgba(var(--dark-color), 0.52);
 }
 /* END CONTENT DASHBOARD STYLE */
+
+
+/* CONTENT STYLE */
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper label {
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    font-size: 0.813rem;
+    font-family: var(--urbanist-regular);
+    color: rgba(var(--dark-color), 0.52);
+    padding: 0 10px;
+    background-color: rgba(var(--light-color), 1);
+    z-index: 2;
+}
+
+.input-wrapper input {
+    position: relative;
+    padding: 20px;
+    border-radius: var(--rounded-md);
+    border: var(--border-style);
+    outline: none;
+    stroke: none;
+    color: rgba(var(--dark-color), 1);
+    font-size: 0.938rem;
+    background-color: rgba(var(--light-color), 1);
+    width: 100%;
+}
+
+.row-button {
+    margin-bottom: 24px;
+}
+
+.button-primary,
+.button-primary-full {
+    padding: 12px 16px;
+    border-radius: var(--rounded-md);
+    background-color: rgba(var(--primary-color), 1);
+    color: rgba(var(--light-color), 1);
+    text-align: center;
+    gap: 10px;
+    font-size: 0.875rem;
+    font-family: var(--urbanist-regular);
+}
+
+.button-primary-full {
+    width: 100%;
+    padding: 19px;
+    font-size: 0.938rem;
+}
+
+.button-primary:hover,
+.button-primary-full:hover {
+    filter: contrast(120%);
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    font-family: var(--urbanist-semibold);
+}
+
+.table-default {
+    border: var(--border-style);
+    width: 100%;
+    border-radius: var(--rounded-xl) !important;
+    margin: 0;
+}
+
+.table-default .table-row {
+    padding: 16px 24px;
+}
+
+.table-default .table-header {
+    background-color: rgba(var(--dark-color), 1);
+    border-top-left-radius: var(--rounded-xl) !important;
+    border-top-right-radius: var(--rounded-xl) !important;
+    padding: 20px 24px;
+}
+
+.table-default .table-header .data-header {
+    color: rgba(var(--light-color), 1);
+}
+
+.table-default .table-border {
+    position: relative;
+}
+
+.table-default .table-border::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 97.2%;
+    height: 1px;
+    background-color: transparent;
+    border-top: var(--border-style);
+}
+
+.table-default .data-header,
+.table-default .data-header span,
+.table-default .data-value {
+    color: rgba(var(--dark-color), 0.52);
+    font-size: 0.938rem;
+}
+
+.table-default .data-value {
+    color: rgba(var(--dark-color), 1);
+}
+
+.table-default .data-value.data-length {
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical;
+}
+
+.table-default .wrapper-action {
+    gap: 6px;
+}
+
+.table-default .button-action {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--rounded-sm);
+    border: none;
+    outline: none;
+    stroke: none;
+}
+
+.table-default .button-action.button-detail {
+    background-color: rgba(var(--blue-color), 0.12);
+    border: var(--border-style);
+    border-color: transparent;
+}
+
+.table-default .button-action.button-detail:hover {
+    border: 1px solid rgba(var(--blue-color), 0.24);
+}
+
+.table-default .button-action.button-edit {
+    background-color: rgba(var(--yellow-color), 0.12);
+    border: var(--border-style);
+    border-color: transparent;
+}
+
+.table-default .button-action.button-edit:hover {
+    border: 1px solid rgba(var(--yellow-color), 0.24);
+}
+
+.table-default .button-action.button-delete {
+    background-color: rgba(var(--red-color), 0.12);
+    border: var(--border-style);
+    border-color: transparent;
+}
+
+.table-default .button-action.button-delete:hover {
+    border: 1px solid rgba(var(--red-color), 0.24);
+}
+
+.table-default .detail-icon,
+.table-default .edit-icon,
+.table-default .delete-icon {
+    width: 16px;
+    height: 16px;
+    background-image: url('../img/button/detail.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.table-default .edit-icon {
+    background-image: url('../img/button/edit.svg');
+}
+
+.table-default .delete-icon {
+    background-image: url('../img/button/delete.svg');
+}
+/* END CONTENT STYLE */
 
 
 /* BREAKPOINT STYLE */
