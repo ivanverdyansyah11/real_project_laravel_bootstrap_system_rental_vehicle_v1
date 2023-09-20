@@ -123,7 +123,7 @@
                         </div>
                         <div class="col-12">
                             <div class="button-wrapper d-flex">
-                                <button type="submit" class="button-primary">Tambah Jenis</button>
+                                <button type="submit" class="button-primary">Tambah Brand</button>
                                 <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal
                                     Tambah</button>
                             </div>
