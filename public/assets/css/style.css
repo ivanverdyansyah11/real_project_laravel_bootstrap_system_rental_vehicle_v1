@@ -495,11 +495,6 @@ body {
     margin-bottom: 12px;
 }
 
-.modal .button-wrapper {
-    width: 100%;
-    gap: 8px;
-}
-
 .modal .caption-description {
     font-size: 0.938rem;
     color: rgba(var(--dark-color), 0.52);
@@ -863,6 +858,11 @@ body {
 
 .card-product .wrapper-button {
     gap: var(--rounded-md);
+}
+
+.button-wrapper {
+    width: 100%;
+    gap: 8px;
 }
 /* END CONTENT STYLE */
 

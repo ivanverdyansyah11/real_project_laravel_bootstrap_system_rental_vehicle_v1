@@ -42,9 +42,9 @@ Route::middleware('guest')->group(function () {
     // KENDARAAN DISEWA
     Route::controller(PenambahanSewaController::class)->group(function () {
         Route::get('/kendaraan-disewa', 'index')->name('penambahanSewa');
-        Route::get('/kendaraan-disewa/nota-sewa/{id}', 'detail')->name('penambahanSewa.detail');
+        Route::get('/kendaraan-disewa/nota-sewa', 'detail')->name('penambahanSewa.detail');
 
-        Route::get('/kendaraan-disewa/tambah-sewa/{id}', 'edit')->name('penambahanSewa.edit');
-        Route::post('/kendaraan-disewa/tambah-sewa/{id}', 'update')->name('penambahanSewa.update');
+        Route::get('/kendaraan-disewa/tambah-sewa', 'edit')->name('penambahanSewa.edit');
+        Route::post('/kendaraan-disewa/tambah-sewa', 'update')->name('penambahanSewa.update');
     });
 });

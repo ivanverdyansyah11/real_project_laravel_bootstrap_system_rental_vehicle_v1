@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col-12 d-flex justify-content-between align-items-center p-0">
+            <div class="col-12 d-flex justify-content-between align-items-center">
                 <form class="form-search">
                     @csrf
                     <input type="text" class="input-search" placeholder=" ">
@@ -44,8 +44,9 @@
                             <h6 class="product-price">Rp. 500.000</h6>
                         </div>
                         <div class="wrapper-button d-flex flex-column">
-                            <a href="" class="button-primary w-100">Tambah Sewa</a>
-                            <a href="" class="button-primary-blur w-100">Lihat Nota</a>
+                            <a href="{{ route('penambahanSewa.edit', 1) }}" class="button-primary w-100">Tambah Sewa</a>
+                            <a href="{{ route('penambahanSewa.detail', 1) }}" class="button-primary-blur w-100">Lihat
+                                Nota</a>
                         </div>
                     </div>
                 </div>

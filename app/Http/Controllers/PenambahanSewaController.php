@@ -13,7 +13,7 @@ class PenambahanSewaController extends Controller
         ]);
     }
 
-    public function edit($id)
+    public function edit()
     {
         return view('penambahan-sewa.edit', [
             'title' => 'Kendaraan Disewa',
