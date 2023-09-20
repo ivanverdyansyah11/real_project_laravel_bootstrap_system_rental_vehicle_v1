@@ -110,44 +110,22 @@
         </div>
     </div>
 
-    {{-- MODAL TAMBAH PENGGUNA --}}
+    {{-- MODAL TAMBAH JENIS KENDARAAN --}}
     <div class="modal fade" id="tambahJenisModal" tabindex="-1" aria-labelledby="tambahJenisModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Tambah Pengguna Baru</h3>
+                <h3 class="title">Tambah Jenis Kendaraan Baru</h3>
                 <form class="form d-inline-block w-100">
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="nama">Nama Lengkap</label>
+                                <label for="nama">Nama Jenis Kendaraan</label>
                                 <input type="text" id="nama" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-12 row-button">
-                            <div class="input-wrapper">
-                                <label for="role">Role</label>
-                                <select id="role" class="input">
-                                    <option value="-">Pilih role pengguna</option>
-                                    <option value="staff">Staff</option>
-                                    <option value="owner">Owner</option>
-                                </select>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="button-wrapper d-flex">
-                                <button type="submit" class="button-primary">Tambah Pengguna</button>
+                                <button type="submit" class="button-primary">Tambah Jenis</button>
                                 <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal
                                     Tambah</button>
                             </div>
@@ -157,42 +135,20 @@
             </div>
         </div>
     </div>
-    {{-- END MODAL TAMBAH PENGGUNA --}}
+    {{-- END MODAL TAMBAH JENIS KENDARAAN --}}
 
-    {{-- MODAL DETAIL PENGGUNA --}}
+    {{-- MODAL DETAIL JENIS KENDARAAN --}}
     <div class="modal fade" id="detailJenisModal" tabindex="-1" aria-labelledby="detailJenisModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Detail Pengguna</h3>
+                <h3 class="title">Detail Jenis Kendaraan</h3>
                 <form class="form d-inline-block w-100">
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="nama">Nama Lengkap</label>
+                                <label for="nama">Nama Jenis Kendaraan</label>
                                 <input type="text" id="nama" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-12 row-button">
-                            <div class="input-wrapper">
-                                <label for="role">Role</label>
-                                <select id="role" class="input">
-                                    <option value="-">Pilih role pengguna</option>
-                                    <option value="staff">Staff</option>
-                                    <option value="owner">Owner</option>
-                                </select>
                             </div>
                         </div>
                         <div class="col-12">
@@ -203,42 +159,20 @@
             </div>
         </div>
     </div>
-    {{-- END MODAL DETAIL PENGGUNA --}}
+    {{-- END MODAL DETAIL JENIS KENDARAAN --}}
 
-    {{-- MODAL EDIT PENGGUNA --}}
+    {{-- MODAL EDIT JENIS KENDARAAN --}}
     <div class="modal fade" id="editJenisModal" tabindex="-1" aria-labelledby="editJenisModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Edit Pengguna</h3>
+                <h3 class="title">Edit Jenis Kendaraan</h3>
                 <form class="form d-inline-block w-100">
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="nama">Nama Lengkap</label>
+                                <label for="nama">Nama Jenis Kendaraan</label>
                                 <input type="text" id="nama" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-12 row-button">
-                            <div class="input-wrapper">
-                                <label for="role">Role</label>
-                                <select id="role" class="input">
-                                    <option value="-">Pilih role pengguna</option>
-                                    <option value="staff">Staff</option>
-                                    <option value="owner">Owner</option>
-                                </select>
                             </div>
                         </div>
                         <div class="col-12">
@@ -253,28 +187,29 @@
             </div>
         </div>
     </div>
-    {{-- END MODAL EDIT PENGGUNA --}}
+    {{-- END MODAL EDIT JENIS KENDARAAN --}}
 
-    {{-- MODAL HAPUS PENGGUNA --}}
+    {{-- MODAL HAPUS JENIS KENDARAAN --}}
     <div class="modal modal-delete fade" id="hapusJenisModal" tabindex="-1" aria-labelledby="hapusJenisModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Hapus Pengguna</h3>
+                <h3 class="title">Hapus Jenis Kendaraan</h3>
                 <form class="form d-inline-block w-100">
-                    <p class="caption-description row-button">Konfirmasi Penghapusan Pengguna: Apakah Anda yakin ingin
-                        menghapus pengguna ini?
-                        Tindakan ini tidak dapat diurungkan, dan pengguna akan dihapus secara permanen dari sistem.
+                    <p class="caption-description row-button">Konfirmasi Penghapusan Jenis Kendaraan: Apakah Anda yakin
+                        ingin
+                        menghapus jenis kendaraan ini?
+                        Tindakan ini tidak dapat diurungkan, dan jenis kendaraan akan dihapus secara permanen dari sistem.
                     </p>
                     <div class="button-wrapper d-flex">
-                        <button type="submit" class="button-primary">Hapus Pengguna</button>
+                        <button type="submit" class="button-primary">Hapus Jenis</button>
                         <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal Hapus</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    {{-- END MODAL HAPUS PENGGUNA --}}
+    {{-- END MODAL HAPUS JENIS KENDARAAN --}}
 
     <script>
         const buttonOther = document.querySelector('.button-other');
