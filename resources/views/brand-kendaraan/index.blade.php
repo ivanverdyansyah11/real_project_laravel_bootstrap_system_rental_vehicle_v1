@@ -17,10 +17,10 @@
         </div>
         <div class="row mb-4">
             <div class="col-12 d-flex justify-content-between align-items-center">
-                <h5 class="subtitle">Data Jenis Kendaraan</h5>
+                <h5 class="subtitle">Data Brand Kendaraan</h5>
                 <div class="wrapper d-flex gap-2 mt-3 mt-md-0 align-items-center">
                     <button type="button" class="button-primary d-none d-md-flex align-items-center" data-bs-toggle="modal"
-                        data-bs-target="#tambahJenisModal">
+                        data-bs-target="#tambahBrandModal">
                         <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
                         Tambah
                     </button>
@@ -53,28 +53,28 @@
         <div class="row table-default">
             <div class="col-12 table-row table-header">
                 <div class="row table-data gap-4">
-                    <div class="col data-header">Nama Jenis Kendaraan</div>
+                    <div class="col data-header">Nama Brand Kendaraan</div>
                     <div class="col-3 col-xl-2 data-header"></div>
                 </div>
             </div>
             <div class="col-12 table-row table-border">
                 <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Kendaraan Roda 2</div>
+                    <div class="col data-value data-length">Hyundai</div>
                     <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
                         <div class="wrapper-action d-flex">
                             <button type="button"
                                 class="button-action button-detail d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#detailJenisModal">
+                                data-bs-toggle="modal" data-bs-target="#detailBrandModal">
                                 <div class="detail-icon"></div>
                             </button>
                             <button type="button"
                                 class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editJenisModal">
+                                data-bs-toggle="modal" data-bs-target="#editBrandModal">
                                 <div class="edit-icon"></div>
                             </button>
                             <button type="button"
                                 class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusJenisModal">
+                                data-bs-toggle="modal" data-bs-target="#hapusBrandModal">
                                 <div class="delete-icon"></div>
                             </button>
                         </div>
@@ -83,22 +83,22 @@
             </div>
             <div class="col-12 table-row table-border">
                 <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Kendaraan Roda 4 </div>
+                    <div class="col data-value data-length">Toyota</div>
                     <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
                         <div class="wrapper-action d-flex">
                             <button type="button"
                                 class="button-action button-detail d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#detailJenisModal">
+                                data-bs-toggle="modal" data-bs-target="#detailBrandModal">
                                 <div class="detail-icon"></div>
                             </button>
                             <button type="button"
                                 class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editJenisModal">
+                                data-bs-toggle="modal" data-bs-target="#editBrandModal">
                                 <div class="edit-icon"></div>
                             </button>
                             <button type="button"
                                 class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusJenisModal">
+                                data-bs-toggle="modal" data-bs-target="#hapusBrandModal">
                                 <div class="delete-icon"></div>
                             </button>
                         </div>
@@ -108,16 +108,16 @@
         </div>
     </div>
 
-    {{-- MODAL TAMBAH JENIS KENDARAAN --}}
-    <div class="modal fade" id="tambahJenisModal" tabindex="-1" aria-labelledby="tambahJenisModalLabel" aria-hidden="true">
+    {{-- MODAL TAMBAH BRAND KENDARAAN --}}
+    <div class="modal fade" id="tambahBrandModal" tabindex="-1" aria-labelledby="tambahBrandModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Tambah Jenis Kendaraan Baru</h3>
+                <h3 class="title">Tambah Brand Kendaraan Baru</h3>
                 <form class="form d-inline-block w-100">
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="nama">Nama Jenis Kendaraan</label>
+                                <label for="nama">Nama Brand Kendaraan</label>
                                 <input type="text" id="nama" class="input" autocomplete="off">
                             </div>
                         </div>
@@ -133,19 +133,19 @@
             </div>
         </div>
     </div>
-    {{-- END MODAL TAMBAH JENIS KENDARAAN --}}
+    {{-- END MODAL TAMBAH BRAND KENDARAAN --}}
 
-    {{-- MODAL DETAIL JENIS KENDARAAN --}}
-    <div class="modal fade" id="detailJenisModal" tabindex="-1" aria-labelledby="detailJenisModalLabel"
+    {{-- MODAL DETAIL BRAND KENDARAAN --}}
+    <div class="modal fade" id="detailBrandModal" tabindex="-1" aria-labelledby="detailBrandModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Detail Jenis Kendaraan</h3>
+                <h3 class="title">Detail Brand Kendaraan</h3>
                 <form class="form d-inline-block w-100">
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="nama">Nama Jenis Kendaraan</label>
+                                <label for="nama">Nama Brand Kendaraan</label>
                                 <input type="text" id="nama" class="input" autocomplete="off">
                             </div>
                         </div>
@@ -157,19 +157,19 @@
             </div>
         </div>
     </div>
-    {{-- END MODAL DETAIL JENIS KENDARAAN --}}
+    {{-- END MODAL DETAIL BRAND KENDARAAN --}}
 
-    {{-- MODAL EDIT JENIS KENDARAAN --}}
-    <div class="modal fade" id="editJenisModal" tabindex="-1" aria-labelledby="editJenisModalLabel"
+    {{-- MODAL EDIT BRAND KENDARAAN --}}
+    <div class="modal fade" id="editBrandModal" tabindex="-1" aria-labelledby="editBrandModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Edit Jenis Kendaraan</h3>
+                <h3 class="title">Edit Brand Kendaraan</h3>
                 <form class="form d-inline-block w-100">
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="nama">Nama Jenis Kendaraan</label>
+                                <label for="nama">Nama Brand Kendaraan</label>
                                 <input type="text" id="nama" class="input" autocomplete="off">
                             </div>
                         </div>
@@ -185,29 +185,29 @@
             </div>
         </div>
     </div>
-    {{-- END MODAL EDIT JENIS KENDARAAN --}}
+    {{-- END MODAL EDIT BRAND KENDARAAN --}}
 
-    {{-- MODAL HAPUS JENIS KENDARAAN --}}
-    <div class="modal modal-delete fade" id="hapusJenisModal" tabindex="-1" aria-labelledby="hapusJenisModalLabel"
+    {{-- MODAL HAPUS BRAND KENDARAAN --}}
+    <div class="modal modal-delete fade" id="hapusBrandModal" tabindex="-1" aria-labelledby="hapusBrandModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Hapus Jenis Kendaraan</h3>
+                <h3 class="title">Hapus Brand Kendaraan</h3>
                 <form class="form d-inline-block w-100">
-                    <p class="caption-description row-button">Konfirmasi Penghapusan Jenis Kendaraan: Apakah Anda yakin
+                    <p class="caption-description row-button">Konfirmasi Penghapusan Brand Kendaraan: Apakah Anda yakin
                         ingin
-                        menghapus jenis kendaraan ini?
-                        Tindakan ini tidak dapat diurungkan, dan jenis kendaraan akan dihapus secara permanen dari sistem.
+                        menghapus brand kendaraan ini?
+                        Tindakan ini tidak dapat diurungkan, dan brand kendaraan akan dihapus secara permanen dari sistem.
                     </p>
                     <div class="button-wrapper d-flex">
-                        <button type="submit" class="button-primary">Hapus Jenis</button>
+                        <button type="submit" class="button-primary">Hapus Brand</button>
                         <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal Hapus</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    {{-- END MODAL HAPUS JENIS KENDARAAN --}}
+    {{-- END MODAL HAPUS BRAND KENDARAAN --}}
 
     <script>
         const buttonOther = document.querySelector('.button-other');
