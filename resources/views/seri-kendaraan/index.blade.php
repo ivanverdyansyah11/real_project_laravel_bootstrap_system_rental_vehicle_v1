@@ -114,22 +114,42 @@
         </div>
     </div>
 
-    {{-- MODAL TAMBAH BRAND KENDARAAN --}}
+    {{-- MODAL TAMBAH SERI KENDARAAN --}}
     <div class="modal fade" id="tambahSeriModal" tabindex="-1" aria-labelledby="tambahSeriModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Tambah Brand Kendaraan Baru</h3>
+                <h3 class="title">Tambah Nomor Seri Kendaraan</h3>
                 <form class="form d-inline-block w-100">
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="nama">Nama Brand Kendaraan</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
+                                <label for="nomor">Nomor Seri Kendaraan</label>
+                                <input type="text" id="nomor" class="input" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="input-wrapper">
+                                <label for="jenis">Jenis Kendaraan</label>
+                                <select id="jenis" class="input">
+                                    <option value="-">Pilih jenis kendaraan</option>
+                                    <option value="kendaraan_roda_2">Kendaraan Roda 2</option>
+                                    <option value="kendaraan_roda_4">Kendaraan Roda 4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 row-button">
+                            <div class="input-wrapper">
+                                <label for="brand">Brand Kendaraan</label>
+                                <select id="brand" class="input">
+                                    <option value="-">Pilih brand kendaraan</option>
+                                    <option value="Hyundai">Hyundai</option>
+                                    <option value="Honda">Honda</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="button-wrapper d-flex">
-                                <button type="submit" class="button-primary">Tambah Brand</button>
+                                <button type="submit" class="button-primary">Tambah Nomor Seri</button>
                                 <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal
                                     Tambah</button>
                             </div>
@@ -139,20 +159,40 @@
             </div>
         </div>
     </div>
-    {{-- END MODAL TAMBAH BRAND KENDARAAN --}}
+    {{-- END MODAL TAMBAH SERI KENDARAAN --}}
 
-    {{-- MODAL DETAIL BRAND KENDARAAN --}}
+    {{-- MODAL DETAIL SERI KENDARAAN --}}
     <div class="modal fade" id="detailSeriModal" tabindex="-1" aria-labelledby="detailSeriModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Detail Brand Kendaraan</h3>
+                <h3 class="title">Detail Nomor Seri Kendaraan</h3>
                 <form class="form d-inline-block w-100">
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Brand Kendaraan</label>
                                 <input type="text" id="nama" class="input" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="input-wrapper">
+                                <label for="jenis">Jenis Kendaraan</label>
+                                <select id="jenis" class="input">
+                                    <option value="-">Pilih jenis kendaraan</option>
+                                    <option value="kendaraan_roda_2">Kendaraan Roda 2</option>
+                                    <option value="kendaraan_roda_4">Kendaraan Roda 4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 row-button">
+                            <div class="input-wrapper">
+                                <label for="brand">Brand Kendaraan</label>
+                                <select id="brand" class="input">
+                                    <option value="-">Pilih brand kendaraan</option>
+                                    <option value="Hyundai">Hyundai</option>
+                                    <option value="Honda">Honda</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-12">
@@ -163,19 +203,39 @@
             </div>
         </div>
     </div>
-    {{-- END MODAL DETAIL BRAND KENDARAAN --}}
+    {{-- END MODAL DETAIL SERI KENDARAAN --}}
 
-    {{-- MODAL EDIT BRAND KENDARAAN --}}
+    {{-- MODAL EDIT SERI KENDARAAN --}}
     <div class="modal fade" id="editSeriModal" tabindex="-1" aria-labelledby="editSeriModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Edit Brand Kendaraan</h3>
+                <h3 class="title">Edit Nomor Seri Kendaraan</h3>
                 <form class="form d-inline-block w-100">
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Brand Kendaraan</label>
                                 <input type="text" id="nama" class="input" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="input-wrapper">
+                                <label for="jenis">Jenis Kendaraan</label>
+                                <select id="jenis" class="input">
+                                    <option value="-">Pilih jenis kendaraan</option>
+                                    <option value="kendaraan_roda_2">Kendaraan Roda 2</option>
+                                    <option value="kendaraan_roda_4">Kendaraan Roda 4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 row-button">
+                            <div class="input-wrapper">
+                                <label for="brand">Brand Kendaraan</label>
+                                <select id="brand" class="input">
+                                    <option value="-">Pilih brand kendaraan</option>
+                                    <option value="Hyundai">Hyundai</option>
+                                    <option value="Honda">Honda</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-12">
@@ -190,29 +250,31 @@
             </div>
         </div>
     </div>
-    {{-- END MODAL EDIT BRAND KENDARAAN --}}
+    {{-- END MODAL EDIT SERI KENDARAAN --}}
 
-    {{-- MODAL HAPUS BRAND KENDARAAN --}}
+    {{-- MODAL HAPUS SERI KENDARAAN --}}
     <div class="modal modal-delete fade" id="hapusSeriModal" tabindex="-1" aria-labelledby="hapusSeriModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Hapus Brand Kendaraan</h3>
+                <h3 class="title">Hapus Nomor Seri Kendaraan</h3>
                 <form class="form d-inline-block w-100">
-                    <p class="caption-description row-button">Konfirmasi Penghapusan Brand Kendaraan: Apakah Anda yakin
+                    <p class="caption-description row-button">Konfirmasi Penghapusan Nomor Seri Kendaraan: Apakah Anda
+                        yakin
                         ingin
-                        menghapus brand kendaraan ini?
-                        Tindakan ini tidak dapat diurungkan, dan brand kendaraan akan dihapus secara permanen dari sistem.
+                        menghapus nomor seri kendaraan ini?
+                        Tindakan ini tidak dapat diurungkan, dan nomor seri kendaraan akan dihapus secara permanen dari
+                        sistem.
                     </p>
                     <div class="button-wrapper d-flex">
-                        <button type="submit" class="button-primary">Hapus Brand</button>
+                        <button type="submit" class="button-primary">Hapus Nomor Seri</button>
                         <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal Hapus</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    {{-- END MODAL HAPUS BRAND KENDARAAN --}}
+    {{-- END MODAL HAPUS SERI KENDARAAN --}}
 
     <script>
         const buttonOther = document.querySelector('.button-other');

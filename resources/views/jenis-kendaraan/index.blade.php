@@ -115,7 +115,7 @@
                 <h3 class="title">Tambah Jenis Kendaraan Baru</h3>
                 <form class="form d-inline-block w-100">
                     <div class="row">
-                        <div class="col-12 mb-4">
+                        <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Jenis Kendaraan</label>
                                 <input type="text" id="nama" class="input" autocomplete="off">
@@ -143,7 +143,7 @@
                 <h3 class="title">Detail Jenis Kendaraan</h3>
                 <form class="form d-inline-block w-100">
                     <div class="row">
-                        <div class="col-12 mb-4">
+                        <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Jenis Kendaraan</label>
                                 <input type="text" id="nama" class="input" autocomplete="off">
@@ -167,7 +167,7 @@
                 <h3 class="title">Edit Jenis Kendaraan</h3>
                 <form class="form d-inline-block w-100">
                     <div class="row">
-                        <div class="col-12 mb-4">
+                        <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Jenis Kendaraan</label>
                                 <input type="text" id="nama" class="input" autocomplete="off">
