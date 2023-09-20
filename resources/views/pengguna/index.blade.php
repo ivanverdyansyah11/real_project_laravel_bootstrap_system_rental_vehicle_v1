@@ -18,7 +18,7 @@
         <div class="row mb-4">
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <h5 class="subtitle">Data Pengguna</h5>
-                <button type="button" class="button-primary d-flex align-items-center" data-bs-toggle="modal"
+                <button type="button" class="button-primary d-none d-md-flex align-items-center" data-bs-toggle="modal"
                     data-bs-target="#tambahPenggunaModal">
                     <img src="{{ asset('assets/img/button/add.svg') }}" alt="Button Tambah Icon"
                         class="img-fluid button-icon">
@@ -31,16 +31,16 @@
                 <div class="col-12 table-row table-header">
                     <div class="row table-data gap-4">
                         <div class="col data-header">Nama Lengkap</div>
-                        <div class="col data-header">Email</div>
-                        <div class="col data-header">Role</div>
+                        <div class="col d-none d-lg-inline-block data-header">Email</div>
+                        <div class="col d-none d-lg-inline-block data-header">Role</div>
                         <div class="col-3 col-xl-2 data-header"></div>
                     </div>
                 </div>
                 <div class="col-12 table-row table-border">
                     <div class="row table-data gap-4 align-items-center">
                         <div class="col data-value data-length">Anak Agung Aditya Prayatna</div>
-                        <div class="col data-value data-length">adityaprayatna@gmail.com</div>
-                        <div class="col data-value data-length">Admin</div>
+                        <div class="col data-value data-length data-length-none">adityaprayatna@gmail.com</div>
+                        <div class="col data-value data-length data-length-none">Admin</div>
                         <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
                             <div class="wrapper-action d-flex">
                                 <button type="button"
@@ -65,8 +65,8 @@
                 <div class="col-12 table-row table-border">
                     <div class="row table-data gap-4 align-items-center">
                         <div class="col data-value data-length">Putri Dewi Sakara</div>
-                        <div class="col data-value data-length">dewisakara@gmail.com</div>
-                        <div class="col data-value data-length">Staff</div>
+                        <div class="col data-value data-length data-length-none">dewisakara@gmail.com</div>
+                        <div class="col data-value data-length data-length-none">Staff</div>
                         <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
                             <div class="wrapper-action d-flex">
                                 <button type="button"
