@@ -16,7 +16,7 @@
                     </div>
                 </a>
                 <a href="{{ route('kendaraan') }}"
-                    class="menu-link d-flex flex-column {{ Request::is('kendaraan*') || Request::is('jenis-kendaraan*') || Request::is('brand-kendaraan*') || Request::is('seri-kendaraan*') || Request::is('kilometrer-kendaraan*') ? 'active' : '' }}">
+                    class="menu-link d-flex flex-column {{ Request::is('kendaraan*') || Request::is('jenis-kendaraan*') || Request::is('brand-kendaraan*') || Request::is('seri-kendaraan*') || Request::is('kilometer-kendaraan*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
                         <div class="icon-sidebar-wrapper">
                             <div class="sidebar-icon kendaraan-icon"></div>

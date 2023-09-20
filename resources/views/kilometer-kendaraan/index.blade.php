@@ -17,10 +17,10 @@
         </div>
         <div class="row mb-4">
             <div class="col-12 d-flex justify-content-between align-items-center">
-                <h5 class="subtitle">Data Brand Kendaraan</h5>
+                <h5 class="subtitle">Data Kilometer Kendaraan</h5>
                 <div class="wrapper d-flex gap-2 mt-3 mt-md-0 align-items-center">
                     <button type="button" class="button-primary d-none d-md-flex align-items-center" data-bs-toggle="modal"
-                        data-bs-target="#tambahBrandModal">
+                        data-bs-target="#tambahKilometerModal">
                         <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
                         Tambah
                     </button>
@@ -56,28 +56,28 @@
         <div class="row table-default">
             <div class="col-12 table-row table-header">
                 <div class="row table-data gap-4">
-                    <div class="col data-header">Nama Brand Kendaraan</div>
+                    <div class="col data-header">Kategori Kilometer Kendaraan</div>
                     <div class="col-3 col-xl-2 data-header"></div>
                 </div>
             </div>
             <div class="col-12 table-row table-border">
                 <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Hyundai</div>
+                    <div class="col data-value data-length">Kilometer 5.000</div>
                     <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
                         <div class="wrapper-action d-flex">
                             <button type="button"
                                 class="button-action button-detail d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#detailBrandModal">
+                                data-bs-toggle="modal" data-bs-target="#detailKilometerModal">
                                 <div class="detail-icon"></div>
                             </button>
                             <button type="button"
                                 class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editBrandModal">
+                                data-bs-toggle="modal" data-bs-target="#editKilometerModal">
                                 <div class="edit-icon"></div>
                             </button>
                             <button type="button"
                                 class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusBrandModal">
+                                data-bs-toggle="modal" data-bs-target="#hapusKilometerModal">
                                 <div class="delete-icon"></div>
                             </button>
                         </div>
@@ -86,22 +86,22 @@
             </div>
             <div class="col-12 table-row table-border">
                 <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Toyota</div>
+                    <div class="col data-value data-length">Kilometer 10.000</div>
                     <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
                         <div class="wrapper-action d-flex">
                             <button type="button"
                                 class="button-action button-detail d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#detailBrandModal">
+                                data-bs-toggle="modal" data-bs-target="#detailKilometerModal">
                                 <div class="detail-icon"></div>
                             </button>
                             <button type="button"
                                 class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editBrandModal">
+                                data-bs-toggle="modal" data-bs-target="#editKilometerModal">
                                 <div class="edit-icon"></div>
                             </button>
                             <button type="button"
                                 class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusBrandModal">
+                                data-bs-toggle="modal" data-bs-target="#hapusKilometerModal">
                                 <div class="delete-icon"></div>
                             </button>
                         </div>
@@ -112,7 +112,8 @@
     </div>
 
     {{-- MODAL TAMBAH BRAND KENDARAAN --}}
-    <div class="modal fade" id="tambahBrandModal" tabindex="-1" aria-labelledby="tambahBrandModalLabel" aria-hidden="true">
+    <div class="modal fade" id="tambahKilometerModal" tabindex="-1" aria-labelledby="tambahKilometerModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Tambah Brand Kendaraan Baru</h3>
@@ -139,7 +140,7 @@
     {{-- END MODAL TAMBAH BRAND KENDARAAN --}}
 
     {{-- MODAL DETAIL BRAND KENDARAAN --}}
-    <div class="modal fade" id="detailBrandModal" tabindex="-1" aria-labelledby="detailBrandModalLabel"
+    <div class="modal fade" id="detailKilometerModal" tabindex="-1" aria-labelledby="detailKilometerModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -163,7 +164,7 @@
     {{-- END MODAL DETAIL BRAND KENDARAAN --}}
 
     {{-- MODAL EDIT BRAND KENDARAAN --}}
-    <div class="modal fade" id="editBrandModal" tabindex="-1" aria-labelledby="editBrandModalLabel"
+    <div class="modal fade" id="editKilometerModal" tabindex="-1" aria-labelledby="editKilometerModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -191,8 +192,8 @@
     {{-- END MODAL EDIT BRAND KENDARAAN --}}
 
     {{-- MODAL HAPUS BRAND KENDARAAN --}}
-    <div class="modal modal-delete fade" id="hapusBrandModal" tabindex="-1" aria-labelledby="hapusBrandModalLabel"
-        aria-hidden="true">
+    <div class="modal modal-delete fade" id="hapusKilometerModal" tabindex="-1"
+        aria-labelledby="hapusKilometerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Hapus Brand Kendaraan</h3>

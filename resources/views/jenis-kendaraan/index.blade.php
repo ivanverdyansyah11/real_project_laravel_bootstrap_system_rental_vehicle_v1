@@ -45,6 +45,9 @@
                             <a href="{{ route('seriKendaraan') }}"
                                 class="modal-link {{ Request::is('seri-kendaraan*') ? 'active' : '' }}">Seri
                                 Kendaraan</a>
+                            <a href="{{ route('kilometerKendaraan') }}"
+                                class="modal-link {{ Request::is('kilometer-kendaraan*') ? 'active' : '' }}">Kilometer
+                                Kendaraan</a>
                         </div>
                     </div>
                 </div>
