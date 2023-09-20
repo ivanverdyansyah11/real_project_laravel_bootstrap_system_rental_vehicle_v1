@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="alert alert-success alert-dashboard mb-4" role="alert">
-                    <a href="" class="link-alert d-inline-block">Lihat Kendaraan Disewa</a>
+                    <a href="{{ route('penambahanSewa') }}" class="link-alert d-inline-block">Lihat Kendaraan Disewa</a>
                 </div>
             </div>
         </div>

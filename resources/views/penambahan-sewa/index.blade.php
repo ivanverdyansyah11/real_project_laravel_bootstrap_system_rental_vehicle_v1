@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-3 mb-4">
+            <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
                 <div class="card-product">
                     <img src="{{ asset('assets/img/default/sample-kendaraan.jpg') }}" alt="Car Thumbnail Image"
                         class="img-fluid product-img">

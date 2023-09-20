@@ -15,7 +15,8 @@
                         <p>Dashboard</p>
                     </div>
                 </a>
-                <a href="" class="menu-link d-flex flex-column {{ Request::is('kendaraan*') ? 'active' : '' }}">
+                <a href="{{ route('kendaraan') }}"
+                    class="menu-link d-flex flex-column {{ Request::is('kendaraan*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
                         <div class="icon-sidebar-wrapper">
                             <div class="sidebar-icon kendaraan-icon"></div>
