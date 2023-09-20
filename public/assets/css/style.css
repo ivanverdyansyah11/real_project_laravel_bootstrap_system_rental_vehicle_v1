@@ -603,6 +603,8 @@ body {
 }
 
 .button-primary,
+.button-primary-blur,
+.button-primary-blur-full,
 .button-reverse,
 .button-primary-full {
     padding: 12px 16px;
@@ -631,6 +633,18 @@ body {
     border: var(--border-style);
     color: rgba(var(--dark-color), 1);
     font-family: var(--urbanist-medium);
+}
+
+.button-primary-blur {
+    background-color: rgba(var(--primary-color), 0.12);
+    border: var(--border-style);
+    border-color: transparent;
+    color: rgba(var(--primary-color), 1);
+    font-family: var(--urbanist-medium);
+}
+
+.button-primary-blur:hover {
+    border-color: rgba(var(--primary-color), 0.24);
 }
 
 .button-reverse:hover {
@@ -758,6 +772,97 @@ body {
 
 .table-default .delete-icon {
     background-image: url('../img/button/delete.svg');
+}
+
+.form-search {
+    width: 260px;
+    position: relative;
+}
+
+.form-search .input-search {
+    position: relative;
+    width: 100%;
+    padding: 16px 18px 16px 42px;
+    border-radius: var(--rounded-md);
+    border: var(--border-style);
+    background-color: rgba(var(--dark-color), 0.03);
+    font-size: 0.875rem;
+}
+
+.form-search .input-search:not(:placeholder-shown) ~ label p {
+    display: none;
+}
+
+.form-search label {
+    position: absolute;
+    top: 50%;
+    left: 18px;
+    transform: translateY(-50%);
+    gap: var(--rounded-lg);
+}
+
+.form-search label p {
+    color: rgba(var(--dark-color), 0.52);
+    font-size: 0.875rem;
+    font-family: var(--urbanist-medium);
+}
+
+.form-search label .search-icon {
+    width: 14px;
+    height: 14px;
+    background-image: url('../img/button/search.svg');
+    opacity: 0.52;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card-product {
+    padding: 16px;
+    border-radius: var(--rounded-sm);
+    border: var(--border-style);
+}
+
+.card-product .product-img {
+    width: 100%;
+    border-radius: var(--rounded-sx);
+    margin-bottom: var(--rounded-xl);
+}
+
+.card-product .product-name {
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical;
+    margin-bottom: var(--rounded-xl);
+}
+
+.card-product .wrapper-tahun {
+    gap: var(--rounded-md);
+}
+
+.card-product .wrapper-tahun .kendaraan-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.card-product .wrapper-tahun .product-year {
+    color: rgba(var(--dark-color), 0.52);
+    font-size: 0.875rem;
+}
+
+.card-product .product-price {
+    font-size: 0.913rem;
+    font-family: var(--urbanist-semibold);
+    color: rgba(var(--primary-color), 1);
+}
+
+.card-product .wrapper-other {
+    margin-bottom: 20px;
+}
+
+.card-product .wrapper-button {
+    gap: var(--rounded-md);
 }
 /* END CONTENT STYLE */
 

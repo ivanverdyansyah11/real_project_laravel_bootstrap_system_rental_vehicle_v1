@@ -6,7 +6,8 @@
                     draggable="false">
             </a>
             <div class="link-wrapper d-flex flex-column w-100">
-                <a href="" class="menu-link d-flex flex-column {{ Request::is('dashboard*') ? 'active' : '' }}">
+                <a href="{{ route('dashboard') }}"
+                    class="menu-link d-flex flex-column {{ Request::is('dashboard*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
                         <div class="icon-sidebar-wrapper">
                             <div class="sidebar-icon dashboard-icon"></div>
