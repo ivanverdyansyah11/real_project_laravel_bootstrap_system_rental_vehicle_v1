@@ -901,6 +901,14 @@ body {
     font-size: 0.813rem;
     color: rgba(var(--red-color), 1);
 }
+
+.status-true {
+    color: rgba(var(--green-color), 1) !important;
+}
+
+.status-false {
+    color: rgba(var(--red-color), 1) !important;
+}
 /* END CONTENT STYLE */
 
 

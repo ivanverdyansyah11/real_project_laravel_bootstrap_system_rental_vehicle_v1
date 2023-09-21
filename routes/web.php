@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KategoriKilometerKendaraanController;
 use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenambahanSewaController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\SeriKendaraanController;
@@ -87,5 +88,17 @@ Route::middleware('guest')->group(function () {
     Route::controller(KategoriKilometerKendaraanController::class)->group(function () {
         Route::get('/kilometer-kendaraan', 'index')->name('kilometerKendaraan');
         Route::post('/kilometer-kendaraan/hapus', 'delete')->name('kilometerKendaraan.delete');
+    });
+
+    // PELANGGAN
+    Route::controller(PelangganController::class)->group(function () {
+        Route::get('/pelanggan', 'index')->name('pelanggan');
+        Route::get('/pelanggan/detail', 'detail')->name('pelanggan.detail');
+
+        Route::get('/pelanggan/tambah', 'create')->name('pelanggan.create');
+        Route::post('/pelanggan/tambah', 'store')->name('pelanggan.store');
+        Route::get('/pelanggan/edit', 'edit')->name('pelanggan.edit');
+        Route::post('/pelanggan/edit', 'update')->name('pelanggan.update');
+        Route::post('/pelanggan/hapus', 'delete')->name('pelanggan.delete');
     });
 });

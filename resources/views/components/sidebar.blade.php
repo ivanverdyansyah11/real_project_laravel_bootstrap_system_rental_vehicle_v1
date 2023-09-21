@@ -24,7 +24,8 @@
                         <p>Kendaraan</p>
                     </div>
                 </a>
-                <a href="" class="menu-link d-flex flex-column {{ Request::is('pelanggan*') ? 'active' : '' }}">
+                <a href="{{ route('pelanggan') }}"
+                    class="menu-link d-flex flex-column {{ Request::is('pelanggan*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
                         <div class="icon-sidebar-wrapper">
                             <div class="sidebar-icon pelanggan-icon"></div>
