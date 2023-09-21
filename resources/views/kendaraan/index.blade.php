@@ -28,7 +28,7 @@
                     </label>
                 </form>
                 <div class="wrapper d-flex gap-2 mt-3 mt-md-0 justify-content-end justify-content-md-start">
-                    <a href="" class="button-primary d-none d-md-flex align-items-center">
+                    <a href="{{ route('kendaraan.create') }}" class="button-primary d-none d-md-flex align-items-center">
                         <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
                         Tambah
                     </a>

@@ -20,9 +20,9 @@ class KendaraanController extends Controller
         ]);
     }
 
-    public function add()
+    public function create()
     {
-        return view('kendaraan.add', [
+        return view('kendaraan.create', [
             'title' => 'Kendaraan',
         ]);
     }

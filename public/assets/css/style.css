@@ -896,6 +896,11 @@ body {
 .modal-other .modal-link:hover {
     background-color: rgba(var(--dark-color), 0.05);
 }
+
+.input-wrapper .caption-error {
+    font-size: 0.813rem;
+    color: rgba(var(--red-color), 1);
+}
 /* END CONTENT STYLE */
 
 
