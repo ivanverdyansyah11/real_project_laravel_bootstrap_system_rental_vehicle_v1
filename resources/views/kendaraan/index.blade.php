@@ -74,7 +74,8 @@
                             <h6 class="product-price">Rp. 500.000</h6>
                         </div>
                         <div class="wrapper-button d-flex">
-                            <button type="button" class="button-primary w-100">Booking</button>
+                            <button type="button" class="button-primary w-100" data-bs-toggle="modal"
+                                data-bs-target="#bookingKendaraanModal">Booking</button>
                             <a href="{{ route('kendaraan.detail') }}" class="button-primary-blur w-100">Detail</a>
                         </div>
                     </div>
@@ -82,6 +83,53 @@
             </div>
         </div>
     </div>
+
+    {{-- MODAL DETAIL BOOKING KENDARAAN --}}
+    <div class="modal fade" id="bookingKendaraanModal" tabindex="-1" aria-labelledby="bookingKendaraanModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <h3 class="title">Booking Kendaraan</h3>
+                <form class="form d-inline-block w-100">
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <div class="input-wrapper">
+                                <label for="nama">Nama Pelanggan</label>
+                                <select id="nama" class="input">
+                                    <option>Pilih nama pelanggan</option>
+                                    <option>Ayu Prayatna</option>
+                                    <option>Adit Wartawan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="input-wrapper">
+                                <label for="kendaraan">Kendaraan di Booking</label>
+                                <select id="kendaraan" class="input">
+                                    <option>Pilih kendaraan yang akan booking</option>
+                                    <option>Honda Brio</option>
+                                    <option>Avanza</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 row-button">
+                            <div class="input-wrapper">
+                                <label for="tanggal_booking">Tanggal Booking</label>
+                                <input type="text" class="input" id="tanggal_booking">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="button-wrapper d-flex">
+                                <button type="submit" class="button-primary">Booking Kendaraan</button>
+                                <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal Tambah</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- END MODAL DETAIL BOOKING KENDARAAN --}}
 
     <script>
         const buttonOther = document.querySelector('.button-other');
