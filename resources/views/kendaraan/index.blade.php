@@ -73,10 +73,9 @@
                             </div>
                             <h6 class="product-price">Rp. 500.000</h6>
                         </div>
-                        <div class="wrapper-button d-flex flex-column">
-                            <a href="{{ route('penambahanSewa.edit', 1) }}" class="button-primary w-100">Tambah Sewa</a>
-                            <a href="{{ route('penambahanSewa.detail', 1) }}" class="button-primary-blur w-100">Lihat
-                                Nota</a>
+                        <div class="wrapper-button d-flex">
+                            <button type="button" class="button-primary w-100">Booking</button>
+                            <a href="{{ route('kendaraan.detail') }}" class="button-primary-blur w-100">Detail</a>
                         </div>
                     </div>
                 </div>

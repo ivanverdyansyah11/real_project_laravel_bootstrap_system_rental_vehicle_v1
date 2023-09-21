@@ -17,7 +17,7 @@
         </div>
         <div class="row" style="margin-bottom: 32px">
             <div class="col-12 d-flex justify-content-between align-items-center">
-                <h5 class="subtitle">Tambah Kendaraan</h5>
+                <h5 class="subtitle">Edit Kendaraan</h5>
             </div>
         </div>
         <div class="row">
@@ -28,26 +28,21 @@
                             <div class="input-wrapper">
                                 <div class="wrapper d-flex gap-3 align-items-end">
                                     <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
-                                        class="img-fluid tag-create-image" alt="Kendaraan Image" width="80">
+                                        class="img-fluid tag-edit-image" alt="Kendaraan Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-image" name="image"
+                                        <input type="file" id="image" class="input-edit-image" name="image"
                                             style="opacity: 0;">
-                                        <button type="button" class="button-reverse button-create">Pilih Foto
+                                        <button type="button" class="button-reverse button-edit">Pilih Foto
                                             Kendaraan</button>
                                     </div>
                                 </div>
-                                {{-- @error('image')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror --}}
                             </div>
                         </div>
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="stnk_nama">STNK Atas Nama</label>
-                                <input type="text" id="stnk_nama" class="input" autocomplete="off">
-                                {{-- @error('image')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror --}}
+                                <input type="text" id="stnk_nama" class="input" autocomplete="off" disabled
+                                    value="">
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
@@ -87,56 +82,64 @@
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="nomor_polisi">Nomor Polisi</label>
-                                <input type="text" id="nomor_polisi" class="input" autocomplete="off">
+                                <input type="text" id="nomor_polisi" class="input" autocomplete="off" disabled
+                                    value="">
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="kilometer">Kilometer</label>
-                                <input type="text" id="kilometer" class="input" autocomplete="off">
+                                <input type="text" id="kilometer" class="input" autocomplete="off" disabled
+                                    value="">
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="tarif_sewa">Tarif Sewa</label>
-                                <input type="text" id="tarif_sewa" class="input" autocomplete="off">
+                                <input type="text" id="tarif_sewa" class="input" autocomplete="off" disabled
+                                    value="">
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="tahun_pembuatan">Tahun Pembuatan</label>
-                                <input type="text" id="tahun_pembuatan" class="input" autocomplete="off">
+                                <input type="text" id="tahun_pembuatan" class="input" autocomplete="off" disabled
+                                    value="">
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="tanggal_pembelian">Tanggal Pembelian</label>
-                                <input type="text" id="tanggal_pembelian" class="input" autocomplete="off">
+                                <input type="text" id="tanggal_pembelian" class="input" autocomplete="off" disabled
+                                    value="">
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="warna">Warna</label>
-                                <input type="text" id="warna" class="input" autocomplete="off">
+                                <input type="text" id="warna" class="input" autocomplete="off" disabled
+                                    value="">
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="nomor_rangka">Nomor Rangka</label>
-                                <input type="text" id="nomor_rangka" class="input" autocomplete="off">
+                                <input type="text" id="nomor_rangka" class="input" autocomplete="off" disabled
+                                    value="">
                             </div>
                         </div>
                         <div class="col-md-6 row-button">
                             <div class="input-wrapper">
                                 <label for="nomor_mesin">Nomor Mesin</label>
-                                <input type="text" id="nomor_mesin" class="input" autocomplete="off">
+                                <input type="text" id="nomor_mesin" class="input" autocomplete="off" disabled
+                                    value="">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="button-wrapper d-flex">
-                                <button type="submit" class="button-primary">Tambah Kendaraan</button>
+                                <button type="submit" class="button-primary">Simpan Perubahan</button>
                                 <a href="{{ route('kendaraan') }}" class="button-reverse">Batal
-                                    Tambah</a>
+                                    Edit</a>
                             </div>
                         </div>
                     </div>
@@ -146,16 +149,16 @@
     </div>
 
     <script>
-        const tagCreateKendaraan = document.querySelector('.tag-create-image');
-        const inputCreateKendaraan = document.querySelector('.input-create-image');
-        const buttonCreate = document.querySelector('.button-create');
+        const tagEditKendaraan = document.querySelector('.tag-edit-image');
+        const inputEditKendaraan = document.querySelector('.input-edit-image');
+        const buttonEdit = document.querySelector('.button-edit');
 
-        buttonCreate.addEventListener('click', function() {
-            inputCreateKendaraan.click();
+        buttonEdit.addEventListener('click', function() {
+            inputEditKendaraan.click();
         });
 
-        inputCreateKendaraan.addEventListener('change', function() {
-            tagCreateKendaraan.src = URL.createObjectURL(inputCreateKendaraan.files[0]);
+        inputEditKendaraan.addEventListener('change', function() {
+            tagEditKendaraan.src = URL.createObjectURL(inputEditKendaraan.files[0]);
         });
     </script>
 @endsection

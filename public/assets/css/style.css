@@ -711,7 +711,7 @@ body {
     gap: 6px;
 }
 
-.table-default .button-action {
+.button-action {
     width: 42px;
     height: 42px;
     border-radius: var(--rounded-sm);
@@ -720,39 +720,39 @@ body {
     stroke: none;
 }
 
-.table-default .button-action.button-detail {
+.button-action.button-detail {
     background-color: rgba(var(--blue-color), 0.12);
     border: var(--border-style);
     border-color: transparent;
 }
 
-.table-default .button-action.button-detail:hover {
+.button-action.button-detail:hover {
     border: 1px solid rgba(var(--blue-color), 0.24);
 }
 
-.table-default .button-action.button-edit {
+.button-action.button-edit {
     background-color: rgba(var(--yellow-color), 0.12);
     border: var(--border-style);
     border-color: transparent;
 }
 
-.table-default .button-action.button-edit:hover {
+.button-action.button-edit:hover {
     border: 1px solid rgba(var(--yellow-color), 0.24);
 }
 
-.table-default .button-action.button-delete {
+.button-action.button-delete {
     background-color: rgba(var(--red-color), 0.12);
     border: var(--border-style);
     border-color: transparent;
 }
 
-.table-default .button-action.button-delete:hover {
+.button-action.button-delete:hover {
     border: 1px solid rgba(var(--red-color), 0.24);
 }
 
-.table-default .detail-icon,
-.table-default .edit-icon,
-.table-default .delete-icon {
+.detail-icon,
+.edit-icon,
+.delete-icon {
     width: 16px;
     height: 16px;
     background-image: url('../img/button/detail.svg');
@@ -761,11 +761,11 @@ body {
     background-size: cover;
 }
 
-.table-default .edit-icon {
+.edit-icon {
     background-image: url('../img/button/edit.svg');
 }
 
-.table-default .delete-icon {
+.delete-icon {
     background-image: url('../img/button/delete.svg');
 }
 
