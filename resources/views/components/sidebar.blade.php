@@ -33,7 +33,8 @@
                         <p>Pelanggan</p>
                     </div>
                 </a>
-                <a href="" class="menu-link d-flex flex-column {{ Request::is('sopir*') ? 'active' : '' }}">
+                <a href="{{ route('sopir') }}"
+                    class="menu-link d-flex flex-column {{ Request::is('sopir*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
                         <div class="icon-sidebar-wrapper">
                             <div class="sidebar-icon sopir-icon"></div>
@@ -41,7 +42,8 @@
                         <p>Sopir</p>
                     </div>
                 </a>
-                <a href="" class="menu-link d-flex flex-column {{ Request::is('pemesanan*') ? 'active' : '' }}">
+                <a href="{{ route('pemesanan') }}"
+                    class="menu-link d-flex flex-column {{ Request::is('pemesanan*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
                         <div class="icon-sidebar-wrapper">
                             <div class="sidebar-icon pemesanan-icon"></div>
@@ -82,7 +84,7 @@
                         <p>Laporan</p>
                     </div>
                 </a>
-                <a href=""
+                <a href="{{ route('pengguna') }}"
                     class="menu-link d-inline-block d-lg-none flex-column {{ Request::is('pengguna*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
                         <div class="icon-sidebar-wrapper">

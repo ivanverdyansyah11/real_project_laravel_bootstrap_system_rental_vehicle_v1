@@ -7,9 +7,11 @@ use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KategoriKilometerKendaraanController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\PenambahanSewaController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\SeriKendaraanController;
+use App\Http\Controllers\SopirController;
 use App\Models\PenambahanSewa;
 use Illuminate\Support\Facades\Route;
 
@@ -100,5 +102,25 @@ Route::middleware('guest')->group(function () {
         Route::get('/pelanggan/edit', 'edit')->name('pelanggan.edit');
         Route::post('/pelanggan/edit', 'update')->name('pelanggan.update');
         Route::post('/pelanggan/hapus', 'delete')->name('pelanggan.delete');
+    });
+
+    // SOPIR
+    Route::controller(SopirController::class)->group(function () {
+        Route::get('/sopir', 'index')->name('sopir');
+        Route::get('/sopir/detail', 'detail')->name('sopir.detail');
+
+        Route::get('/sopir/tambah', 'create')->name('sopir.create');
+        Route::post('/sopir/tambah', 'store')->name('sopir.store');
+        Route::get('/sopir/edit', 'edit')->name('sopir.edit');
+        Route::post('/sopir/edit', 'update')->name('sopir.update');
+        Route::post('/sopir/hapus', 'delete')->name('sopir.delete');
+    });
+
+    // PEMESANAN
+    Route::controller(PemesananController::class)->group(function () {
+        Route::get('/pemesanan', 'index')->name('pemesanan');
+        Route::get('/pemesanan/booking', 'booking')->name('pemesanan.booking');
+        Route::get('/pemesanan/pembayaran', 'transaction')->name('pemesanan.transaction');
+        Route::post('/pemesanan/hapus', 'delete')->name('pemesanan.delete');
     });
 });
