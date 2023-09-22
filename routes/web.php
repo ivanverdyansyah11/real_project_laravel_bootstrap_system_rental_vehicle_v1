@@ -42,11 +42,6 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware(['auth', 'owner'])->group(function () {
-    // PENGGUNA
-    Route::controller(PenggunaController::class)->group(function () {
-        Route::get('/pengguna', 'index')->name('pengguna');
-    });
-
     // KENDARAAN DISEWA
     Route::controller(PenambahanSewaController::class)->group(function () {
         Route::get('/kendaraan-disewa', 'index')->name('penambahanSewa');
@@ -129,11 +124,6 @@ Route::middleware(['auth', 'owner'])->group(function () {
         Route::get('/pajak/detail', 'detail')->name('pajak.detail');
         Route::get('/pajak/transaksi', 'transaction')->name('pajak.transaction');
     });
-
-    // LAPORAN
-    Route::controller(LaporanController::class)->group(function () {
-        Route::get('/laporan', 'index')->name('laporan');
-    });
 });
 
 Route::middleware('auth')->group(function () {
@@ -145,6 +135,11 @@ Route::middleware('auth')->group(function () {
     // DASHBOARD
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
+    });
+
+    // PENGGUNA
+    Route::controller(PenggunaController::class)->group(function () {
+        Route::get('/pengguna', 'index')->name('pengguna');
     });
 
     // PEMESANAN
@@ -159,5 +154,10 @@ Route::middleware('auth')->group(function () {
     Route::controller(PengembalianController::class)->group(function () {
         Route::get('/pengembalian', 'index')->name('pengembalian');
         Route::get('/pengembalian/kendaraan', 'restoration')->name('pengembalian.restoration');
+    });
+
+    // LAPORAN
+    Route::controller(LaporanController::class)->group(function () {
+        Route::get('/laporan', 'index')->name('laporan');
     });
 });

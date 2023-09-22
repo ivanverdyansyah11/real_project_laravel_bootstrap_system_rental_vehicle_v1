@@ -2,13 +2,15 @@
 
 @section('content')
     <div class="content">
-        <div class="row">
-            <div class="col-12">
-                <div class="alert alert-success alert-dashboard mb-4" role="alert">
-                    <a href="{{ route('penambahanSewa') }}" class="link-alert d-inline-block">Lihat Kendaraan Disewa</a>
+        @if (auth()->user()->role === 'owner' || auth()->user()->role === 'admin')
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-success alert-dashboard mb-4" role="alert">
+                        <a href="{{ route('penambahanSewa') }}" class="link-alert d-inline-block">Lihat Kendaraan Disewa</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
         <div class="row mb-4">
             <div class="col-md-4 mb-4 mb-md-0">
                 <div class="card-default d-flex align-items-start justify-content-between">
@@ -56,7 +58,9 @@
                             <img src="{{ asset('assets/img/dashboard/oli.svg') }}" class="img-fluid dashboard-img"
                                 alt="Oli Icon" width="18">
                         </div>
-                        <a href="" class="link-dashboard">Lihat Kendaraan</a>
+                        @if (auth()->user()->role === 'owner' || auth()->user()->role === 'admin')
+                            <a href="" class="link-dashboard">Lihat Kendaraan</a>
+                        @endif
                     </div>
                     <div class="card-caption">
                         <p class="caption-name">Pergantian Oli</p>
@@ -69,7 +73,9 @@
                             <img src="{{ asset('assets/img/dashboard/servis.svg') }}" class="img-fluid dashboard-img"
                                 alt="Servis Icon" width="18">
                         </div>
-                        <a href="" class="link-dashboard">Lihat Kendaraan</a>
+                        @if (auth()->user()->role === 'owner' || auth()->user()->role === 'admin')
+                            <a href="" class="link-dashboard">Lihat Kendaraan</a>
+                        @endif
                     </div>
                     <div class="card-caption">
                         <p class="caption-name">Waktu Service</p>

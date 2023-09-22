@@ -15,33 +15,35 @@
                         <p>Dashboard</p>
                     </div>
                 </a>
-                <a href="{{ route('kendaraan') }}"
-                    class="menu-link d-flex flex-column {{ Request::is('kendaraan*') || Request::is('jenis-kendaraan*') || Request::is('brand-kendaraan*') || Request::is('seri-kendaraan*') || Request::is('kilometer-kendaraan*') ? 'active' : '' }}">
-                    <div class="link-item d-flex align-items-center">
-                        <div class="icon-sidebar-wrapper">
-                            <div class="sidebar-icon kendaraan-icon"></div>
+                @if (auth()->user()->role === 'owner' || auth()->user()->role === 'admin')
+                    <a href="{{ route('kendaraan') }}"
+                        class="menu-link d-flex flex-column {{ Request::is('kendaraan*') || Request::is('jenis-kendaraan*') || Request::is('brand-kendaraan*') || Request::is('seri-kendaraan*') || Request::is('kilometer-kendaraan*') ? 'active' : '' }}">
+                        <div class="link-item d-flex align-items-center">
+                            <div class="icon-sidebar-wrapper">
+                                <div class="sidebar-icon kendaraan-icon"></div>
+                            </div>
+                            <p>Kendaraan</p>
                         </div>
-                        <p>Kendaraan</p>
-                    </div>
-                </a>
-                <a href="{{ route('pelanggan') }}"
-                    class="menu-link d-flex flex-column {{ Request::is('pelanggan*') ? 'active' : '' }}">
-                    <div class="link-item d-flex align-items-center">
-                        <div class="icon-sidebar-wrapper">
-                            <div class="sidebar-icon pelanggan-icon"></div>
+                    </a>
+                    <a href="{{ route('pelanggan') }}"
+                        class="menu-link d-flex flex-column {{ Request::is('pelanggan*') ? 'active' : '' }}">
+                        <div class="link-item d-flex align-items-center">
+                            <div class="icon-sidebar-wrapper">
+                                <div class="sidebar-icon pelanggan-icon"></div>
+                            </div>
+                            <p>Pelanggan</p>
                         </div>
-                        <p>Pelanggan</p>
-                    </div>
-                </a>
-                <a href="{{ route('sopir') }}"
-                    class="menu-link d-flex flex-column {{ Request::is('sopir*') ? 'active' : '' }}">
-                    <div class="link-item d-flex align-items-center">
-                        <div class="icon-sidebar-wrapper">
-                            <div class="sidebar-icon sopir-icon"></div>
+                    </a>
+                    <a href="{{ route('sopir') }}"
+                        class="menu-link d-flex flex-column {{ Request::is('sopir*') ? 'active' : '' }}">
+                        <div class="link-item d-flex align-items-center">
+                            <div class="icon-sidebar-wrapper">
+                                <div class="sidebar-icon sopir-icon"></div>
+                            </div>
+                            <p>Sopir</p>
                         </div>
-                        <p>Sopir</p>
-                    </div>
-                </a>
+                    </a>
+                @endif
                 <a href="{{ route('pemesanan') }}"
                     class="menu-link d-flex flex-column {{ Request::is('pemesanan*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
@@ -60,24 +62,26 @@
                         <p>Pengembalian</p>
                     </div>
                 </a>
-                <a href="{{ route('servis') }}"
-                    class="menu-link d-flex flex-column {{ Request::is('servis*') || Request::is('kategori-servis*') ? 'active' : '' }}">
-                    <div class="link-item d-flex align-items-center">
-                        <div class="icon-sidebar-wrapper">
-                            <div class="sidebar-icon servis-icon"></div>
+                @if (auth()->user()->role === 'owner' || auth()->user()->role === 'admin')
+                    <a href="{{ route('servis') }}"
+                        class="menu-link d-flex flex-column {{ Request::is('servis*') || Request::is('kategori-servis*') ? 'active' : '' }}">
+                        <div class="link-item d-flex align-items-center">
+                            <div class="icon-sidebar-wrapper">
+                                <div class="sidebar-icon servis-icon"></div>
+                            </div>
+                            <p>Servis</p>
                         </div>
-                        <p>Servis</p>
-                    </div>
-                </a>
-                <a href="{{ route('pajak') }}"
-                    class="menu-link d-flex flex-column {{ Request::is('pajak*') ? 'active' : '' }}">
-                    <div class="link-item d-flex align-items-center">
-                        <div class="icon-sidebar-wrapper">
-                            <div class="sidebar-icon pajak-icon"></div>
+                    </a>
+                    <a href="{{ route('pajak') }}"
+                        class="menu-link d-flex flex-column {{ Request::is('pajak*') ? 'active' : '' }}">
+                        <div class="link-item d-flex align-items-center">
+                            <div class="icon-sidebar-wrapper">
+                                <div class="sidebar-icon pajak-icon"></div>
+                            </div>
+                            <p>Pajak</p>
                         </div>
-                        <p>Pajak</p>
-                    </div>
-                </a>
+                    </a>
+                @endif
                 <a href="{{ route('laporan') }}"
                     class="menu-link d-flex flex-column {{ Request::is('laporan*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
