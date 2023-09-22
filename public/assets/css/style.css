@@ -60,7 +60,7 @@ h2,
 h3,
 h4,
 h5 {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 }
 
 a {
@@ -858,7 +858,7 @@ body {
     overflow: hidden;
     display: -webkit-box !important;
     -webkit-box-orient: vertical;
-    margin-bottom: var(--rounded-xl);
+    margin-bottom: var(--rounded-sx) !important;
 }
 
 .card-product .wrapper-tahun {
@@ -931,10 +931,17 @@ body {
     color: rgba(var(--red-color), 1);
 }
 
+.card-product .status-true,
 .status-true {
     color: rgba(var(--green-color), 1) !important;
 }
 
+.card-product .status-true,
+.card-product .status-false {
+    font-size: 0.875rem;
+}
+
+.card-product .status-false,
 .status-false {
     color: rgba(var(--red-color), 1) !important;
 }

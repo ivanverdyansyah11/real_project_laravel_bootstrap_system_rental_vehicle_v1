@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KategoriKilometerKendaraanController;
 use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\PajakController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\PenambahanSewaController;
@@ -137,5 +138,12 @@ Route::middleware('guest')->group(function () {
         Route::get('/servis', 'index')->name('servis');
         Route::get('/servis/check', 'check')->name('servis.check');
         Route::get('/kategori-servis', 'category')->name('kategoriServis');
+    });
+
+    // PAJAK
+    Route::controller(PajakController::class)->group(function () {
+        Route::get('/pajak', 'index')->name('pajak');
+        Route::get('/pajak/detail', 'detail')->name('pajak.detail');
+        Route::get('/pajak/transaksi', 'transaction')->name('pajak.transaction');
     });
 });
