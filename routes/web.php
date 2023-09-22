@@ -12,6 +12,7 @@ use App\Http\Controllers\PenambahanSewaController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\SeriKendaraanController;
+use App\Http\Controllers\ServisController;
 use App\Http\Controllers\SopirController;
 use App\Models\PenambahanSewa;
 use Illuminate\Support\Facades\Route;
@@ -129,5 +130,12 @@ Route::middleware('guest')->group(function () {
     Route::controller(PengembalianController::class)->group(function () {
         Route::get('/pengembalian', 'index')->name('pengembalian');
         Route::get('/pengembalian/kendaraan', 'restoration')->name('pengembalian.restoration');
+    });
+
+    // SERVIS
+    Route::controller(ServisController::class)->group(function () {
+        Route::get('/servis', 'index')->name('servis');
+        Route::get('/servis/check', 'check')->name('servis.check');
+        Route::get('/kategori-servis', 'category')->name('kategoriServis');
     });
 });
