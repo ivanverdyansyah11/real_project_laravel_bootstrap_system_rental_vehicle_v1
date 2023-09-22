@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sopir extends Model
+class KelengkapanSopir extends Model
 {
     protected $guarded = [];
 
-    public function kelengkapan_sopir()
+    public function sopir()
     {
-        return $this->belongsTo(KelengkapanSopir::class, 'id');
+        return $this->belongsTo(Sopir::class, 'id');
     }
 }

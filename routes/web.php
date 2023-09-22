@@ -102,13 +102,13 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // SOPIR
     Route::controller(SopirController::class)->group(function () {
         Route::get('/sopir', 'index')->name('sopir');
-        Route::get('/sopir/detail', 'detail')->name('sopir.detail');
+        Route::get('/sopir/detail/{id}', 'detail')->name('sopir.detail');
 
         Route::get('/sopir/tambah', 'create')->name('sopir.create');
         Route::post('/sopir/tambah', 'store')->name('sopir.store');
-        Route::get('/sopir/edit', 'edit')->name('sopir.edit');
-        Route::post('/sopir/edit', 'update')->name('sopir.update');
-        Route::post('/sopir/hapus', 'delete')->name('sopir.delete');
+        Route::get('/sopir/edit/{id}', 'edit')->name('sopir.edit');
+        Route::post('/sopir/edit/{id}', 'update')->name('sopir.update');
+        Route::post('/sopir/hapus/{id}', 'delete')->name('sopir.delete');
     });
 
     // SERVIS

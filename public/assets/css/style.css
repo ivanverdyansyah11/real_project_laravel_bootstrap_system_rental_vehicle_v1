@@ -464,6 +464,11 @@ body {
 
 
 /* ALERT STYLE */
+.alert {
+    font-size: 0.938rem;
+    width: 100%;
+}
+
 .alert.alert-success.alert-dashboard {
     z-index: 2 !important;
     background-color: rgba(var(--primary-color), 0.08) !important;
@@ -966,10 +971,6 @@ body {
     font-size: 1.125rem;
     font-family: var(--urbanist-medium);
     margin-bottom: 0 !important;
-}
-
-.alert {
-    font-size: 0.938rem;
 }
 /* END CONTENT STYLE */
 
