@@ -38,9 +38,7 @@
                         <p class="product-name">Honda Brio</p>
                         <div class="wrapper-other d-flex align-items-center justify-content-between">
                             <div class="wrapper-tahun d-flex align-items-center">
-                                <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
-                                    class="img-fluid kendaraan-icon">
-                                <p class="product-year">2017</p>
+                                <p class="product-year">Agus Wartawan</p>
                             </div>
                             <h6 class="product-price">Rp. 500.000</h6>
                         </div>
