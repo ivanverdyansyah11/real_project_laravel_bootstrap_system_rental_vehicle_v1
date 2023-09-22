@@ -78,7 +78,8 @@
                         <p>Pajak</p>
                     </div>
                 </a>
-                <a href="" class="menu-link d-flex flex-column {{ Request::is('laporan*') ? 'active' : '' }}">
+                <a href="{{ route('laporan') }}"
+                    class="menu-link d-flex flex-column {{ Request::is('laporan*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
                         <div class="icon-sidebar-wrapper">
                             <div class="sidebar-icon laporan-icon"></div>
