@@ -675,6 +675,11 @@ body {
     background-color: rgba(var(--dark-color), 0.05);
 }
 
+.button-small {
+    padding: 10px 16px;
+    border-radius: var(--rounded-sm);
+}
+
 .subtitle {
     font-size: 1.25rem;
     font-family: var(--urbanist-semibold);
@@ -944,6 +949,18 @@ body {
 .card-product .status-false,
 .status-false {
     color: rgba(var(--red-color), 1) !important;
+}
+
+.card-header {
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.card-header .subtitle {
+    font-size: 1.125rem;
+    font-family: var(--urbanist-medium);
+    margin-bottom: 0 !important;
 }
 /* END CONTENT STYLE */
 

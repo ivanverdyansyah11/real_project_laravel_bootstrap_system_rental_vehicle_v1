@@ -40,7 +40,7 @@ Route::middleware('guest')->group(function () {
     });
 });
 
-Route::middleware('guest')->group(function () {
+Route::middleware('auth')->group(function () {
     // DASHBOARD
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
