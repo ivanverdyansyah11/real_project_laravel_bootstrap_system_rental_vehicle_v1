@@ -20,20 +20,32 @@
             <div class="col banner-login d-none d-lg-inline-block"></div>
             <div class="col-md-9 col-lg-5 col-xl-4">
                 <div class="content-login d-flex align-items-center flex-column">
+                    @if (session()->has('success'))
+                        <div class="alert alert-success w-100 mb-4" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @elseif(session()->has('failed'))
+                        <div class="alert alert-danger w-100 mb-4" role="alert">
+                            {{ session('failed') }}
+                        </div>
+                    @endif
                     <img src="{{ asset('assets/img/brand/brand-text.svg') }}" alt="Brand Nusa Kendala Logo Teks"
                         class="img-fluid login-brand" draggable="false">
-                    <form class="form d-inline-block w-100">
+                    <form class="form d-inline-block w-100" method="POST" action="{{ route('login.action') }}">
+                        @csrf
                         <div class="row">
                             <div class="col-12 mb-4">
                                 <div class="input-wrapper">
                                     <label for="email">Email</label>
-                                    <input type="email" id="email" class="input" autocomplete="off">
+                                    <input type="email" id="email" class="input" name="email"
+                                        autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-12 row-button">
                                 <div class="input-wrapper">
                                     <label for="password">Password</label>
-                                    <input type="password" id="password" class="input" autocomplete="off">
+                                    <input type="password" id="password" class="input" name="password"
+                                        autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-12">

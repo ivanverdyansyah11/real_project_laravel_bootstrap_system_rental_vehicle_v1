@@ -37,15 +37,11 @@ Route::fallback(function () {
 Route::middleware('guest')->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('/login', 'index')->name('login');
+        Route::post('/login', 'login')->name('login.action');
     });
 });
 
-Route::middleware('auth')->group(function () {
-    // DASHBOARD
-    Route::controller(DashboardController::class)->group(function () {
-        Route::get('/dashboard', 'index')->name('dashboard');
-    });
-
+Route::middleware(['auth', 'owner'])->group(function () {
     // PENGGUNA
     Route::controller(PenggunaController::class)->group(function () {
         Route::get('/pengguna', 'index')->name('pengguna');
@@ -120,20 +116,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/sopir/hapus', 'delete')->name('sopir.delete');
     });
 
-    // PEMESANAN
-    Route::controller(PemesananController::class)->group(function () {
-        Route::get('/pemesanan', 'index')->name('pemesanan');
-        Route::get('/pemesanan/booking', 'booking')->name('pemesanan.booking');
-        Route::get('/pemesanan/pembayaran', 'transaction')->name('pemesanan.transaction');
-        Route::post('/pemesanan/hapus', 'delete')->name('pemesanan.delete');
-    });
-
-    // PENGEMBALIAN
-    Route::controller(PengembalianController::class)->group(function () {
-        Route::get('/pengembalian', 'index')->name('pengembalian');
-        Route::get('/pengembalian/kendaraan', 'restoration')->name('pengembalian.restoration');
-    });
-
     // SERVIS
     Route::controller(ServisController::class)->group(function () {
         Route::get('/servis', 'index')->name('servis');
@@ -151,5 +133,31 @@ Route::middleware('auth')->group(function () {
     // LAPORAN
     Route::controller(LaporanController::class)->group(function () {
         Route::get('/laporan', 'index')->name('laporan');
+    });
+});
+
+Route::middleware('auth')->group(function () {
+    // AUTH
+    Route::controller(AuthController::class)->group(function () {
+        Route::post('/logout', 'logout')->name('logout');
+    });
+
+    // DASHBOARD
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('dashboard');
+    });
+
+    // PEMESANAN
+    Route::controller(PemesananController::class)->group(function () {
+        Route::get('/pemesanan', 'index')->name('pemesanan');
+        Route::get('/pemesanan/booking', 'booking')->name('pemesanan.booking');
+        Route::get('/pemesanan/pembayaran', 'transaction')->name('pemesanan.transaction');
+        Route::post('/pemesanan/hapus', 'delete')->name('pemesanan.delete');
+    });
+
+    // PENGEMBALIAN
+    Route::controller(PengembalianController::class)->group(function () {
+        Route::get('/pengembalian', 'index')->name('pengembalian');
+        Route::get('/pengembalian/kendaraan', 'restoration')->name('pengembalian.restoration');
     });
 });

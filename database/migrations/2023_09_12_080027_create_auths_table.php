@@ -16,8 +16,9 @@ class CreateAuthsTable extends Migration
         Schema::create('auths', function (Blueprint $table) {
             $table->id();
             $table->string('nama_lengkap');
+            $table->string('email');
             $table->string('password');
-            $table->enum('role', ['owner', 'admin', 'staff']);
+            $table->enum('role', ['admin', 'owner', 'staff']);
             $table->timestamps();
         });
     }
