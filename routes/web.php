@@ -140,6 +140,10 @@ Route::middleware('auth')->group(function () {
     // PENGGUNA
     Route::controller(PenggunaController::class)->group(function () {
         Route::get('/pengguna', 'index')->name('pengguna');
+        Route::get('/pengguna/detail/{id}', 'detail')->name('pengguna.detail');
+        Route::post('/pengguna/tambah', 'store')->name('pengguna.store');
+        Route::post('/pengguna/edit/{id}', 'update')->name('pengguna.update');
+        Route::post('/pengguna/hapus/{id}', 'delete')->name('pengguna.delete');
     });
 
     // PEMESANAN

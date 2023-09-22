@@ -67,6 +67,10 @@ a {
     text-decoration: none;
 }
 
+select option {
+    text-transform: capitalize;
+}
+
 body {
     overflow-x: hidden;
 }

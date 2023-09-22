@@ -35,58 +35,49 @@
                     <div class="col-3 col-xl-2 data-header"></div>
                 </div>
             </div>
-            <div class="col-12 table-row table-border">
-                <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Anak Agung Aditya Prayatna</div>
-                    <div class="col data-value data-length data-length-none">adityaprayatna@gmail.com</div>
-                    <div class="col data-value data-length data-length-none">Admin</div>
-                    <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
-                        <div class="wrapper-action d-flex">
-                            <button type="button"
-                                class="button-action button-detail d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#detailPenggunaModal">
-                                <div class="detail-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editPenggunaModal">
-                                <div class="edit-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusPenggunaModal">
-                                <div class="delete-icon"></div>
-                            </button>
-                        </div>
+            @if ($penggunas->count() == 0)
+                <div class="col-12 table-row table-border">
+                    <div class="row table-data gap-4 align-items-center">
+                        <div class="col data-value data-length">Tidak Ada Data Pengguna!</div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 table-row table-border">
-                <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Putri Dewi Sakara</div>
-                    <div class="col data-value data-length data-length-none">dewisakara@gmail.com</div>
-                    <div class="col data-value data-length data-length-none">Staff</div>
-                    <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
-                        <div class="wrapper-action d-flex">
-                            <button type="button"
-                                class="button-action button-detail d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#detailPenggunaModal">
-                                <div class="detail-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editPenggunaModal">
-                                <div class="edit-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusPenggunaModal">
-                                <div class="delete-icon"></div>
-                            </button>
+            @else
+                @foreach ($penggunas as $pengguna)
+                    <div class="col-12 table-row table-border">
+                        <div class="row table-data gap-4 align-items-center">
+                            <div class="col data-value data-length">{{ $pengguna->nama_lengkap }}</div>
+                            <div class="col data-value data-length data-length-none">{{ $pengguna->email }}</div>
+                            <div class="col data-value data-length data-length-none text-capitalize">
+                                {{ $pengguna->role }}</div>
+                            <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
+                                <div class="wrapper-action d-flex">
+                                    <button type="button"
+                                        class="button-action button-detail d-flex justify-content-center align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#detailPenggunaModal"
+                                        data-id="{{ $pengguna->id }}">
+                                        <div class="detail-icon"></div>
+                                    </button>
+                                    <button type="button"
+                                        class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#editPenggunaModal"
+                                        data-id="{{ $pengguna->id }}">
+                                        <div class="edit-icon"></div>
+                                    </button>
+                                    <button type="button"
+                                        class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#hapusPenggunaModal"
+                                        data-id="{{ $pengguna->id }}">
+                                        <div class="delete-icon"></div>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                @endforeach
+            @endif
+        </div>
+        <div class="col-12 d-flex justify-content-end mt-4">
+            {{ $penggunas->links() }}
         </div>
     </div>
 
@@ -96,33 +87,34 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Tambah Pengguna Baru</h3>
-                <form class="form d-inline-block w-100">
+                <form class="form d-inline-block w-100" method="POST" action="{{ route('pengguna.store') }}">
+                    @csrf
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Lengkap</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
+                                <input type="text" id="nama" name="nama_lengkap" class="input" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" class="input" autocomplete="off">
+                                <input type="email" id="email" name="email" class="input" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="password">Password</label>
-                                <input type="password" id="password" class="input" autocomplete="off">
+                                <input type="password" id="password" name="password" class="input" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="role">Role</label>
-                                <select id="role" class="input">
+                                <select id="role" name="role" class="input">
                                     <option value="-">Pilih role pengguna</option>
-                                    <option value="staff">Staff</option>
-                                    <option value="owner">Owner</option>
+                                    <option value="admin">admin</option>
+                                    <option value="staff">staff</option>
                                 </select>
                             </div>
                         </div>
@@ -151,29 +143,19 @@
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Lengkap</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
+                                <input type="text" id="nama" class="input" disabled data-value="nama_lengkap">
                             </div>
                         </div>
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" class="input" autocomplete="off">
+                                <input type="email" id="email" class="input" disabled data-value="email">
                             </div>
                         </div>
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="role">Role</label>
-                                <select id="role" class="input">
-                                    <option value="-">Pilih role pengguna</option>
-                                    <option value="staff">Staff</option>
-                                    <option value="owner">Owner</option>
-                                </select>
+                                <input type="text" id="role" class="input" disabled data-value="role">
                             </div>
                         </div>
                         <div class="col-12">
@@ -192,33 +174,27 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Edit Pengguna</h3>
-                <form class="form d-inline-block w-100">
+                <form class="form d-inline-block w-100" id="editPengguna" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Lengkap</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
+                                <input type="text" id="nama" class="input" autocomplete="off"
+                                    data-value="nama_lengkap" name="nama_lengkap">
                             </div>
                         </div>
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" class="input" autocomplete="off">
+                                <input type="email" id="email" class="input" autocomplete="off"
+                                    data-value="email" name="email">
                             </div>
                         </div>
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="role">Role</label>
-                                <select id="role" class="input">
-                                    <option value="-">Pilih role pengguna</option>
-                                    <option value="staff">Staff</option>
-                                    <option value="owner">Owner</option>
+                                <select id="role" class="input" data-value="role" name="role">
                                 </select>
                             </div>
                         </div>
@@ -242,7 +218,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Hapus Pengguna</h3>
-                <form class="form d-inline-block w-100">
+                <form class="form d-inline-block w-100" method="POST" id="hapusPengguna">
+                    @csrf
                     <p class="caption-description row-button">Konfirmasi Penghapusan Pengguna: Apakah Anda yakin ingin
                         menghapus pengguna ini?
                         Tindakan ini tidak dapat diurungkan, dan pengguna akan dihapus secara permanen dari sistem.
@@ -256,4 +233,53 @@
         </div>
     </div>
     {{-- END MODAL HAPUS PENGGUNA --}}
+
+    <script>
+        $(document).on('click', '[data-bs-target="#detailPenggunaModal"]', function() {
+            let id = $(this).data('id');
+            $.ajax({
+                type: 'get',
+                url: '/pengguna/detail/' + id,
+                success: function(data) {
+                    $('[data-value="nama_lengkap"]').val(data.nama_lengkap);
+                    $('[data-value="email"]').val(data.email);
+                    $('[data-value="role"]').val(data.role);
+                }
+            });
+        });
+
+        $(document).on('click', '[data-bs-target="#editPenggunaModal"]', function() {
+            let id = $(this).data('id');
+            $('[data-value="role"] option').remove();
+            $('#editPengguna').attr('action', '/pengguna/edit/' + id);
+            $.ajax({
+                type: 'get',
+                url: '/pengguna/detail/' + id,
+                success: function(data) {
+                    $('[data-value="nama_lengkap"]').val(data.nama_lengkap);
+                    $('[data-value="email"]').val(data.email);
+
+                    $('[data-value="role"]').append(
+                        `<option value="${data.role}">${data.role}</option>`);
+                    if (data.role == 'admin') {
+                        $('[data-value="role"]').append(
+                            `<option value="staff">staff</option>`);
+                    } else if (data.role == 'staff') {
+                        $('[data-value="role"]').append(
+                            `<option value="admin">admin</option>`);
+                    } else {
+                        $('[data-value="role"]').append(
+                            `<option value="admin">admin</option>`);
+                        $('[data-value="role"]').append(
+                            `<option value="staff">staff</option>`);
+                    }
+                }
+            });
+        });
+
+        $(document).on('click', '[data-bs-target="#hapusPenggunaModal"]', function() {
+            let id = $(this).data('id');
+            $('#hapusPengguna').attr('action', '/pengguna/hapus/' + id);
+        });
+    </script>
 @endsection
