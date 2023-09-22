@@ -132,7 +132,7 @@
                                 <input type="text" id="waktu_sewa" class="input" autocomplete="off">
                             </div>
                         </div>
-                        <div class="col-md-6 mb-4 row-button">
+                        <div class="col-md-6 row-button">
                             <div class="input-wrapper">
                                 <label for="total_tarif_sewa">Total Tarif Sewa</label>
                                 <input type="text" id="total_tarif_sewa" class="input" autocomplete="off">

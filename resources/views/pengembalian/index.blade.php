@@ -38,39 +38,17 @@
                         <p class="product-name">Honda Brio</p>
                         <div class="wrapper-other d-flex align-items-center justify-content-between">
                             <div class="wrapper-tahun d-flex align-items-center">
-                                <p class="product-year">Agus Wartawan</p>
+                                <p class="product-year">23-09-23, 16.00</p>
                             </div>
-                            <h6 class="product-price">Rp. 500.000</h6>
+                            <h6 class="product-price">6 Hari 8 Jam</h6>
                         </div>
                         <div class="wrapper-button d-flex flex-column">
-                            <a href="{{ route('pemesanan.booking') }}" class="button-primary w-100">Pemesanan</a>
-                            <button type="button" class="button-primary-blur w-100" data-bs-toggle="modal"
-                                data-bs-target="#hapusBookingModal">Hapus Booking</button>
+                            <a href="{{ route('pengembalian.restoration') }}" class="button-primary w-100">Pengembalian</a>
+                            <a href="" class="button-primary-blur w-100">Lihat Nota</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    {{-- MODAL HAPUS BOOKING --}}
-    <div class="modal modal-delete fade" id="hapusBookingModal" tabindex="-1" aria-labelledby="hapusBookingModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <h3 class="title">Hapus Booking</h3>
-                <form class="form d-inline-block w-100">
-                    <p class="caption-description row-button">Konfirmasi Penghapusan Booking: Apakah Anda yakin ingin
-                        menghapus booking ini?
-                        Tindakan ini tidak dapat diurungkan, dan booking akan dihapus secara permanen dari sistem.
-                    </p>
-                    <div class="button-wrapper d-flex">
-                        <button type="submit" class="button-primary">Hapus Booking</button>
-                        <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal Hapus</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    {{-- END MODAL HAPUS BOOKING --}}
 @endsection

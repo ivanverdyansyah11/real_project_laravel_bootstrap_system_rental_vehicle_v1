@@ -51,7 +51,7 @@
                         <p>Pemesanan</p>
                     </div>
                 </a>
-                <a href=""
+                <a href="{{ route('pengembalian') }}"
                     class="menu-link d-flex flex-column {{ Request::is('pengembalian*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
                         <div class="icon-sidebar-wrapper">

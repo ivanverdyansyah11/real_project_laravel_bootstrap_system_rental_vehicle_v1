@@ -9,6 +9,7 @@ use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\PenambahanSewaController;
+use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\SeriKendaraanController;
 use App\Http\Controllers\SopirController;
@@ -122,5 +123,11 @@ Route::middleware('guest')->group(function () {
         Route::get('/pemesanan/booking', 'booking')->name('pemesanan.booking');
         Route::get('/pemesanan/pembayaran', 'transaction')->name('pemesanan.transaction');
         Route::post('/pemesanan/hapus', 'delete')->name('pemesanan.delete');
+    });
+
+    // PENGEMBALIAN
+    Route::controller(PengembalianController::class)->group(function () {
+        Route::get('/pengembalian', 'index')->name('pengembalian');
+        Route::get('/pengembalian/kendaraan', 'restoration')->name('pengembalian.restoration');
     });
 });
