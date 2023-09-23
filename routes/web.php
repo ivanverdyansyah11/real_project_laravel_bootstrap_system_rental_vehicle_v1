@@ -75,7 +75,10 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // BRAND KENDARAAN
     Route::controller(BrandKendaraanController::class)->group(function () {
         Route::get('/brand-kendaraan', 'index')->name('brandKendaraan');
-        Route::post('/brand-kendaraan/hapus', 'delete')->name('brandKendaraan.delete');
+        Route::get('/brand-kendaraan/detail/{id}', 'detail')->name('brandKendaraan.detail');
+        Route::post('/brand-kendaraan/tambah', 'store')->name('brandKendaraan.store');
+        Route::post('/brand-kendaraan/edit/{id}', 'update')->name('brandKendaraan.update');
+        Route::post('/brand-kendaraan/hapus/{id}', 'delete')->name('brandKendaraan.delete');
     });
 
     // SERI KENDARAAN

@@ -60,54 +60,46 @@
                     <div class="col-3 col-xl-2 data-header"></div>
                 </div>
             </div>
-            <div class="col-12 table-row table-border">
-                <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Hyundai</div>
-                    <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
-                        <div class="wrapper-action d-flex">
-                            <button type="button"
-                                class="button-action button-detail d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#detailBrandModal">
-                                <div class="detail-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editBrandModal">
-                                <div class="edit-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusBrandModal">
-                                <div class="delete-icon"></div>
-                            </button>
-                        </div>
+            @if ($brands->count() == 0)
+                <div class="col-12 table-row table-border">
+                    <div class="row table-data gap-4 align-items-center">
+                        <div class="col data-value data-length">Tidak Ada Data Brand Kendaraan!</div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 table-row table-border">
-                <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Toyota</div>
-                    <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
-                        <div class="wrapper-action d-flex">
-                            <button type="button"
-                                class="button-action button-detail d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#detailBrandModal">
-                                <div class="detail-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editBrandModal">
-                                <div class="edit-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusBrandModal">
-                                <div class="delete-icon"></div>
-                            </button>
+            @else
+                @foreach ($brands as $brand)
+                    <div class="col-12 table-row table-border">
+                        <div class="row table-data gap-4 align-items-center">
+                            <div class="col data-value data-length">{{ $brand->nama }}</div>
+                            <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
+                                <div class="wrapper-action d-flex">
+                                    <button type="button"
+                                        class="button-action button-detail d-flex justify-content-center align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#detailBrandModal"
+                                        data-id="{{ $brand->id }}">
+                                        <div class="detail-icon"></div>
+                                    </button>
+                                    <button type="button"
+                                        class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#editBrandModal"
+                                        data-id="{{ $brand->id }}">
+                                        <div class="edit-icon"></div>
+                                    </button>
+                                    <button type="button"
+                                        class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#hapusBrandModal"
+                                        data-id="{{ $brand->id }}">
+                                        <div class="delete-icon"></div>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                @endforeach
+            @endif
+        </div>
+        <div class="col-12 d-flex justify-content-end mt-4">
+            {{ $brands->links() }}
         </div>
     </div>
 
@@ -116,12 +108,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Tambah Brand Kendaraan Baru</h3>
-                <form class="form d-inline-block w-100">
+                <form class="form d-inline-block w-100" method="POST" action="{{ route('brandKendaraan.store') }}">
+                    @csrf
                     <div class="row">
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Brand Kendaraan</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
+                                <input type="text" id="nama" class="input" autocomplete="off" name="nama">
+                                @error('nama')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
@@ -149,7 +145,8 @@
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Brand Kendaraan</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
+                                <input type="text" id="nama" class="input" autocomplete="off"
+                                    data-value="nama" disabled>
                             </div>
                         </div>
                         <div class="col-12">
@@ -168,12 +165,17 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Edit Brand Kendaraan</h3>
-                <form class="form d-inline-block w-100">
+                <form id="editBrand" class="form d-inline-block w-100" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Brand Kendaraan</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
+                                <input type="text" id="nama" class="input" autocomplete="off"
+                                    data-value="nama" name="nama">
+                                @error('nama')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
@@ -196,7 +198,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Hapus Brand Kendaraan</h3>
-                <form class="form d-inline-block w-100">
+                <form id="hapusBrand" class="form d-inline-block w-100" method="POST">
+                    @csrf
                     <p class="caption-description row-button">Konfirmasi Penghapusan Brand Kendaraan: Apakah Anda yakin
                         ingin
                         menghapus brand kendaraan ini?
@@ -218,6 +221,34 @@
 
         buttonOther.addEventListener('click', function() {
             modalOther.classList.toggle('active');
+        });
+
+        $(document).on('click', '[data-bs-target="#detailBrandModal"]', function() {
+            let id = $(this).data('id');
+            $.ajax({
+                type: 'get',
+                url: '/brand-kendaraan/detail/' + id,
+                success: function(data) {
+                    $('[data-value="nama"]').val(data.nama);
+                }
+            });
+        });
+
+        $(document).on('click', '[data-bs-target="#editBrandModal"]', function() {
+            let id = $(this).data('id');
+            $('#editBrand').attr('action', '/brand-kendaraan/edit/' + id);
+            $.ajax({
+                type: 'get',
+                url: '/brand-kendaraan/detail/' + id,
+                success: function(data) {
+                    $('[data-value="nama"]').val(data.nama);
+                }
+            });
+        });
+
+        $(document).on('click', '[data-bs-target="#hapusBrandModal"]', function() {
+            let id = $(this).data('id');
+            $('#hapusBrand').attr('action', '/brand-kendaraan/hapus/' + id);
         });
     </script>
 @endsection
