@@ -93,7 +93,10 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // KATEGORI KILOMETER KENDARAAN
     Route::controller(KategoriKilometerKendaraanController::class)->group(function () {
         Route::get('/kilometer-kendaraan', 'index')->name('kilometerKendaraan');
-        Route::post('/kilometer-kendaraan/hapus', 'delete')->name('kilometerKendaraan.delete');
+        Route::get('/kilometer-kendaraan/detail/{id}', 'detail')->name('kilometerKendaraan.detail');
+        Route::post('/kilometer-kendaraan/tambah', 'store')->name('kilometerKendaraan.store');
+        Route::post('/kilometer-kendaraan/edit/{id}', 'update')->name('kilometerKendaraan.update');
+        Route::post('/kilometer-kendaraan/hapus/{id}', 'delete')->name('kilometerKendaraan.delete');
     });
 
     // PELANGGAN

@@ -15,6 +15,7 @@ class CreateKategoriKilometerKendaraansTable extends Migration
     {
         Schema::create('kategori_kilometer_kendaraans', function (Blueprint $table) {
             $table->id();
+            $table->string('jumlah');
             $table->timestamps();
         });
     }

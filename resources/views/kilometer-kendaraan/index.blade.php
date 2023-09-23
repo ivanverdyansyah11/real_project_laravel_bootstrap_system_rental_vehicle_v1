@@ -60,54 +60,46 @@
                     <div class="col-3 col-xl-2 data-header"></div>
                 </div>
             </div>
-            <div class="col-12 table-row table-border">
-                <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Kilometer 5.000</div>
-                    <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
-                        <div class="wrapper-action d-flex">
-                            <button type="button"
-                                class="button-action button-detail d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#detailKilometerModal">
-                                <div class="detail-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editKilometerModal">
-                                <div class="edit-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusKilometerModal">
-                                <div class="delete-icon"></div>
-                            </button>
-                        </div>
+            @if ($kilometers->count() == 0)
+                <div class="col-12 table-row table-border">
+                    <div class="row table-data gap-4 align-items-center">
+                        <div class="col data-value data-length">Tidak Ada Data Kategori Kilometer Kendaraan!</div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 table-row table-border">
-                <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Kilometer 10.000</div>
-                    <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
-                        <div class="wrapper-action d-flex">
-                            <button type="button"
-                                class="button-action button-detail d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#detailKilometerModal">
-                                <div class="detail-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editKilometerModal">
-                                <div class="edit-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusKilometerModal">
-                                <div class="delete-icon"></div>
-                            </button>
+            @else
+                @foreach ($kilometers as $kilometer)
+                    <div class="col-12 table-row table-border">
+                        <div class="row table-data gap-4 align-items-center">
+                            <div class="col data-value data-length">Kilometer {{ $kilometer->jumlah }}</div>
+                            <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
+                                <div class="wrapper-action d-flex">
+                                    <button type="button"
+                                        class="button-action button-detail d-flex justify-content-center align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#detailKilometerModal"
+                                        data-id="{{ $kilometer->id }}">
+                                        <div class="detail-icon"></div>
+                                    </button>
+                                    <button type="button"
+                                        class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#editKilometerModal"
+                                        data-id="{{ $kilometer->id }}">
+                                        <div class="edit-icon"></div>
+                                    </button>
+                                    <button type="button"
+                                        class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#hapusKilometerModal"
+                                        data-id="{{ $kilometer->id }}">
+                                        <div class="delete-icon"></div>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                @endforeach
+            @endif
+        </div>
+        <div class="col-12 d-flex justify-content-end mt-4">
+            {{ $kilometers->links() }}
         </div>
     </div>
 
@@ -117,12 +109,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Tambah Kilometer Kendaraan</h3>
-                <form class="form d-inline-block w-100">
+                <form class="form d-inline-block w-100" method="POST" action="{{ route('kilometerKendaraan.store') }}">
+                    @csrf
                     <div class="row">
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Kategori Kilometer</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
+                                <input type="text" id="nama" class="input" autocomplete="off" name="jumlah">
+                                @error('jumlah')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
@@ -150,7 +146,8 @@
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Kategori Kilometer</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
+                                <input type="text" id="nama" class="input" autocomplete="off" disabled
+                                    data-value="jumlah">
                             </div>
                         </div>
                         <div class="col-12">
@@ -169,12 +166,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Edit Kilometer Kendaraan</h3>
-                <form class="form d-inline-block w-100">
+                <form id="editKilometer" class="form d-inline-block w-100" method="POST">
+                    @csrf
+                    @csrf
                     <div class="row">
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Kategori Kilometer</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
+                                <input type="text" id="nama" class="input" autocomplete="off"
+                                    data-value="jumlah" name="jumlah">
+                                @error('jumlah')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
@@ -197,7 +200,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Hapus Kilometer Kendaraan</h3>
-                <form class="form d-inline-block w-100">
+                <form id="hapusKilometer" class="form d-inline-block w-100" method="POST">
+                    @csrf
                     <p class="caption-description row-button">Konfirmasi Penghapusan Kategori Kilometer Kendaraan: Apakah
                         Anda yakin
                         ingin
@@ -221,6 +225,34 @@
 
         buttonOther.addEventListener('click', function() {
             modalOther.classList.toggle('active');
+        });
+
+        $(document).on('click', '[data-bs-target="#detailKilometerModal"]', function() {
+            let id = $(this).data('id');
+            $.ajax({
+                type: 'get',
+                url: '/kilometer-kendaraan/detail/' + id,
+                success: function(data) {
+                    $('[data-value="jumlah"]').val(data.jumlah);
+                }
+            });
+        });
+
+        $(document).on('click', '[data-bs-target="#editKilometerModal"]', function() {
+            let id = $(this).data('id');
+            $('#editKilometer').attr('action', '/kilometer-kendaraan/edit/' + id);
+            $.ajax({
+                type: 'get',
+                url: '/kilometer-kendaraan/detail/' + id,
+                success: function(data) {
+                    $('[data-value="jumlah"]').val(data.jumlah);
+                }
+            });
+        });
+
+        $(document).on('click', '[data-bs-target="#hapusKilometerModal"]', function() {
+            let id = $(this).data('id');
+            $('#hapusKilometer').attr('action', '/kilometer-kendaraan/hapus/' + id);
         });
     </script>
 @endsection
