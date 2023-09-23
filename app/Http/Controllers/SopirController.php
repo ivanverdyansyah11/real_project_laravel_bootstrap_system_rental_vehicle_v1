@@ -62,8 +62,11 @@ class SopirController extends Controller
         }
 
         $sopirID = Sopir::latest()->first();
-
-        $validatedDataKelengkapan['sopirs_id'] = $sopirID->id + 1;
+        if ($sopirID) {
+            $validatedDataKelengkapan['sopirs_id'] = $sopirID->id + 1;
+        } else {
+            $validatedDataKelengkapan['sopirs_id'] = 1;
+        }
 
         if (!empty($validatedData['foto_ktp']) && !empty($validatedData['nomor_ktp'])) {
             $validatedDataKelengkapan['ktp'] = 'lengkap';
