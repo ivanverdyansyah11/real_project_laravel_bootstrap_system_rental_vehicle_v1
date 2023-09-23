@@ -30,6 +30,7 @@ class CreateKendaraansTable extends Migration
             $table->string('warna');
             $table->string('nomor_rangka');
             $table->string('nomor_mesin');
+            $table->enum('status', ['ready', 'booking', 'dipesan']);
             $table->timestamps();
         });
     }

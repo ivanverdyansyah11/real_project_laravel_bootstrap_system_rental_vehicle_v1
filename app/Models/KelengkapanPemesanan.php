@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pemesanan extends Model
+class KelengkapanPemesanan extends Model
 {
     protected $guarded = [];
 
-    public function kelengkapan_pemesanan()
+    public function pemesanan()
     {
-        return $this->belongsTo(KelengkapanPemesanan::class, 'id');
+        return $this->belongsTo(Pemesanan::class, 'id');
     }
 }

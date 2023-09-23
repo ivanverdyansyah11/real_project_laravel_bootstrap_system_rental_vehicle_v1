@@ -43,6 +43,24 @@ class DatabaseSeeder extends Seeder
             'role' => 'staff',
         ]);
 
+        Pelanggan::create([
+            'nama' => 'Aditya Prayatna',
+            'nik' => '00454654435',
+            'nomor_telepon' => '08123456789',
+            'nomor_ktp' => '34265768645',
+            'nomor_kk' => '34556565734',
+            'foto_ktp' => 'sample-kk.jpg',
+            'foto_kk' => 'sample-kk.jpg',
+            'alamat' => 'Jl. Ahmad Yani',
+        ]);
+
+        KelengkapanPelanggan::create([
+            'pelanggans_id' => 1,
+            'ktp' => 'lengkap',
+            'kk' => 'lengkap',
+            'nomor_telepon' => 'lengkap',
+        ]);
+
         JenisKendaraan::create([
             'nama' => 'Kendaraan Beroda 2',
         ]);

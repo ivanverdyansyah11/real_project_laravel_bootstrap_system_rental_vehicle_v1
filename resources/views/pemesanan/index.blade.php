@@ -30,26 +30,33 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                <div class="card-product">
-                    <img src="{{ asset('assets/img/default/sample-kendaraan.jpg') }}" alt="Car Thumbnail Image"
-                        class="img-fluid product-img">
-                    <div class="product-content">
-                        <p class="product-name">Honda Brio</p>
-                        <div class="wrapper-other d-flex align-items-center justify-content-between">
-                            <div class="wrapper-tahun d-flex align-items-center">
-                                <p class="product-year">Agus Wartawan</p>
+            @foreach ($kendaraans as $kendaraan)
+                <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
+                    <div class="card-product">
+                        <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
+                            alt="Car Thumbnail Image" class="img-fluid product-img">
+                        <div class="product-content">
+                            <p class="product-name">{{ $kendaraan->brand_kendaraan->nama }}
+                                {{ $kendaraan->nama_kendaraan }}</p>
+                            <div class="wrapper-other d-flex align-items-center justify-content-between">
+                                <div class="wrapper-tahun d-flex align-items-center">
+                                    <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
+                                        class="img-fluid kendaraan-icon">
+                                    <p class="product-year">{{ $kendaraan->tanggal_pembelian }}</p>
+                                </div>
+                                <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa }}</h6>
                             </div>
-                            <h6 class="product-price">Rp. 500.000</h6>
-                        </div>
-                        <div class="wrapper-button d-flex flex-column">
-                            <a href="{{ route('pemesanan.booking') }}" class="button-primary w-100">Pemesanan</a>
-                            <button type="button" class="button-primary-blur w-100" data-bs-toggle="modal"
-                                data-bs-target="#hapusBookingModal">Hapus Booking</button>
+                            <div class="wrapper-button d-flex flex-column">
+                                <a href="{{ route('pemesanan.booking', $kendaraan->id) }}"
+                                    class="button-primary w-100">Pemesanan</a>
+                                <button type="button" class="button-primary-blur w-100" data-bs-toggle="modal"
+                                    data-bs-target="#hapusBookingModal" data-id="{{ $kendaraan->id }}">Hapus
+                                    Booking</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
 
@@ -59,7 +66,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Hapus Booking</h3>
-                <form class="form d-inline-block w-100">
+                <form id="hapusBooking" class="form d-inline-block w-100" method="POST">
+                    @csrf
                     <p class="caption-description row-button">Konfirmasi Penghapusan Booking: Apakah Anda yakin ingin
                         menghapus booking ini?
                         Tindakan ini tidak dapat diurungkan, dan booking akan dihapus secara permanen dari sistem.
@@ -73,4 +81,11 @@
         </div>
     </div>
     {{-- END MODAL HAPUS BOOKING --}}
+
+    <script>
+        $(document).on('click', '[data-bs-target="#hapusBookingModal"]', function() {
+            let id = $(this).data('id');
+            $('#hapusBooking').attr('action', '/pemesanan/hapus/' + id);
+        });
+    </script>
 @endsection

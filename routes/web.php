@@ -57,7 +57,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
         Route::get('/kendaraan/detail/{id}', 'detail')->name('kendaraan.detail');
         Route::get('/kendaraan/getSeriKendaraan/{id}', 'getSeriKendaraan')->name('kendaraan.getSeriKendaraan');
 
-        Route::post('/kendaraan/booking/{id}', 'booking')->name('kendaraan.booking');
+        Route::post('/kendaraan/booking', 'booking')->name('kendaraan.booking');
         Route::get('/kendaraan/tambah', 'create')->name('kendaraan.create');
         Route::post('/kendaraan/tambah', 'store')->name('kendaraan.store');
         Route::get('/kendaraan/edit/{id}', 'edit')->name('kendaraan.edit');
@@ -163,9 +163,13 @@ Route::middleware('auth')->group(function () {
     // PEMESANAN
     Route::controller(PemesananController::class)->group(function () {
         Route::get('/pemesanan', 'index')->name('pemesanan');
-        Route::get('/pemesanan/booking', 'booking')->name('pemesanan.booking');
-        Route::get('/pemesanan/pembayaran', 'transaction')->name('pemesanan.transaction');
-        Route::post('/pemesanan/hapus', 'delete')->name('pemesanan.delete');
+        Route::get('/pemesanan/booking/{id}', 'booking')->name('pemesanan.booking');
+        Route::post('/pemesanan/booking/{id}', 'bookingAction')->name('pemesanan.booking.action');
+
+        Route::get('/pemesanan/pembayaran/{id}', 'transaction')->name('pemesanan.transaction');
+        Route::post('/pemesanan/pembayaran/{id}', 'transactionAction')->name('pemesanan.transaction.action');
+
+        Route::post('/pemesanan/hapus/{id}', 'delete')->name('pemesanan.delete');
     });
 
     // PENGEMBALIAN
