@@ -15,6 +15,14 @@ class CreatePelanggansTable extends Migration
     {
         Schema::create('pelanggans', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('nik');
+            $table->string('nomor_telepon', 13)->nullable();
+            $table->string('nomor_ktp')->nullable();
+            $table->string('nomor_kk')->nullable();
+            $table->string('foto_ktp')->nullable();
+            $table->string('foto_kk')->nullable();
+            $table->text('alamat');
             $table->timestamps();
         });
     }

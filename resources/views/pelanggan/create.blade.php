@@ -22,7 +22,9 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <form class="form d-inline-block w-100">
+                <form class="form d-inline-block w-100" method="POST" action="{{ route('pelanggan.store') }}"
+                    enctype="multipart/form-data">
+                    @csrf
                     <div class="row">
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
                             <div class="input-wrapper">
@@ -36,9 +38,9 @@
                                             KTP</button>
                                     </div>
                                 </div>
-                                {{-- @error('image')
+                                @error('foto_ktp')
                                     <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror --}}
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
@@ -53,46 +55,66 @@
                                             KK</button>
                                     </div>
                                 </div>
-                                {{-- @error('image')
+                                @error('foto_kk')
                                     <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror --}}
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nama">Nama</label>
-                                    <input type="text" id="nama" class="input" autocomplete="off">
+                                    <input type="text" id="nama" class="input" autocomplete="off" name="nama">
+                                    @error('nama')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nik">NIK</label>
-                                    <input type="text" id="nik" class="input" autocomplete="off">
+                                    <input type="text" id="nik" class="input" autocomplete="off" name="nik">
+                                    @error('nik')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nomor_telepon">Nomor Telepon</label>
-                                    <input type="text" id="nomor_telepon" class="input" autocomplete="off">
+                                    <input type="text" id="nomor_telepon" class="input" autocomplete="off"
+                                        name="nomor_telepon">
+                                    @error('nomor_telepon')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nomor_ktp">Nomor KTP</label>
-                                    <input type="text" id="nomor_ktp" class="input" autocomplete="off">
+                                    <input type="text" id="nomor_ktp" class="input" autocomplete="off" name="nomor_ktp">
+                                    @error('nomor_ktp')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nomor_kk">Nomor KK</label>
-                                    <input type="text" id="nomor_kk" class="input" autocomplete="off">
+                                    <input type="text" id="nomor_kk" class="input" autocomplete="off" name="nomor_kk">
+                                    @error('nomor_kk')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 row-button">
                                 <div class="input-wrapper">
                                     <label for="alamat">Alamat</label>
-                                    <input type="text" id="alamat" class="input" autocomplete="off">
+                                    <input type="text" id="alamat" class="input" autocomplete="off"
+                                        name="alamat">
+                                    @error('alamat')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12">

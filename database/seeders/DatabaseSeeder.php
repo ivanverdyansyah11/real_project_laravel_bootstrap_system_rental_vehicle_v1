@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Auth;
+use App\Models\KelengkapanPelanggan;
 use App\Models\KelengkapanSopir;
+use App\Models\Pelanggan;
 use App\Models\Sopir;
 use Illuminate\Database\Seeder;
 

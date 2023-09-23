@@ -90,13 +90,13 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // PELANGGAN
     Route::controller(PelangganController::class)->group(function () {
         Route::get('/pelanggan', 'index')->name('pelanggan');
-        Route::get('/pelanggan/detail', 'detail')->name('pelanggan.detail');
+        Route::get('/pelanggan/detail/{id}', 'detail')->name('pelanggan.detail');
 
         Route::get('/pelanggan/tambah', 'create')->name('pelanggan.create');
         Route::post('/pelanggan/tambah', 'store')->name('pelanggan.store');
-        Route::get('/pelanggan/edit', 'edit')->name('pelanggan.edit');
-        Route::post('/pelanggan/edit', 'update')->name('pelanggan.update');
-        Route::post('/pelanggan/hapus', 'delete')->name('pelanggan.delete');
+        Route::get('/pelanggan/edit/{id}', 'edit')->name('pelanggan.edit');
+        Route::post('/pelanggan/edit/{id}', 'update')->name('pelanggan.update');
+        Route::post('/pelanggan/hapus/{id}', 'delete')->name('pelanggan.delete');
     });
 
     // SOPIR

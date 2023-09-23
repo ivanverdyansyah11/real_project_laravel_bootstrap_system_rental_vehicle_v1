@@ -27,72 +27,60 @@
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
                             <div class="input-wrapper">
                                 <div class="wrapper d-flex gap-3 align-items-end">
-                                    <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
+                                    <img src="{{ $pelanggan->foto_ktp ? asset('assets/img/ktp-images/' . $pelanggan->foto_ktp) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-ktp" alt="KTP Image" width="80">
-                                    {{-- <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-ktp" name="foto_ktp"
-                                            style="opacity: 0;">
-                                        <button type="button" class="button-reverse button-create-ktp">Pilih Foto
-                                            KTP</button>
-                                    </div> --}}
                                 </div>
-                                {{-- @error('image')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror --}}
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
                             <div class="input-wrapper">
                                 <div class="wrapper d-flex gap-3 align-items-end">
-                                    <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
+                                    <img src="{{ $pelanggan->foto_kk ? asset('assets/img/kk-images/' . $pelanggan->foto_kk) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-kk" alt="KK Image" width="80">
-                                    {{-- <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-kk" name="foto_kk"
-                                            style="opacity: 0;">
-                                        <button type="button" class="button-reverse button-create-kk">Pilih Foto
-                                            KK</button>
-                                    </div> --}}
                                 </div>
-                                {{-- @error('image')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror --}}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nama">Nama</label>
-                                    <input type="text" id="nama" class="input" autocomplete="off" disabled>
+                                    <input type="text" id="nama" class="input" autocomplete="off" disabled
+                                        value="{{ $pelanggan->nama }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nik">NIK</label>
-                                    <input type="text" id="nik" class="input" autocomplete="off" disabled>
+                                    <input type="text" id="nik" class="input" autocomplete="off" disabled
+                                        value="{{ $pelanggan->nik }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nomor_telepon">Nomor Telepon</label>
-                                    <input type="text" id="nomor_telepon" class="input" autocomplete="off" disabled>
+                                    <input type="text" id="nomor_telepon" class="input" autocomplete="off" disabled
+                                        value="{{ $pelanggan->nomor_telepon }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nomor_ktp">Nomor KTP</label>
-                                    <input type="text" id="nomor_ktp" class="input" autocomplete="off" disabled>
+                                    <input type="text" id="nomor_ktp" class="input" autocomplete="off" disabled
+                                        value="{{ $pelanggan->nomor_ktp }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nomor_kk">Nomor KK</label>
-                                    <input type="text" id="nomor_kk" class="input" autocomplete="off" disabled>
+                                    <input type="text" id="nomor_kk" class="input" autocomplete="off" disabled
+                                        value="{{ $pelanggan->nomor_kk }}">
                                 </div>
                             </div>
                             <div class="col-md-6 row-button">
                                 <div class="input-wrapper">
                                     <label for="alamat">Alamat</label>
-                                    <input type="text" id="alamat" class="input" autocomplete="off" disabled>
+                                    <input type="text" id="alamat" class="input" autocomplete="off" disabled
+                                        value="{{ $pelanggan->alamat }}">
                                 </div>
                             </div>
                             <div class="col-12">

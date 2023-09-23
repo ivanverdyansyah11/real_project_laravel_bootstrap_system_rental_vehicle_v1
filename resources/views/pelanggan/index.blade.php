@@ -35,56 +35,53 @@
                     <div class="col-3 col-xl-2 data-header"></div>
                 </div>
             </div>
-            <div class="col-12 table-row table-border">
-                <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Anak Agung Aditya Prayatna</div>
-                    <div class="col data-value data-length data-length-none">08123456789</div>
-                    <div class="col data-value data-length data-length-none">Jl. Ahmad Yani</div>
-                    <div class="col data-value data-length data-length-none status-true">Lengkap</div>
-                    <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
-                        <div class="wrapper-action d-flex">
-                            <a href="{{ route('pelanggan.detail') }}"
-                                class="button-action button-detail d-flex justify-content-center align-items-center">
-                                <div class="detail-icon"></div>
-                            </a>
-                            <a href="{{ route('pelanggan.edit') }}"
-                                class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
-                                <div class="edit-icon"></div>
-                            </a>
-                            <button type="button"
-                                class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusPelangganModal">
-                                <div class="delete-icon"></div>
-                            </button>
-                        </div>
+            @if ($pelanggans->count() == 0)
+                <div class="col-12 table-row table-border">
+                    <div class="row table-data gap-4 align-items-center">
+                        <div class="col data-value data-length">Tidak Ada Data Pelanggan!</div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 table-row table-border">
-                <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Dimas Praguna Putra</div>
-                    <div class="col data-value data-length data-length-none">08987654321</div>
-                    <div class="col data-value data-length data-length-none">Jl. Gatsu Barat</div>
-                    <div class="col data-value data-length data-length-none status-false">Belum Lengkap</div>
-                    <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
-                        <div class="wrapper-action d-flex">
-                            <a href="{{ route('pelanggan.detail') }}"
-                                class="button-action button-detail d-flex justify-content-center align-items-center">
-                                <div class="detail-icon"></div>
-                            </a>
-                            <a href="{{ route('pelanggan.edit') }}"
-                                class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
-                                <div class="edit-icon"></div>
-                            </a>
-                            <button type="button"
-                                class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusPelangganModal">
-                                <div class="delete-icon"></div>
-                            </button>
+            @else
+                @foreach ($pelanggans as $pelanggan)
+                    <div class="col-12 table-row table-border">
+                        <div class="row table-data gap-4 align-items-center">
+                            <div class="col data-value data-length">{{ $pelanggan->nama }}</div>
+                            <div class="col data-value data-length data-length-none">{{ $pelanggan->nomor_telepon ?: '-' }}
+                            </div>
+                            <div class="col data-value data-length data-length-none">{{ $pelanggan->alamat }}</div>
+                            @if (
+                                $pelanggan->kelengkapan_pelanggan->ktp == 'lengkap' &&
+                                    $pelanggan->kelengkapan_pelanggan->kk == 'lengkap' &&
+                                    $pelanggan->kelengkapan_pelanggan->nomor_telepon == 'lengkap')
+                                <div class="col data-value data-length data-length-none status-true">Lengkap</div>
+                            @else
+                                <div class="col data-value data-length data-length-none status-false">Belum Lengkap</div>
+                            @endif
+                            <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
+                                <div class="wrapper-action d-flex">
+                                    <a href="{{ route('pelanggan.detail', $pelanggan->id) }}"
+                                        class="button-action button-detail d-flex justify-content-center align-items-center">
+                                        <div class="detail-icon"></div>
+                                    </a>
+                                    <a href="{{ route('pelanggan.edit', $pelanggan->id) }}"
+                                        class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
+                                        <div class="edit-icon"></div>
+                                    </a>
+                                    <button type="button"
+                                        class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#hapusPelangganModal"
+                                        data-id="{{ $pelanggan->id }}">
+                                        <div class="delete-icon"></div>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                @endforeach
+            @endif
+        </div>
+        <div class="col-12 d-flex justify-content-end mt-4">
+            {{ $pelanggans->links() }}
         </div>
     </div>
 
@@ -94,7 +91,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Hapus Pelanggan</h3>
-                <form class="form d-inline-block w-100">
+                <form id="hapusPelanggan" class="form d-inline-block w-100" method="POST">
+                    @csrf
                     <p class="caption-description row-button">Konfirmasi Penghapusan Pelanggan: Apakah Anda yakin ingin
                         menghapus pelanggan ini?
                         Tindakan ini tidak dapat diurungkan, dan pelanggan akan dihapus secara permanen dari sistem.
@@ -108,4 +106,12 @@
         </div>
     </div>
     {{-- END MODAL HAPUS PELANGGAN --}}
+
+
+    <script>
+        $(document).on('click', '[data-bs-target="#hapusPelangganModal"]', function() {
+            let id = $(this).data('id');
+            $('#hapusPelanggan').attr('action', '/pelanggan/hapus/' + id);
+        });
+    </script>
 @endsection
