@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class JenisKendaraan extends Model
 {
     protected $guarded = [];
+
+    public function kendaraan()
+    {
+        return $this->hasMany(Kendaraan::class, 'id');
+    }
 }

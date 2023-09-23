@@ -53,34 +53,43 @@
                             <a href="{{ route('seriKendaraan') }}"
                                 class="modal-link {{ Request::is('seri-kendaraan*') ? 'active' : '' }}">Seri
                                 Kendaraan</a>
+                            <a href="{{ route('kilometerKendaraan') }}"
+                                class="modal-link {{ Request::is('kilometer-kendaraan*') ? 'active' : '' }}">Kilometer
+                                Kendaraan</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                <div class="card-product">
-                    <img src="{{ asset('assets/img/default/sample-kendaraan.jpg') }}" alt="Car Thumbnail Image"
-                        class="img-fluid product-img">
-                    <div class="product-content">
-                        <p class="product-name">Honda Brio</p>
-                        <div class="wrapper-other d-flex align-items-center justify-content-between">
-                            <div class="wrapper-tahun d-flex align-items-center">
-                                <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
-                                    class="img-fluid kendaraan-icon">
-                                <p class="product-year">2017</p>
+        @foreach ($kendaraans as $kendaraan)
+            <div class="row">
+                <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
+                    <div class="card-product">
+                        <img src="{{ asset('assets/img/default/sample-kendaraan.jpg') }}" alt="Car Thumbnail Image"
+                            class="img-fluid product-img">
+                        <div class="product-content">
+                            <p class="product-name">{{ $kendaraan->brand }} {{ $kendaraan->nama }}</p>
+                            <div class="wrapper-other d-flex align-items-center justify-content-between">
+                                <div class="wrapper-tahun d-flex align-items-center">
+                                    <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
+                                        alt="Kendaraan Icon" class="img-fluid kendaraan-icon">
+                                    <p class="product-year">{{ $kendaraan->tanggal_pembelian }}</p>
+                                </div>
+                                <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa }}</h6>
                             </div>
-                            <h6 class="product-price">Rp. 500.000</h6>
-                        </div>
-                        <div class="wrapper-button d-flex">
-                            <button type="button" class="button-primary w-100" data-bs-toggle="modal"
-                                data-bs-target="#bookingKendaraanModal">Booking</button>
-                            <a href="{{ route('kendaraan.detail') }}" class="button-primary-blur w-100">Detail</a>
+                            <div class="wrapper-button d-flex">
+                                <button type="button" class="button-primary w-100" data-bs-toggle="modal"
+                                    data-bs-target="#bookingKendaraanModal" data-id="{{ $kendaraan->id }}">Booking</button>
+                                <a href="{{ route('kendaraan.detail', $kendaraan->id) }}"
+                                    class="button-primary-blur w-100">Detail</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        @endforeach
+        <div class="col-12 d-flex justify-content-end mt-4">
+            {{ $kendaraans->links() }}
         </div>
     </div>
 
@@ -121,7 +130,8 @@
                         <div class="col-12">
                             <div class="button-wrapper d-flex">
                                 <button type="submit" class="button-primary">Booking Kendaraan</button>
-                                <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal Tambah</button>
+                                <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal
+                                    Tambah</button>
                             </div>
                         </div>
                     </div>

@@ -60,54 +60,46 @@
                     <div class="col-3 col-xl-2 data-header"></div>
                 </div>
             </div>
-            <div class="col-12 table-row table-border">
-                <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Kendaraan Roda 2</div>
-                    <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
-                        <div class="wrapper-action d-flex">
-                            <button type="button"
-                                class="button-action button-detail d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#detailJenisModal">
-                                <div class="detail-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editJenisModal">
-                                <div class="edit-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusJenisModal">
-                                <div class="delete-icon"></div>
-                            </button>
-                        </div>
+            @if ($jenises->count() == 0)
+                <div class="col-12 table-row table-border">
+                    <div class="row table-data gap-4 align-items-center">
+                        <div class="col data-value data-length">Tidak Ada Data Jenis Kendaraan!</div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 table-row table-border">
-                <div class="row table-data gap-4 align-items-center">
-                    <div class="col data-value data-length">Kendaraan Roda 4 </div>
-                    <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
-                        <div class="wrapper-action d-flex">
-                            <button type="button"
-                                class="button-action button-detail d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#detailJenisModal">
-                                <div class="detail-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editJenisModal">
-                                <div class="edit-icon"></div>
-                            </button>
-                            <button type="button"
-                                class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#hapusJenisModal">
-                                <div class="delete-icon"></div>
-                            </button>
+            @else
+                @foreach ($jenises as $jenis)
+                    <div class="col-12 table-row table-border">
+                        <div class="row table-data gap-4 align-items-center">
+                            <div class="col data-value data-length">{{ $jenis->nama }}</div>
+                            <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
+                                <div class="wrapper-action d-flex">
+                                    <button type="button"
+                                        class="button-action button-detail d-flex justify-content-center align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#detailJenisModal"
+                                        data-id="{{ $jenis->id }}">
+                                        <div class="detail-icon"></div>
+                                    </button>
+                                    <button type="button"
+                                        class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#editJenisModal"
+                                        data-id="{{ $jenis->id }}">
+                                        <div class="edit-icon"></div>
+                                    </button>
+                                    <button type="button"
+                                        class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#hapusJenisModal"
+                                        data-id="{{ $jenis->id }}">
+                                        <div class="delete-icon"></div>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                @endforeach
+            @endif
+        </div>
+        <div class="col-12 d-flex justify-content-end mt-4">
+            {{ $jenises->links() }}
         </div>
     </div>
 
@@ -116,12 +108,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Tambah Jenis Kendaraan Baru</h3>
-                <form class="form d-inline-block w-100">
+                <form class="form d-inline-block w-100" method="POST" action="{{ route('jenisKendaraan.store') }}">
+                    @csrf
                     <div class="row">
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Jenis Kendaraan</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
+                                <input type="text" id="nama" class="input" autocomplete="off" name="nama">
+                                @error('nama')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
@@ -149,7 +145,8 @@
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Jenis Kendaraan</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
+                                <input type="text" id="nama" class="input" autocomplete="off" disabled
+                                    data-value="nama">
                             </div>
                         </div>
                         <div class="col-12">
@@ -168,12 +165,17 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Edit Jenis Kendaraan</h3>
-                <form class="form d-inline-block w-100">
+                <form id="editJenis" class="form d-inline-block w-100" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Jenis Kendaraan</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
+                                <input type="text" id="nama" class="input" autocomplete="off"
+                                    data-value="nama" name="nama">
+                                @error('nama')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
@@ -196,7 +198,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Hapus Jenis Kendaraan</h3>
-                <form class="form d-inline-block w-100">
+                <form id="hapusJenis" class="form d-inline-block w-100" method="POST">
+                    @csrf
                     <p class="caption-description row-button">Konfirmasi Penghapusan Jenis Kendaraan: Apakah Anda yakin
                         ingin
                         menghapus jenis kendaraan ini?
@@ -218,6 +221,34 @@
 
         buttonOther.addEventListener('click', function() {
             modalOther.classList.toggle('active');
+        });
+
+        $(document).on('click', '[data-bs-target="#detailJenisModal"]', function() {
+            let id = $(this).data('id');
+            $.ajax({
+                type: 'get',
+                url: '/jenis-kendaraan/detail/' + id,
+                success: function(data) {
+                    $('[data-value="nama"]').val(data.nama);
+                }
+            });
+        });
+
+        $(document).on('click', '[data-bs-target="#editJenisModal"]', function() {
+            let id = $(this).data('id');
+            $('#editJenis').attr('action', '/jenis-kendaraan/edit/' + id);
+            $.ajax({
+                type: 'get',
+                url: '/jenis-kendaraan/detail/' + id,
+                success: function(data) {
+                    $('[data-value="nama"]').val(data.nama);
+                }
+            });
+        });
+
+        $(document).on('click', '[data-bs-target="#hapusJenisModal"]', function() {
+            let id = $(this).data('id');
+            $('#hapusJenis').attr('action', '/jenis-kendaraan/hapus/' + id);
         });
     </script>
 @endsection

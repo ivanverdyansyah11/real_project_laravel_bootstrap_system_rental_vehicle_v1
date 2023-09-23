@@ -66,7 +66,10 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // JENIS KENDARAAN
     Route::controller(JenisKendaraanController::class)->group(function () {
         Route::get('/jenis-kendaraan', 'index')->name('jenisKendaraan');
-        Route::post('/jenis-kendaraan/hapus', 'delete')->name('jenisKendaraan.delete');
+        Route::get('/jenis-kendaraan/detail/{id}', 'detail')->name('jenisKendaraan.detail');
+        Route::post('/jenis-kendaraan/tambah', 'store')->name('jenisKendaraan.store');
+        Route::post('/jenis-kendaraan/edit/{id}', 'update')->name('jenisKendaraan.update');
+        Route::post('/jenis-kendaraan/hapus/{id}', 'delete')->name('jenisKendaraan.delete');
     });
 
     // BRAND KENDARAAN

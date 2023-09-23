@@ -15,6 +15,7 @@ class CreateBrandKendaraansTable extends Migration
     {
         Schema::create('brand_kendaraans', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kendaraan;
 use Illuminate\Http\Request;
 
 class KendaraanController extends Controller
@@ -10,6 +11,7 @@ class KendaraanController extends Controller
     {
         return view('kendaraan.index', [
             'title' => 'Kendaraan',
+            'kendaraans' => Kendaraan::with('jenis_kendaraan', 'brand_kendaraan', 'seri_kendaraan', 'kilometer_kendaraan')->paginate(6),
         ]);
     }
 

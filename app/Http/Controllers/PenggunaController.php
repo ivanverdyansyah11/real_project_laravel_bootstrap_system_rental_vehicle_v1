@@ -16,6 +16,12 @@ class PenggunaController extends Controller
         ]);
     }
 
+    function detail($id)
+    {
+        $pengguna = Auth::where('id', $id)->first();
+        return response()->json($pengguna);
+    }
+
     function store(Request $request)
     {
         if ($request->role == '-') {
@@ -38,18 +44,8 @@ class PenggunaController extends Controller
         }
     }
 
-    function detail($id)
-    {
-        $pengguna = Auth::where('id', $id)->first();
-        return response()->json($pengguna);
-    }
-
     function update($id, Request $request)
     {
-        if ($request->role == '-') {
-            return redirect(route('pengguna'))->with('failed', 'Isi Form Input Role Terlebih Dahulu!');
-        }
-
         $validatedData = $request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'email' => 'required|email|max:255',
