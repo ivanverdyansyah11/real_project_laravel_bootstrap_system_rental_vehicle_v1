@@ -22,124 +22,180 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <form class="form d-inline-block w-100">
+                <form class="form d-inline-block w-100" method="POST"
+                    action="{{ route('kendaraan.update', $kendaraan->id) }}" enctype="multipart/form-data">
+                    @csrf
                     <div class="row">
                         <div class="col-md-6 mb-5">
                             <div class="input-wrapper">
                                 <div class="wrapper d-flex gap-3 align-items-end">
-                                    <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
+                                    <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
                                         class="img-fluid tag-edit-image" alt="Kendaraan Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-edit-image" name="image"
+                                        <input type="file" id="image" class="input-edit-image" name="foto_kendaraan"
                                             style="opacity: 0;">
-                                        <button type="button" class="button-reverse button-edit">Pilih Foto
+                                        <button type="button" class="button-reverse button-edit-image">Pilih Foto
                                             Kendaraan</button>
                                     </div>
                                 </div>
+                                @error('foto_kendaraan')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="stnk_nama">STNK Atas Nama</label>
-                                <input type="text" id="stnk_nama" class="input" autocomplete="off" disabled
-                                    value="">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="stnk_nama">STNK Atas Nama</label>
+                                    <input type="text" id="stnk_nama" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->stnk_nama }}" name="stnk_nama">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="jenis">Jenis Kendaraan</label>
-                                <input type="text" id="jenis" class="input" autocomplete="off"
-                                    value="Pilih nomor seri terlebih dahulu!" disabled>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="nama_kendaraan">Nama Kendaraan</label>
+                                    <input type="text" id="nama_kendaraan" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->nama_kendaraan }}" name="nama_kendaraan">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="brand">Brand Kendaraan</label>
-                                <input type="text" id="brand" class="input" autocomplete="off"
-                                    value="Pilih nomor seri terlebih dahulu!" disabled>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="jenis">Jenis Kendaraan</label>
+                                    <input type="text" id="jenis" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->jenis_kendaraan->nama }}" disabled
+                                        data-value="jenis_kendaraan">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="seri">Nomor Seri</label>
-                                <select id="seri" class="input">
-                                    <option value="-">Pilih nomor seri kendaraan</option>
-                                    <option value="576578">576578</option>
-                                    <option value="456576">456576</option>
-                                </select>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="brand">Brand Kendaraan</label>
+                                    <input type="text" id="brand" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->brand_kendaraan->nama }}" disabled
+                                        data-value="brand_kendaraan">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="kilometer">Kategori Kilometer</label>
-                                <select id="kilometer" class="input">
-                                    <option value="-">Pilih kategori kilometer kendaraan</option>
-                                    <option value="5.000">Kilometer 5.000</option>
-                                    <option value="10.000">Kilometer 10.000</option>
-                                </select>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="seriData">Nomor Seri</label>
+                                    <select id="seriData" class="input" name="seri_kendaraans_id">
+                                        @foreach ($series as $seri)
+                                            @if ($kendaraan->seri_kendaraans_id == $seri->id)
+                                                <option value="{{ $seri->id }}" selected>{{ $seri->nomor_seri }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $seri->id }}">{{ $seri->nomor_seri }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    @error('seri_kendaraans_id')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="nomor_polisi">Nomor Polisi</label>
-                                <input type="text" id="nomor_polisi" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="kilometer">Kategori Kilometer</label>
+                                    <select id="kilometer" class="input" name="kategori_kilometer_kendaraans_id">
+                                        @foreach ($kilometers as $kilometer)
+                                            @if ($kendaraan->kategori_kilometer_kendaraans_id == $kilometer->id)
+                                                <option value="{{ $kilometer->id }}" selected>{{ $kilometer->jumlah }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $kilometer->id }}">{{ $kilometer->jumlah }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    @error('kategori_kilometer_kendaraans_id')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="kilometer">Kilometer</label>
-                                <input type="text" id="kilometer" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="nomor_polisi">Nomor Polisi</label>
+                                    <input type="text" id="nomor_polisi" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->nomor_polisi }}" name="nomor_polisi">
+                                    @error('nomor_polisi')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tarif_sewa">Tarif Sewa</label>
-                                <input type="text" id="tarif_sewa" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="kilometer">Kilometer</label>
+                                    <input type="text" id="kilometer" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->kilometer }}" name="kilometer">
+                                    @error('kilometer')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tahun_pembuatan">Tahun Pembuatan</label>
-                                <input type="text" id="tahun_pembuatan" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="tarif_sewa">Tarif Sewa</label>
+                                    <input type="text" id="tarif_sewa" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->tarif_sewa }}" name="tarif_sewa">
+                                    @error('tarif_sewa')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tanggal_pembelian">Tanggal Pembelian</label>
-                                <input type="text" id="tanggal_pembelian" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="tahun_pembuatan">Tahun Pembuatan</label>
+                                    <input type="text" id="tahun_pembuatan" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->tahun_pembuatan }}" name="tahun_pembuatan">
+                                    @error('tahun_pembuatan')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="warna">Warna</label>
-                                <input type="text" id="warna" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="tanggal_pembelian">Tanggal Pembelian</label>
+                                    <input type="text" id="tanggal_pembelian" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->tanggal_pembelian }}" name="tanggal_pembelian">
+                                    @error('tanggal_pembelian')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="nomor_rangka">Nomor Rangka</label>
-                                <input type="text" id="nomor_rangka" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="warna">Warna</label>
+                                    <input type="text" id="warna" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->warna }}" name="warna">
+                                    @error('warna')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 row-button">
-                            <div class="input-wrapper">
-                                <label for="nomor_mesin">Nomor Mesin</label>
-                                <input type="text" id="nomor_mesin" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="nomor_rangka">Nomor Rangka</label>
+                                    <input type="text" id="nomor_rangka" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->nomor_rangka }}" name="nomor_rangka">
+                                    @error('nomor_rangka')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="button-wrapper d-flex">
-                                <button type="submit" class="button-primary">Simpan Perubahan</button>
-                                <a href="{{ route('kendaraan') }}" class="button-reverse">Batal
-                                    Edit</a>
+                            <div class="col-md-6 row-button">
+                                <div class="input-wrapper">
+                                    <label for="nomor_mesin">Nomor Mesin</label>
+                                    <input type="text" id="nomor_mesin" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->nomor_mesin }}" name="nomor_mesin">
+                                    @error('nomor_mesin')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="button-wrapper d-flex">
+                                    <button type="submit" class="button-primary">Simpan Perubahan</button>
+                                    <a href="{{ route('kendaraan') }}" class="button-reverse">Batal
+                                        Edit</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -151,7 +207,7 @@
     <script>
         const tagEditKendaraan = document.querySelector('.tag-edit-image');
         const inputEditKendaraan = document.querySelector('.input-edit-image');
-        const buttonEdit = document.querySelector('.button-edit');
+        const buttonEdit = document.querySelector('.button-edit-image');
 
         buttonEdit.addEventListener('click', function() {
             inputEditKendaraan.click();
@@ -159,6 +215,18 @@
 
         inputEditKendaraan.addEventListener('change', function() {
             tagEditKendaraan.src = URL.createObjectURL(inputEditKendaraan.files[0]);
+        });
+
+        $("#seriData").change(function() {
+            let id = $(this).val();
+            $.ajax({
+                type: 'get',
+                url: '/kendaraan/getSeriKendaraan/' + id,
+                success: function(data) {
+                    $('[data-value="jenis_kendaraan"]').val(data.jenis_kendaraan.nama);
+                    $('[data-value="brand_kendaraan"]').val(data.brand_kendaraan.nama);
+                }
+            });
         });
     </script>
 @endsection

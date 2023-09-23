@@ -113,8 +113,8 @@ class SopirController extends Controller
             'nomor_telepon' => 'nullable|integer',
             'nomor_ktp' => 'nullable|integer',
             'nomor_sim' => 'nullable|integer',
-            'foto_ktp' => 'nullable|image|max:2048',
-            'foto_sim' => 'nullable|image|max:2048',
+            // 'foto_ktp' => 'nullable|image|max:2048',
+            // 'foto_sim' => 'nullable|image|max:2048',
             'alamat' => 'required|string',
         ]);
 

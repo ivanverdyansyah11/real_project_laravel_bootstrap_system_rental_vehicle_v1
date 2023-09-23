@@ -19,13 +19,13 @@
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <h5 class="subtitle">Detail Kendaraan</h5>
                 <div class="wrapper d-flex gap-2">
-                    <a href="{{ route('kendaraan.edit') }}"
+                    <a href="{{ route('kendaraan.edit', $kendaraan->id) }}"
                         class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
                         <div class="edit-icon"></div>
                     </a>
                     <button type="button"
                         class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                        data-bs-toggle="modal" data-bs-target="#hapusKendaraanModal">
+                        data-bs-toggle="modal" data-bs-target="#hapusKendaraanModal" data-id="{{ $kendaraan->id }}">
                         <div class="delete-icon"></div>
                     </button>
                 </div>
@@ -38,115 +38,114 @@
                         <div class="col-md-6 mb-5">
                             <div class="input-wrapper">
                                 <div class="wrapper d-flex gap-3 align-items-end">
-                                    <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
+                                    <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
                                         class="img-fluid tag-create-image" alt="Kendaraan Image" width="80">
-                                    {{-- <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-image" name="image"
-                                            style="opacity: 0;">
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="stnk_nama">STNK Atas Nama</label>
-                                <input type="text" id="stnk_nama" class="input" autocomplete="off" disabled
-                                    value="">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="stnk_nama">STNK Atas Nama</label>
+                                    <input type="text" id="stnk_nama" class="input" autocomplete="off" disabled
+                                        value="{{ $kendaraan->stnk_nama }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="jenis">Jenis Kendaraan</label>
-                                <input type="text" id="jenis" class="input" autocomplete="off"
-                                    value="Pilih nomor seri terlebih dahulu!" disabled>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="nama_kendaraan">Nama Kendaraan</label>
+                                    <input type="text" id="nama_kendaraan" class="input" autocomplete="off" disabled
+                                        value="{{ $kendaraan->nama_kendaraan }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="brand">Brand Kendaraan</label>
-                                <input type="text" id="brand" class="input" autocomplete="off"
-                                    value="Pilih nomor seri terlebih dahulu!" disabled>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="jenis">Jenis Kendaraan</label>
+                                    <input type="text" id="jenis" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->jenis_kendaraan->nama }}" disabled>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="seri">Nomor Seri</label>
-                                <select id="seri" class="input">
-                                    <option value="-">Pilih nomor seri kendaraan</option>
-                                    <option value="576578">576578</option>
-                                    <option value="456576">456576</option>
-                                </select>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="brand">Brand Kendaraan</label>
+                                    <input type="text" id="brand" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->brand_kendaraan->nama }}" disabled>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="kilometer">Kategori Kilometer</label>
-                                <select id="kilometer" class="input">
-                                    <option value="-">Pilih kategori kilometer kendaraan</option>
-                                    <option value="5.000">Kilometer 5.000</option>
-                                    <option value="10.000">Kilometer 10.000</option>
-                                </select>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="seri">Nomor Seri</label>
+                                    <input type="text" id="seri" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->seri_kendaraan->nomor_seri }}" disabled>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="nomor_polisi">Nomor Polisi</label>
-                                <input type="text" id="nomor_polisi" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="kilometer">Kategori Kilometer</label>
+                                    <input type="text" id="kilometer" class="input" autocomplete="off"
+                                        value="{{ $kendaraan->kilometer_kendaraan->jumlah }}" disabled>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="kilometer">Kilometer</label>
-                                <input type="text" id="kilometer" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="nomor_polisi">Nomor Polisi</label>
+                                    <input type="text" id="nomor_polisi" class="input" autocomplete="off" disabled
+                                        value="{{ $kendaraan->nomor_polisi }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tarif_sewa">Tarif Sewa</label>
-                                <input type="text" id="tarif_sewa" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="kilometer">Kilometer</label>
+                                    <input type="text" id="kilometer" class="input" autocomplete="off" disabled
+                                        value="{{ $kendaraan->kilometer }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tahun_pembuatan">Tahun Pembuatan</label>
-                                <input type="text" id="tahun_pembuatan" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="tarif_sewa">Tarif Sewa</label>
+                                    <input type="text" id="tarif_sewa" class="input" autocomplete="off" disabled
+                                        value="{{ $kendaraan->tarif_sewa }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tanggal_pembelian">Tanggal Pembelian</label>
-                                <input type="text" id="tanggal_pembelian" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="tahun_pembuatan">Tahun Pembuatan</label>
+                                    <input type="text" id="tahun_pembuatan" class="input" autocomplete="off"
+                                        disabled value="{{ $kendaraan->tahun_pembuatan }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="warna">Warna</label>
-                                <input type="text" id="warna" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="tanggal_pembelian">Tanggal Pembelian</label>
+                                    <input type="text" id="tanggal_pembelian" class="input" autocomplete="off"
+                                        disabled value="{{ $kendaraan->tanggal_pembelian }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="nomor_rangka">Nomor Rangka</label>
-                                <input type="text" id="nomor_rangka" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="warna">Warna</label>
+                                    <input type="text" id="warna" class="input" autocomplete="off" disabled
+                                        value="{{ $kendaraan->warna }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 row-button">
-                            <div class="input-wrapper">
-                                <label for="nomor_mesin">Nomor Mesin</label>
-                                <input type="text" id="nomor_mesin" class="input" autocomplete="off" disabled
-                                    value="">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="nomor_rangka">Nomor Rangka</label>
+                                    <input type="text" id="nomor_rangka" class="input" autocomplete="off" disabled
+                                        value="{{ $kendaraan->nomor_rangka }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="button-wrapper d-flex">
-                                <a href="{{ route('kendaraan') }}" class="button-reverse">Kembali ke Halaman</a>
+                            <div class="col-md-6 row-button">
+                                <div class="input-wrapper">
+                                    <label for="nomor_mesin">Nomor Mesin</label>
+                                    <input type="text" id="nomor_mesin" class="input" autocomplete="off" disabled
+                                        value="{{ $kendaraan->nomor_mesin }}">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="button-wrapper d-flex">
+                                    <a href="{{ route('kendaraan') }}" class="button-reverse">Kembali ke Halaman</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -161,7 +160,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Hapus Kendaraan</h3>
-                <form class="form d-inline-block w-100">
+                <form id="hapusKendaraan" class="form d-inline-block w-100" method="POST">
+                    @csrf
                     <p class="caption-description row-button">Konfirmasi Penghapusan Kendaraan: Apakah Anda yakin
                         ingin
                         menghapus kendaraan ini?
@@ -176,4 +176,11 @@
         </div>
     </div>
     {{-- END MODAL HAPUS KENDARAAN --}}
+
+    <script>
+        $(document).on('click', '[data-bs-target="#hapusKendaraanModal"]', function() {
+            let id = $(this).data('id');
+            $('#hapusKendaraan').attr('action', '/kendaraan/hapus/' + id);
+        });
+    </script>
 @endsection

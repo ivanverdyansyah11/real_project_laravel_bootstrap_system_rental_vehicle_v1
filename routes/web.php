@@ -54,13 +54,15 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // KENDARAAN
     Route::controller(KendaraanController::class)->group(function () {
         Route::get('/kendaraan', 'index')->name('kendaraan');
-        Route::get('/kendaraan/detail', 'detail')->name('kendaraan.detail');
+        Route::get('/kendaraan/detail/{id}', 'detail')->name('kendaraan.detail');
+        Route::get('/kendaraan/getSeriKendaraan/{id}', 'getSeriKendaraan')->name('kendaraan.getSeriKendaraan');
 
+        Route::post('/kendaraan/booking/{id}', 'booking')->name('kendaraan.booking');
         Route::get('/kendaraan/tambah', 'create')->name('kendaraan.create');
         Route::post('/kendaraan/tambah', 'store')->name('kendaraan.store');
-        Route::get('/kendaraan/edit', 'edit')->name('kendaraan.edit');
-        Route::post('/kendaraan/edit', 'update')->name('kendaraan.update');
-        Route::post('/kendaraan/hapus', 'delete')->name('kendaraan.delete');
+        Route::get('/kendaraan/edit/{id}', 'edit')->name('kendaraan.edit');
+        Route::post('/kendaraan/edit/{id}', 'update')->name('kendaraan.update');
+        Route::post('/kendaraan/hapus/{id}', 'delete')->name('kendaraan.delete');
     });
 
     // JENIS KENDARAAN

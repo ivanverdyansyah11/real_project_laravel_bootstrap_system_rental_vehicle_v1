@@ -110,8 +110,8 @@ class PelangganController extends Controller
             'nomor_telepon' => 'nullable|integer',
             'nomor_ktp' => 'nullable|integer',
             'nomor_kk' => 'nullable|integer',
-            'foto_ktp' => 'nullable|image|max:2048',
-            'foto_kk' => 'nullable|image|max:2048',
+            // 'foto_ktp' => 'nullable|image|max:2048',
+            // 'foto_kk' => 'nullable|image|max:2048',
             'alamat' => 'required|string',
         ]);
 

@@ -65,14 +65,15 @@
             <div class="row">
                 <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
                     <div class="card-product">
-                        <img src="{{ asset('assets/img/default/sample-kendaraan.jpg') }}" alt="Car Thumbnail Image"
-                            class="img-fluid product-img">
+                        <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
+                            alt="Car Thumbnail Image" class="img-fluid product-img">
                         <div class="product-content">
-                            <p class="product-name">{{ $kendaraan->brand }} {{ $kendaraan->nama }}</p>
+                            <p class="product-name">{{ $kendaraan->brand_kendaraan->nama }}
+                                {{ $kendaraan->nama_kendaraan }}</p>
                             <div class="wrapper-other d-flex align-items-center justify-content-between">
                                 <div class="wrapper-tahun d-flex align-items-center">
-                                    <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
-                                        alt="Kendaraan Icon" class="img-fluid kendaraan-icon">
+                                    <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
+                                        class="img-fluid kendaraan-icon">
                                     <p class="product-year">{{ $kendaraan->tanggal_pembelian }}</p>
                                 </div>
                                 <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa }}</h6>
@@ -88,9 +89,6 @@
                 </div>
             </div>
         @endforeach
-        <div class="col-12 d-flex justify-content-end mt-4">
-            {{ $kendaraans->links() }}
-        </div>
     </div>
 
     {{-- MODAL DETAIL BOOKING KENDARAAN --}}
