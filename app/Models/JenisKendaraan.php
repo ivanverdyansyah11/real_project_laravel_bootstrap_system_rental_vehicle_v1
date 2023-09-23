@@ -13,4 +13,9 @@ class JenisKendaraan extends Model
     {
         return $this->hasMany(Kendaraan::class, 'id');
     }
+
+    public function seri_kendaraan()
+    {
+        return $this->hasMany(SeriKendaraan::class, 'id');
+    }
 }

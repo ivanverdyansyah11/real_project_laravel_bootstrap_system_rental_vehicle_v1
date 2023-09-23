@@ -13,4 +13,14 @@ class SeriKendaraan extends Model
     {
         return $this->hasMany(Kendaraan::class, 'id');
     }
+
+    public function jenis_kendaraan()
+    {
+        return $this->belongsTo(JenisKendaraan::class, 'id');
+    }
+
+    public function brand_kendaraan()
+    {
+        return $this->belongsTo(BrandKendaraan::class, 'id');
+    }
 }

@@ -15,6 +15,9 @@ class CreateSeriKendaraansTable extends Migration
     {
         Schema::create('seri_kendaraans', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('jenis_kendaraans_id')->index();
+            $table->bigInteger('brand_kendaraans_id')->index();
+            $table->string('nomor_seri');
             $table->timestamps();
         });
     }
