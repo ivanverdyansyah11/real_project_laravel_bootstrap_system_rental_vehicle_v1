@@ -174,7 +174,7 @@
                         </div>
                         <div class="col-12">
                             <div class="button-wrapper d-flex">
-                                <a href="{{ route('pemesanan.transaction') }}" class="button-primary">Simpan
+                                <a href="{{ route('pemesanan.transaction', '1') }}" class="button-primary">Simpan
                                     Kelengkapan</a>
                                 <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal
                                     Simpan</button>

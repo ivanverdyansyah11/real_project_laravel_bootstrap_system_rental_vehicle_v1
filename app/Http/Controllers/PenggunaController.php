@@ -24,16 +24,13 @@ class PenggunaController extends Controller
 
     function store(Request $request)
     {
-        if ($request->role == '-') {
-            return redirect(route('pengguna'))->with('failed', 'Isi Form Input Role Terlebih Dahulu!');
-        }
-
         $validatedData = $request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'password' => 'required|min:3|max:255',
-            'role' => 'required|string',
         ]);
+
+        $validatedData['role'] = 'staff';
 
         $pengguna = Auth::create($validatedData);
 
@@ -49,7 +46,6 @@ class PenggunaController extends Controller
         $validatedData = $request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'role' => 'required|string',
         ]);
 
         $pengguna = Auth::where('id', $id)->first()->update($validatedData);

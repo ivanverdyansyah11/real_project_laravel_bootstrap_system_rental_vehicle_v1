@@ -30,15 +30,15 @@
                                     <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-document" alt="Dokumen Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-document" name="image"
-                                            style="opacity: 0;">
+                                        <input type="file" id="image" class="input-create-document"
+                                            name="foto_dokumen" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-document">Pilih Foto
                                             Dokumen</button>
                                     </div>
                                 </div>
-                                {{-- @error('image')
+                                @error('foto_dokumen')
                                     <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror --}}
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
@@ -47,15 +47,15 @@
                                     <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-vehicle" alt="Kendaraan Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-vehicle" name="image"
-                                            style="opacity: 0;">
+                                        <input type="file" id="image" class="input-create-vehicle"
+                                            name="foto_kendaraan" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-vehicle">Pilih Foto
                                             Kendaraan</button>
                                     </div>
                                 </div>
-                                {{-- @error('image')
+                                @error('foto_kendaraan')
                                     <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror --}}
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
@@ -64,78 +64,64 @@
                                     <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-customer" alt="Pelanggan Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-customer" name="image"
-                                            style="opacity: 0;">
+                                        <input type="file" id="image" class="input-create-customer"
+                                            name="foto_pelanggan" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-customer">Pilih Foto
                                             Pelanggan</button>
                                     </div>
                                 </div>
-                                {{-- @error('image')
+                                @error('foto_pelanggan')
                                     <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror --}}
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="nama">Nama</label>
-                                <input type="text" id="nama" class="input" autocomplete="off">
-                                {{-- @error('image')
+                                <input type="text" id="nama" class="input" autocomplete="off" name="nama">
+                                @error('nama')
                                     <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror --}}
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="nomor_telepon">Nomor Telepon</label>
-                                <input type="text" id="nomor_telepon" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="kendaraan">Kendaraan</label>
-                                <input type="text" id="kendaraan" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tarif_sewa">Tarif Sewa</label>
-                                <input type="text" id="tarif_sewa" class="input" autocomplete="off">
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="kilometer_keluar">Kilometer Keluar</label>
-                                <input type="text" id="kilometer_keluar" class="input" autocomplete="off">
+                                <input type="text" id="kilometer_keluar" class="input" autocomplete="off"
+                                    name="kilometer_keluar">
+                                @error('kilometer_keluar')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="bensin_keluar">Bensin Keluar</label>
-                                <input type="text" id="bensin_keluar" class="input" autocomplete="off">
+                                <input type="text" id="bensin_keluar" class="input" autocomplete="off"
+                                    name="bensin_keluar">
+                                @error('bensin_keluar')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="tanggal_diambil">Tanggal Diambil</label>
-                                <input type="text" id="tanggal_diambil" class="input" autocomplete="off">
+                                <input type="text" id="tanggal_diambil" class="input" autocomplete="off"
+                                    name="tanggal_diambil">
+                                @error('tanggal_diambil')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="tanggal_kembali">Tanggal Kembali</label>
-                                <input type="text" id="tanggal_kembali" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="waktu_sewa">Waktu Sewa</label>
-                                <input type="text" id="waktu_sewa" class="input" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-md-6 row-button">
-                            <div class="input-wrapper">
-                                <label for="total_tarif_sewa">Total Tarif Sewa</label>
-                                <input type="text" id="total_tarif_sewa" class="input" autocomplete="off">
+                                <input type="text" id="tanggal_kembali" class="input" autocomplete="off"
+                                    name="tanggal_kembali">
+                                @error('tanggal_kembali')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
@@ -147,77 +133,78 @@
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
-    {{-- MODAL TAMBAH PENGECEKAN KELENGKAPAN --}}
-    <div class="modal fade" id="pengecekanKelengkapanModal" tabindex="-1"
-        aria-labelledby="pengecekanKelengkapanModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <h3 class="title">Kelengkapan Pelepasan Pemesanan</h3>
-                <form class="form d-inline-block w-100">
-                    <div class="row">
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="sarung_jok">Sarung Jok</label>
-                                <select id="sarung_jok" class="input">
-                                    <option>Pilih kelengkapan sarung jok</option>
-                                    <option>Ada</option>
-                                    <option>Tidak Ada</option>
-                                    <option>Kosong</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="karpet">Karpet</label>
-                                <select id="karpet" class="input">
-                                    <option>Pilih kelengkapan karpet</option>
-                                    <option>Ada</option>
-                                    <option>Tidak Ada</option>
-                                    <option>Kosong</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="kondisi_kendaraan">Kondisi Kendaraan</label>
-                                <select id="kondisi_kendaraan" class="input">
-                                    <option>Pilih kondisi kendaraan</option>
-                                    <option>Ada</option>
-                                    <option>Tidak Ada</option>
-                                    <option>Kosong</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 row-button">
-                            <div class="input-wrapper">
-                                <label for="ban_serep">Ban Serep</label>
-                                <select id="ban_serep" class="input">
-                                    <option>Pilih ban serep</option>
-                                    <option>Ada</option>
-                                    <option>Tidak Ada</option>
-                                    <option>Kosong</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="button-wrapper d-flex">
-                                <a href="{{ route('pemesanan.transaction') }}" class="button-primary">Simpan
-                                    Kelengkapan</a>
-                                <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal
-                                    Simpan</button>
+                    {{-- MODAL TAMBAH PENGECEKAN KELENGKAPAN --}}
+                    <div class="modal fade" id="pengecekanKelengkapanModal" tabindex="-1"
+                        aria-labelledby="pengecekanKelengkapanModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <h3 class="title">Kelengkapan Pelepasan Pemesanan</h3>
+                                <div class="row">
+                                    <div class="col-12 mb-4">
+                                        <div class="input-wrapper">
+                                            <label for="sarung_jok">Sarung Jok</label>
+                                            <select id="sarung_jok" class="input">
+                                                <option>Pilih kelengkapan sarung jok</option>
+                                                <option>Ada</option>
+                                                <option>Tidak Ada</option>
+                                                <option>Kosong</option>
+                                            </select>
+                                            @error('tanggal_kembali')
+                                                <p class="caption-error mt-2">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-4">
+                                        <div class="input-wrapper">
+                                            <label for="karpet">Karpet</label>
+                                            <select id="karpet" class="input">
+                                                <option>Pilih kelengkapan karpet</option>
+                                                <option>Ada</option>
+                                                <option>Tidak Ada</option>
+                                                <option>Kosong</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-4">
+                                        <div class="input-wrapper">
+                                            <label for="kondisi_kendaraan">Kondisi Kendaraan</label>
+                                            <select id="kondisi_kendaraan" class="input">
+                                                <option>Pilih kondisi kendaraan</option>
+                                                <option>Ada</option>
+                                                <option>Tidak Ada</option>
+                                                <option>Kosong</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 row-button">
+                                        <div class="input-wrapper">
+                                            <label for="ban_serep">Ban Serep</label>
+                                            <select id="ban_serep" class="input">
+                                                <option>Pilih ban serep</option>
+                                                <option>Ada</option>
+                                                <option>Tidak Ada</option>
+                                                <option>Kosong</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="button-wrapper d-flex">
+                                            <button type="submit" class="button-primary">Simpan
+                                                Kelengkapan</button>
+                                            <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal
+                                                Simpan</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {{-- END MODAL TAMBAH PENGECEKAN KELENGKAPAN --}}
                 </form>
             </div>
         </div>
     </div>
-    {{-- END MODAL TAMBAH PENGECEKAN KELENGKAPAN --}}
 
     <script>
         const tagCreateDocument = document.querySelector('.tag-create-document');

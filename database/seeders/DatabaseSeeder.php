@@ -26,13 +26,6 @@ class DatabaseSeeder extends Seeder
             'nama_lengkap' => 'Putu Aditya Prayatna',
             'email' => 'adityaprayatna@gmail.com',
             'password' => bcrypt('aditya123'),
-            'role' => 'owner',
-        ]);
-
-        Auth::create([
-            'nama_lengkap' => 'Budi Susanto',
-            'email' => 'budisusanto@gmail.com',
-            'password' => bcrypt('budi123'),
             'role' => 'admin',
         ]);
 

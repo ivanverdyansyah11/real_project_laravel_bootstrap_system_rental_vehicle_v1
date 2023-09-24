@@ -24,7 +24,7 @@ class PemesananController extends Controller
         ]);
     }
 
-    public function transaction()
+    public function transaction($id)
     {
         return view('pemesanan.transaction', [
             'title' => 'Pemesanan',

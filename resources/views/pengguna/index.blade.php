@@ -117,19 +117,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-12 row-button">
-                            <div class="input-wrapper">
-                                <label for="role">Role</label>
-                                <select id="role" name="role" class="input">
-                                    <option value="-">Pilih role pengguna</option>
-                                    <option value="admin">admin</option>
-                                    <option value="staff">staff</option>
-                                </select>
-                                @error('role')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="col-12">
                             <div class="button-wrapper d-flex">
                                 <button type="submit" class="button-primary">Tambah Pengguna</button>
@@ -209,16 +196,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-12 row-button">
-                            <div class="input-wrapper">
-                                <label for="role">Role</label>
-                                <select id="role" class="input" data-value="role" name="role">
-                                </select>
-                                @error('role')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="col-12">
                             <div class="button-wrapper d-flex">
                                 <button type="submit" class="button-primary">Simpan Perubahan</button>
@@ -279,21 +256,6 @@
                 success: function(data) {
                     $('[data-value="nama_lengkap"]').val(data.nama_lengkap);
                     $('[data-value="email"]').val(data.email);
-
-                    $('[data-value="role"]').append(
-                        `<option value="${data.role}">${data.role}</option>`);
-                    if (data.role == 'admin') {
-                        $('[data-value="role"]').append(
-                            `<option value="staff">staff</option>`);
-                    } else if (data.role == 'staff') {
-                        $('[data-value="role"]').append(
-                            `<option value="admin">admin</option>`);
-                    } else {
-                        $('[data-value="role"]').append(
-                            `<option value="admin">admin</option>`);
-                        $('[data-value="role"]').append(
-                            `<option value="staff">staff</option>`);
-                    }
                 }
             });
         });
