@@ -18,39 +18,11 @@
         <div class="row mb-4">
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <h5 class="subtitle">Data Brand Kendaraan</h5>
-                <div class="wrapper d-flex gap-2 mt-3 mt-md-0 align-items-center">
-                    <button type="button" class="button-primary d-none d-md-flex align-items-center" data-bs-toggle="modal"
-                        data-bs-target="#tambahBrandModal">
-                        <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
-                        Tambah
-                    </button>
-                    <div class="wrapper position-relative">
-                        <button type="button"
-                            class="button-other position-relative button-primary-blur d-flex align-items-center">
-                            <img src="{{ asset('assets/img/button/filter.svg') }}" alt="Icon Filter"
-                                class="img-fluid button-icon">
-                            Lainnya
-                            <img src="{{ asset('assets/img/button/arrow-down-primary.svg') }}" alt="Icon Filter"
-                                class="img-fluid button-icon" style="margin-left: 6px;">
-                        </button>
-                        <div class="modal-other d-flex flex-column">
-                            <a href="{{ route('kendaraan') }}"
-                                class="modal-link {{ Request::is('kendaraan*') ? 'active' : '' }}">Kendaraan</a>
-                            <a href="{{ route('jenisKendaraan') }}"
-                                class="modal-link {{ Request::is('jenis-kendaraan*') ? 'active' : '' }}">Jenis
-                                Kendaraan</a>
-                            <a href="{{ route('brandKendaraan') }}"
-                                class="modal-link {{ Request::is('brand-kendaraan*') ? 'active' : '' }}">Brand
-                                Kendaraan</a>
-                            <a href="{{ route('seriKendaraan') }}"
-                                class="modal-link {{ Request::is('seri-kendaraan*') ? 'active' : '' }}">Seri
-                                Kendaraan</a>
-                            <a href="{{ route('kilometerKendaraan') }}"
-                                class="modal-link {{ Request::is('kilometer-kendaraan*') ? 'active' : '' }}">Kilometer
-                                Kendaraan</a>
-                        </div>
-                    </div>
-                </div>
+                <button type="button" class="button-primary d-none d-md-flex align-items-center" data-bs-toggle="modal"
+                    data-bs-target="#tambahBrandModal">
+                    <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
+                    Tambah
+                </button>
             </div>
         </div>
         <div class="row table-default">

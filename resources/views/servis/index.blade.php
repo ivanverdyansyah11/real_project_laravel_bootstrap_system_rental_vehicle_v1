@@ -27,23 +27,6 @@
                         <p>Cari kendaraan..</p>
                     </label>
                 </form>
-                <div class="wrapper position-relative">
-                    <button type="button"
-                        class="button-other position-relative button-primary-blur d-flex align-items-center">
-                        <img src="{{ asset('assets/img/button/filter.svg') }}" alt="Icon Filter"
-                            class="img-fluid button-icon">
-                        Lainnya
-                        <img src="{{ asset('assets/img/button/arrow-down-primary.svg') }}" alt="Icon Filter"
-                            class="img-fluid button-icon" style="margin-left: 6px;">
-                    </button>
-                    <div class="modal-other d-flex flex-column">
-                        <a href="{{ route('servis') }}"
-                            class="modal-link {{ Request::is('servis*') ? 'active' : '' }}">Servis</a>
-                        <a href="{{ route('kategoriServis') }}"
-                            class="modal-link {{ Request::is('kategori-servis*') ? 'active' : '' }}">Kategori
-                            servis</a>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="row">

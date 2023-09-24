@@ -19,30 +19,11 @@
             <div
                 class="col-12 d-flex flex-column flex-md-row justify-content-md-between align-items-end align-items-md-center">
                 <h5 class="subtitle">Data Kategori Servis</h5>
-                <div class="wrapper d-flex gap-2 mt-3 mt-md-0 justify-content-end justify-content-md-start">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#tambahKategoriServisModal"
-                        class="button-primary d-none d-md-flex align-items-center">
-                        <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
-                        Tambah
-                    </button>
-                    <div class="wrapper position-relative">
-                        <button type="button"
-                            class="button-other position-relative button-primary-blur d-flex align-items-center">
-                            <img src="{{ asset('assets/img/button/filter.svg') }}" alt="Icon Filter"
-                                class="img-fluid button-icon">
-                            Lainnya
-                            <img src="{{ asset('assets/img/button/arrow-down-primary.svg') }}" alt="Icon Filter"
-                                class="img-fluid button-icon" style="margin-left: 6px;">
-                        </button>
-                        <div class="modal-other d-flex flex-column">
-                            <a href="{{ route('servis') }}"
-                                class="modal-link {{ Request::is('servis*') ? 'active' : '' }}">Servis</a>
-                            <a href="{{ route('kategoriServis') }}"
-                                class="modal-link {{ Request::is('kategori-servis*') ? 'active' : '' }}">Kategori
-                                servis</a>
-                        </div>
-                    </div>
-                </div>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#tambahKategoriServisModal"
+                    class="button-primary d-none d-md-flex align-items-center">
+                    <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
+                    Tambah
+                </button>
             </div>
         </div>
         <div class="row table-default">

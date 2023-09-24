@@ -283,7 +283,7 @@ body {
 }
 
 .sidebar .link-child {
-    padding: 9px 9px 9px 56px;
+    padding: 8px 8px 8px 56px;
     font-size: 0.875rem;
     color: rgba(var(--dark-color), 0.52);
     display: none;
