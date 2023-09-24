@@ -25,6 +25,17 @@
                             <p>Kendaraan</p>
                         </div>
                     </a>
+                    <div
+                        class="menu-link d-flex flex-column {{ Request::is('kendaraan*') || Request::is('jenis-kendaraan*') || Request::is('brand-kendaraan*') || Request::is('seri-kendaraan*') || Request::is('kilometer-kendaraan*') ? 'active' : 'd-none' }}">
+                        <a href="{{ route('jenisKendaraan') }}"
+                            class="link-child {{ Request::is('jenis-kendaraan*') ? 'active' : '' }}">Jenis</a>
+                        <a href="{{ route('brandKendaraan') }}"
+                            class="link-child {{ Request::is('brand-kendaraan*') ? 'active' : '' }}">Brand</a>
+                        <a href="{{ route('seriKendaraan') }}"
+                            class="link-child {{ Request::is('seri-kendaraan*') ? 'active' : '' }}">Seri</a>
+                        <a href="{{ route('kilometerKendaraan') }}"
+                            class="link-child {{ Request::is('kilometer-kendaraan*') ? 'active' : '' }}">Kilometer</a>
+                    </div>
                     <a href="{{ route('pelanggan') }}"
                         class="menu-link d-flex flex-column {{ Request::is('pelanggan*') ? 'active' : '' }}">
                         <div class="link-item d-flex align-items-center">
@@ -72,6 +83,11 @@
                             <p>Servis</p>
                         </div>
                     </a>
+                    <div
+                        class="menu-link d-flex flex-column {{ Request::is('servis*') || Request::is('kategori-servis*') ? 'active' : 'd-none' }}">
+                        <a href=""
+                            class="link-child {{ Request::is('kategori-servis*') ? 'active' : '' }}">Kategori</a>
+                    </div>
                     <a href="{{ route('pajak') }}"
                         class="menu-link d-flex flex-column {{ Request::is('pajak*') ? 'active' : '' }}">
                         <div class="link-item d-flex align-items-center">
