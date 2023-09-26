@@ -16,9 +16,7 @@ class PengembalianController extends Controller
     {
         return view('pengembalian.index', [
             'title' => 'Pengembalian',
-            'pemesanans' => PelepasanPemesanan::with(['kendaraan' => function ($query) {
-                $query->where('status', 'dipesan');
-            }])->get(),
+            'kendaraans' => Kendaraan::where('status', 'dipesan')->with('jenis_kendaraan', 'brand_kendaraan')->get(),
         ]);
     }
 
@@ -26,16 +24,16 @@ class PengembalianController extends Controller
     {
         return view('pengembalian.restoration', [
             'title' => 'Pengembalian',
-            'pemesanan' => PelepasanPemesanan::where('id', $id)->with('kendaraan')->first(),
-            'pembayaran' => PembayaranPemesanan::where('pelepasan_pemesanans_id', $id)->first(),
+            'pemesanan' => PelepasanPemesanan::where('kendaraans_id', $id)->with('kendaraan')->latest()->first(),
+            'pembayaran' => PembayaranPemesanan::where('kendaraans_id', $id)->latest()->first(),
             'jenis_kendaraan' => JenisKendaraan::where('nama', "Kendaraan Beroda 4")->first(),
         ]);
     }
 
     public function restorationAction($id, Request $request)
     {
-        $pemesanan = PelepasanPemesanan::where('id', $id)->with('kendaraan', 'pemesanan')->first();
-        $pembayaran = PembayaranPemesanan::where('pelepasan_pemesanans_id', $id)->with('sopir')->first();
+        $pemesanan = PelepasanPemesanan::where('kendaraans_id', $id)->with('kendaraan', 'pemesanan')->latest()->first();
+        $pembayaran = PembayaranPemesanan::where('kendaraans_id', $id)->with('sopir')->latest()->first();
 
         $jenis_kendaraan = JenisKendaraan::where('nama', "Kendaraan Beroda 4")->first();
         if ($pemesanan->kendaraan->jenis_kendaraans_id == $jenis_kendaraan->id) {
@@ -65,7 +63,11 @@ class PengembalianController extends Controller
             'keterangan' => 'nullable|text',
         ]);
 
-        $validatedData['pelepasan_pemesanans_id'] = $id;
+        $validatedData['pelepasan_pemesanans_id'] = $pemesanan->id;
+
+        if ($request->metode_bayar == "-") {
+            $validatedData['metode_bayar'] = null;
+        }
 
         if (!empty($validatedData['foto_pembayaran'])) {
             $image = $request->file('foto_pembayaran');
@@ -89,23 +91,23 @@ class PengembalianController extends Controller
         $kategori_kilometer = (int)$pemesanan->kendaraan->kilometer_kendaraan->jumlah;
         $kilometer_sebelumnya = (int)$pemesanan->kendaraan->kilometer;
         $kilometer_saat_ini = $validatedData['kilometer_kembali'];
-        $total_kilometer = $kilometer_sebelumnya + $kategori_kilometer;
+        $total_kilometer = $kilometer_saat_ini - $kilometer_sebelumnya;
 
-        $kendaraan = Kendaraan::where('id', $pemesanan->kendaraans_id)->first()->update([
+        $kendaraan = Kendaraan::where('id', $id)->first()->update([
             'kilometer_saat_ini' => $validatedData['kilometer_kembali'],
         ]);
 
-        if ($kilometer_saat_ini >= $total_kilometer) {
-            Kendaraan::where('id', $pemesanan->kendaraans_id)->first()->update([
+        if ($total_kilometer >= $kategori_kilometer) {
+            Kendaraan::where('id', $id)->first()->update([
                 'status' => 'servis',
             ]);
         } else {
-            Kendaraan::where('id', $pemesanan->kendaraans_id)->first()->update([
+            Kendaraan::where('id', $id)->first()->update([
                 'status' => 'ready',
             ]);
         }
 
-        if ($request->sopirs_id !== "-") {
+        if ($pembayaran->sopirs_id !== null) {
             Sopir::where('id', $pembayaran->sopirs_id)->first()->update([
                 'status' => 'ada',
             ]);

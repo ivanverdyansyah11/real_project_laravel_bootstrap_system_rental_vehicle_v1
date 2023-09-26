@@ -23,7 +23,8 @@
         <div class="row">
             <div class="col-12">
                 <form class="form d-inline-block w-100" method="POST"
-                    action="{{ route('pengembalian.restoration.action', $pemesanan->id) }}" enctype="multipart/form-data">
+                    action="{{ route('pengembalian.restoration.action', $pemesanan->kendaraan->id) }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-5">

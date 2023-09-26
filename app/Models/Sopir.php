@@ -13,4 +13,9 @@ class Sopir extends Model
     {
         return $this->belongsTo(PembayaranPemesanan::class, 'id');
     }
+
+    public function kelengkapan_sopir()
+    {
+        return $this->belongsTo(KelengkapanSopir::class, 'id');
+    }
 }

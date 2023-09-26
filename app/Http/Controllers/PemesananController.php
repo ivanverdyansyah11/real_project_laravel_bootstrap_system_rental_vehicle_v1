@@ -162,7 +162,7 @@ class PemesananController extends Controller
             $validatedDataPembayaran['sopirs_id'] = null;
         } else {
             $validatedDataPembayaran['sopirs_id'] = $request->sopirs_id;
-            $sopir = Sopir::where('id', $validatedDataPembayaran['sopirs_id'])->first()->update([
+            Sopir::where('id', $validatedDataPembayaran['sopirs_id'])->first()->update([
                 'status' => 'tidak ada',
             ]);
         }
@@ -185,8 +185,8 @@ class PemesananController extends Controller
             'status' => 'dipesan',
         ]);
 
-        if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan && $sopir) {
-            return redirect(route('pengembalian'))->with('success', 'Berhasil Melakukan Pelepasan Kendaraan!');
+        if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan) {
+            return redirect(route('laporan'))->with('success', 'Berhasil Melakukan Pelepasan Kendaraan!');
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Melakukan Pelepasan Kendaraan!');
         }

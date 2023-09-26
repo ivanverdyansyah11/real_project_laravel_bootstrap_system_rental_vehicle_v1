@@ -36,17 +36,15 @@
                         <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
                             alt="Car Thumbnail Image" class="img-fluid product-img">
                         <div class="product-content">
-                            <div class="wrapper d-flex justify-content-between align-items-center mb-3">
-                                <p class="product-name m-0">{{ $kendaraan->brand_kendaraan->nama }}
-                                    {{ $kendaraan->nama_kendaraan }}</p>
-                                <div class="wrapper-other d-flex align-items-center justify-content-between">
-                                    <div class="wrapper-tahun d-flex align-items-center">
-                                        <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
-                                            class="img-fluid kendaraan-icon">
-                                        <p class="product-year">{{ $kendaraan->tanggal_pembelian }}</p>
-                                    </div>
-                                    <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa }}</h6>
+                            <p class="product-name m-0">{{ $kendaraan->brand_kendaraan->nama }}
+                                {{ $kendaraan->nama_kendaraan }}</p>
+                            <div class="wrapper-other d-flex align-items-center justify-content-between">
+                                <div class="wrapper-tahun d-flex align-items-center">
+                                    <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
+                                        class="img-fluid kendaraan-icon">
+                                    <p class="product-year">{{ $kendaraan->tanggal_pembelian }}</p>
                                 </div>
+                                <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa }}</h6>
                             </div>
                             <div class="wrapper-button d-flex">
                                 <a href="{{ route('servis.check', $kendaraan->id) }}" class="button-primary w-100">Servis

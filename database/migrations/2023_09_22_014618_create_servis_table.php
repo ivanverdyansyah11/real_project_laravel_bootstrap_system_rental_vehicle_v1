@@ -15,6 +15,15 @@ class CreateServisTable extends Migration
     {
         Schema::create('servis', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('kendaraans_id')->index();
+            $table->date('tanggal_servis');
+            $table->string('kilometer_sebelum');
+            $table->string('kilometer_setelah');
+            $table->enum('air_accu', ['ada', 'tidak ada', 'kosong']);
+            $table->enum('air_waiper', ['ada', 'tidak ada', 'kosong']);
+            $table->enum('ban', ['ada', 'tidak ada', 'kosong']);
+            $table->enum('oli', ['ada', 'tidak ada', 'kosong']);
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }
