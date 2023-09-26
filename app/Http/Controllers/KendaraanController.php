@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\KategoriKilometerKendaraan;
-use App\Models\KelengkapanPemesanan;
 use App\Models\Kendaraan;
 use App\Models\Pelanggan;
-use App\Models\Pemesanan;
 use App\Models\SeriKendaraan;
 use Illuminate\Http\Request;
 
@@ -46,49 +44,6 @@ class KendaraanController extends Controller
         return response()->json($seri);
     }
 
-    function booking(Request $request)
-    {
-        if ($request->pelanggans_id == '-') {
-            return redirect(route('kendaraan'))->with('failed', 'Isi Form Input Pelanggan Terlebih Dahulu!');
-        }
-
-        $validatedData = $request->validate([
-            'pelanggans_id' => 'required|integer',
-            'kendaraans_id' => 'required|integer',
-            'tanggal_booking' => 'required|date',
-        ]);
-
-        $pemesananID = Pemesanan::latest()->first();
-        if ($pemesananID) {
-            $validatedDataPemesanan['pemesanans_id'] = $pemesananID->id + 1;
-        } else {
-            $validatedDataPemesanan['pemesanans_id'] = 1;
-        }
-
-        $validatedDataPemesanan['jenis_kendaraan'] = 'lengkap';
-        $validatedDataPemesanan['nama_pemesan'] = 'lengkap';
-
-        if (is_string($validatedData['pelanggans_id'])) {
-            $validatedData['pelanggans_id'] = (int)$validatedData['pelanggans_id'];
-        }
-
-        if (is_string($validatedData['kendaraans_id'])) {
-            $validatedData['kendaraans_id'] = (int)$validatedData['kendaraans_id'];
-        }
-
-        $pemesanan = Pemesanan::create($validatedData);
-        $kelengkapanPemesanan = KelengkapanPemesanan::create($validatedDataPemesanan);
-        $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first()->update([
-            'status' => 'booking',
-        ]);
-
-        if ($pemesanan && $kendaraan) {
-            return redirect(route('pemesanan'))->with('success', 'Berhasil Tambah Pemesanan!');
-        } else {
-            return redirect(route('pemesanan'))->with('failed', 'Gagal Tambah Pemesanan!');
-        }
-    }
-
     function store(Request $request)
     {
         if ($request->seri_kendaraans_id == '-' || $request->kategori_kilometer_kendaraans_id == '-') {
@@ -118,6 +73,7 @@ class KendaraanController extends Controller
         $validatedData['jenis_kendaraans_id'] = $jenis_kendaraans_id;
         $validatedData['brand_kendaraans_id'] = $brand_kendaraans_id;
         $validatedData['status'] = 'ready';
+        $validatedData['kilometer_saat_ini'] = $validatedData['kilometer'];
 
         if (!empty($validatedData['foto_kendaraan'])) {
             $image = $request->file('foto_kendaraan');

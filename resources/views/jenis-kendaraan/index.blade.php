@@ -186,13 +186,6 @@
     {{-- END MODAL HAPUS JENIS KENDARAAN --}}
 
     <script>
-        const buttonOther = document.querySelector('.button-other');
-        const modalOther = document.querySelector('.modal-other');
-
-        buttonOther.addEventListener('click', function() {
-            modalOther.classList.toggle('active');
-        });
-
         $(document).on('click', '[data-bs-target="#detailJenisModal"]', function() {
             let id = $(this).data('id');
             $.ajax({

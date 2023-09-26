@@ -13,4 +13,19 @@ class Pemesanan extends Model
     {
         return $this->belongsTo(KelengkapanPemesanan::class, 'id');
     }
+
+    public function kendaraan()
+    {
+        return $this->belongsTo(Kendaraan::class, 'id');
+    }
+
+    public function pelanggan()
+    {
+        return $this->belongsTo(Pelanggan::class, 'id');
+    }
+
+    public function pelepasan_pemesanans()
+    {
+        return $this->hasMany(PelepasanPemesanan::class, 'id');
+    }
 }

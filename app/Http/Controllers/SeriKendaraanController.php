@@ -51,9 +51,9 @@ class SeriKendaraanController extends Controller
     function update($id, Request $request)
     {
         $validatedData = $request->validate([
-            'nomor_seri' => 'required|string',
             'jenis_kendaraans_id' => 'required|integer',
             'brand_kendaraans_id' => 'required|integer',
+            'nomor_seri' => 'required|string',
         ]);
 
         if (is_string($validatedData['jenis_kendaraans_id'])) {
@@ -64,8 +64,7 @@ class SeriKendaraanController extends Controller
             $validatedData['brand_kendaraans_id'] = (int)$validatedData['brand_kendaraans_id'];
         }
 
-        $seri = SeriKendaraan::where('id', $id)->first();
-        $seri = $seri->update($validatedData);
+        $seri = SeriKendaraan::where('id', $id)->first()->update($validatedData);
 
         if ($seri) {
             return redirect(route('seriKendaraan'))->with('success', 'Berhasil Update Seri Kendaraan!');

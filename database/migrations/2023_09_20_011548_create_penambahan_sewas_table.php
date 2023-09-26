@@ -15,7 +15,7 @@ class CreatePenambahanSewasTable extends Migration
     {
         Schema::create('penambahan_sewas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pelepasan_kendaraans_id')->references('id')->on('pelepasan_kendaraans');
+            // $table->foreignId('pelepasan_kendaraans_id')->references('id')->on('pelepasan_kendaraans');
             $table->foreignId('kendaraans_id')->references('id')->on('kendaraans');
             $table->string('jumlah_hari', 3);
             $table->string('total_biaya', 50);

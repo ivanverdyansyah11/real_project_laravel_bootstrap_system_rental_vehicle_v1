@@ -114,7 +114,8 @@
                                 <div class="input-wrapper">
                                     <label for="nomor_polisi">Nomor Polisi</label>
                                     <input type="text" id="nomor_polisi" class="input" autocomplete="off"
-                                        value="{{ $kendaraan->nomor_polisi }}" name="nomor_polisi">
+                                        value="{{ $kendaraan->nomor_polisi }}" name="nomor_polisi" pattern="[0-9]*"
+                                        title="Hanya angka 0-9 diperbolehkan">
                                     @error('nomor_polisi')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -124,7 +125,8 @@
                                 <div class="input-wrapper">
                                     <label for="kilometer">Kilometer</label>
                                     <input type="text" id="kilometer" class="input" autocomplete="off"
-                                        value="{{ $kendaraan->kilometer }}" name="kilometer">
+                                        value="{{ $kendaraan->kilometer }}" name="kilometer" pattern="[0-9]*"
+                                        title="Hanya angka 0-9 diperbolehkan">
                                     @error('kilometer')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -134,7 +136,8 @@
                                 <div class="input-wrapper">
                                     <label for="tarif_sewa">Tarif Sewa</label>
                                     <input type="text" id="tarif_sewa" class="input" autocomplete="off"
-                                        value="{{ $kendaraan->tarif_sewa }}" name="tarif_sewa">
+                                        value="{{ $kendaraan->tarif_sewa }}" name="tarif_sewa" pattern="[0-9]*"
+                                        title="Hanya angka 0-9 diperbolehkan">
                                     @error('tarif_sewa')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -144,7 +147,8 @@
                                 <div class="input-wrapper">
                                     <label for="tahun_pembuatan">Tahun Pembuatan</label>
                                     <input type="text" id="tahun_pembuatan" class="input" autocomplete="off"
-                                        value="{{ $kendaraan->tahun_pembuatan }}" name="tahun_pembuatan">
+                                        value="{{ $kendaraan->tahun_pembuatan }}" name="tahun_pembuatan" minlength="0"
+                                        maxlength="4" pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
                                     @error('tahun_pembuatan')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -174,7 +178,8 @@
                                 <div class="input-wrapper">
                                     <label for="nomor_rangka">Nomor Rangka</label>
                                     <input type="text" id="nomor_rangka" class="input" autocomplete="off"
-                                        value="{{ $kendaraan->nomor_rangka }}" name="nomor_rangka">
+                                        value="{{ $kendaraan->nomor_rangka }}" name="nomor_rangka" pattern="[0-9]*"
+                                        title="Hanya angka 0-9 diperbolehkan">
                                     @error('nomor_rangka')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -184,7 +189,8 @@
                                 <div class="input-wrapper">
                                     <label for="nomor_mesin">Nomor Mesin</label>
                                     <input type="text" id="nomor_mesin" class="input" autocomplete="off"
-                                        value="{{ $kendaraan->nomor_mesin }}" name="nomor_mesin">
+                                        value="{{ $kendaraan->nomor_mesin }}" name="nomor_mesin" pattern="[0-9]*"
+                                        title="Hanya angka 0-9 diperbolehkan">
                                     @error('nomor_mesin')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror

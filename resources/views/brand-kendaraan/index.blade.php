@@ -107,8 +107,7 @@
     {{-- END MODAL TAMBAH BRAND KENDARAAN --}}
 
     {{-- MODAL DETAIL BRAND KENDARAAN --}}
-    <div class="modal fade" id="detailBrandModal" tabindex="-1" aria-labelledby="detailBrandModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="detailBrandModal" tabindex="-1" aria-labelledby="detailBrandModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Detail Brand Kendaraan</h3>
@@ -117,8 +116,8 @@
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Brand Kendaraan</label>
-                                <input type="text" id="nama" class="input" autocomplete="off"
-                                    data-value="nama" disabled>
+                                <input type="text" id="nama" class="input" autocomplete="off" data-value="nama"
+                                    disabled>
                             </div>
                         </div>
                         <div class="col-12">
@@ -132,8 +131,7 @@
     {{-- END MODAL DETAIL BRAND KENDARAAN --}}
 
     {{-- MODAL EDIT BRAND KENDARAAN --}}
-    <div class="modal fade" id="editBrandModal" tabindex="-1" aria-labelledby="editBrandModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="editBrandModal" tabindex="-1" aria-labelledby="editBrandModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Edit Brand Kendaraan</h3>
@@ -188,13 +186,6 @@
     {{-- END MODAL HAPUS BRAND KENDARAAN --}}
 
     <script>
-        const buttonOther = document.querySelector('.button-other');
-        const modalOther = document.querySelector('.modal-other');
-
-        buttonOther.addEventListener('click', function() {
-            modalOther.classList.toggle('active');
-        });
-
         $(document).on('click', '[data-bs-target="#detailBrandModal"]', function() {
             let id = $(this).data('id');
             $.ajax({

@@ -54,6 +54,25 @@ class DatabaseSeeder extends Seeder
             'nomor_telepon' => 'lengkap',
         ]);
 
+        Sopir::create([
+            'nama' => 'Aditya Prayatna',
+            'nik' => '00454654435',
+            'nomor_telepon' => '08987654321',
+            'nomor_ktp' => '34254756867',
+            'nomor_sim' => '32435466576',
+            'foto_ktp' => 'sample-ktp.jpg',
+            'foto_sim' => 'sample-sim.jpg',
+            'alamat' => 'Jl. Dalung Permai',
+            'status' => 'ada',
+        ]);
+
+        KelengkapanSopir::create([
+            'sopirs_id' => 1,
+            'ktp' => 'lengkap',
+            'sim' => 'lengkap',
+            'nomor_telepon' => 'lengkap',
+        ]);
+
         JenisKendaraan::create([
             'nama' => 'Kendaraan Beroda 2',
         ]);

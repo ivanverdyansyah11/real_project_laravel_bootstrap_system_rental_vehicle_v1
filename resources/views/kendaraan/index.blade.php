@@ -67,7 +67,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <h3 class="title">Booking Kendaraan</h3>
-                        <form class="form d-inline-block w-100" method="POST" action="{{ route('kendaraan.booking') }}">
+                        <form class="form d-inline-block w-100" method="POST" action="{{ route('pemesanan.booking') }}">
                             @csrf
                             <input type="hidden" name="kendaraans_id" value="{{ $kendaraan->id }}">
                             <div class="row">
@@ -109,13 +109,4 @@
             {{-- END MODAL DETAIL BOOKING KENDARAAN --}}
         @endforeach
     </div>
-
-    <script>
-        const buttonOther = document.querySelector('.button-other');
-        const modalOther = document.querySelector('.modal-other');
-
-        buttonOther.addEventListener('click', function() {
-            modalOther.classList.toggle('active');
-        });
-    </script>
 @endsection

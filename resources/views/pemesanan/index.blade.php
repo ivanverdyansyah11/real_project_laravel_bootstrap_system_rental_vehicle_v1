@@ -47,7 +47,7 @@
                                 <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa }}</h6>
                             </div>
                             <div class="wrapper-button d-flex flex-column">
-                                <a href="{{ route('pemesanan.booking', $kendaraan->id) }}"
+                                <a href="{{ route('pemesanan.release', $kendaraan->id) }}"
                                     class="button-primary w-100">Pemesanan</a>
                                 <button type="button" class="button-primary-blur w-100" data-bs-toggle="modal"
                                     data-bs-target="#hapusBookingModal" data-id="{{ $kendaraan->id }}">Hapus

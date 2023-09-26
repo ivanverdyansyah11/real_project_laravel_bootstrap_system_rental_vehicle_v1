@@ -28,4 +28,14 @@ class Kendaraan extends Model
     {
         return $this->belongsTo(KategoriKilometerKendaraan::class, 'id');
     }
+
+    public function pemesanan()
+    {
+        return $this->hasMany(Pemesanan::class, 'id');
+    }
+
+    public function pelepasan_pemesanans()
+    {
+        return $this->hasMany(PelepasanPemesanan::class, 'id');
+    }
 }

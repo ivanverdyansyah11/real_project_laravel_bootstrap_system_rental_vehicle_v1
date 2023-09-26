@@ -192,13 +192,6 @@
     {{-- END MODAL HAPUS KILOMETER KENDARAAN --}}
 
     <script>
-        const buttonOther = document.querySelector('.button-other');
-        const modalOther = document.querySelector('.modal-other');
-
-        buttonOther.addEventListener('click', function() {
-            modalOther.classList.toggle('active');
-        });
-
         $(document).on('click', '[data-bs-target="#detailKilometerModal"]', function() {
             let id = $(this).data('id');
             $.ajax({

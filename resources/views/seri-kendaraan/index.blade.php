@@ -92,7 +92,8 @@
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="nomor">Nomor Seri Kendaraan</label>
-                                <input type="text" id="nomor" class="input" autocomplete="off" name="nomor_seri">
+                                <input type="text" id="nomor" class="input" autocomplete="off" name="nomor_seri"
+                                    pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
                                 @error('nomor_seri')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -191,7 +192,8 @@
                             <div class="input-wrapper">
                                 <label for="nomor">Nomor Seri Kendaraan</label>
                                 <input type="text" id="nomor" class="input" autocomplete="off"
-                                    name="nomor_seri" data-value="nomor_seri">
+                                    name="nomor_seri" data-value="nomor_seri" pattern="[0-9]*"
+                                    title="Hanya angka 0-9 diperbolehkan">
                                 @error('nomor_seri')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -259,13 +261,6 @@
     {{-- END MODAL HAPUS SERI KENDARAAN --}}
 
     <script>
-        const buttonOther = document.querySelector('.button-other');
-        const modalOther = document.querySelector('.modal-other');
-
-        buttonOther.addEventListener('click', function() {
-            modalOther.classList.toggle('active');
-        });
-
         $(document).on('click', '[data-bs-target="#detailSeriModal"]', function() {
             let id = $(this).data('id');
             $.ajax({
@@ -281,6 +276,7 @@
 
         $(document).on('click', '[data-bs-target="#editSeriModal"]', function() {
             let id = $(this).data('id');
+            console.log(id);
             $('[data-value="jenis_kendaraan"] option').remove();
             $('[data-value="brand_kendaraan"] option').remove();
             $('#editSeri').attr('action', '/seri-kendaraan/edit/' + id);

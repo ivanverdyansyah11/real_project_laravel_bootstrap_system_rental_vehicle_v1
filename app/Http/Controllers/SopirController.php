@@ -47,6 +47,8 @@ class SopirController extends Controller
             'alamat' => 'required|string',
         ]);
 
+        $validatedData['status'] = "ada";
+
         if (!empty($validatedData['foto_ktp'])) {
             $image = $request->file('foto_ktp');
             $imageName = $validatedData['nik'] . '-foto' . '.' . $image->getClientOriginalExtension();;

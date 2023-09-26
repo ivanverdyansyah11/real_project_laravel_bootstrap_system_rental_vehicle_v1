@@ -23,6 +23,7 @@ class CreateSopirsTable extends Migration
             $table->string('foto_ktp')->nullable();
             $table->string('foto_sim')->nullable();
             $table->text('alamat');
+            $table->enum('status', ['ada', 'tidak ada']);
             $table->timestamps();
         });
     }
