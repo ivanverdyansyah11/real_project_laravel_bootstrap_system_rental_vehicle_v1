@@ -30,25 +30,32 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                <div class="card-product">
-                    <img src="{{ asset('assets/img/default/sample-kendaraan.jpg') }}" alt="Car Thumbnail Image"
-                        class="img-fluid product-img">
-                    <div class="product-content">
-                        <p class="product-name">Honda Brio</p>
-                        <div class="wrapper-other d-flex align-items-center justify-content-between">
-                            <div class="wrapper-tahun d-flex align-items-center">
-                                <p class="product-year">23-09-23, 16.00</p>
+            @foreach ($pemesanans as $pemesanan)
+                @if ($pemesanan->kendaraan !== null)
+                    <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
+                        <div class="card-product">
+                            <img src="{{ asset('assets/img/kendaraan-images/' . $pemesanan->kendaraan->foto_kendaraan) }}"
+                                alt="Car Thumbnail Image" class="img-fluid product-img">
+                            <div class="product-content">
+                                <p class="product-name">{{ $pemesanan->kendaraan->brand_kendaraan->nama }}
+                                    {{ $pemesanan->kendaraan->nama_kendaraan }}</p>
+                                <div class="wrapper-other d-flex align-items-center justify-content-between">
+                                    <div class="wrapper-tahun d-flex align-items-center">
+                                        <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
+                                            class="img-fluid kendaraan-icon">
+                                        <p class="product-year">{{ $pemesanan->kendaraan->tanggal_pembelian }}</p>
+                                    </div>
+                                    <h6 class="product-price">Rp. {{ $pemesanan->kendaraan->tarif_sewa }}</h6>
+                                </div>
+                                <div class="wrapper-button d-flex flex-column">
+                                    <a href="{{ route('pengembalian.restoration', $pemesanan->id) }}"
+                                        class="button-primary w-100">Pengembalian</a>
+                                </div>
                             </div>
-                            <h6 class="product-price">6 Hari 8 Jam</h6>
-                        </div>
-                        <div class="wrapper-button d-flex flex-column">
-                            <a href="{{ route('pengembalian.restoration') }}" class="button-primary w-100">Pengembalian</a>
-                            <a href="" class="button-primary-blur w-100">Lihat Nota</a>
                         </div>
                     </div>
-                </div>
-            </div>
+                @endif
+            @endforeach
         </div>
     </div>
 @endsection

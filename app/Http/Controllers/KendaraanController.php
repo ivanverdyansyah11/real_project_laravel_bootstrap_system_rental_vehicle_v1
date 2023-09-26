@@ -14,7 +14,7 @@ class KendaraanController extends Controller
     {
         return view('kendaraan.index', [
             'title' => 'Kendaraan',
-            'kendaraans' => Kendaraan::where('status', 'ready')->with('jenis_kendaraan', 'brand_kendaraan', 'seri_kendaraan', 'kilometer_kendaraan')->get(),
+            'kendaraans' => Kendaraan::where('status', 'ready')->with('jenis_kendaraan', 'brand_kendaraan')->get(),
             'pelanggans' => Pelanggan::all(),
         ]);
     }
@@ -120,7 +120,6 @@ class KendaraanController extends Controller
             'stnk_nama' => 'required|string|max:255',
             'nama_kendaraan' => 'required|string|max:255',
             'nomor_polisi' => 'required|string|max:255',
-            'kilometer' => 'required|string|max:255',
             'tarif_sewa' => 'required|string|max:255',
             'tahun_pembuatan' => 'required|string|max:255',
             'tanggal_pembelian' => 'required|date',
@@ -131,6 +130,7 @@ class KendaraanController extends Controller
 
         $validatedData['jenis_kendaraans_id'] = $jenis_kendaraans_id;
         $validatedData['brand_kendaraans_id'] = $brand_kendaraans_id;
+        $validatedData['kilometer_saat_ini'] = $request->kilometer;
 
         if ($request->file('foto_kendaraan')) {
             if ($kendaraan->foto_kendaraan) {

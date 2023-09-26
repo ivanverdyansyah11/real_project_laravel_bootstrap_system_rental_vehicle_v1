@@ -97,7 +97,7 @@
                                 <div class="input-wrapper">
                                     <label for="kilometer">Kilometer</label>
                                     <input type="text" id="kilometer" class="input" autocomplete="off" disabled
-                                        value="{{ $kendaraan->kilometer }}">
+                                        value="{{ $kendaraan->kilometer_saat_ini }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">

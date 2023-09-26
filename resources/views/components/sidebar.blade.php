@@ -83,11 +83,6 @@
                             <p>Servis</p>
                         </div>
                     </a>
-                    <div
-                        class="menu-link d-flex flex-column {{ Request::is('servis*') || Request::is('kategori-servis*') ? 'active' : 'd-none' }}">
-                        <a href=""
-                            class="link-child {{ Request::is('kategori-servis*') ? 'active' : '' }}">Kategori</a>
-                    </div>
                     <a href="{{ route('pajak') }}"
                         class="menu-link d-flex flex-column {{ Request::is('pajak*') ? 'active' : '' }}">
                         <div class="link-item d-flex align-items-center">

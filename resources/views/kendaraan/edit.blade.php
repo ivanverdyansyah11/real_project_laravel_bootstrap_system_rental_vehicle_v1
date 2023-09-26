@@ -125,7 +125,7 @@
                                 <div class="input-wrapper">
                                     <label for="kilometer">Kilometer</label>
                                     <input type="text" id="kilometer" class="input" autocomplete="off"
-                                        value="{{ $kendaraan->kilometer }}" name="kilometer" pattern="[0-9]*"
+                                        value="{{ $kendaraan->kilometer_saat_ini }}" name="kilometer" pattern="[0-9]*"
                                         title="Hanya angka 0-9 diperbolehkan">
                                     @error('kilometer')
                                         <p class="caption-error mt-2">{{ $message }}</p>

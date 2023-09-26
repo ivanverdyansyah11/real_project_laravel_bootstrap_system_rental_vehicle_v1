@@ -27,7 +27,7 @@ class CreatePelepasanPemesanansTable extends Migration
             $table->enum('sarung_jok', ['ada', 'tidak ada', 'kosong']);
             $table->enum('karpet', ['ada', 'tidak ada', 'kosong']);
             $table->enum('kondisi_kendaraan', ['ada', 'tidak ada', 'kosong']);
-            $table->enum('ban_serep', ['ada', 'tidak ada', 'kosong']);
+            $table->enum('ban_serep', ['ada', 'tidak ada', 'kosong'])->nullable();
             $table->timestamps();
         });
     }

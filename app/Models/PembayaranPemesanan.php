@@ -14,6 +14,11 @@ class PembayaranPemesanan extends Model
         return $this->hasMany(Kendaraan::class, 'kendaraans_id');
     }
 
+    public function sopir()
+    {
+        return $this->belongsTo(Sopir::class, 'sopirs_id');
+    }
+
     public function pelepasan_pemesanan()
     {
         return $this->belongsTo(PelepasanPemesanan::class, 'pelepasan_pemesanans_id');

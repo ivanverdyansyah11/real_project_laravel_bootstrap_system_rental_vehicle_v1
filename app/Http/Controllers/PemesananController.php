@@ -17,7 +17,7 @@ class PemesananController extends Controller
     {
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
-            'kendaraans' => Kendaraan::where('status', 'booking')->with('jenis_kendaraan', 'brand_kendaraan', 'seri_kendaraan', 'kilometer_kendaraan')->get(),
+            'kendaraans' => Kendaraan::where('status', 'booking')->with('jenis_kendaraan', 'brand_kendaraan')->get(),
         ]);
     }
 
@@ -160,6 +160,11 @@ class PemesananController extends Controller
 
         if ($request->sopirs_id == "-") {
             $validatedDataPembayaran['sopirs_id'] = null;
+        } else {
+            $validatedDataPembayaran['sopirs_id'] = $request->sopirs_id;
+            $sopir = Sopir::where('id', $validatedDataPembayaran['sopirs_id'])->first()->update([
+                'status' => 'tidak ada',
+            ]);
         }
 
         if ($request->metode_bayar == "-") {
@@ -180,7 +185,7 @@ class PemesananController extends Controller
             'status' => 'dipesan',
         ]);
 
-        if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan) {
+        if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan && $sopir) {
             return redirect(route('pengembalian'))->with('success', 'Berhasil Melakukan Pelepasan Kendaraan!');
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Melakukan Pelepasan Kendaraan!');

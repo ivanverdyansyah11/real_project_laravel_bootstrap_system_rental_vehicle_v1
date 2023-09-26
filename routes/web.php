@@ -128,8 +128,8 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // SERVIS
     Route::controller(ServisController::class)->group(function () {
         Route::get('/servis', 'index')->name('servis');
-        Route::get('/servis/check', 'check')->name('servis.check');
-        Route::get('/kategori-servis', 'category')->name('kategoriServis');
+        Route::get('/servis/check/{id}', 'check')->name('servis.check');
+        Route::post('/servis/check/{id}', 'checkAction')->name('servis.check.action');
     });
 
     // PAJAK
@@ -174,7 +174,8 @@ Route::middleware('auth')->group(function () {
     // PENGEMBALIAN
     Route::controller(PengembalianController::class)->group(function () {
         Route::get('/pengembalian', 'index')->name('pengembalian');
-        Route::get('/pengembalian/kendaraan', 'restoration')->name('pengembalian.restoration');
+        Route::get('/pengembalian/kendaraan/{id}', 'restoration')->name('pengembalian.restoration');
+        Route::post('/pengembalian/kendaraan/{id}', 'restorationAction')->name('pengembalian.restoration.action');
     });
 
     // LAPORAN

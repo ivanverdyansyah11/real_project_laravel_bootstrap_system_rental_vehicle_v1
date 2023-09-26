@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisKendaraan;
+use App\Models\Kendaraan;
+use App\Models\PelepasanPemesanan;
+use App\Models\PembayaranPemesanan;
+use App\Models\Pengembalian;
+use App\Models\Sopir;
 use Illuminate\Http\Request;
 
 class PengembalianController extends Controller
@@ -10,13 +16,107 @@ class PengembalianController extends Controller
     {
         return view('pengembalian.index', [
             'title' => 'Pengembalian',
+            'pemesanans' => PelepasanPemesanan::with(['kendaraan' => function ($query) {
+                $query->where('status', 'dipesan');
+            }])->get(),
         ]);
     }
 
-    public function restoration()
+    public function restoration($id)
     {
         return view('pengembalian.restoration', [
             'title' => 'Pengembalian',
+            'pemesanan' => PelepasanPemesanan::where('id', $id)->with('kendaraan')->first(),
+            'pembayaran' => PembayaranPemesanan::where('pelepasan_pemesanans_id', $id)->first(),
+            'jenis_kendaraan' => JenisKendaraan::where('nama', "Kendaraan Beroda 4")->first(),
         ]);
+    }
+
+    public function restorationAction($id, Request $request)
+    {
+        $pemesanan = PelepasanPemesanan::where('id', $id)->with('kendaraan', 'pemesanan')->first();
+        $pembayaran = PembayaranPemesanan::where('pelepasan_pemesanans_id', $id)->with('sopir')->first();
+
+        $jenis_kendaraan = JenisKendaraan::where('nama', "Kendaraan Beroda 4")->first();
+        if ($pemesanan->kendaraan->jenis_kendaraans_id == $jenis_kendaraan->id) {
+            if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->ban_serep == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-' || $request->ketepatan_waktu == '-') {
+                return redirect(route('pengembalian.restoration', $id))->with('failed', 'Isi Form Input Kelengkapan Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
+            }
+        } else {
+            if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-' || $request->ketepatan_waktu == '-') {
+                return redirect(route('pengembalian.restoration', $id))->with('failed', 'Isi Form Input Kelengkapan Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
+            }
+        }
+
+        $validatedData = $request->validate([
+            'foto_pembayaran' => 'required|image',
+            'jenis_pembayaran' => 'required|string',
+            'total_bayar' => 'nullable|string',
+            'metode_bayar' => 'nullable|string',
+            'tanggal_kembali' => 'required|date',
+            'kilometer_kembali' => 'required|string',
+            'bensin_kembali' => 'required|string',
+            'ketepatan_waktu' => 'required|string',
+            'terlambat' => 'nullable|string',
+            'sarung_jok' => 'required|string',
+            'karpet' => 'required|string',
+            'kondisi_kendaraan' => 'required|string',
+            'biaya_tambahan' => 'nullable|string',
+            'keterangan' => 'nullable|text',
+        ]);
+
+        $validatedData['pelepasan_pemesanans_id'] = $id;
+
+        if (!empty($validatedData['foto_pembayaran'])) {
+            $image = $request->file('foto_pembayaran');
+            $imageName = $validatedData['pelepasan_pemesanans_id'] . $pemesanan->tanggal_diambil . $pemesanan->tanggal_kembali . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $image->move(public_path('assets/img/pengembalian-pemesanan-images/'), $imageName);
+            $validatedData['foto_pembayaran'] = $imageName;
+        }
+
+        if (is_string($validatedData['kilometer_kembali'])) {
+            $validatedData['kilometer_kembali'] = (int)$validatedData['kilometer_kembali'];
+        }
+
+        if (is_string($validatedData['bensin_kembali'])) {
+            $validatedData['bensin_kembali'] = (int)$validatedData['bensin_kembali'];
+        }
+
+        if ($pemesanan->kendaraan->jenis_kendaraans_id == $jenis_kendaraan->id) {
+            $validatedData['ban_serep'] = $request->ban_serep;
+        }
+
+        $kategori_kilometer = (int)$pemesanan->kendaraan->kilometer_kendaraan->jumlah;
+        $kilometer_sebelumnya = (int)$pemesanan->kendaraan->kilometer;
+        $kilometer_saat_ini = $validatedData['kilometer_kembali'];
+        $total_kilometer = $kilometer_sebelumnya + $kategori_kilometer;
+
+        $kendaraan = Kendaraan::where('id', $pemesanan->kendaraans_id)->first()->update([
+            'kilometer_saat_ini' => $validatedData['kilometer_kembali'],
+        ]);
+
+        if ($kilometer_saat_ini >= $total_kilometer) {
+            Kendaraan::where('id', $pemesanan->kendaraans_id)->first()->update([
+                'status' => 'servis',
+            ]);
+        } else {
+            Kendaraan::where('id', $pemesanan->kendaraans_id)->first()->update([
+                'status' => 'ready',
+            ]);
+        }
+
+        if ($request->sopirs_id !== "-") {
+            Sopir::where('id', $pembayaran->sopirs_id)->first()->update([
+                'status' => 'ada',
+            ]);
+        }
+
+        $pengembalian = Pengembalian::create($validatedData);
+
+        if ($pengembalian && $kendaraan) {
+            return redirect(route('laporan'))->with('success', 'Berhasil Melakukan Pengembalian Kendaraan!');
+        } else {
+            return redirect(route('pengembalian'))->with('failed', 'Gagal Melakukan Pengembalian Kendaraan!');
+        }
     }
 }

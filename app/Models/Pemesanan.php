@@ -9,11 +9,6 @@ class Pemesanan extends Model
 {
     protected $guarded = [];
 
-    // public function kelengkapan_pemesanan()
-    // {
-    //     return $this->belongsTo(KelengkapanPemesanan::class, 'id');
-    // }
-
     public function kendaraan()
     {
         return $this->belongsTo(Kendaraan::class, 'kendaraans_id');
@@ -24,8 +19,8 @@ class Pemesanan extends Model
         return $this->belongsTo(Pelanggan::class, 'pelanggans_id');
     }
 
-    // public function pelepasan_pemesanans()
-    // {
-    //     return $this->hasMany(PelepasanPemesanan::class, 'id');
-    // }
+    public function pelepasan_pemesanan()
+    {
+        return $this->belongsTo(PelepasanPemesanan::class, 'id');
+    }
 }

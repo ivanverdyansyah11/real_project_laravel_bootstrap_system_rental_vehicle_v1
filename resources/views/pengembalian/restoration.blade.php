@@ -22,85 +22,226 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <form class="form d-inline-block w-100">
+                <form class="form d-inline-block w-100" method="POST"
+                    action="{{ route('pengembalian.restoration.action', $pemesanan->id) }}" enctype="multipart/form-data">
+                    @csrf
                     <div class="row">
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
                             <div class="input-wrapper">
                                 <div class="wrapper d-flex gap-3 align-items-end">
                                     <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
-                                        class="img-fluid tag-create-proof" alt="Pembayaran Image" width="80">
+                                        class="img-fluid tag-create-transaction" alt="Pembayaran Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-proof" name="image"
-                                            style="opacity: 0;">
-                                        <button type="button" class="button-reverse button-create-proof">Pilih Foto
+                                        <input type="file" id="image" class="input-create-transaction"
+                                            name="foto_pembayaran" value="{{ old('foto_pembayaran') }}" style="opacity: 0;">
+                                        <button type="button" class="button-reverse button-create-transaction">Pilih Foto
                                             Pembayaran</button>
                                     </div>
                                 </div>
-                                {{-- @error('image')
+                                @error('foto_pembayaran')
                                     <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror --}}
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
-                                    <label for="tanggal_kembali">Tanggal Kembali</label>
-                                    <input type="text" id="tanggal_kembali" class="input" autocomplete="off">
-                                    {{-- @error('image')
-                                        <p class="caption-error mt-2">{{ $message }}</p>
-                                    @enderror --}}
+                                    <label>Tanggal Kembali</label>
+                                    <input type="date" class="input" autocomplete="off"
+                                        value="{{ $pemesanan->tanggal_kembali }}" disabled>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
-                                    <label for="jumlah_uang">Jumlah Uang</label>
-                                    <input type="text" id="jumlah_uang" class="input" autocomplete="off">
+                                    <label for="total_tarif_sewa">Total Tarif Sewa</label>
+                                    <input type="text" id="total_tarif_sewa" class="input" autocomplete="off"
+                                        value="{{ $pembayaran->total_tarif_sewa }}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="tanggal_kembali">Pengembalian Tanggal</label>
+                                    <input type="date" id="tanggal_kembali" name="tanggal_kembali" class="input"
+                                        autocomplete="off">
+                                    @error('tanggal_kembali')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="jenis_pembayaran">Jenis Pembayaran</label>
+                                    <select id="jenis_pembayaran" class="input" name="jenis_pembayaran"
+                                        value="{{ old('jenis_pembayaran') }}">
+                                        <option value="-">Pilih jenis pembayaran</option>
+                                        <option value="lunas">Lunas</option>
+                                        <option value="dp">DP</option>
+                                        <option value="belum bayar">Belum Bayar</option>
+                                    </select>
+                                    @error('jenis_pembayaran')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="total_bayar">Total Bayar</label>
+                                    <input type="text" id="total_bayar" class="input" autocomplete="off"
+                                        name="total_bayar" value="{{ old('total_bayar') }}" pattern="[0-9]*"
+                                        title="Hanya angka 0-9 diperbolehkan" disabled>
+                                    @error('total_bayar')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="metode_bayar">Metode Pembayaran</label>
+                                    <select id="metode_bayar" class="input" name="metode_bayar"
+                                        value="{{ old('metode_bayar') }}">
+                                        <option value="-">Pilih metode pembayaran</option>
+                                        <option value="transfer bank">Transfer Bank</option>
+                                        <option value="internet banking">Internet Banking (E-Banking)</option>
+                                        <option value="mobile banking">Mobile Banking</option>
+                                        <option value="virtual account">Virtual Account (VA)</option>
+                                        <option value="online credit card">Online Credit Card</option>
+                                        <option value="rekening bersama">Rekening Bersama (Rekber)</option>
+                                        <option value="payPal">PayPal</option>
+                                        <option value="e-money">e-Money</option>
+                                    </select>
+                                    @error('metode_bayar')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="kilometer_kembali">Kilometer Kembali</label>
-                                    <input type="text" id="kilometer_kembali" class="input" autocomplete="off">
+                                    <input type="text" id="kilometer_kembali" name="kilometer_kembali" class="input"
+                                        autocomplete="off" pattern="[0-9]*">
+                                    @error('kilometer_kembali')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
-                                    <label for="bensin_kembali">Bensi Kembali</label>
-                                    <input type="text" id="bensin_kembali" class="input" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="tanggal_kembali">Tanggal Kembali</label>
-                                    <input type="text" id="tanggal_kembali" class="input" autocomplete="off">
+                                    <label for="bensin_kembali">Bensin Kembali</label>
+                                    <input type="text" id="bensin_kembali" name="bensin_kembali" class="input"
+                                        autocomplete="off" title="Hanya angka 0-9 diperbolehkan">
+                                    @error('bensin_kembali')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="ketepatan_waktu">Ketepatan Waktu</label>
-                                    <select id="ketepatan_waktu" class="input">
-                                        <option>Pilih ketepatan pengembalian</option>
-                                        <option>Tepat</option>
-                                        <option>Tidak Tepat</option>
+                                    <select id="ketepatan_waktu" name="ketepatan_waktu" class="input">
+                                        <option value="-">Pilih ketepatan pengembalian</option>
+                                        <option value="tepat">Tepat</option>
+                                        <option value="tidak tepat">Tidak Tepat</option>
                                     </select>
+                                    @error('ketepatan_waktu')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
-                                    <label for="terlambat">Terlambat</label>
-                                    <input type="text" id="terlambat" class="input" autocomplete="off">
+                                    <label for="terlambat">Terlambat (Max 3 Jam)</label>
+                                    <input type="text" id="terlambat" name="terlambat" class="input"
+                                        autocomplete="off" pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan"
+                                        disabled>
+                                    @error('terlambat')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="sarung_jok">Sarung Jok</label>
+                                    <select id="sarung_jok" class="input" name="sarung_jok"
+                                        value="{{ old('sarung_jok') }}">
+                                        <option value="-">Pilih kelengkapan sarung jok</option>
+                                        <option value="ada">Ada</option>
+                                        <option value="tidak ada">Tidak Ada</option>
+                                        <option value="kosong">Kosong</option>
+                                    </select>
+                                    @error('sarung_jok')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="karpet">Karpet</label>
+                                    <select id="karpet" class="input" name="karpet" value="{{ old('karpet') }}">
+                                        <option value="-">Pilih kelengkapan karpet</option>
+                                        <option value="ada">Ada</option>
+                                        <option value="tidak ada">Tidak Ada</option>
+                                        <option value="kosong">Kosong</option>
+                                    </select>
+                                    @error('karpet')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="kondisi_kendaraan">Kondisi Kendaraan</label>
+                                    <select id="kondisi_kendaraan" class="input" name="kondisi_kendaraan"
+                                        value="{{ old('kondisi_kendaraan') }}">
+                                        <option value="-">Pilih kondisi kendaraan</option>
+                                        <option value="ada">Ada</option>
+                                        <option value="tidak ada">Tidak Ada</option>
+                                        <option value="kosong">Kosong</option>
+                                    </select>
+                                    @error('kondisi_kendaraan')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            @if ($pemesanan->kendaraan->jenis_kendaraans_id === $jenis_kendaraan->id)
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="ban_serep">Ban Serep</label>
+                                        <select id="ban_serep" class="input" name="ban_serep"
+                                            value="{{ old('ban_serep') }}">
+                                            <option value="-">Pilih ban serep</option>
+                                            <option value="ada">Ada</option>
+                                            <option value="tidak ada">Tidak Ada</option>
+                                            <option value="kosong">Kosong</option>
+                                        </select>
+                                        @error('ban_serep')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="biaya_tambahan">Biaya Tambahan</label>
+                                    <input type="text" id="biaya_tambahan" name="biaya_tambahan" class="input"
+                                        autocomplete="off" pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
+                                    @error('biaya_tambahan')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 row-button">
                                 <div class="input-wrapper">
                                     <label for="keterangan">Keterangan</label>
-                                    <input type="text" id="keterangan" class="input" autocomplete="off">
+                                    <input type="text" id="keterangan" name="keterangan" class="input"
+                                        autocomplete="off">
+                                    @error('keterangan')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="button-wrapper d-flex">
-                                    <button type="button" class="button-primary" data-bs-toggle="modal"
-                                        data-bs-target="#pengecekanKelengkapanModal">Simpan Pengembalian</button>
+                                    <button type="submit" class="button-primary">Simpan Pengembalian</button>
                                     <a href="{{ route('pengembalian') }}" class="button-reverse">Batal
                                         Pengembalian</a>
                                 </div>
@@ -112,73 +253,37 @@
         </div>
     </div>
 
-    {{-- MODAL TAMBAH PENGECEKAN KELENGKAPAN --}}
-    <div class="modal fade" id="pengecekanKelengkapanModal" tabindex="-1" aria-labelledby="pengecekanKelengkapanModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <h3 class="title">Kelengkapan Pengembalian Pemesanan</h3>
-                <form class="form d-inline-block w-100">
-                    <div class="row">
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="sarung_jok">Sarung Jok</label>
-                                <select id="sarung_jok" class="input">
-                                    <option>Pilih kelengkapan sarung jok</option>
-                                    <option>Ada</option>
-                                    <option>Tidak Ada</option>
-                                    <option>Kosong</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="karpet">Karpet</label>
-                                <select id="karpet" class="input">
-                                    <option>Pilih kelengkapan karpet</option>
-                                    <option>Ada</option>
-                                    <option>Tidak Ada</option>
-                                    <option>Kosong</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 row-button">
-                            <div class="input-wrapper">
-                                <label for="ban_serep">Ban Serep</label>
-                                <select id="ban_serep" class="input">
-                                    <option>Pilih ban serep</option>
-                                    <option>Ada</option>
-                                    <option>Tidak Ada</option>
-                                    <option>Kosong</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="button-wrapper d-flex">
-                                <button type="submit" class="button-primary">Simpan
-                                    Kelengkapan</button>
-                                <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal
-                                    Simpan</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    {{-- END MODAL TAMBAH PENGECEKAN KELENGKAPAN --}}
-
     <script>
-        const tagCreateProof = document.querySelector('.tag-create-proof');
-        const inputCreateProof = document.querySelector('.input-create-proof');
-        const buttonCreateProof = document.querySelector('.button-create-proof');
+        const tagCreateTransaction = document.querySelector('.tag-create-transaction');
+        const inputCreateTransaction = document.querySelector('.input-create-transaction');
+        const buttonCreateTransaction = document.querySelector('.button-create-transaction');
+        const jenisPembayaran = document.querySelector('#jenis_pembayaran');
+        const totalBayar = document.querySelector('#total_bayar');
+        const ketepatanWaktu = document.querySelector('#ketepatan_waktu');
+        const terlambat = document.querySelector('#terlambat');
 
-        buttonCreateProof.addEventListener('click', function() {
-            inputCreateProof.click();
+        jenisPembayaran.addEventListener('change', function() {
+            if (jenisPembayaran.value == "-" || jenisPembayaran.value == "belum bayar") {
+                totalBayar.setAttribute("disabled", "disabled");
+            } else {
+                totalBayar.removeAttribute("disabled");
+            }
         });
 
-        inputCreateProof.addEventListener('change', function() {
-            tagCreateProof.src = URL.createObjectURL(inputCreateProof.files[0]);
+        ketepatanWaktu.addEventListener('change', function() {
+            if (ketepatanWaktu.value == "tidak tepat") {
+                terlambat.removeAttribute("disabled");
+            } else {
+                terlambat.setAttribute("disabled", "disabled");
+            }
+        });
+
+        buttonCreateTransaction.addEventListener('click', function() {
+            inputCreateTransaction.click();
+        });
+
+        inputCreateTransaction.addEventListener('change', function() {
+            tagCreateTransaction.src = URL.createObjectURL(inputCreateTransaction.files[0]);
         });
     </script>
 @endsection

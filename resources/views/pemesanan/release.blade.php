@@ -101,7 +101,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="tanggal_diambil">Tanggal Diambil</label>
                                 <input type="date" id="tanggal_diambil" class="input" autocomplete="off"
@@ -111,22 +111,12 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="tanggal_kembali">Tanggal Kembali</label>
                                 <input type="date" id="tanggal_kembali" class="input" autocomplete="off"
                                     name="tanggal_kembali" disabled>
                                 @error('tanggal_kembali')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="input-wrapper">
-                                <label for="jam_kembali">Jam Kembali</label>
-                                <input type="time" id="jam_kembali" class="input" autocomplete="off"
-                                    name="jam_kembali" value="{{ old('jam_kembali') }}">
-                                @error('jam_kembali')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
                             </div>

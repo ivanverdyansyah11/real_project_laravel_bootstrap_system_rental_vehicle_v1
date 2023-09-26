@@ -14,8 +14,8 @@ class Pelanggan extends Model
         return $this->belongsTo(KelengkapanPelanggan::class, 'id');
     }
 
-    // public function pemesanans()
-    // {
-    //     return $this->hasMany(Pemesanan::class, 'id');
-    // }
+    public function pelepasan_pemesanan()
+    {
+        return $this->belongsTo(PelepasanPemesanan::class, 'id');
+    }
 }
