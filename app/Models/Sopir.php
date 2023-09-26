@@ -9,8 +9,8 @@ class Sopir extends Model
 {
     protected $guarded = [];
 
-    public function kelengkapan_sopir()
-    {
-        return $this->belongsTo(KelengkapanSopir::class, 'id');
-    }
+    // public function kelengkapan_sopir()
+    // {
+    //     return $this->belongsTo(KelengkapanSopir::class, 'id');
+    // }
 }

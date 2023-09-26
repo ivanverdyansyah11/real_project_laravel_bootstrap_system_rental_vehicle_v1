@@ -11,6 +11,6 @@ class KelengkapanPelanggan extends Model
 
     public function pelanggan()
     {
-        return $this->belongsTo(Pelanggan::class, 'id');
+        return $this->belongsTo(Pelanggan::class, 'pelanggans_id');
     }
 }

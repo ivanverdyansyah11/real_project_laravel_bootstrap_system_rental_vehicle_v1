@@ -19,11 +19,17 @@ class KendaraanController extends Controller
         ]);
     }
 
+    function getDetail($id)
+    {
+        $kendaraan = Kendaraan::where('id', $id)->first();
+        return response()->json($kendaraan);
+    }
+
     public function detail($id)
     {
         return view('kendaraan.detail', [
             'title' => 'Kendaraan',
-            'kendaraan' => Kendaraan::where('id', $id)->first(),
+            'kendaraan' => Kendaraan::where('id', $id)->with('jenis_kendaraan')->first(),
             'series' => SeriKendaraan::all(),
             'kilometers' => KategoriKilometerKendaraan::all(),
         ]);

@@ -33,8 +33,8 @@
                 </a>
             </div>
         </div>
-        @foreach ($kendaraans as $kendaraan)
-            <div class="row">
+        <div class="row">
+            @foreach ($kendaraans as $kendaraan)
                 <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
                     <div class="card-product">
                         <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
@@ -59,54 +59,67 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            {{-- MODAL DETAIL BOOKING KENDARAAN --}}
-            <div class="modal fade" id="bookingKendaraanModal" tabindex="-1" aria-labelledby="bookingKendaraanModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <h3 class="title">Booking Kendaraan</h3>
-                        <form class="form d-inline-block w-100" method="POST" action="{{ route('pemesanan.booking') }}">
-                            @csrf
-                            <input type="hidden" name="kendaraans_id" value="{{ $kendaraan->id }}">
-                            <div class="row">
-                                <div class="col-12 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="nama">Nama Pelanggan</label>
-                                        <select id="nama" class="input" name="pelanggans_id">
-                                            <option value="-">Pilih nama pelanggan</option>
-                                            @foreach ($pelanggans as $pelanggan)
-                                                <option value="{{ $pelanggan->id }}">{{ $pelanggan->nama }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('pelanggans_id')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-12 row-button">
-                                    <div class="input-wrapper">
-                                        <label for="tanggal_booking">Tanggal Booking</label>
-                                        <input type="date" class="input" id="tanggal_booking" name="tanggal_booking">
-                                        @error('tanggal_booking')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="button-wrapper d-flex">
-                                        <button type="submit" class="button-primary">Booking Kendaraan</button>
-                                        <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal
-                                            Tambah</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            {{-- END MODAL DETAIL BOOKING KENDARAAN --}}
-        @endforeach
+            @endforeach
+        </div>
     </div>
+
+    {{-- MODAL DETAIL BOOKING KENDARAAN --}}
+    <div class="modal fade" id="bookingKendaraanModal" tabindex="-1" aria-labelledby="bookingKendaraanModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <h3 class="title">Booking Kendaraan</h3>
+                <form class="form d-inline-block w-100" method="POST" action="{{ route('pemesanan.booking') }}">
+                    @csrf
+                    <input type="hidden" name="kendaraans_id" data-value="kendaraans_id">
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <div class="input-wrapper">
+                                <label for="nama">Nama Pelanggan</label>
+                                <select id="nama" class="input" name="pelanggans_id">
+                                    <option value="-">Pilih nama pelanggan</option>
+                                    @foreach ($pelanggans as $pelanggan)
+                                        <option value="{{ $pelanggan->id }}">{{ $pelanggan->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('pelanggans_id')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-12 row-button">
+                            <div class="input-wrapper">
+                                <label for="tanggal_booking">Tanggal Booking</label>
+                                <input type="date" class="input" id="tanggal_booking" name="tanggal_booking">
+                                @error('tanggal_booking')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="button-wrapper d-flex">
+                                <button type="submit" class="button-primary">Booking Kendaraan</button>
+                                <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal
+                                    Tambah</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- END MODAL DETAIL BOOKING KENDARAAN --}}
+
+    <script>
+        $(document).on('click', '[data-bs-target="#bookingKendaraanModal"]', function() {
+            let id = $(this).data('id');
+            $.ajax({
+                type: 'get',
+                url: '/kendaraan/getDetail/' + id,
+                success: function(data) {
+                    $('[data-value="kendaraans_id"]').val(data.id);
+                }
+            });
+        });
+    </script>
 @endsection

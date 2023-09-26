@@ -9,18 +9,18 @@ class PelepasanPemesanan extends Model
 {
     protected $guarded = [];
 
-    public function kendaraans()
+    public function kendaraan()
     {
-        return $this->hasMany(Kendaraan::class, 'id');
+        return $this->hasMany(Kendaraan::class, 'kendaraans_id');
     }
 
     public function pemesanans()
     {
-        return $this->hasMany(Pemesanan::class, 'id');
+        return $this->hasMany(Pemesanan::class, 'pemesanans_id');
     }
 
-    public function pembayaran_pemesanan()
-    {
-        return $this->belongsTo(PembayaranPemesanan::class, 'id');
-    }
+    // public function pembayaran_pemesanan()
+    // {
+    //     return $this->belongsTo(PembayaranPemesanan::class, 'id');
+    // }
 }

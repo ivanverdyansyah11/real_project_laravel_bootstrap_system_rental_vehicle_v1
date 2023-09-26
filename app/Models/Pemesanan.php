@@ -9,23 +9,23 @@ class Pemesanan extends Model
 {
     protected $guarded = [];
 
-    public function kelengkapan_pemesanan()
-    {
-        return $this->belongsTo(KelengkapanPemesanan::class, 'id');
-    }
+    // public function kelengkapan_pemesanan()
+    // {
+    //     return $this->belongsTo(KelengkapanPemesanan::class, 'id');
+    // }
 
     public function kendaraan()
     {
-        return $this->belongsTo(Kendaraan::class, 'id');
+        return $this->belongsTo(Kendaraan::class, 'kendaraans_id');
     }
 
     public function pelanggan()
     {
-        return $this->belongsTo(Pelanggan::class, 'id');
+        return $this->belongsTo(Pelanggan::class, 'pelanggans_id');
     }
 
-    public function pelepasan_pemesanans()
-    {
-        return $this->hasMany(PelepasanPemesanan::class, 'id');
-    }
+    // public function pelepasan_pemesanans()
+    // {
+    //     return $this->hasMany(PelepasanPemesanan::class, 'id');
+    // }
 }

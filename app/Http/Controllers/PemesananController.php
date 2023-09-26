@@ -107,8 +107,8 @@ class PemesananController extends Controller
             'waktu_sewa' => 'required|string',
             'total_tarif_sewa' => 'required|string',
             'jenis_pembayaran' => 'required|string',
-            'total_bayar' => 'required|string',
-            'metode_bayar' => 'required|string',
+            'total_bayar' => 'nullable|string',
+            'metode_bayar' => 'nullable|string',
             'keterangan' => 'nullable|text',
         ]);
 
@@ -162,6 +162,10 @@ class PemesananController extends Controller
             $validatedDataPembayaran['sopirs_id'] = null;
         }
 
+        if ($request->metode_bayar == "-") {
+            $validatedDataPembayaran['metode_bayar'] = null;
+        }
+
         if (!empty($validatedData['foto_pembayaran'])) {
             $image = $request->file('foto_pembayaran');
             $imageName = $pemesanan->pelanggan->nama . '-foto' . '.' . $image->getClientOriginalExtension();;
@@ -172,6 +176,7 @@ class PemesananController extends Controller
         $pelepasanPemesanan = PelepasanPemesanan::create($validatedData);
         $pembayaranPemesanan = PembayaranPemesanan::create($validatedDataPembayaran);
         $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first()->update([
+            'kilometer_saat_ini' => $validatedData['kilometer_keluar'],
             'status' => 'dipesan',
         ]);
 

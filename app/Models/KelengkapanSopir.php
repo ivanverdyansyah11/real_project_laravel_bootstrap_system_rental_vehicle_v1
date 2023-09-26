@@ -11,6 +11,6 @@ class KelengkapanSopir extends Model
 
     public function sopir()
     {
-        return $this->belongsTo(Sopir::class, 'id');
+        return $this->belongsTo(Sopir::class, 'sopirs_id');
     }
 }

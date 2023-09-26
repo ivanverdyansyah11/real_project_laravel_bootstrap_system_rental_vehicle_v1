@@ -175,7 +175,7 @@
                                 @enderror
                             </div>
                         </div>
-                        @if ($pemesanan->kendaraan->jenis_kendaraans_id == $jenis_kendaraan->id)
+                        @if ($pemesanan->kendaraan->jenis_kendaraans_id === $jenis_kendaraan->id)
                             <div class="col-md-6">
                                 <div class="input-wrapper">
                                     <label for="ban_serep">Ban Serep</label>
@@ -261,7 +261,7 @@
                                     <label for="total_bayar">Total Bayar</label>
                                     <input type="text" id="total_bayar" class="input" autocomplete="off"
                                         name="total_bayar" value="{{ old('total_bayar') }}" pattern="[0-9]*"
-                                        title="Hanya angka 0-9 diperbolehkan">
+                                        title="Hanya angka 0-9 diperbolehkan" disabled>
                                     @error('total_bayar')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -332,6 +332,16 @@
         const waktuSewa = document.querySelector('#waktu_sewa');
         const tarifSewa = document.querySelector('#tarifSewa');
         const totalTarifSewa = document.querySelector('#total_tarif_sewa');
+        const jenisPembayaran = document.querySelector('#jenis_pembayaran');
+        const totalBayar = document.querySelector('#total_bayar');
+
+        jenisPembayaran.addEventListener('change', function() {
+            if (jenisPembayaran.value == "-" || jenisPembayaran.value == "belum bayar") {
+                totalBayar.setAttribute("disabled", "disabled");
+            } else {
+                totalBayar.removeAttribute("disabled");
+            }
+        });
 
         tanggalDiambil.addEventListener('change', function() {
             if (tanggalDiambil.value !== "") {

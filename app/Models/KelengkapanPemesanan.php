@@ -11,6 +11,6 @@ class KelengkapanPemesanan extends Model
 
     public function pemesanan()
     {
-        return $this->belongsTo(Pemesanan::class, 'id');
+        return $this->belongsTo(Pemesanan::class, 'pemesanans_id');
     }
 }

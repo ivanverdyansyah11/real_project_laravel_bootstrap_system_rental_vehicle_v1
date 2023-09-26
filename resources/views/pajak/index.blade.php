@@ -30,23 +30,27 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                <div class="card-product">
-                    <img src="{{ asset('assets/img/default/sample-kendaraan.jpg') }}" alt="Car Thumbnail Image"
-                        class="img-fluid product-img">
-                    <div class="product-content">
-                        <p class="product-name">Honda Brio</p>
-                        <div class="wrapper-other d-flex align-items-center justify-content-between">
-                            <div class="wrapper-tahun d-flex align-items-center">
-                                <p class="product-year">No. Seri: 5675687990</p>
+            @foreach ($kendaraans as $kendaraan)
+                <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
+                    <div class="card-product">
+                        <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
+                            alt="Car Thumbnail Image" class="img-fluid product-img">
+                        <div class="product-content">
+                            <p class="product-name">{{ $kendaraan->brand_kendaraan->nama }}
+                                {{ $kendaraan->nama_kendaraan }}</p>
+                            <div class="wrapper-other d-flex align-items-center justify-content-between">
+                                <div class="wrapper-tahun d-flex align-items-center">
+                                    <p class="product-year">No. Seri: {{ $kendaraan->seri_kendaraan->nomor_seri }}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="wrapper-button d-flex">
-                            <a href="{{ route('pajak.transaction') }}" class="button-primary w-100">Bayar Pajak</a>
+                            <div class="wrapper-button d-flex">
+                                <a href="{{ route('pajak.transaction', $kendaraan->id) }}"
+                                    class="button-primary w-100">Bayar Pajak</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection

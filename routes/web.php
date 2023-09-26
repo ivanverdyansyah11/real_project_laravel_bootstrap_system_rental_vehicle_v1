@@ -54,6 +54,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // KENDARAAN
     Route::controller(KendaraanController::class)->group(function () {
         Route::get('/kendaraan', 'index')->name('kendaraan');
+        Route::get('/kendaraan/getDetail/{id}', 'getDetail')->name('kendaraan.detail');
         Route::get('/kendaraan/detail/{id}', 'detail')->name('kendaraan.detail');
         Route::get('/kendaraan/getSeriKendaraan/{id}', 'getSeriKendaraan')->name('kendaraan.getSeriKendaraan');
 
@@ -134,8 +135,8 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // PAJAK
     Route::controller(PajakController::class)->group(function () {
         Route::get('/pajak', 'index')->name('pajak');
-        Route::get('/pajak/detail', 'detail')->name('pajak.detail');
-        Route::get('/pajak/transaksi', 'transaction')->name('pajak.transaction');
+        Route::get('/pajak/transaksi/{id}', 'transaction')->name('pajak.transaction');
+        Route::post('/pajak/transaksi/{id}', 'transactionAction')->name('pajak.transaction.action');
     });
 });
 

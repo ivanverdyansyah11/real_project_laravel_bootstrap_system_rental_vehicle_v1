@@ -11,11 +11,11 @@ class PembayaranPemesanan extends Model
 
     public function kendaraans()
     {
-        return $this->hasMany(Kendaraan::class, 'id');
+        return $this->hasMany(Kendaraan::class, 'kendaraans_id');
     }
 
     public function pelepasan_pemesanan()
     {
-        return $this->belongsTo(PelepasanPemesanan::class, 'id');
+        return $this->belongsTo(PelepasanPemesanan::class, 'pelepasan_pemesanans_id');
     }
 }
