@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\KelengkapanSopir;
+use App\Models\Laporan;
 use App\Models\Sopir;
-use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
-
-use function PHPUnit\Framework\isNull;
 
 class SopirController extends Controller
 {
@@ -90,8 +88,13 @@ class SopirController extends Controller
 
         $sopir = Sopir::create($validatedData);
         $kelengkapanSopir = KelengkapanSopir::create($validatedDataKelengkapan);
+        $laporan = Laporan::create([
+            'penggunas_id' => auth()->user()->id,
+            'relations_id' => $validatedDataKelengkapan['sopirs_id'],
+            'kategori_laporan' => 'sopir',
+        ]);
 
-        if ($sopir && $kelengkapanSopir) {
+        if ($sopir && $kelengkapanSopir && $laporan) {
             return redirect(route('sopir'))->with('success', 'Berhasil Tambah Sopir!');
         } else {
             return redirect(route('sopir'))->with('failed', 'Gagal Tambah Sopir!');
@@ -108,6 +111,7 @@ class SopirController extends Controller
 
     function update($id, Request $request)
     {
+        return $id;
         $sopir = Sopir::where('id', $id)->first();
         $validatedData = $request->validate([
             'nama' => 'required|string',
@@ -164,8 +168,10 @@ class SopirController extends Controller
             $validatedDataKelengkapan['nomor_telepon'] = 'belum lengkap';
         }
 
+        return KelengkapanSopir::where('sopirs_id', $id)->first();
+
         $sopir = Sopir::where('id', $id)->first()->update($validatedData);
-        $kelengkapanSopir = KelengkapanSopir::where('sopirs_id', $id)->first()->update($validatedDataKelengkapan);;
+        $kelengkapanSopir = KelengkapanSopir::where('sopirs_id', $id)->first()->update($validatedDataKelengkapan);
 
         if ($sopir && $kelengkapanSopir) {
             return redirect(route('sopir'))->with('success', 'Berhasil Edit Sopir!');

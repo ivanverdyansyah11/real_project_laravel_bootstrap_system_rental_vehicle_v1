@@ -13,7 +13,7 @@ class PelangganController extends Controller
     {
         return view('pelanggan.index', [
             'title' => 'Pelanggan',
-            'pelanggans' => Pelanggan::with('kelengkapan_pelanggan')->paginate(6),
+            'pelanggans' => Pelanggan::paginate(6),
         ]);
     }
 
@@ -59,40 +59,34 @@ class PelangganController extends Controller
             $validatedData['foto_kk'] = $imageName;
         }
 
-        $pelangganID = Pelanggan::latest()->first();
-        if ($pelangganID) {
-            $validatedDataKelengkapan['pelanggans_id'] = $pelangganID->id + 1;
+        if ($request->foto_ktp && $validatedData['nomor_ktp'] !== null) {
+            $validatedData['kelengkapan_ktp'] = 'lengkap';
         } else {
-            $validatedDataKelengkapan['pelanggans_id'] = 1;
+            $validatedData['kelengkapan_ktp'] = 'belum lengkap';
         }
 
-        if (!empty($validatedData['foto_ktp']) && !empty($validatedData['nomor_ktp'])) {
-            $validatedDataKelengkapan['ktp'] = 'lengkap';
+        if ($request->foto_kk && $validatedData['nomor_kk'] !== null) {
+            $validatedData['kelengkapan_kk'] = 'lengkap';
         } else {
-            $validatedDataKelengkapan['ktp'] = 'belum lengkap';
+            $validatedData['kelengkapan_kk'] = 'belum lengkap';
         }
 
-        if (!empty($validatedData['foto_kk']) && !empty($validatedData['nomor_kk'])) {
-            $validatedDataKelengkapan['kk'] = 'lengkap';
+        if ($validatedData['nomor_telepon'] !== null) {
+            $validatedData['kelengkapan_nomor_telepon'] = 'lengkap';
         } else {
-            $validatedDataKelengkapan['kk'] = 'belum lengkap';
-        }
-
-        if (!empty($validatedData['nomor_telepon'])) {
-            $validatedDataKelengkapan['nomor_telepon'] = 'lengkap';
-        } else {
-            $validatedDataKelengkapan['nomor_telepon'] = 'belum lengkap';
+            $validatedData['kelengkapan_nomor_telepon'] = 'belum lengkap';
         }
 
         $pelanggan = Pelanggan::create($validatedData);
-        $kelengkapanPelanggan = KelengkapanPelanggan::create($validatedDataKelengkapan);
+        $pelangganID = Pelanggan::where('nik', $validatedData['nik'])->first();
+
         $laporan = Laporan::create([
             'penggunas_id' => auth()->user()->id,
-            'relations_id' => $validatedDataKelengkapan['pelanggans_id'],
+            'relations_id' => $pelangganID->id,
             'kategori_laporan' => 'pelanggan',
         ]);
 
-        if ($pelanggan && $kelengkapanPelanggan && $laporan) {
+        if ($pelanggan && $laporan) {
             return redirect(route('pelanggan'))->with('success', 'Berhasil Tambah Pelanggan!');
         } else {
             return redirect(route('pelanggan'))->with('failed', 'Gagal Tambah Pelanggan!');
@@ -147,28 +141,27 @@ class PelangganController extends Controller
             $validatedData['foto_kk'] = $pelanggan->foto_kk;
         }
 
-        if (!empty($validatedData['foto_ktp']) && !empty($validatedData['nomor_ktp'])) {
-            $validatedDataKelengkapan['ktp'] = 'lengkap';
+        if ($validatedData['foto_ktp'] !== null && $validatedData['nomor_ktp'] !== null) {
+            $validatedData['kelengkapan_ktp'] = 'lengkap';
         } else {
-            $validatedDataKelengkapan['ktp'] = 'belum lengkap';
+            $validatedData['kelengkapan_ktp'] = 'belum lengkap';
         }
 
-        if (!empty($validatedData['foto_kk']) && !empty($validatedData['nomor_kk'])) {
-            $validatedDataKelengkapan['kk'] = 'lengkap';
+        if ($validatedData['foto_kk'] !== null && $validatedData['nomor_kk'] !== null) {
+            $validatedData['kelengkapan_kk'] = 'lengkap';
         } else {
-            $validatedDataKelengkapan['kk'] = 'belum lengkap';
+            $validatedData['kelengkapan_kk'] = 'belum lengkap';
         }
 
-        if (!empty($validatedData['nomor_telepon'])) {
-            $validatedDataKelengkapan['nomor_telepon'] = 'lengkap';
+        if ($validatedData['nomor_telepon'] !== null) {
+            $validatedData['kelengkapan_nomor_telepon'] = 'lengkap';
         } else {
-            $validatedDataKelengkapan['nomor_telepon'] = 'belum lengkap';
+            $validatedData['kelengkapan_nomor_telepon'] = 'belum lengkap';
         }
 
         $pelanggan = Pelanggan::where('id', $id)->first()->update($validatedData);
-        $kelengkapanPelanggan = KelengkapanPelanggan::where('pelanggans_id', $id)->first()->update($validatedDataKelengkapan);;
 
-        if ($pelanggan && $kelengkapanPelanggan) {
+        if ($pelanggan) {
             return redirect(route('pelanggan'))->with('success', 'Berhasil Edit Pelanggan!');
         } else {
             return redirect(route('pelanggan'))->with('failed', 'Gagal Edit Pelanggan!');
@@ -190,9 +183,8 @@ class PelangganController extends Controller
         }
 
         $pelanggan = $pelanggan->delete();
-        $kelengkapanPelanggan = KelengkapanPelanggan::where('pelanggans_id', $id)->first()->delete();
 
-        if ($pelanggan && $kelengkapanPelanggan) {
+        if ($pelanggan) {
             return redirect(route('pelanggan'))->with('success', 'Berhasil Hapus Pelanggan!');
         } else {
             return redirect(route('pelanggan'))->with('failed', 'Gagal Hapus Pelanggan!');

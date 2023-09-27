@@ -23,6 +23,9 @@ class CreatePelanggansTable extends Migration
             $table->string('foto_ktp')->nullable();
             $table->string('foto_kk')->nullable();
             $table->text('alamat');
+            $table->enum('kelengkapan_ktp', ['lengkap', 'belum lengkap']);
+            $table->enum('kelengkapan_kk', ['lengkap', 'belum lengkap']);
+            $table->enum('kelengkapan_nomor_telepon', ['lengkap', 'belum lengkap']);
             $table->timestamps();
             $table->softDeletes();
         });

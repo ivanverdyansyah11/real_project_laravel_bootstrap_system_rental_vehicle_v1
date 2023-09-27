@@ -50,9 +50,9 @@
                             </div>
                             <div class="col data-value data-length data-length-none">{{ $pelanggan->alamat }}</div>
                             @if (
-                                $pelanggan->kelengkapan_pelanggan->ktp == 'lengkap' &&
-                                    $pelanggan->kelengkapan_pelanggan->kk == 'lengkap' &&
-                                    $pelanggan->kelengkapan_pelanggan->nomor_telepon == 'lengkap')
+                                $pelanggan->kelengkapan_ktp == 'lengkap' &&
+                                    $pelanggan->kelengkapan_kk == 'lengkap' &&
+                                    $pelanggan->kelengkapan_nomor_telepon == 'lengkap')
                                 <div class="col data-value data-length data-length-none status-true">Lengkap</div>
                             @else
                                 <div class="col data-value data-length data-length-none status-false">Belum Lengkap</div>

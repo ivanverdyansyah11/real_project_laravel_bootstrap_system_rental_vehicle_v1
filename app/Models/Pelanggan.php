@@ -10,11 +10,6 @@ class Pelanggan extends Model
     use SoftDeletes;
     protected $guarded = [];
 
-    public function kelengkapan_pelanggan()
-    {
-        return $this->belongsTo(KelengkapanPelanggan::class, 'id');
-    }
-
     public function pelepasan_pemesanan()
     {
         return $this->belongsTo(PelepasanPemesanan::class, 'id');
