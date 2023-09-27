@@ -54,6 +54,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // KENDARAAN
     Route::controller(KendaraanController::class)->group(function () {
         Route::get('/kendaraan', 'index')->name('kendaraan');
+        Route::post('/kendaraan/cari', 'search')->name('kendaraan.search');
         Route::get('/kendaraan/getDetail/{id}', 'getDetail')->name('kendaraan.detail');
         Route::get('/kendaraan/detail/{id}', 'detail')->name('kendaraan.detail');
         Route::get('/kendaraan/getSeriKendaraan/{id}', 'getSeriKendaraan')->name('kendaraan.getSeriKendaraan');
@@ -128,6 +129,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // SERVIS
     Route::controller(ServisController::class)->group(function () {
         Route::get('/servis', 'index')->name('servis');
+        Route::post('/servis/cari', 'search')->name('servis.search');
         Route::get('/servis/check/{id}', 'check')->name('servis.check');
         Route::post('/servis/check/{id}', 'checkAction')->name('servis.check.action');
     });
@@ -135,6 +137,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // PAJAK
     Route::controller(PajakController::class)->group(function () {
         Route::get('/pajak', 'index')->name('pajak');
+        Route::post('/pajak/cari', 'search')->name('pajak.search');
         Route::get('/pajak/transaksi/{id}', 'transaction')->name('pajak.transaction');
         Route::post('/pajak/transaksi/{id}', 'transactionAction')->name('pajak.transaction.action');
     });
@@ -163,6 +166,7 @@ Route::middleware('auth')->group(function () {
     // PEMESANAN
     Route::controller(PemesananController::class)->group(function () {
         Route::get('/pemesanan', 'index')->name('pemesanan');
+        Route::post('/pemesanan/cari', 'search')->name('pemesanan.search');
         Route::post('/pemesanan/booking', 'booking')->name('pemesanan.booking');
 
         Route::get('/pemesanan/release/{id}', 'release')->name('pemesanan.release');
@@ -174,6 +178,7 @@ Route::middleware('auth')->group(function () {
     // PENGEMBALIAN
     Route::controller(PengembalianController::class)->group(function () {
         Route::get('/pengembalian', 'index')->name('pengembalian');
+        Route::post('/pengembalian/cari', 'search')->name('pengembalian.search');
         Route::get('/pengembalian/kendaraan/{id}', 'restoration')->name('pengembalian.restoration');
         Route::post('/pengembalian/kendaraan/{id}', 'restorationAction')->name('pengembalian.restoration.action');
     });

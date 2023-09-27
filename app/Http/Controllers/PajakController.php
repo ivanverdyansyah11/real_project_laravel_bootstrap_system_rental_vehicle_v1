@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kendaraan;
+use App\Models\Laporan;
 use App\Models\Pajak;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,25 @@ class PajakController extends Controller
         return view('pajak.index', [
             'title' => 'Pajak',
             'kendaraans' => Kendaraan::all(),
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $kendaraans = Kendaraan::where('nama_kendaraan', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
+            ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa', 'like', '%' . $request->search . '%')
+            ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
+            ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
+            ->orWhere('warna', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')
+            ->get();
+
+        return view('pajak.index', [
+            'title' => 'Pajak',
+            'kendaraans' => $kendaraans,
         ]);
     }
 
@@ -35,9 +55,15 @@ class PajakController extends Controller
 
         $validatedData['kendaraans_id'] = $id;
         $pajak = Pajak::create($validatedData);
+        $pajakID = Pajak::latest()->first();
+        $laporan = Laporan::create([
+            'penggunas_id' => auth()->user()->id,
+            'relations_id' => $pajakID->id,
+            'kategori_laporan' => 'pajak',
+        ]);
 
-        if ($pajak) {
-            return redirect(route('pajak'))->with('success', 'Berhasil Tambah Bayar Pajak Kendaraan!');
+        if ($pajak && $laporan) {
+            return redirect(route('laporan'))->with('success', 'Berhasil Tambah Bayar Pajak Kendaraan!');
         } else {
             return redirect(route('pajak'))->with('failed', 'Gagal Tambah Bayar Pajak Kendaraan!');
         }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kendaraan;
+use App\Models\Laporan;
 use App\Models\Servis;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,25 @@ class ServisController extends Controller
         return view('servis.index', [
             'title' => 'Servis',
             'kendaraans' => Kendaraan::where('status', 'servis')->with('jenis_kendaraan', 'brand_kendaraan')->get(),
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $kendaraans = Kendaraan::where('status', 'servis')
+            ->where('nama_kendaraan', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
+            ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa', 'like', '%' . $request->search . '%')
+            ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
+            ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
+            ->orWhere('warna', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')->get();
+
+        return view('servis.index', [
+            'title' => 'Servis',
+            'kendaraans' => $kendaraans,
         ]);
     }
 
@@ -38,7 +58,7 @@ class ServisController extends Controller
             'air_waiper' => 'required|string',
             'ban' => 'required|string',
             'oli' => 'required|string',
-            'total_bayar' => 'required|string',
+            'total_bayar' => 'nullable|string',
             'keterangan' => 'nullable|text',
         ]);
 
@@ -51,8 +71,14 @@ class ServisController extends Controller
         ]);
 
         $servis = Servis::create($validatedData);
+        $servisID = Servis::latest()->first();
+        $laporan = Laporan::create([
+            'penggunas_id' => auth()->user()->id,
+            'relations_id' => $servisID->id,
+            'kategori_laporan' => 'servis',
+        ]);
 
-        if ($servis && $kendaraan) {
+        if ($servis && $kendaraan && $laporan) {
             return redirect(route('laporan'))->with('success', 'Berhasil Melakukan Servis Kendaraan!');
         } else {
             return redirect(route('servis'))->with('failed', 'Gagal Melakukan Servis Kendaraan!');

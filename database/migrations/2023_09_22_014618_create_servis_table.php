@@ -23,6 +23,7 @@ class CreateServisTable extends Migration
             $table->enum('air_waiper', ['ada', 'tidak ada', 'kosong']);
             $table->enum('ban', ['ada', 'tidak ada', 'kosong']);
             $table->enum('oli', ['ada', 'tidak ada', 'kosong']);
+            $table->text('total_bayar')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();

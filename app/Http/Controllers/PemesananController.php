@@ -6,6 +6,7 @@ use App\Models\JenisKendaraan;
 use App\Models\Kendaraan;
 use Illuminate\Http\Request;
 use App\Models\KelengkapanPemesanan;
+use App\Models\Laporan;
 use App\Models\PelepasanPemesanan;
 use App\Models\PembayaranPemesanan;
 use App\Models\Pemesanan;
@@ -18,6 +19,25 @@ class PemesananController extends Controller
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
             'kendaraans' => Kendaraan::where('status', 'booking')->with('jenis_kendaraan', 'brand_kendaraan')->get(),
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $kendaraans = Kendaraan::where('status', 'booking')
+            ->where('nama_kendaraan', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
+            ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa', 'like', '%' . $request->search . '%')
+            ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
+            ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
+            ->orWhere('warna', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')->get();
+
+        return view('pemesanan.index', [
+            'title' => 'Pemesanan',
+            'kendaraans' => $kendaraans,
         ]);
     }
 
@@ -57,7 +77,13 @@ class PemesananController extends Controller
             'status' => 'booking',
         ]);
 
-        if ($pemesanan && $kelengkapanPemesanan && $kendaraan) {
+        $laporan = Laporan::create([
+            'penggunas_id' => auth()->user()->id,
+            'relations_id' => $validatedDataPemesanan['pemesanans_id'],
+            'kategori_laporan' => 'booking',
+        ]);
+
+        if ($pemesanan && $kelengkapanPemesanan && $kendaraan && $laporan) {
             return redirect(route('pemesanan'))->with('success', 'Berhasil Tambah Pemesanan!');
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Tambah Pemesanan!');
@@ -185,7 +211,13 @@ class PemesananController extends Controller
             'status' => 'dipesan',
         ]);
 
-        if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan) {
+        $laporan = Laporan::create([
+            'penggunas_id' => auth()->user()->id,
+            'relations_id' => $validatedDataPembayaran['pelepasan_pemesanans_id'],
+            'kategori_laporan' => 'pemesanan',
+        ]);
+
+        if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan && $laporan) {
             return redirect(route('laporan'))->with('success', 'Berhasil Melakukan Pelepasan Kendaraan!');
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Melakukan Pelepasan Kendaraan!');

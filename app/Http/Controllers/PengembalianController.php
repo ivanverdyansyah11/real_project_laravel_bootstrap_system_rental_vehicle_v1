@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JenisKendaraan;
 use App\Models\Kendaraan;
+use App\Models\Laporan;
 use App\Models\PelepasanPemesanan;
 use App\Models\PembayaranPemesanan;
 use App\Models\Pengembalian;
@@ -17,6 +18,25 @@ class PengembalianController extends Controller
         return view('pengembalian.index', [
             'title' => 'Pengembalian',
             'kendaraans' => Kendaraan::where('status', 'dipesan')->with('jenis_kendaraan', 'brand_kendaraan')->get(),
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $kendaraans = Kendaraan::where('status', 'dipesan')
+            ->where('nama_kendaraan', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
+            ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa', 'like', '%' . $request->search . '%')
+            ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
+            ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
+            ->orWhere('warna', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')->get();
+
+        return view('pengembalian.index', [
+            'title' => 'Pengembalian',
+            'kendaraans' => $kendaraans,
         ]);
     }
 
@@ -114,8 +134,15 @@ class PengembalianController extends Controller
         }
 
         $pengembalian = Pengembalian::create($validatedData);
+        $pengembalianID = Pengembalian::latest()->first();
 
-        if ($pengembalian && $kendaraan) {
+        $laporan = Laporan::create([
+            'penggunas_id' => auth()->user()->id,
+            'relations_id' => $pengembalianID->id,
+            'kategori_laporan' => 'pengembalian',
+        ]);
+
+        if ($pengembalian && $kendaraan && $laporan) {
             return redirect(route('laporan'))->with('success', 'Berhasil Melakukan Pengembalian Kendaraan!');
         } else {
             return redirect(route('pengembalian'))->with('failed', 'Gagal Melakukan Pengembalian Kendaraan!');

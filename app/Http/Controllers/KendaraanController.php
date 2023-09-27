@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KategoriKilometerKendaraan;
 use App\Models\Kendaraan;
+use App\Models\Laporan;
 use App\Models\Pelanggan;
 use App\Models\SeriKendaraan;
 use Illuminate\Http\Request;
@@ -15,6 +16,26 @@ class KendaraanController extends Controller
         return view('kendaraan.index', [
             'title' => 'Kendaraan',
             'kendaraans' => Kendaraan::where('status', 'ready')->with('jenis_kendaraan', 'brand_kendaraan')->get(),
+            'pelanggans' => Pelanggan::all(),
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $kendaraans = Kendaraan::where('nama_kendaraan', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
+            ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa', 'like', '%' . $request->search . '%')
+            ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
+            ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
+            ->orWhere('warna', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')
+            ->get();
+
+        return view('kendaraan.index', [
+            'title' => 'Kendaraan',
+            'kendaraans' => $kendaraans,
             'pelanggans' => Pelanggan::all(),
         ]);
     }
@@ -89,8 +110,15 @@ class KendaraanController extends Controller
         }
 
         $kendaraan = Kendaraan::create($validatedData);
+        $kendaraanID = Kendaraan::latest()->first();
 
-        if ($kendaraan) {
+        $laporan = Laporan::create([
+            'penggunas_id' => auth()->user()->id,
+            'relations_id' => $kendaraanID->id,
+            'kategori_laporan' => 'kendaraan',
+        ]);
+
+        if ($kendaraan && $laporan) {
             return redirect(route('kendaraan'))->with('success', 'Berhasil Tambah Kendaraan!');
         } else {
             return redirect(route('kendaraan'))->with('failed', 'Gagal Tambah Kendaraan!');

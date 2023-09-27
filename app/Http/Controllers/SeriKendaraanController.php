@@ -13,7 +13,7 @@ class SeriKendaraanController extends Controller
     {
         return view('seri-kendaraan.index', [
             'title' => 'Kendaraan',
-            'series' => SeriKendaraan::paginate(6),
+            'series' => SeriKendaraan::with('jenis_kendaraan', 'brand_kendaraan')->paginate(6),
             'jenises' => JenisKendaraan::all(),
             'brands' => BrandKendaraan::all(),
         ]);
@@ -35,8 +35,8 @@ class SeriKendaraanController extends Controller
 
         $validatedData = $request->validate([
             'nomor_seri' => 'required|string',
-            'jenis_kendaraans_id' => 'required|integer',
-            'brand_kendaraans_id' => 'required|integer',
+            'jenis_kendaraans_id' => 'required|string',
+            'brand_kendaraans_id' => 'required|string',
         ]);
 
         $seri = SeriKendaraan::create($validatedData);
@@ -51,8 +51,8 @@ class SeriKendaraanController extends Controller
     function update($id, Request $request)
     {
         $validatedData = $request->validate([
-            'jenis_kendaraans_id' => 'required|integer',
-            'brand_kendaraans_id' => 'required|integer',
+            'jenis_kendaraans_id' => 'required|string',
+            'brand_kendaraans_id' => 'required|string',
             'nomor_seri' => 'required|string',
         ]);
 

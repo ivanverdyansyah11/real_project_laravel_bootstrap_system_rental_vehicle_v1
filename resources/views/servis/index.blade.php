@@ -18,9 +18,9 @@
         <div class="row mb-4">
             <div
                 class="col-12 d-flex flex-column flex-md-row justify-content-md-between align-items-end align-items-md-center">
-                <form class="form-search d-inline-block">
+                <form class="form-search d-inline-block" method="POST" action="{{ route('servis.search') }}">
                     @csrf
-                    <input type="text" class="input-search" placeholder=" ">
+                    <input type="text" class="input-search" placeholder=" " name="search">
                     <label class="d-flex align-items-center">
                         <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
                             class="img-fluid search-icon">

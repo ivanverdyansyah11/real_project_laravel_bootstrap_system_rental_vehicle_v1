@@ -17,11 +17,11 @@ class SeriKendaraan extends Model
 
     public function jenis_kendaraan()
     {
-        return $this->belongsTo(JenisKendaraan::class, 'id');
+        return $this->belongsTo(JenisKendaraan::class, 'jenis_kendaraans_id');
     }
 
     public function brand_kendaraan()
     {
-        return $this->belongsTo(BrandKendaraan::class, 'id');
+        return $this->belongsTo(BrandKendaraan::class, 'brand_kendaraans_id');
     }
 }

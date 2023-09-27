@@ -9,4 +9,9 @@ class JenisKendaraan extends Model
 {
     use SoftDeletes;
     protected $guarded = [];
+
+    public function seri_kendaraan()
+    {
+        return $this->belongsTo(SeriKendaraan::class, 'id');
+    }
 }

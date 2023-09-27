@@ -17,7 +17,7 @@ class CreateLaporansTable extends Migration
             $table->id();
             $table->bigInteger('penggunas_id')->index();
             $table->bigInteger('relations_id')->index();
-            $table->enum('kategori_laporan', ['pelanggan', 'sopir', 'kendaraan', 'booking', 'pemesanan', 'pengembalian', 'servis', 'pajak']);
+            $table->enum('kategori_laporan', ['pelanggan', 'sopir', 'kendaraan', 'booking', 'pemesanan', 'pengembalian', 'penambahan', 'servis', 'pajak']);
             $table->timestamps();
             $table->softDeletes();
         });
