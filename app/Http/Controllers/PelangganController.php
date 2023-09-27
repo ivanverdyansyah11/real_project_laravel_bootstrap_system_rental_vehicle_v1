@@ -88,6 +88,7 @@ class PelangganController extends Controller
         $kelengkapanPelanggan = KelengkapanPelanggan::create($validatedDataKelengkapan);
         $laporan = Laporan::create([
             'penggunas_id' => auth()->user()->id,
+            'relations_id' => $validatedDataKelengkapan['pelanggans_id'],
             'kategori_laporan' => 'pelanggan',
         ]);
 

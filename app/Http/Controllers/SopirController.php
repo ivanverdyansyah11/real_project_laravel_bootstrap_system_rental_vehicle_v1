@@ -38,10 +38,10 @@ class SopirController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|string',
-            'nik' => 'required|integer',
-            'nomor_telepon' => 'nullable|integer',
-            'nomor_ktp' => 'nullable|integer',
-            'nomor_sim' => 'nullable|integer',
+            'nik' => 'required|string',
+            'nomor_telepon' => 'nullable|string',
+            'nomor_ktp' => 'nullable|string',
+            'nomor_sim' => 'nullable|string',
             'foto_ktp' => 'nullable|image|max:2048',
             'foto_sim' => 'nullable|image|max:2048',
             'alamat' => 'required|string',
@@ -111,17 +111,15 @@ class SopirController extends Controller
         $sopir = Sopir::where('id', $id)->first();
         $validatedData = $request->validate([
             'nama' => 'required|string',
-            'nik' => 'required|integer',
-            'nomor_telepon' => 'nullable|integer',
-            'nomor_ktp' => 'nullable|integer',
-            'nomor_sim' => 'nullable|integer',
-            // 'foto_ktp' => 'nullable|image|max:2048',
-            // 'foto_sim' => 'nullable|image|max:2048',
+            'nik' => 'required|string',
+            'nomor_telepon' => 'nullable|string',
+            'nomor_ktp' => 'nullable|string',
+            'nomor_sim' => 'nullable|string',
             'alamat' => 'required|string',
         ]);
 
         if ($request->file('foto_ktp')) {
-            if ($sopir->foto_ktp) {
+            if (file_exists(public_path('assets/img/ktp-images/') . $sopir->foto_ktp) && $sopir->foto_ktp) {
                 $oldImagePath = public_path('assets/img/ktp-images/') . $sopir->foto_ktp;
                 unlink($oldImagePath);
             }
@@ -135,7 +133,7 @@ class SopirController extends Controller
         }
 
         if ($request->file('foto_sim')) {
-            if ($sopir->foto_sim) {
+            if (file_exists(public_path('assets/img/ktp-images/') . $sopir->foto_sim) && $sopir->foto_sim) {
                 $oldImagePath = public_path('assets/img/sim-images/') . $sopir->foto_sim;
                 unlink($oldImagePath);
             }
@@ -180,12 +178,12 @@ class SopirController extends Controller
     {
         $sopir = Sopir::where('id', $id)->first();
 
-        if ($sopir->foto_ktp) {
+        if (file_exists(public_path('assets/img/ktp-images/') . $sopir->foto_ktp) && $sopir->foto_ktp) {
             $imagePath = public_path('assets/img/ktp-images/') . $sopir->foto_ktp;
             unlink($imagePath);
         }
 
-        if ($sopir->foto_sim) {
+        if (file_exists(public_path('assets/img/ktp-images/') . $sopir->foto_sim) && $sopir->foto_sim) {
             $imagePath = public_path('assets/img/sim-images/') . $sopir->foto_sim;
             unlink($imagePath);
         }
