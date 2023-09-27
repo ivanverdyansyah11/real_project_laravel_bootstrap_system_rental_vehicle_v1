@@ -25,6 +25,7 @@ class CreateServisTable extends Migration
             $table->enum('oli', ['ada', 'tidak ada', 'kosong']);
             $table->text('keterangan')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

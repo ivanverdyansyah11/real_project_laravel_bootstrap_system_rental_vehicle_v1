@@ -24,6 +24,7 @@ class CreatePelanggansTable extends Migration
             $table->string('foto_kk')->nullable();
             $table->text('alamat');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

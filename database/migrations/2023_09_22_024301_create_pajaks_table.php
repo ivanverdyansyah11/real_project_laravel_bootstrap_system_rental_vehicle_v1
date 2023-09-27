@@ -21,6 +21,7 @@ class CreatePajaksTable extends Migration
             $table->enum('metode_bayar', ['transfer bank', 'internet banking', 'mobile banking', 'virtual account', 'online credit card', 'rekening bersama', 'payPal', 'e-money']);
             $table->string('jumlah_bayar');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -12,4 +12,11 @@ class LaporanController extends Controller
             'title' => 'Laporan',
         ]);
     }
+
+    public function detail($id)
+    {
+        return view('laporan.index', [
+            'title' => 'Laporan',
+        ]);
+    }
 }

@@ -33,6 +33,7 @@ class CreateKendaraansTable extends Migration
             $table->string('nomor_mesin');
             $table->enum('status', ['ready', 'booking', 'dipesan', 'servis']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -19,6 +19,7 @@ class CreateSeriKendaraansTable extends Migration
             $table->bigInteger('brand_kendaraans_id')->index();
             $table->string('nomor_seri');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KelengkapanPelanggan;
+use App\Models\Laporan;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 
@@ -35,10 +36,10 @@ class PelangganController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|string',
-            'nik' => 'required|integer',
-            'nomor_telepon' => 'nullable|integer',
-            'nomor_ktp' => 'nullable|integer',
-            'nomor_kk' => 'nullable|integer',
+            'nik' => 'required|string',
+            'nomor_telepon' => 'nullable|string',
+            'nomor_ktp' => 'nullable|string',
+            'nomor_kk' => 'nullable|string',
             'foto_ktp' => 'nullable|image|max:2048',
             'foto_kk' => 'nullable|image|max:2048',
             'alamat' => 'required|string',
@@ -85,8 +86,12 @@ class PelangganController extends Controller
 
         $pelanggan = Pelanggan::create($validatedData);
         $kelengkapanPelanggan = KelengkapanPelanggan::create($validatedDataKelengkapan);
+        $laporan = Laporan::create([
+            'penggunas_id' => auth()->user()->id,
+            'kategori_laporan' => 'pelanggan',
+        ]);
 
-        if ($pelanggan && $kelengkapanPelanggan) {
+        if ($pelanggan && $kelengkapanPelanggan && $laporan) {
             return redirect(route('pelanggan'))->with('success', 'Berhasil Tambah Pelanggan!');
         } else {
             return redirect(route('pelanggan'))->with('failed', 'Gagal Tambah Pelanggan!');
@@ -106,17 +111,15 @@ class PelangganController extends Controller
         $pelanggan = Pelanggan::where('id', $id)->first();
         $validatedData = $request->validate([
             'nama' => 'required|string',
-            'nik' => 'required|integer',
-            'nomor_telepon' => 'nullable|integer',
-            'nomor_ktp' => 'nullable|integer',
-            'nomor_kk' => 'nullable|integer',
-            // 'foto_ktp' => 'nullable|image|max:2048',
-            // 'foto_kk' => 'nullable|image|max:2048',
+            'nik' => 'required|string',
+            'nomor_telepon' => 'nullable|string',
+            'nomor_ktp' => 'nullable|string',
+            'nomor_kk' => 'nullable|string',
             'alamat' => 'required|string',
         ]);
 
         if ($request->file('foto_ktp')) {
-            if ($pelanggan->foto_ktp) {
+            if (file_exists(public_path('assets/img/ktp-images/') . $pelanggan->foto_ktp && $pelanggan->foto_ktp)) {
                 $oldImagePath = public_path('assets/img/ktp-images/') . $pelanggan->foto_ktp;
                 unlink($oldImagePath);
             }
@@ -130,7 +133,7 @@ class PelangganController extends Controller
         }
 
         if ($request->file('foto_kk')) {
-            if ($pelanggan->foto_kk) {
+            if (file_exists(public_path('assets/img/kk-images/') . $pelanggan->foto_kk && $pelanggan->foto_kk)) {
                 $oldImagePath = public_path('assets/img/kk-images/') . $pelanggan->foto_kk;
                 unlink($oldImagePath);
             }
@@ -175,12 +178,12 @@ class PelangganController extends Controller
     {
         $pelanggan = Pelanggan::where('id', $id)->first();
 
-        if ($pelanggan->foto_ktp) {
+        if (file_exists(public_path('assets/img/ktp-images/') . $pelanggan->foto_ktp && $pelanggan->foto_ktp)) {
             $imagePath = public_path('assets/img/ktp-images/') . $pelanggan->foto_ktp;
             unlink($imagePath);
         }
 
-        if ($pelanggan->foto_kk) {
+        if (file_exists(public_path('assets/img/kk-images/') . $pelanggan->foto_kk && $pelanggan->foto_kk)) {
             $imagePath = public_path('assets/img/kk-images/') . $pelanggan->foto_kk;
             unlink($imagePath);
         }

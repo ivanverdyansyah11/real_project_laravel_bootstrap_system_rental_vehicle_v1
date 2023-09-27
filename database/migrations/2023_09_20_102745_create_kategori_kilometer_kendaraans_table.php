@@ -17,6 +17,7 @@ class CreateKategoriKilometerKendaraansTable extends Migration
             $table->id();
             $table->string('jumlah');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

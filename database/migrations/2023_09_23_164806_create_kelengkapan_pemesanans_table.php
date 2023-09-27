@@ -19,6 +19,7 @@ class CreateKelengkapanPemesanansTable extends Migration
             $table->enum('jenis_kendaraan', ['lengkap', 'belum lengkap']);
             $table->enum('nama_pemesan', ['lengkap', 'belum lengkap']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

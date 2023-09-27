@@ -15,7 +15,10 @@ class CreateLaporansTable extends Migration
     {
         Schema::create('laporans', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('penggunas_id')->index();
+            $table->enum('kategori_laporan', ['pelanggan', 'sopir', 'kendaraan', 'booking', 'pemesanan', 'pengembalian', 'servis', 'pajak']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

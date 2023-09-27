@@ -25,6 +25,7 @@ class CreateSopirsTable extends Migration
             $table->text('alamat');
             $table->enum('status', ['ada', 'tidak ada']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

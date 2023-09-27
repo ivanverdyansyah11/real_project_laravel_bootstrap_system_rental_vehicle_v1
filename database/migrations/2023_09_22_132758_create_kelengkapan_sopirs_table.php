@@ -20,6 +20,7 @@ class CreateKelengkapanSopirsTable extends Migration
             $table->enum('sim', ['lengkap', 'belum lengkap']);
             $table->enum('nomor_telepon', ['lengkap', 'belum lengkap']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

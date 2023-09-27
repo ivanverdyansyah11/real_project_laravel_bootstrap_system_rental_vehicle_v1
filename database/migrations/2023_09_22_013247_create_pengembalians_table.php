@@ -32,6 +32,7 @@ class CreatePengembaliansTable extends Migration
             $table->string('biaya_tambahan')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -20,6 +20,7 @@ class CreateKelengkapanPelanggansTable extends Migration
             $table->enum('kk', ['lengkap', 'belum lengkap']);
             $table->enum('nomor_telepon', ['lengkap', 'belum lengkap']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
