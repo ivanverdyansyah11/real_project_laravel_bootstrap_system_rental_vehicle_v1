@@ -13,7 +13,7 @@ class SopirController extends Controller
     {
         return view('sopir.index', [
             'title' => 'Sopir',
-            'sopirs' => Sopir::with('kelengkapan_sopir')->paginate(6),
+            'sopirs' => Sopir::paginate(6),
         ]);
     }
 
@@ -61,40 +61,34 @@ class SopirController extends Controller
             $validatedData['foto_sim'] = $imageName;
         }
 
-        $sopirID = Sopir::latest()->first();
-        if ($sopirID) {
-            $validatedDataKelengkapan['sopirs_id'] = $sopirID->id + 1;
+        if ($request->foto_ktp && $validatedData['nomor_ktp'] !== null) {
+            $validatedData['kelengkapan_ktp'] = 'lengkap';
         } else {
-            $validatedDataKelengkapan['sopirs_id'] = 1;
+            $validatedData['kelengkapan_ktp'] = 'belum lengkap';
         }
 
-        if (!empty($validatedData['foto_ktp']) && !empty($validatedData['nomor_ktp'])) {
-            $validatedDataKelengkapan['ktp'] = 'lengkap';
+        if ($request->foto_sim && $validatedData['nomor_sim'] !== null) {
+            $validatedData['kelengkapan_sim'] = 'lengkap';
         } else {
-            $validatedDataKelengkapan['ktp'] = 'belum lengkap';
+            $validatedData['kelengkapan_sim'] = 'belum lengkap';
         }
 
-        if (!empty($validatedData['foto_sim']) && !empty($validatedData['nomor_sim'])) {
-            $validatedDataKelengkapan['sim'] = 'lengkap';
+        if ($validatedData['nomor_telepon'] !== null) {
+            $validatedData['kelengkapan_nomor_telepon'] = 'lengkap';
         } else {
-            $validatedDataKelengkapan['sim'] = 'belum lengkap';
-        }
-
-        if (!empty($validatedData['nomor_telepon'])) {
-            $validatedDataKelengkapan['nomor_telepon'] = 'lengkap';
-        } else {
-            $validatedDataKelengkapan['nomor_telepon'] = 'belum lengkap';
+            $validatedData['kelengkapan_nomor_telepon'] = 'belum lengkap';
         }
 
         $sopir = Sopir::create($validatedData);
-        $kelengkapanSopir = KelengkapanSopir::create($validatedDataKelengkapan);
+        $sopirID = Sopir::where('nik', $validatedData['nik'])->first();
+
         $laporan = Laporan::create([
             'penggunas_id' => auth()->user()->id,
-            'relations_id' => $validatedDataKelengkapan['sopirs_id'],
+            'relations_id' => $sopirID->id,
             'kategori_laporan' => 'sopir',
         ]);
 
-        if ($sopir && $kelengkapanSopir && $laporan) {
+        if ($sopir && $laporan) {
             return redirect(route('sopir'))->with('success', 'Berhasil Tambah Sopir!');
         } else {
             return redirect(route('sopir'))->with('failed', 'Gagal Tambah Sopir!');
@@ -111,7 +105,6 @@ class SopirController extends Controller
 
     function update($id, Request $request)
     {
-        return $id;
         $sopir = Sopir::where('id', $id)->first();
         $validatedData = $request->validate([
             'nama' => 'required|string',
@@ -129,7 +122,7 @@ class SopirController extends Controller
             }
 
             $image = $request->file('foto_ktp');
-            $imageName = $validatedData['nik'] . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = $validatedData['nik'] . '-foto' . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('assets/img/ktp-images/'), $imageName);
             $validatedData['foto_ktp'] = $imageName;
         } else {
@@ -150,30 +143,27 @@ class SopirController extends Controller
             $validatedData['foto_sim'] = $sopir->foto_sim;
         }
 
-        if (!empty($validatedData['foto_ktp']) && !empty($validatedData['nomor_ktp'])) {
-            $validatedDataKelengkapan['ktp'] = 'lengkap';
+        if ($validatedData['foto_ktp'] !== null && $validatedData['nomor_ktp'] !== null) {
+            $validatedData['kelengkapan_ktp'] = 'lengkap';
         } else {
-            $validatedDataKelengkapan['ktp'] = 'belum lengkap';
+            $validatedData['kelengkapan_ktp'] = 'belum lengkap';
         }
 
-        if (!empty($validatedData['foto_sim']) && !empty($validatedData['nomor_sim'])) {
-            $validatedDataKelengkapan['sim'] = 'lengkap';
+        if ($validatedData['foto_sim'] !== null && $validatedData['nomor_sim'] !== null) {
+            $validatedData['kelengkapan_sim'] = 'lengkap';
         } else {
-            $validatedDataKelengkapan['sim'] = 'belum lengkap';
+            $validatedData['kelengkapan_sim'] = 'belum lengkap';
         }
 
-        if (!empty($validatedData['nomor_telepon'])) {
-            $validatedDataKelengkapan['nomor_telepon'] = 'lengkap';
+        if ($validatedData['nomor_telepon'] !== null) {
+            $validatedData['kelengkapan_nomor_telepon'] = 'lengkap';
         } else {
-            $validatedDataKelengkapan['nomor_telepon'] = 'belum lengkap';
+            $validatedData['kelengkapan_nomor_telepon'] = 'belum lengkap';
         }
-
-        return KelengkapanSopir::where('sopirs_id', $id)->first();
 
         $sopir = Sopir::where('id', $id)->first()->update($validatedData);
-        $kelengkapanSopir = KelengkapanSopir::where('sopirs_id', $id)->first()->update($validatedDataKelengkapan);
 
-        if ($sopir && $kelengkapanSopir) {
+        if ($sopir) {
             return redirect(route('sopir'))->with('success', 'Berhasil Edit Sopir!');
         } else {
             return redirect(route('sopir'))->with('failed', 'Gagal Edit Sopir!');
@@ -195,9 +185,8 @@ class SopirController extends Controller
         }
 
         $sopir = $sopir->delete();
-        $kelengkapanSopir = KelengkapanSopir::where('sopirs_id', $id)->first()->delete();
 
-        if ($sopir && $kelengkapanSopir) {
+        if ($sopir) {
             return redirect(route('sopir'))->with('success', 'Berhasil Hapus Sopir!');
         } else {
             return redirect(route('sopir'))->with('failed', 'Gagal Hapus Sopir!');

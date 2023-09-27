@@ -50,9 +50,9 @@
                             </div>
                             <div class="col data-value data-length data-length-none">{{ $sopir->alamat }}</div>
                             @if (
-                                $sopir->kelengkapan_sopir->ktp == 'lengkap' &&
-                                    $sopir->kelengkapan_sopir->sim == 'lengkap' &&
-                                    $sopir->kelengkapan_sopir->nomor_telepon == 'lengkap')
+                                $sopir->kelengkapan_ktp == 'lengkap' &&
+                                    $sopir->kelengkapan_sim == 'lengkap' &&
+                                    $sopir->kelengkapan_nomor_telepon == 'lengkap')
                                 <div class="col data-value data-length data-length-none status-true">Lengkap</div>
                             @else
                                 <div class="col data-value data-length data-length-none status-false">Belum Lengkap</div>
