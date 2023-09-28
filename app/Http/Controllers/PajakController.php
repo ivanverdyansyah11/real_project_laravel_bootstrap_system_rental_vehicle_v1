@@ -13,7 +13,7 @@ class PajakController extends Controller
     {
         return view('pajak.index', [
             'title' => 'Pajak',
-            'kendaraans' => Kendaraan::all(),
+            'kendaraans' => Kendaraan::paginate(6),
         ]);
     }
 
@@ -28,7 +28,7 @@ class PajakController extends Controller
             ->orWhere('warna', 'like', '%' . $request->search . '%')
             ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
             ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')
-            ->get();
+            ->paginate(6);
 
         return view('pajak.index', [
             'title' => 'Pajak',

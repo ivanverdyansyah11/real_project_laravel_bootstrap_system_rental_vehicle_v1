@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JenisKendaraan;
 use App\Models\Kendaraan;
 use App\Models\Laporan;
+use App\Models\Pelanggan;
 use App\Models\PelepasanPemesanan;
 use App\Models\PembayaranPemesanan;
 use App\Models\Pengembalian;
@@ -17,7 +18,7 @@ class PengembalianController extends Controller
     {
         return view('pengembalian.index', [
             'title' => 'Pengembalian',
-            'kendaraans' => Kendaraan::where('status', 'dipesan')->with('jenis_kendaraan', 'brand_kendaraan')->get(),
+            'kendaraans' => Kendaraan::where('status', 'dipesan')->with('jenis_kendaraan', 'brand_kendaraan')->paginate(6),
         ]);
     }
 
@@ -32,7 +33,7 @@ class PengembalianController extends Controller
             ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
             ->orWhere('warna', 'like', '%' . $request->search . '%')
             ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')->get();
+            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')->paginate(6);
 
         return view('pengembalian.index', [
             'title' => 'Pengembalian',
@@ -53,16 +54,17 @@ class PengembalianController extends Controller
     public function restorationAction($id, Request $request)
     {
         $pemesanan = PelepasanPemesanan::where('kendaraans_id', $id)->with('kendaraan', 'pemesanan')->latest()->first();
+
         $pembayaran = PembayaranPemesanan::where('kendaraans_id', $id)->with('sopir')->latest()->first();
 
         $jenis_kendaraan = JenisKendaraan::where('nama', "Kendaraan Beroda 4")->first();
         if ($pemesanan->kendaraan->jenis_kendaraans_id == $jenis_kendaraan->id) {
             if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->ban_serep == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-' || $request->ketepatan_waktu == '-') {
-                return redirect(route('pengembalian.restoration', $id))->with('failed', 'Isi Form Input Kelengkapan Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
+                return redirect(route('pengembalian.restoration', $id))->with('failed', 'Isi Form Input Pengembalian Kendaraan Terlebih Dahulu!');
             }
         } else {
             if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-' || $request->ketepatan_waktu == '-') {
-                return redirect(route('pengembalian.restoration', $id))->with('failed', 'Isi Form Input Kelengkapan Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
+                return redirect(route('pengembalian.restoration', $id))->with('failed', 'Isi Form Input Pengembalian Kendaraan Terlebih Dahulu!');
             }
         }
 
@@ -80,7 +82,7 @@ class PengembalianController extends Controller
             'karpet' => 'required|string',
             'kondisi_kendaraan' => 'required|string',
             'biaya_tambahan' => 'nullable|string',
-            'keterangan' => 'nullable|text',
+            'keterangan' => 'nullable|string',
         ]);
 
         $validatedData['pelepasan_pemesanans_id'] = $pemesanan->id;
@@ -133,6 +135,10 @@ class PengembalianController extends Controller
             ]);
         }
 
+        $pelanggan = Pelanggan::where('id', $pemesanan->pemesanan->pelanggans_id)->first()->update([
+            'status' => 'ada',
+        ]);
+
         $pengembalian = Pengembalian::create($validatedData);
         $pengembalianID = Pengembalian::latest()->first();
 
@@ -142,7 +148,7 @@ class PengembalianController extends Controller
             'kategori_laporan' => 'pengembalian',
         ]);
 
-        if ($pengembalian && $kendaraan && $laporan) {
+        if ($pengembalian && $kendaraan && $pelanggan && $laporan) {
             return redirect(route('laporan'))->with('success', 'Berhasil Melakukan Pengembalian Kendaraan!');
         } else {
             return redirect(route('pengembalian'))->with('failed', 'Gagal Melakukan Pengembalian Kendaraan!');

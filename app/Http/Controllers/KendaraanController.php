@@ -22,7 +22,8 @@ class KendaraanController extends Controller
 
     public function search(Request $request)
     {
-        $kendaraans = Kendaraan::where('nama_kendaraan', 'like', '%' . $request->search . '%')
+        $kendaraans = Kendaraan::where('status', 'ready')
+            ->where('nama_kendaraan', 'like', '%' . $request->search . '%')
             ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
             ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
             ->orWhere('tarif_sewa', 'like', '%' . $request->search . '%')
@@ -161,7 +162,7 @@ class KendaraanController extends Controller
         $validatedData['kilometer_saat_ini'] = $request->kilometer;
 
         if ($request->file('foto_kendaraan')) {
-            if ($kendaraan->foto_kendaraan) {
+            if (file_exists(public_path('assets/img/kendaraan-images/') . $kendaraan->foto_kendaraan) && $kendaraan->foto_kendaraan) {
                 $oldImagePath = public_path('assets/img/kendaraan-images/') . $kendaraan->foto_kendaraan;
                 unlink($oldImagePath);
             }
@@ -190,7 +191,7 @@ class KendaraanController extends Controller
         $laporan = Laporan::where('relations_id', $kendaraan->id)->first();
         $laporan = $laporan->delete();
 
-        if ($kendaraan->foto_kendaraan) {
+        if (file_exists(public_path('assets/img/kendaraan-images/') . $kendaraan->foto_kendaraan) && $kendaraan->foto_kendaraan) {
             $imagePath = public_path('assets/img/kendaraan-images/') . $kendaraan->foto_kendaraan;
             unlink($imagePath);
         }

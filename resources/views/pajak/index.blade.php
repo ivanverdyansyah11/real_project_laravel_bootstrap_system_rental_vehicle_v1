@@ -30,27 +30,37 @@
             </div>
         </div>
         <div class="row">
-            @foreach ($kendaraans as $kendaraan)
-                <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                    <div class="card-product">
-                        <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
-                            alt="Car Thumbnail Image" class="img-fluid product-img">
-                        <div class="product-content">
-                            <p class="product-name">{{ $kendaraan->brand_kendaraan->nama }}
-                                {{ $kendaraan->nama_kendaraan }}</p>
-                            <div class="wrapper-other d-flex align-items-center justify-content-between">
-                                <div class="wrapper-tahun d-flex align-items-center">
-                                    <p class="product-year">No. Seri: {{ $kendaraan->seri_kendaraan->nomor_seri }}</p>
-                                </div>
+            @if ($kendaraans->count() == 0)
+                <div class="col-12 text-center mt-5">
+                    <p style="font-size: 0.913rem;">Tidak Ada Data Kendaraan!</p>
+                </div>
+            @else
+                @foreach ($kendaraans as $kendaraan)
+                    <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
+                        <div class="card-product">
+                            <div class="wrapper-img d-flex justify-content-center align-items-center">
+                                <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
+                                    alt="Car Thumbnail Image" class="img-fluid product-img">
                             </div>
-                            <div class="wrapper-button d-flex">
-                                <a href="{{ route('pajak.transaction', $kendaraan->id) }}"
-                                    class="button-primary w-100">Bayar Pajak</a>
+                            <div class="product-content">
+                                <p class="product-name">{{ $kendaraan->nama_kendaraan }}</p>
+                                <div class="wrapper-other d-flex align-items-center justify-content-between">
+                                    <div class="wrapper-tahun d-flex align-items-center">
+                                        <p class="product-year">No. Seri: {{ $kendaraan->seri_kendaraan->nomor_seri }}</p>
+                                    </div>
+                                </div>
+                                <div class="wrapper-button d-flex">
+                                    <a href="{{ route('pajak.transaction', $kendaraan->id) }}"
+                                        class="button-primary w-100">Bayar Pajak</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            @endif
+        </div>
+        <div class="col-12 d-flex justify-content-end mt-4">
+            {{ $kendaraans->links() }}
         </div>
     </div>
 @endsection

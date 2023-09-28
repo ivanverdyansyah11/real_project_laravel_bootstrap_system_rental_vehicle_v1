@@ -6,6 +6,7 @@ use App\Models\Auth;
 use App\Models\BrandKendaraan;
 use App\Models\JenisKendaraan;
 use App\Models\KategoriKilometerKendaraan;
+use App\Models\Laporan;
 use App\Models\Pelanggan;
 use App\Models\SeriKendaraan;
 use App\Models\Sopir;
@@ -47,6 +48,12 @@ class DatabaseSeeder extends Seeder
             'kelengkapan_nomor_telepon' => 'lengkap',
         ]);
 
+        Laporan::create([
+            'penggunas_id' => 1,
+            'relations_id' => 1,
+            'kategori_laporan' => 'pelanggan',
+        ]);
+
         Pelanggan::create([
             'nama' => 'Ayu Saputri',
             'nik' => '3454657568',
@@ -58,6 +65,12 @@ class DatabaseSeeder extends Seeder
             'kelengkapan_ktp' => 'belum lengkap',
             'kelengkapan_kk' => 'belum lengkap',
             'kelengkapan_nomor_telepon' => 'lengkap',
+        ]);
+
+        Laporan::create([
+            'penggunas_id' => 1,
+            'relations_id' => 2,
+            'kategori_laporan' => 'pelanggan',
         ]);
 
         Sopir::create([
@@ -73,6 +86,12 @@ class DatabaseSeeder extends Seeder
             'kelengkapan_nomor_telepon' => 'lengkap',
         ]);
 
+        Laporan::create([
+            'penggunas_id' => 1,
+            'relations_id' => 1,
+            'kategori_laporan' => 'sopir',
+        ]);
+
         Sopir::create([
             'nama' => 'Putri Cindrawati',
             'nik' => '0845345456554',
@@ -84,6 +103,12 @@ class DatabaseSeeder extends Seeder
             'kelengkapan_ktp' => 'belum lengkap',
             'kelengkapan_sim' => 'belum lengkap',
             'kelengkapan_nomor_telepon' => 'lengkap',
+        ]);
+
+        Laporan::create([
+            'penggunas_id' => 1,
+            'relations_id' => 2,
+            'kategori_laporan' => 'sopir',
         ]);
 
         JenisKendaraan::create([

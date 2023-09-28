@@ -13,7 +13,7 @@ class ServisController extends Controller
     {
         return view('servis.index', [
             'title' => 'Servis',
-            'kendaraans' => Kendaraan::where('status', 'servis')->with('jenis_kendaraan', 'brand_kendaraan')->get(),
+            'kendaraans' => Kendaraan::where('status', 'servis')->with('jenis_kendaraan', 'brand_kendaraan')->paginate(6),
         ]);
     }
 
@@ -28,7 +28,7 @@ class ServisController extends Controller
             ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
             ->orWhere('warna', 'like', '%' . $request->search . '%')
             ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')->get();
+            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')->paginate(6);
 
         return view('servis.index', [
             'title' => 'Servis',
@@ -59,7 +59,7 @@ class ServisController extends Controller
             'ban' => 'required|string',
             'oli' => 'required|string',
             'total_bayar' => 'nullable|string',
-            'keterangan' => 'nullable|text',
+            'keterangan' => 'nullable|string',
         ]);
 
         $validatedData['kendaraans_id'] = $id;

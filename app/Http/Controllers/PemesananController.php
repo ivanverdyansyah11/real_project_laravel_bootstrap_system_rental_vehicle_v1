@@ -102,7 +102,7 @@ class PemesananController extends Controller
             'title' => 'Pemesanan',
             'pemesanan' => Pemesanan::where('kendaraans_id', $id)->first(),
             'jenis_kendaraan' => JenisKendaraan::where('nama', "Kendaraan Beroda 4")->first(),
-            'sopirs' => Sopir::all(),
+            'sopirs' => Sopir::where('status', 'ada')->get(),
         ]);
     }
 
@@ -113,11 +113,11 @@ class PemesananController extends Controller
         $jenis_kendaraan = JenisKendaraan::where('nama', "Kendaraan Beroda 4")->first();
         if ($pemesanan->kendaraan->jenis_kendaraans_id == $jenis_kendaraan->id) {
             if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->ban_serep == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-') {
-                return redirect(route('pemesanan'))->with('failed', 'Isi Form Input Kelengkapan Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
+                return redirect(route('pemesanan.release', $id))->with('failed', 'Isi Form Input Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
             }
         } else {
             if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-') {
-                return redirect(route('pemesanan'))->with('failed', 'Isi Form Input Kelengkapan Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
+                return redirect(route('pemesanan.release', $id))->with('failed', 'Isi Form Input Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
             }
         }
 
@@ -141,7 +141,7 @@ class PemesananController extends Controller
             'jenis_pembayaran' => 'required|string',
             'total_bayar' => 'nullable|string',
             'metode_bayar' => 'nullable|string',
-            'keterangan' => 'nullable|text',
+            'keterangan' => 'nullable|string',
         ]);
 
         if (is_string($validatedData['kilometer_keluar'])) {
@@ -156,7 +156,7 @@ class PemesananController extends Controller
             $validatedData['ban_serep'] = $request->ban_serep;
         }
 
-        $validatedData['pemesanans_id'] = $pemesanan->pelanggans_id;
+        $validatedData['pemesanans_id'] = $pemesanan->id;
         $validatedData['kendaraans_id'] = $pemesanan->kendaraans_id;
 
 

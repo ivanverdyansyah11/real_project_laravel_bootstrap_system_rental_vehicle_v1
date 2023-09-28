@@ -47,6 +47,20 @@
                         <div class="row">
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
+                                    <label for="jenis_pembayaran">Jenis Pembayaran Sebelumnya</label>
+                                    <input type="text" id="jenis_pembayaran" class="input" autocomplete="off"
+                                        value="{{ $pembayaran->jenis_pembayaran }}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="total_bayar">Total Bayar Sebelumnya</label>
+                                    <input type="text" id="total_bayar" class="input" autocomplete="off"
+                                        value="{{ $pembayaran->total_bayar ?: '0' }}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
                                     <label>Tanggal Kembali</label>
                                     <input type="date" class="input" autocomplete="off"
                                         value="{{ $pemesanan->tanggal_kembali }}" disabled>
@@ -89,7 +103,7 @@
                                     <label for="total_bayar">Total Bayar</label>
                                     <input type="text" id="total_bayar" class="input" autocomplete="off"
                                         name="total_bayar" value="{{ old('total_bayar') }}" pattern="[0-9]*"
-                                        title="Hanya angka 0-9 diperbolehkan" disabled>
+                                        title="Hanya angka 0-9 diperbolehkan">
                                     @error('total_bayar')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -258,18 +272,8 @@
         const tagCreateTransaction = document.querySelector('.tag-create-transaction');
         const inputCreateTransaction = document.querySelector('.input-create-transaction');
         const buttonCreateTransaction = document.querySelector('.button-create-transaction');
-        const jenisPembayaran = document.querySelector('#jenis_pembayaran');
-        const totalBayar = document.querySelector('#total_bayar');
         const ketepatanWaktu = document.querySelector('#ketepatan_waktu');
         const terlambat = document.querySelector('#terlambat');
-
-        jenisPembayaran.addEventListener('change', function() {
-            if (jenisPembayaran.value == "-" || jenisPembayaran.value == "belum bayar") {
-                totalBayar.setAttribute("disabled", "disabled");
-            } else {
-                totalBayar.removeAttribute("disabled");
-            }
-        });
 
         ketepatanWaktu.addEventListener('change', function() {
             if (ketepatanWaktu.value == "tidak tepat") {
