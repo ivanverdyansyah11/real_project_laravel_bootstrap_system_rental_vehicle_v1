@@ -9,4 +9,9 @@ class Pajak extends Model
 {
     use SoftDeletes;
     protected $guarded = [];
+
+    public function kendaraan()
+    {
+        return $this->belongsTo(Kendaraan::class, 'kendaraans_id');
+    }
 }

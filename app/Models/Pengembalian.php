@@ -9,4 +9,9 @@ class Pengembalian extends Model
 {
     use SoftDeletes;
     protected $guarded = [];
+
+    public function pelepasan_pemesanan()
+    {
+        return $this->belongsTo(PelepasanPemesanan::class, 'pelepasan_pemesanans_id');
+    }
 }

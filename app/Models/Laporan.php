@@ -9,4 +9,9 @@ class Laporan extends Model
 {
     use SoftDeletes;
     protected $guarded = [];
+
+    public function pengguna()
+    {
+        return $this->belongsTo(Auth::class, 'penggunas_id');
+    }
 }
