@@ -15,8 +15,8 @@ class KendaraanController extends Controller
     {
         return view('kendaraan.index', [
             'title' => 'Kendaraan',
-            'kendaraans' => Kendaraan::where('status', 'ready')->with('jenis_kendaraan', 'brand_kendaraan')->get(),
-            'pelanggans' => Pelanggan::all(),
+            'kendaraans' => Kendaraan::where('status', 'ready')->with('jenis_kendaraan', 'brand_kendaraan')->paginate(6),
+            'pelanggans' => Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
         ]);
     }
 
@@ -31,7 +31,7 @@ class KendaraanController extends Controller
             ->orWhere('warna', 'like', '%' . $request->search . '%')
             ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
             ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')
-            ->get();
+            ->paginate(6);
 
         return view('kendaraan.index', [
             'title' => 'Kendaraan',
@@ -74,7 +74,7 @@ class KendaraanController extends Controller
     function store(Request $request)
     {
         if ($request->seri_kendaraans_id == '-' || $request->kategori_kilometer_kendaraans_id == '-') {
-            return redirect(route('kendaraan'))->with('failed', 'Isi Form Input Seri Kendaraan dan Kategori Kilometer Kendaraan Terlebih Dahulu!');
+            return redirect(route('kendaraan.create'))->with('failed', 'Isi Form Input Seri Kendaraan dan Kategori Kilometer Kendaraan Terlebih Dahulu!');
         }
 
         $seri = SeriKendaraan::where('id', $request->seri_kendaraans_id)->first();
@@ -187,6 +187,9 @@ class KendaraanController extends Controller
     {
         $kendaraan = Kendaraan::where('id', $id)->first();
 
+        $laporan = Laporan::where('relations_id', $kendaraan->id)->first();
+        $laporan = $laporan->delete();
+
         if ($kendaraan->foto_kendaraan) {
             $imagePath = public_path('assets/img/kendaraan-images/') . $kendaraan->foto_kendaraan;
             unlink($imagePath);
@@ -194,7 +197,7 @@ class KendaraanController extends Controller
 
         $kendaraan = $kendaraan->delete();
 
-        if ($kendaraan) {
+        if ($kendaraan && $laporan) {
             return redirect(route('kendaraan'))->with('success', 'Berhasil Hapus Kendaraan!');
         } else {
             return redirect(route('kendaraan'))->with('failed', 'Gagal Hapus Kendaraan!');

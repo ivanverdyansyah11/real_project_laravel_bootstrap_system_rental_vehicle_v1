@@ -878,10 +878,16 @@ body {
     border: var(--border-style);
 }
 
+.card-product .wrapper-img {
+    aspect-ratio: 4/2.6;
+    overflow: hidden;
+    border-radius: var(--rounded-sx);
+}
+
 .card-product .product-img {
     width: 100%;
-    border-radius: var(--rounded-sx);
     margin-bottom: var(--rounded-xl);
+    border-radius: var(--rounded-sx);
 }
 
 .card-product .product-name {

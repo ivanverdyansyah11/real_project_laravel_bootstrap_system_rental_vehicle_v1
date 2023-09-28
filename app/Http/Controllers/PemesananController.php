@@ -7,6 +7,7 @@ use App\Models\Kendaraan;
 use Illuminate\Http\Request;
 use App\Models\KelengkapanPemesanan;
 use App\Models\Laporan;
+use App\Models\Pelanggan;
 use App\Models\PelepasanPemesanan;
 use App\Models\PembayaranPemesanan;
 use App\Models\Pemesanan;
@@ -18,7 +19,7 @@ class PemesananController extends Controller
     {
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
-            'kendaraans' => Kendaraan::where('status', 'booking')->with('jenis_kendaraan', 'brand_kendaraan')->get(),
+            'kendaraans' => Kendaraan::where('status', 'booking')->with('jenis_kendaraan', 'brand_kendaraan')->paginate(6),
         ]);
     }
 
@@ -33,7 +34,8 @@ class PemesananController extends Controller
             ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
             ->orWhere('warna', 'like', '%' . $request->search . '%')
             ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')->get();
+            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')
+            ->paginate(6);
 
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
@@ -72,18 +74,22 @@ class PemesananController extends Controller
         }
 
         $pemesanan = Pemesanan::create($validatedData);
-        $kelengkapanPemesanan = KelengkapanPemesanan::create($validatedDataPemesanan);
+        $pemesananID = Pemesanan::latest()->first();
         $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first()->update([
             'status' => 'booking',
         ]);
 
+        $pelanggan = Pelanggan::where('id', $validatedData['pelanggans_id'])->first()->update([
+            'status' => 'tidak ada',
+        ]);
+
         $laporan = Laporan::create([
             'penggunas_id' => auth()->user()->id,
-            'relations_id' => $validatedDataPemesanan['pemesanans_id'],
+            'relations_id' => $pemesananID->id,
             'kategori_laporan' => 'booking',
         ]);
 
-        if ($pemesanan && $kelengkapanPemesanan && $kendaraan && $laporan) {
+        if ($pemesanan && $kendaraan && $pelanggan && $laporan) {
             return redirect(route('pemesanan'))->with('success', 'Berhasil Tambah Pemesanan!');
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Tambah Pemesanan!');
@@ -227,13 +233,21 @@ class PemesananController extends Controller
     public function delete($id)
     {
         $pemesanan = Pemesanan::where('kendaraans_id', $id)->first();
+
+        $pelanggan = Pelanggan::where('id', $pemesanan->pelanggans_id)->first()->update([
+            'status' => 'ada',
+        ]);
+
+        $laporan = Laporan::where('relations_id', $pemesanan->id)->where('kategori_laporan', 'booking')->first();
+        $laporan = $laporan->delete();
+
         $pemesanan = $pemesanan->delete();
 
         $kendaraan = Kendaraan::where('id', $id)->first()->update([
             'status' => 'ready',
         ]);
 
-        if ($kendaraan && $pemesanan) {
+        if ($kendaraan && $pemesanan && $pelanggan && $laporan) {
             return redirect(route('kendaraan'))->with('success', 'Berhasil Hapus Pemesanan Kendaraan!');
         } else {
             return redirect(route('kendaraan'))->with('failed', 'Gagal Hapus Pemesanan Kendaraan!');
