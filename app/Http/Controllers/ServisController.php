@@ -79,7 +79,7 @@ class ServisController extends Controller
         ]);
 
         if ($servis && $kendaraan && $laporan) {
-            return redirect(route('laporan'))->with('success', 'Berhasil Melakukan Servis Kendaraan!');
+            return redirect(route('servis'))->with('success', 'Berhasil Melakukan Servis Kendaraan!');
         } else {
             return redirect(route('servis'))->with('failed', 'Gagal Melakukan Servis Kendaraan!');
         }

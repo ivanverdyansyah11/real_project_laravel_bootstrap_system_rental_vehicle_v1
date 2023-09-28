@@ -15,10 +15,11 @@ class CreatePenambahanSewasTable extends Migration
     {
         Schema::create('penambahan_sewas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kendaraans_id')->references('id')->on('kendaraans');
-            $table->string('jumlah_hari', 3);
-            $table->string('total_biaya', 50);
-            $table->text('keterangan');
+            $table->bigInteger('pelepasan_pemesanans_id')->index();
+            $table->bigInteger('kendaraans_id')->index();
+            $table->string('jumlah_hari');
+            $table->string('total_biaya');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

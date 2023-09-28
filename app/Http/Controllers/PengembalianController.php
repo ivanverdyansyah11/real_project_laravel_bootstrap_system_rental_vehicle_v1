@@ -149,7 +149,7 @@ class PengembalianController extends Controller
         ]);
 
         if ($pengembalian && $kendaraan && $pelanggan && $laporan) {
-            return redirect(route('laporan'))->with('success', 'Berhasil Melakukan Pengembalian Kendaraan!');
+            return redirect(route('pengembalian'))->with('success', 'Berhasil Melakukan Pengembalian Kendaraan!');
         } else {
             return redirect(route('pengembalian'))->with('failed', 'Gagal Melakukan Pengembalian Kendaraan!');
         }

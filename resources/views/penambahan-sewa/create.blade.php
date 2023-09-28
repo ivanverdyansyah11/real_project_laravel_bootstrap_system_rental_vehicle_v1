@@ -22,45 +22,69 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <form class="form d-inline-block w-100">
+                <form class="form d-inline-block w-100" action="{{ route('penambahan.store', $pemesanan->kendaraan->id) }}"
+                    method="POST">
+                    @csrf
                     <div class="row">
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-6 mb-5">
                             <div class="input-wrapper">
-                                <label for="kendaraan">Kendaraan</label>
-                                <input type="text" id="kendaraan" class="input" autocomplete="off" disabled
-                                    value="Honda Brio (Honda)">
+                                <div class="wrapper d-flex gap-3 align-items-end">
+                                    <img src="{{ asset('assets/img/kendaraan-images/' . $pemesanan->kendaraan->foto_kendaraan) }}"
+                                        class="img-fluid tag-create-image" alt="Kendaraan Image" width="80">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tarif">Tarif Sewa</label>
-                                <input type="text" id="tarif" class="input" autocomplete="off" disabled
-                                    value="500.000">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="kendaraan">Kendaraan</label>
+                                    <input type="text" id="kendaraan" class="input" autocomplete="off" disabled
+                                        value="{{ $pemesanan->kendaraan->nama_kendaraan }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="jumlah_hari">Jumlah Hari</label>
-                                <input type="text" id="jumlah_hari" class="input" autocomplete="off">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="tarifSewa">Tarif Sewa</label>
+                                    <input type="text" id="tarifSewa" class="input" autocomplete="off" disabled
+                                        value="{{ $pemesanan->kendaraan->tarif_sewa }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="total_tarif">Total Tarif</label>
-                                <input type="text" id="total_tarif" class="input" autocomplete="off">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="jumlah_hari">Jumlah Hari</label>
+                                    <input type="text" id="jumlah_hari" class="input" autocomplete="off"
+                                        pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan" name="jumlah_hari">
+                                </div>
+                                @error('keterangan')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
-                        </div>
-                        <div class="col-12 row-button">
-                            <div class="input-wrapper">
-                                <label for="total_tarif">Total Tarif</label>
-                                <textarea id="total_tarif" class="input" autocomplete="off" rows="4"></textarea>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="total_biaya">Total Biaya</label>
+                                    <input type="text" id="total_biaya" class="input" autocomplete="off"
+                                        pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan" name="total_biaya">
+                                    @error('keterangan')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="button-wrapper d-flex">
-                                <button type="submit" class="button-primary">Tambah Sewa</button>
-                                <a href="{{ route('penambahanSewa') }}" class="button-reverse">Batal
-                                    Tambah</a>
+                            <div class="col-12 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="keterangan">Keterangan</label>
+                                    <input type="text" id="keterangan" class="input" autocomplete="off"
+                                        name="keterangan">
+                                    @error('keterangan')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="button-wrapper d-flex">
+                                    <button type="submit" class="button-primary">Tambah Sewa</button>
+                                    <a href="{{ route('pengembalian') }}" class="button-reverse">Batal
+                                        Tambah</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -68,4 +92,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const jumlahHari = document.querySelector('#jumlah_hari');
+        const tarifSewa = document.querySelector('#tarifSewa');
+        const totalBiaya = document.querySelector('#total_biaya');
+
+        jumlahHari.addEventListener('change', function() {
+            const jumlahHariValue = parseInt(jumlahHari.value);
+            const tarifSewaValue = parseInt(tarifSewa.value);
+
+            const totalTarifWaktu = jumlahHariValue * tarifSewaValue;
+
+            totalBiaya.value = totalTarifWaktu;
+        });
+    </script>
 @endsection

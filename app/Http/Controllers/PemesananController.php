@@ -90,9 +90,9 @@ class PemesananController extends Controller
         ]);
 
         if ($pemesanan && $kendaraan && $pelanggan && $laporan) {
-            return redirect(route('pemesanan'))->with('success', 'Berhasil Tambah Pemesanan!');
+            return redirect(route('kendaraan'))->with('success', 'Berhasil Tambah Pemesanan!');
         } else {
-            return redirect(route('pemesanan'))->with('failed', 'Gagal Tambah Pemesanan!');
+            return redirect(route('kendaraan'))->with('failed', 'Gagal Tambah Pemesanan!');
         }
     }
 
@@ -102,7 +102,7 @@ class PemesananController extends Controller
             'title' => 'Pemesanan',
             'pemesanan' => Pemesanan::where('kendaraans_id', $id)->first(),
             'jenis_kendaraan' => JenisKendaraan::where('nama', "Kendaraan Beroda 4")->first(),
-            'sopirs' => Sopir::where('status', 'ada')->get(),
+            'sopirs' => Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
         ]);
     }
 
@@ -224,7 +224,7 @@ class PemesananController extends Controller
         ]);
 
         if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan && $laporan) {
-            return redirect(route('laporan'))->with('success', 'Berhasil Melakukan Pelepasan Kendaraan!');
+            return redirect(route('pemesanan'))->with('success', 'Berhasil Melakukan Pelepasan Kendaraan!');
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Melakukan Pelepasan Kendaraan!');
         }

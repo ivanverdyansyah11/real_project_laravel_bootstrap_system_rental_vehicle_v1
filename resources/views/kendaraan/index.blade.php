@@ -52,7 +52,7 @@
                                     <div class="wrapper-tahun d-flex align-items-center">
                                         <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
                                             class="img-fluid kendaraan-icon">
-                                        <p class="product-year">{{ $kendaraan->tanggal_pembelian }}</p>
+                                        <p class="product-year">{{ $kendaraan->tahun_pembuatan }}</p>
                                     </div>
                                     <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa }}</h6>
                                 </div>

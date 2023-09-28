@@ -44,8 +44,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware(['auth', 'owner'])->group(function () {
     // KENDARAAN DISEWA
     Route::controller(PenambahanSewaController::class)->group(function () {
-        Route::get('/kendaraan-disewa/tambah-sewa/{id}', 'create')->name('penambahan.rent');
-        Route::post('/kendaraan-disewa/tambah-sewa/{id}', 'store')->name('penambahan.store');
+        Route::get('/penambahan-sewa/tambah-sewa/{id}', 'create')->name('penambahan.rent');
+        Route::post('/penambahan-sewa/tambah-sewa/{id}', 'store')->name('penambahan.store');
     });
 
     // KENDARAAN

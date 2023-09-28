@@ -63,7 +63,7 @@ class PajakController extends Controller
         ]);
 
         if ($pajak && $laporan) {
-            return redirect(route('laporan'))->with('success', 'Berhasil Tambah Bayar Pajak Kendaraan!');
+            return redirect(route('pajak'))->with('success', 'Berhasil Tambah Bayar Pajak Kendaraan!');
         } else {
             return redirect(route('pajak'))->with('failed', 'Gagal Tambah Bayar Pajak Kendaraan!');
         }
