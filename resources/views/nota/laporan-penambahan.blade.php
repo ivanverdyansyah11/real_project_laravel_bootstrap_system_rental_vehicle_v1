@@ -38,11 +38,6 @@
                             {{ $penambahan->pelepasan_pemesanan->kendaraan->nomor_polisi }}</td>
                     </tr>
                     <tr>
-                        <td scope="col">Tanggal Diambil</td>
-                        <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $penambahan->pelepasan_pemesanan->tanggal_diambil }}</td>
-                    </tr>
-                    <tr>
                         <td scope="col">Tanggal Kembali</td>
                         <td scope="col-1">:</td>
                         <td scope="col" class="text-end">{{ $penambahan->pelepasan_pemesanan->tanggal_kembali }}</td>

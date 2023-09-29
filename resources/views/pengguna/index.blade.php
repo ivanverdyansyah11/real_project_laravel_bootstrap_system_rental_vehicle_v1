@@ -49,28 +49,30 @@
                             <div class="col data-value data-length data-length-none">{{ $pengguna->email }}</div>
                             <div class="col data-value data-length data-length-none text-capitalize">
                                 {{ $pengguna->role }}</div>
-                            <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
-                                <div class="wrapper-action d-flex">
-                                    <button type="button"
-                                        class="button-action button-detail d-flex justify-content-center align-items-center"
-                                        data-bs-toggle="modal" data-bs-target="#detailPenggunaModal"
-                                        data-id="{{ $pengguna->id }}">
-                                        <div class="detail-icon"></div>
-                                    </button>
-                                    <button type="button"
-                                        class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                        data-bs-toggle="modal" data-bs-target="#editPenggunaModal"
-                                        data-id="{{ $pengguna->id }}">
-                                        <div class="edit-icon"></div>
-                                    </button>
-                                    <button type="button"
-                                        class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                        data-bs-toggle="modal" data-bs-target="#hapusPenggunaModal"
-                                        data-id="{{ $pengguna->id }}">
-                                        <div class="delete-icon"></div>
-                                    </button>
+                            @if (auth()->user()->role == 'admin')
+                                <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
+                                    <div class="wrapper-action d-flex">
+                                        <button type="button"
+                                            class="button-action button-detail d-flex justify-content-center align-items-center"
+                                            data-bs-toggle="modal" data-bs-target="#detailPenggunaModal"
+                                            data-id="{{ $pengguna->id }}">
+                                            <div class="detail-icon"></div>
+                                        </button>
+                                        <button type="button"
+                                            class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
+                                            data-bs-toggle="modal" data-bs-target="#editPenggunaModal"
+                                            data-id="{{ $pengguna->id }}">
+                                            <div class="edit-icon"></div>
+                                        </button>
+                                        <button type="button"
+                                            class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
+                                            data-bs-toggle="modal" data-bs-target="#hapusPenggunaModal"
+                                            data-id="{{ $pengguna->id }}">
+                                            <div class="delete-icon"></div>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 @endforeach
