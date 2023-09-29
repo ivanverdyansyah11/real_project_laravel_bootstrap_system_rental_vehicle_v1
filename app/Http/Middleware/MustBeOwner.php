@@ -16,7 +16,7 @@ class MustBeOwner
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->role === 'admin' || auth()->user()->role === 'owner') {
+        if (auth()->user()->role === 'admin') {
             return $next($request);
         }
         abort(403);

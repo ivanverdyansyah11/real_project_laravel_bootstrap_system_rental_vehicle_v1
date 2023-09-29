@@ -55,8 +55,10 @@
                                 <div class="wrapper-button d-flex flex-column">
                                     <a href="{{ route('pengembalian.restoration', $kendaraan->id) }}"
                                         class="button-primary w-100">Pengembalian</a>
-                                    <a href="{{ route('penambahan.rent', $kendaraan->id) }}"
-                                        class="button-primary-blur w-100">Penambahan Sewa</a>
+                                    @if (auth()->user()->role == 'admin')
+                                        <a href="{{ route('penambahan.rent', $kendaraan->id) }}"
+                                            class="button-primary-blur w-100">Penambahan Sewa</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
