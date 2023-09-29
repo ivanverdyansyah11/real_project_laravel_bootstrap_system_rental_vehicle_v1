@@ -7,6 +7,7 @@ use App\Models\Laporan;
 use App\Models\Pelanggan;
 use App\Models\PelepasanPemesanan;
 use App\Models\Pemesanan;
+use App\Models\Pengembalian;
 use App\Models\Sopir;
 use Illuminate\Http\Request;
 
@@ -60,6 +61,12 @@ class LaporanController extends Controller
                 'title' => 'Nota Pemesanan',
                 'laporan' => $laporan,
                 'pemesanan' => PelepasanPemesanan::where('id', $laporan->relations_id)->with('kendaraan', 'pemesanan', 'pembayaran_pemesanan')->first(),
+            ]);
+        } elseif ($laporan->kategori_laporan == 'pengembalian') {
+            return view('nota.laporan-pengembalian', [
+                'title' => 'Nota Pengembalian',
+                'laporan' => $laporan,
+                'pengembalian' => Pengembalian::where('id', $laporan->relations_id)->with('pelepasan_pemesanan')->first(),
             ]);
         }
     }

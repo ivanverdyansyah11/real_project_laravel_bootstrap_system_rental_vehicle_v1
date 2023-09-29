@@ -124,11 +124,13 @@
                                 <td scope="col-1">:</td>
                                 <td scope="col" class="text-end">{{ $pemesanan->kondisi_kendaraan }}</td>
                             </tr>
-                            <tr>
-                                <td scope="col">Ban Serep</td>
-                                <td scope="col-1">:</td>
-                                <td scope="col" class="text-end">{{ $pemesanan->ban_serep ?: 'kosong' }}</td>
-                            </tr>
+                            @if ($pemesanan->ban_serep)
+                                <tr>
+                                    <td scope="col">Ban Serep</td>
+                                    <td scope="col-1">:</td>
+                                    <td scope="col" class="text-end">{{ $pemesanan->ban_serep }}</td>
+                                </tr>
+                            @endif
                         </table>
                     </div>
                 </div>
