@@ -17,7 +17,7 @@
                     <div class="card-caption">
                         <p class="caption-name">Kendaraan Terdaftar</p>
                         <h4 class="caption-value">{{ $kendaraan->count() }}</h4>
-                    </div>
+                    </div> 
                     <div class="wrapper-icon d-flex justify-content-center align-items-center">
                         <img src="{{ asset('assets/img/dashboard/stok.svg') }}" class="img-fluid dashboard-img"
                             alt="Stok Kendaraan Icon" width="18">

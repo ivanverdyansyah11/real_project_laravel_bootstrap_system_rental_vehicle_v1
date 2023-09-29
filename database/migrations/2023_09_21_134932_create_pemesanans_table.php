@@ -16,7 +16,7 @@ class CreatePemesanansTable extends Migration
         Schema::create('pemesanans', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('pelanggans_id')->index();
-            $table->bigInteger('kendaraans_id')->index();
+            $table->bigInteger('jenis_kendaraans_id')->index();
             $table->date('tanggal_booking');
             $table->timestamps();
             $table->softDeletes();

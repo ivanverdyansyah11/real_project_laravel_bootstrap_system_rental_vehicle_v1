@@ -48,7 +48,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="stnk_nama">STNK Atas Nama</label>
-                                        <input type="text" id="stnk_nama" class="input" autocomplete="off" name="stnk_nama">
+                                        <input type="text" id="stnk_nama" class="input" autocomplete="off"
+                                            name="stnk_nama">
                                         @error('stnk_nama')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -81,7 +82,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="seriData">Nomor Seri</label>
-                                        <select id="seriData" class="input" name="seri_kendaraans_id" data-target="#seriData">
+                                        <select id="seriData" class="input" name="seri_kendaraans_id"
+                                            data-target="#seriData">
                                             <option value="-">Pilih nomor seri kendaraan</option>
                                             @foreach ($series as $seri)
                                                 <option value="{{ $seri->id }}">{{ $seri->nomor_seri }}</option>
@@ -128,10 +130,33 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="tarif_sewa">Tarif Sewa</label>
-                                        <input type="text" id="tarif_sewa" class="input" autocomplete="off"
-                                            name="tarif_sewa" pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
-                                        @error('tarif_sewa')
+                                        <label for="tarif_sewa_hari">Tarif Sewa Harian</label>
+                                        <input type="text" id="tarif_sewa_hari" class="input" autocomplete="off"
+                                            name="tarif_sewa_hari" pattern="[0-9]*"
+                                            title="Hanya angka 0-9 diperbolehkan">
+                                        @error('tarif_sewa_hari')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="tarif_sewa_minggu">Tarif Sewa Mingguan</label>
+                                        <input type="text" id="tarif_sewa_minggu" class="input" autocomplete="off"
+                                            name="tarif_sewa_minggu" pattern="[0-9]*"
+                                            title="Hanya angka 0-9 diperbolehkan">
+                                        @error('tarif_sewa_minggu')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="tarif_sewa_bulan">Tarif Sewa Bulanan</label>
+                                        <input type="text" id="tarif_sewa_bulan" class="input" autocomplete="off"
+                                            name="tarif_sewa_bulan" pattern="[0-9]*"
+                                            title="Hanya angka 0-9 diperbolehkan">
+                                        @error('tarif_sewa_bulan')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>

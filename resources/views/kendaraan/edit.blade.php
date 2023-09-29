@@ -135,11 +135,33 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="tarif_sewa">Tarif Sewa</label>
-                                        <input type="text" id="tarif_sewa" class="input" autocomplete="off"
-                                            value="{{ $kendaraan->tarif_sewa }}" name="tarif_sewa" pattern="[0-9]*"
-                                            title="Hanya angka 0-9 diperbolehkan">
-                                        @error('tarif_sewa')
+                                        <label for="tarif_sewa_hari">Tarif Sewa Harian</label>
+                                        <input type="text" id="tarif_sewa_hari" class="input" autocomplete="off"
+                                            value="{{ $kendaraan->tarif_sewa_hari }}" name="tarif_sewa_hari"
+                                            pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
+                                        @error('tarif_sewa_hari')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="tarif_sewa_minggu">Tarif Sewa Mingguan</label>
+                                        <input type="text" id="tarif_sewa_minggu" class="input" autocomplete="off"
+                                            value="{{ $kendaraan->tarif_sewa_minggu }}" name="tarif_sewa_minggu"
+                                            pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
+                                        @error('tarif_sewa_minggu')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="tarif_sewa_bulan">Tarif Sewa Bulanan</label>
+                                        <input type="text" id="tarif_sewa_bulan" class="input" autocomplete="off"
+                                            value="{{ $kendaraan->tarif_sewa_bulan }}" name="tarif_sewa_bulan"
+                                            pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
+                                        @error('tarif_sewa_bulan')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -159,7 +181,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="tanggal_pembelian">Tanggal Pembelian</label>
-                                        <input type="text" id="tanggal_pembelian" class="input" autocomplete="off"
+                                        <input type="date" id="tanggal_pembelian" class="input" autocomplete="off"
                                             value="{{ $kendaraan->tanggal_pembelian }}" name="tanggal_pembelian">
                                         @error('tanggal_pembelian')
                                             <p class="caption-error mt-2">{{ $message }}</p>

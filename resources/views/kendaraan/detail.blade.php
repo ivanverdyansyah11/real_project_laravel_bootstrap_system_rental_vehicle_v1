@@ -103,9 +103,23 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="tarif_sewa">Tarif Sewa</label>
-                                        <input type="text" id="tarif_sewa" class="input" autocomplete="off" disabled
-                                            value="{{ $kendaraan->tarif_sewa }}">
+                                        <label for="tarif_sewa_hari">Tarif Sewa Harian</label>
+                                        <input type="text" id="tarif_sewa_hari" class="input" autocomplete="off"
+                                            disabled value="{{ $kendaraan->tarif_sewa_hari }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="tarif_sewa_minggu">Tarif Sewa Mingguan</label>
+                                        <input type="text" id="tarif_sewa_minggu" class="input" autocomplete="off"
+                                            disabled value="{{ $kendaraan->tarif_sewa_minggu }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="tarif_sewa_bulan">Tarif Sewa Bulanan</label>
+                                        <input type="text" id="tarif_sewa_bulan" class="input" autocomplete="off"
+                                            disabled value="{{ $kendaraan->tarif_sewa_bulan }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">

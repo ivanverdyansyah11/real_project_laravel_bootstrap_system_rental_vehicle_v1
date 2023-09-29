@@ -25,7 +25,9 @@ class CreateKendaraansTable extends Migration
             $table->string('nomor_polisi');
             $table->string('kilometer');
             $table->string('kilometer_saat_ini');
-            $table->string('tarif_sewa');
+            $table->string('tarif_sewa_hari');
+            $table->string('tarif_sewa_minggu');
+            $table->string('tarif_sewa_bulan');
             $table->string('tahun_pembuatan');
             $table->date('tanggal_pembelian');
             $table->string('warna');

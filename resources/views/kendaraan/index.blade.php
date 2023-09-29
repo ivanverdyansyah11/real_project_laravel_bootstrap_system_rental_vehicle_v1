@@ -54,7 +54,7 @@
                                             class="img-fluid kendaraan-icon">
                                         <p class="product-year">{{ $kendaraan->tahun_pembuatan }}</p>
                                     </div>
-                                    <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa }}</h6>
+                                    <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa_hari }}</h6>
                                 </div>
                                 <div class="wrapper-button d-flex">
                                     <button type="button" class="button-primary w-100" data-bs-toggle="modal"
@@ -82,7 +82,6 @@
                 <h3 class="title">Booking Kendaraan</h3>
                 <form class="form d-inline-block w-100" method="POST" action="{{ route('pemesanan.booking') }}">
                     @csrf
-                    <input type="hidden" name="kendaraans_id" data-value="kendaraans_id">
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
@@ -94,6 +93,20 @@
                                     @endforeach
                                 </select>
                                 @error('pelanggans_id')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="input-wrapper">
+                                <label for="jenis_kendaraan">Jenis Kendaraan</label>
+                                <select id="jenis_kendaraan" class="input" name="jenis_kendaraans_id">
+                                    <option value="-">Pilih jenis kendaraan</option>
+                                    @foreach ($jenises as $jenis)
+                                        <option value="{{ $jenis->id }}">{{ $jenis->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('jenis_kendaraans_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
                             </div>

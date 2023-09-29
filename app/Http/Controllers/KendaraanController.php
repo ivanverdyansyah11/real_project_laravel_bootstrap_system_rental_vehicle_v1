@@ -15,7 +15,7 @@ class KendaraanController extends Controller
     {
         return view('kendaraan.index', [
             'title' => 'Kendaraan',
-            'kendaraans' => Kendaraan::where('status', 'ready')->with('jenis_kendaraan', 'brand_kendaraan')->paginate(6),
+            'kendaraans' => Kendaraan::with('jenis_kendaraan', 'brand_kendaraan')->paginate(6),
             'pelanggans' => Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
         ]);
     }
@@ -26,7 +26,9 @@ class KendaraanController extends Controller
             ->where('nama_kendaraan', 'like', '%' . $request->search . '%')
             ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
             ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa_hari', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa_minggu', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa_bulan', 'like', '%' . $request->search . '%')
             ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
             ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
             ->orWhere('warna', 'like', '%' . $request->search . '%')
@@ -90,7 +92,9 @@ class KendaraanController extends Controller
             'nama_kendaraan' => 'required|string|max:255',
             'nomor_polisi' => 'required|string|max:255',
             'kilometer' => 'required|string|max:255',
-            'tarif_sewa' => 'required|string|max:255',
+            'tarif_sewa_hari' => 'required|string|max:255',
+            'tarif_sewa_minggu' => 'required|string|max:255',
+            'tarif_sewa_bulan' => 'required|string|max:255',
             'tahun_pembuatan' => 'required|string|max:255',
             'tanggal_pembelian' => 'required|date',
             'warna' => 'required|string|max:255',
@@ -143,6 +147,10 @@ class KendaraanController extends Controller
     function update($id, Request $request)
     {
         $kendaraan = Kendaraan::where('id', $id)->first();
+        SeriKendaraan::where('id', $kendaraan->seri_kendaraans_id)->first()->update([
+            'status' => 'ada',
+        ]);
+
         $seri = SeriKendaraan::where('id', $request->seri_kendaraans_id)->first();
         $jenis_kendaraans_id = $seri->jenis_kendaraans_id;
         $brand_kendaraans_id = $seri->brand_kendaraans_id;
@@ -153,7 +161,9 @@ class KendaraanController extends Controller
             'stnk_nama' => 'required|string|max:255',
             'nama_kendaraan' => 'required|string|max:255',
             'nomor_polisi' => 'required|string|max:255',
-            'tarif_sewa' => 'required|string|max:255',
+            'tarif_sewa_hari' => 'required|string|max:255',
+            'tarif_sewa_minggu' => 'required|string|max:255',
+            'tarif_sewa_bulan' => 'required|string|max:255',
             'tahun_pembuatan' => 'required|string|max:255',
             'tanggal_pembelian' => 'required|date',
             'warna' => 'required|string|max:255',
@@ -179,9 +189,13 @@ class KendaraanController extends Controller
             $validatedData['foto_kendaraan'] = $kendaraan->foto_kendaraan;
         }
 
+        $seriKendaraan = SeriKendaraan::where('id', $validatedData['seri_kendaraans_id'])->first()->update([
+            'status' => 'tidak ada',
+        ]);
+
         $kendaraan = Kendaraan::where('id', $id)->first()->update($validatedData);
 
-        if ($kendaraan) {
+        if ($kendaraan && $seriKendaraan) {
             return redirect(route('kendaraan'))->with('success', 'Berhasil Edit Kendaraan!');
         } else {
             return redirect(route('kendaraan'))->with('failed', 'Gagal Edit Kendaraan!');
