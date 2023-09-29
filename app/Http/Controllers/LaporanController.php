@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kendaraan;
 use App\Models\Laporan;
+use App\Models\Pajak;
 use App\Models\Pelanggan;
 use App\Models\PelepasanPemesanan;
 use App\Models\Pemesanan;
@@ -81,6 +82,12 @@ class LaporanController extends Controller
                 'title' => 'Nota Servis',
                 'laporan' => $laporan,
                 'servis' => Servis::where('id', $laporan->relations_id)->with('kendaraan')->first(),
+            ]);
+        } elseif ($laporan->kategori_laporan == 'pajak') {
+            return view('nota.laporan-pajak', [
+                'title' => 'Nota Pajak',
+                'laporan' => $laporan,
+                'pajak' => Pajak::where('id', $laporan->relations_id)->with('kendaraan')->first(),
             ]);
         }
     }
