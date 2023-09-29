@@ -53,7 +53,10 @@
                                     alt="Car Thumbnail Image" class="img-fluid product-img">
                             </div>
                             <div class="product-content">
-                                <p class="product-name">{{ $kendaraan->nama_kendaraan }}</p>
+                                <div class="wrapper d-flex align-items-center justify-content-between">
+                                    <p class="product-name">{{ $kendaraan->nama_kendaraan }}</p>
+                                    <p class="status-true text-capitalize">{{ $kendaraan->status }}</p>
+                                </div>
                                 <div class="wrapper-other d-flex align-items-center justify-content-between">
                                     <div class="wrapper-tahun d-flex align-items-center">
                                         <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
@@ -62,9 +65,14 @@
                                     </div>
                                     <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa_hari }}</h6>
                                 </div>
-                                <div class="wrapper-button d-flex">
+                                <div class="wrapper-button d-flex flex-column">
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#bookingKendaraanModal"
                                         data-id="{{ $kendaraan->id }}" class="button-primary w-100">Booking</button>
+                                    @if ($kendaraan->status == 'booking')
+                                        <a href="{{ route('pemesanan.search.booking', $kendaraan->id) }}" class="button-primary-blur w-100">Lihat Penyewa</a>
+                                    @else
+                                        <button type="button" class="button-primary-blur w-100">Belum Dibooking</button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -85,7 +93,7 @@
                 <h3 class="title">Booking Kendaraan</h3>
                 <form class="form d-inline-block w-100" method="POST" action="{{ route('booking') }}">
                     @csrf
-                    <input type="text" data-value="kendaraans_id" name="kendaraans_id">
+                    <input type="hidden" data-value="kendaraans_id" name="kendaraans_id">
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">

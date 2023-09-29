@@ -882,17 +882,18 @@ body {
     aspect-ratio: 4/2.6;
     overflow: hidden;
     border-radius: var(--rounded-sx);
+    margin-bottom: var(--rounded-xl);
 }
 
 .card-product .product-img {
     width: 100%;
-    margin-bottom: var(--rounded-xl);
     border-radius: var(--rounded-sx);
 }
 
 .card-product .product-name {
     -webkit-line-clamp: 1;
     overflow: hidden;
+    margin-bottom: 8px;
     display: -webkit-box !important;
     -webkit-box-orient: vertical;
     margin-bottom: var(--rounded-sx) !important;
@@ -976,6 +977,7 @@ body {
 .card-product .status-true,
 .card-product .status-false {
     font-size: 0.875rem;
+    margin-bottom: 8px;
 }
 
 .card-product .status-false,

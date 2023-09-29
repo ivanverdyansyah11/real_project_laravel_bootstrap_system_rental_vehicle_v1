@@ -174,10 +174,9 @@ Route::middleware('auth')->group(function () {
     Route::controller(PemesananController::class)->group(function () {
         Route::get('/pemesanan', 'index')->name('pemesanan');
         Route::post('/pemesanan/cari', 'search')->name('pemesanan.search');
-
+        Route::get('/pemesanan/{id}', 'searchBooking')->name('pemesanan.search.booking');
         Route::get('/pemesanan/release/{id}', 'release')->name('pemesanan.release');
         Route::post('/pemesanan/release/{id}', 'releaseAction')->name('pemesanan.release.action');
-
         Route::post('/pemesanan/hapus/{id}', 'delete')->name('pemesanan.delete');
     });
 

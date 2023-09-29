@@ -15,7 +15,7 @@
                         <p>Dashboard</p>
                     </div>
                 </a>
-                @if (auth()->user()->role === 'owner' || auth()->user()->role === 'admin')
+                @if (auth()->user()->role === 'admin')
                     <a href="{{ route('pelanggan') }}"
                         class="menu-link d-flex flex-column {{ Request::is('pelanggan*') ? 'active' : '' }}">
                         <div class="link-item d-flex align-items-center">
@@ -56,7 +56,7 @@
                     </div>
                 @endif
                 <a href="{{ route('booking') }}"
-                    class="menu-link d-flex flex-column {{ Request::is('booking*') || Request::is('pemesanan*') ? 'active' : 'd-none' }}">
+                    class="menu-link d-flex flex-column {{ Request::is('booking*') || Request::is('pemesanan*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
                         <div class="icon-sidebar-wrapper">
                             <div class="sidebar-icon pemesanan-icon"></div>
@@ -78,7 +78,7 @@
                         <p>Pengembalian</p>
                     </div>
                 </a>
-                @if (auth()->user()->role === 'owner' || auth()->user()->role === 'admin')
+                @if (auth()->user()->role === 'admin')
                     <a href="{{ route('servis') }}"
                         class="menu-link d-flex flex-column {{ Request::is('servis*') || Request::is('kategori-servis*') ? 'active' : '' }}">
                         <div class="link-item d-flex align-items-center">

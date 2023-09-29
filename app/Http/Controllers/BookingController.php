@@ -44,7 +44,7 @@ class BookingController extends Controller
     function booking(Request $request)
     {
         if ($request->pelanggans_id == '-') {
-            return redirect(route('kendaraan'))->with('failed', 'Isi Form Input Pelanggan Terlebih Dahulu!');
+            return redirect(route('booking'))->with('failed', 'Isi Form Input Pelanggan Terlebih Dahulu!');
         }
 
         $validatedData = $request->validate([
@@ -64,6 +64,9 @@ class BookingController extends Controller
 
         $pemesanan = Pemesanan::create($validatedData);
         $pemesananID = Pemesanan::latest()->first();
+        $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first()->update([
+            'status' => 'booking',
+        ]);
 
         $pelanggan = Pelanggan::where('id', $validatedData['pelanggans_id'])->first()->update([
             'status' => 'tidak ada',
@@ -75,10 +78,10 @@ class BookingController extends Controller
             'kategori_laporan' => 'booking',
         ]);
 
-        if ($pemesanan && $pelanggan && $laporan) {
-            return redirect(route('kendaraan'))->with('success', 'Berhasil Tambah Pemesanan!');
+        if ($pemesanan && $kendaraan && $pelanggan && $laporan) {
+            return redirect(route('booking'))->with('success', 'Berhasil Booking Kendaraan!');
         } else {
-            return redirect(route('kendaraan'))->with('failed', 'Gagal Tambah Pemesanan!');
+            return redirect(route('booking'))->with('failed', 'Gagal Booking Kendaraan!');
         }
     }
 }
