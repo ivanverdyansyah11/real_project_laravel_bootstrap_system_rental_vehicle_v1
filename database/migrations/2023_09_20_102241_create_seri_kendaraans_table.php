@@ -18,6 +18,7 @@ class CreateSeriKendaraansTable extends Migration
             $table->bigInteger('jenis_kendaraans_id')->index();
             $table->bigInteger('brand_kendaraans_id')->index();
             $table->string('nomor_seri');
+            $table->enum('status', ['ada', 'tidak ada']);
             $table->timestamps();
             $table->softDeletes();
         });

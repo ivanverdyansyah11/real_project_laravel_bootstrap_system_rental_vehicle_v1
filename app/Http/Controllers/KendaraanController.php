@@ -61,7 +61,7 @@ class KendaraanController extends Controller
     {
         return view('kendaraan.create', [
             'title' => 'Kendaraan',
-            'series' => SeriKendaraan::all(),
+            'series' => SeriKendaraan::where('status', 'ada')->get(),
             'kilometers' => KategoriKilometerKendaraan::all(),
         ]);
     }
@@ -83,8 +83,8 @@ class KendaraanController extends Controller
         $brand_kendaraans_id = $seri->brand_kendaraans_id;
 
         $validatedData = $request->validate([
-            'seri_kendaraans_id' => 'required|integer',
-            'kategori_kilometer_kendaraans_id' => 'required|integer',
+            'seri_kendaraans_id' => 'required|string',
+            'kategori_kilometer_kendaraans_id' => 'required|string',
             'foto_kendaraan' => 'required|image|max:2048',
             'stnk_nama' => 'required|string|max:255',
             'nama_kendaraan' => 'required|string|max:255',
@@ -110,6 +110,10 @@ class KendaraanController extends Controller
             $validatedData['foto_kendaraan'] = $imageName;
         }
 
+        $seriKendaraan = SeriKendaraan::where('id', $validatedData['seri_kendaraans_id'])->first()->update([
+            'status' => 'tidak ada',
+        ]);
+
         $kendaraan = Kendaraan::create($validatedData);
         $kendaraanID = Kendaraan::latest()->first();
 
@@ -119,7 +123,7 @@ class KendaraanController extends Controller
             'kategori_laporan' => 'kendaraan',
         ]);
 
-        if ($kendaraan && $laporan) {
+        if ($kendaraan && $seriKendaraan && $laporan) {
             return redirect(route('kendaraan'))->with('success', 'Berhasil Tambah Kendaraan!');
         } else {
             return redirect(route('kendaraan'))->with('failed', 'Gagal Tambah Kendaraan!');
@@ -144,8 +148,8 @@ class KendaraanController extends Controller
         $brand_kendaraans_id = $seri->brand_kendaraans_id;
 
         $validatedData = $request->validate([
-            'seri_kendaraans_id' => 'required|integer',
-            'kategori_kilometer_kendaraans_id' => 'required|integer',
+            'seri_kendaraans_id' => 'required|string',
+            'kategori_kilometer_kendaraans_id' => 'required|string',
             'stnk_nama' => 'required|string|max:255',
             'nama_kendaraan' => 'required|string|max:255',
             'nomor_polisi' => 'required|string|max:255',
@@ -190,6 +194,9 @@ class KendaraanController extends Controller
 
         $laporan = Laporan::where('relations_id', $kendaraan->id)->first();
         $laporan = $laporan->delete();
+        $seriKendaraan = SeriKendaraan::where('id', $kendaraan->seri_kendaraans_id)->first()->update([
+            'status' => 'ada',
+        ]);
 
         if (file_exists(public_path('assets/img/kendaraan-images/') . $kendaraan->foto_kendaraan) && $kendaraan->foto_kendaraan) {
             $imagePath = public_path('assets/img/kendaraan-images/') . $kendaraan->foto_kendaraan;
@@ -198,7 +205,7 @@ class KendaraanController extends Controller
 
         $kendaraan = $kendaraan->delete();
 
-        if ($kendaraan && $laporan) {
+        if ($kendaraan && $seriKendaraan && $laporan) {
             return redirect(route('kendaraan'))->with('success', 'Berhasil Hapus Kendaraan!');
         } else {
             return redirect(route('kendaraan'))->with('failed', 'Gagal Hapus Kendaraan!');
