@@ -183,6 +183,6 @@ Route::middleware('auth')->group(function () {
     // LAPORAN
     Route::controller(LaporanController::class)->group(function () {
         Route::get('/laporan', 'index')->name('laporan');
-        Route::get('/laporan/detail/{id}', 'detail')->name('laporan.detail');
+        Route::get('/laporan/nota/{id}', 'nota')->name('laporan.nota');
     });
 });

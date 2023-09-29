@@ -994,6 +994,33 @@ body {
     font-family: var(--urbanist-medium);
     margin-bottom: 0 !important;
 }
+
+.report-nota .nota-paper {
+    border: var(--border-style);
+    padding: 46px 64px;
+}
+
+.report-nota .paragraph,
+.report-nota td {
+    font-size: 0.913rem;
+}
+
+.report-nota td {
+    padding: 10px;
+}
+
+.report-nota .title {
+    font-size: 1.25rem;
+    font-family: var(--urbanist-semibold);
+    margin: 46px 0 24px 0;
+}
+
+.report-nota .copyright {
+    font-size: 0.913rem;
+    margin-top: 46px;
+    text-align: center;
+    color: rgba(var(--dark-color), 0.52);
+}
 /* END CONTENT STYLE */
 
 
@@ -1022,6 +1049,12 @@ body {
 @media (max-width: 991.98px) {
     .table-default .data-value.data-length.data-length-none {
         display: none !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .report-nota .nota-paper {
+        padding: 32px 24px;
     }
 }
 /* END BREAKPOINT STYLE */

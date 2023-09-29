@@ -19,4 +19,9 @@ class PelepasanPemesanan extends Model
     {
         return $this->belongsTo(Pemesanan::class, 'pemesanans_id');
     }
+
+    public function pembayaran_pemesanan()
+    {
+        return $this->belongsTo(PembayaranPemesanan::class, 'id');
+    }
 }
