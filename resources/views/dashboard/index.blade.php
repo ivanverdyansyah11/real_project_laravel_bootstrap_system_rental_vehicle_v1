@@ -15,7 +15,7 @@
             <div class="col-md-4 mb-4 mb-md-0">
                 <div class="card-default d-flex align-items-start justify-content-between">
                     <div class="card-caption">
-                        <p class="caption-name">Stok Kendaraan</p>
+                        <p class="caption-name">Kendaraan Terdaftar</p>
                         <h4 class="caption-value">23</h4>
                     </div>
                     <div class="wrapper-icon d-flex justify-content-center align-items-center">
@@ -27,24 +27,24 @@
             <div class="col-md-4 mb-4 mb-md-0">
                 <div class="card-default d-flex align-items-start justify-content-between">
                     <div class="card-caption">
-                        <p class="caption-name">Kendaraan Keluar</p>
+                        <p class="caption-name">Pelanggan Terdaftar</p>
                         <h4 class="caption-value">07</h4>
                     </div>
                     <div class="wrapper-icon d-flex justify-content-center align-items-center">
-                        <img src="{{ asset('assets/img/dashboard/kendaraan.svg') }}" class="img-fluid dashboard-img"
-                            alt="Kendaraan Icon" width="18">
+                        <img src="{{ asset('assets/img/dashboard/pelanggan.svg') }}" class="img-fluid dashboard-img"
+                            alt="Pelanggan Icon" width="18">
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card-default d-flex align-items-start justify-content-between">
                     <div class="card-caption">
-                        <p class="caption-name">Kendaraan Masuk</p>
+                        <p class="caption-name">Sopir Terdaftar</p>
                         <h4 class="caption-value">23</h4>
                     </div>
                     <div class="wrapper-icon d-flex justify-content-center align-items-center">
-                        <img src="{{ asset('assets/img/dashboard/kendaraan.svg') }}" class="img-fluid dashboard-img"
-                            alt="Kendaraan Icon" width="18">
+                        <img src="{{ asset('assets/img/dashboard/pelanggan.svg') }}" class="img-fluid dashboard-img"
+                            alt="Sopir Icon" width="18">
                     </div>
                 </div>
             </div>
@@ -55,15 +55,31 @@
                     class="card-default card-other w-100 d-flex flex-column align-items-start justify-content-between mb-4 mb-4 me-md-4 me-lg-0">
                     <div class="wrapper d-flex justify-content-between w-100">
                         <div class="wrapper-icon d-flex justify-content-center align-items-center">
-                            <img src="{{ asset('assets/img/dashboard/oli.svg') }}" class="img-fluid dashboard-img"
-                                alt="Oli Icon" width="18">
+                            <img src="{{ asset('assets/img/dashboard/kendaraan.svg') }}" class="img-fluid dashboard-img"
+                                alt="Kendaraan Icon" width="18">
                         </div>
                         @if (auth()->user()->role === 'owner' || auth()->user()->role === 'admin')
-                            <a href="" class="link-dashboard">Lihat Kendaraan</a>
+                            <a href="{{ route('pemesanan') }}" class="link-dashboard">Lihat Kendaraan</a>
                         @endif
                     </div>
                     <div class="card-caption">
-                        <p class="caption-name">Pergantian Oli</p>
+                        <p class="caption-name">Kendaraan Dibooking</p>
+                        <h4 class="caption-value">04 <span>Kendaraan</span></h4>
+                    </div>
+                </div>
+                <div
+                    class="card-default card-other w-100 d-flex flex-column align-items-start justify-content-between mb-4 mb-4 me-md-4 me-lg-0">
+                    <div class="wrapper d-flex justify-content-between w-100">
+                        <div class="wrapper-icon d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/dashboard/kendaraan.svg') }}" class="img-fluid dashboard-img"
+                                alt="Kendaraan Icon" width="18">
+                        </div>
+                        @if (auth()->user()->role === 'owner' || auth()->user()->role === 'admin')
+                            <a href="{{ route('pengembalian') }}" class="link-dashboard">Lihat Kendaraan</a>
+                        @endif
+                    </div>
+                    <div class="card-caption">
+                        <p class="caption-name">Kendaraan Dipesan</p>
                         <h4 class="caption-value">04 <span>Kendaraan</span></h4>
                     </div>
                 </div>
@@ -74,11 +90,11 @@
                                 alt="Servis Icon" width="18">
                         </div>
                         @if (auth()->user()->role === 'owner' || auth()->user()->role === 'admin')
-                            <a href="" class="link-dashboard">Lihat Kendaraan</a>
+                            <a href="{{ route('servis') }}" class="link-dashboard">Lihat Kendaraan</a>
                         @endif
                     </div>
                     <div class="card-caption">
-                        <p class="caption-name">Waktu Service</p>
+                        <p class="caption-name">Kendaraan Diservis</p>
                         <h4 class="caption-value">04 <span>Kendaraan</span></h4>
                     </div>
                 </div>
@@ -100,7 +116,8 @@
                                 <a href=""
                                     class="modal-link {{ Request::is('dashboard/bulan*') ? 'active' : '' }}">Bulan Ini</a>
                                 <a href=""
-                                    class="modal-link {{ Request::is('dashboard/minggu*') ? 'active' : '' }}">Minggu Ini</a>
+                                    class="modal-link {{ Request::is('dashboard/minggu*') ? 'active' : '' }}">Minggu
+                                    Ini</a>
                             </div>
                         </div>
 

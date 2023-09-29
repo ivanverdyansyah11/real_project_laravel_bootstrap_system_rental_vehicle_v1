@@ -32,7 +32,7 @@
         <div class="row">
             @if ($kendaraans->count() == 0)
                 <div class="col-12 text-center mt-5">
-                    <p style="font-size: 0.913rem;">Tidak Ada Data Kendaraan Dipesan!</p>
+                    <p style="font-size: 0.913rem;">Tidak Ada Data Kendaraan Dibooking!</p>
                 </div>
             @else
                 @foreach ($kendaraans as $kendaraan)
