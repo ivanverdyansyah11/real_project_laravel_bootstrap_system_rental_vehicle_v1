@@ -3,7 +3,7 @@
     <div class="wrapper-position position-relative d-none d-lg-inline-block">
         <div class="topbar-profile d-flex align-items-center position-relative">
             <div class="wrapper-profile d-flex align-items-center">
-                <img src="{{ asset('assets/img/pengguna/aditya-prayatna-profile.svg') }}" class="img-fluid pengguna-image"
+                <img src="{{ asset('assets/img/pengguna/profile-admin.png') }}" class="img-fluid pengguna-image"
                     alt="Pengguna Profile" draggable="false">
                 <div class="profile-user">
                     <h6 class="user-name">{{ auth()->user()->nama_lengkap }}</h6>
