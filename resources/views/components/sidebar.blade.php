@@ -15,25 +15,25 @@
                         <p>Dashboard</p>
                     </div>
                 </a>
-                <a href="{{ route('pelanggan') }}"
-                    class="menu-link d-flex flex-column {{ Request::is('pelanggan*') ? 'active' : '' }}">
-                    <div class="link-item d-flex align-items-center">
-                        <div class="icon-sidebar-wrapper">
-                            <div class="sidebar-icon pelanggan-icon"></div>
-                        </div>
-                        <p>Pelanggan</p>
-                    </div>
-                </a>
-                <a href="{{ route('sopir') }}"
-                    class="menu-link d-flex flex-column {{ Request::is('sopir*') ? 'active' : '' }}">
-                    <div class="link-item d-flex align-items-center">
-                        <div class="icon-sidebar-wrapper">
-                            <div class="sidebar-icon sopir-icon"></div>
-                        </div>
-                        <p>Sopir</p>
-                    </div>
-                </a>
                 @if (auth()->user()->role === 'owner' || auth()->user()->role === 'admin')
+                    <a href="{{ route('pelanggan') }}"
+                        class="menu-link d-flex flex-column {{ Request::is('pelanggan*') ? 'active' : '' }}">
+                        <div class="link-item d-flex align-items-center">
+                            <div class="icon-sidebar-wrapper">
+                                <div class="sidebar-icon pelanggan-icon"></div>
+                            </div>
+                            <p>Pelanggan</p>
+                        </div>
+                    </a>
+                    <a href="{{ route('sopir') }}"
+                        class="menu-link d-flex flex-column {{ Request::is('sopir*') ? 'active' : '' }}">
+                        <div class="link-item d-flex align-items-center">
+                            <div class="icon-sidebar-wrapper">
+                                <div class="sidebar-icon sopir-icon"></div>
+                            </div>
+                            <p>Sopir</p>
+                        </div>
+                    </a>
                     <a href="{{ route('kendaraan') }}"
                         class="menu-link d-flex flex-column {{ Request::is('kendaraan*') || Request::is('jenis-kendaraan*') || Request::is('brand-kendaraan*') || Request::is('seri-kendaraan*') || Request::is('kilometer-kendaraan*') ? 'active' : '' }}">
                         <div class="link-item d-flex align-items-center">

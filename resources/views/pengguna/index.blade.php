@@ -18,12 +18,14 @@
         <div class="row mb-4">
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <h5 class="subtitle">Data Pengguna</h5>
-                <button type="button" class="button-primary d-none d-md-flex align-items-center" data-bs-toggle="modal"
-                    data-bs-target="#tambahPenggunaModal">
-                    <img src="{{ asset('assets/img/button/add.svg') }}" alt="Button Tambah Icon"
-                        class="img-fluid button-icon">
-                    Tambah
-                </button>
+                @if (auth()->user()->role == 'admin')
+                    <button type="button" class="button-primary d-none d-md-flex align-items-center" data-bs-toggle="modal"
+                        data-bs-target="#tambahPenggunaModal">
+                        <img src="{{ asset('assets/img/button/add.svg') }}" alt="Button Tambah Icon"
+                            class="img-fluid button-icon">
+                        Tambah
+                    </button>
+                @endif
             </div>
         </div>
         <div class="row table-default">
@@ -32,7 +34,9 @@
                     <div class="col data-header">Nama Lengkap</div>
                     <div class="col d-none d-lg-inline-block data-header">Email</div>
                     <div class="col d-none d-lg-inline-block data-header">Role</div>
-                    <div class="col-3 col-xl-2 data-header"></div>
+                    @if (auth()->user()->role == 'admin')
+                        <div class="col-3 col-xl-2 data-header"></div>
+                    @endif
                 </div>
             </div>
             @if ($penggunas->count() == 0)

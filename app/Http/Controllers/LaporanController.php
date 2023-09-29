@@ -23,7 +23,7 @@ class LaporanController extends Controller
                 'title' => 'Laporan',
                 'laporans' => Laporan::orderBy('created_at', 'DESC')->paginate(6),
             ]);
-        } elseif (auth()->user()->role == 'admin') {
+        } elseif (auth()->user()->role == 'staff') {
             return view('laporan.index', [
                 'title' => 'Laporan',
                 'laporans' => Laporan::where('penggunas_id', auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(6),
