@@ -67,7 +67,7 @@
                                 <td scope="col">Kilometer Kembali</td>
                                 <td scope="col-1">:</td>
                                 <td scope="col" class="text-end">
-                                    {{ $pengembalian->kilometer_kembali }}</td>
+                                    {{ $pengembalian->kilometer_kembali }} km</td>
                             </tr>
                             <tr>
                                 <td scope="col">Bensin Kembali</td>
@@ -112,6 +112,36 @@
                                     <td scope="col">Ban Serep</td>
                                     <td scope="col-1">:</td>
                                     <td scope="col" class="text-end">{{ $pengembalian->ban_serep }}</td>
+                                </tr>
+                            @endif
+                        </table>
+                    </div>
+                    <div class="col-12">
+                        <h5 class="title">Data Kelengkapan Pelepasan Kendaraan</h5>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td scope="col">Sarung Jok</td>
+                                <td scope="col-1">:</td>
+                                <td scope="col" class="text-end">{{ $pengembalian->pelepasan_pemesanan->sarung_jok }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Karpet</td>
+                                <td scope="col-1">:</td>
+                                <td scope="col" class="text-end">{{ $pengembalian->pelepasan_pemesanan->karpet }}</td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Kondisi Kendaraan</td>
+                                <td scope="col-1">:</td>
+                                <td scope="col" class="text-end">
+                                    {{ $pengembalian->pelepasan_pemesanan->kondisi_kendaraan }}</td>
+                            </tr>
+                            @if ($pengembalian->pelepasan_pemesanan->ban_serep)
+                                <tr>
+                                    <td scope="col">Ban Serep</td>
+                                    <td scope="col-1">:</td>
+                                    <td scope="col" class="text-end">{{ $pengembalian->pelepasan_pemesanan->ban_serep }}
+                                    </td>
                                 </tr>
                             @endif
                         </table>
