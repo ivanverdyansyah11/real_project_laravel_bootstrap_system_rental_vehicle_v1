@@ -16,9 +16,7 @@ class KendaraanController extends Controller
     {
         return view('kendaraan.index', [
             'title' => 'Kendaraan',
-            'jenises' => JenisKendaraan::all(),
             'kendaraans' => Kendaraan::with('jenis_kendaraan', 'brand_kendaraan')->paginate(6),
-            'pelanggans' => Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
         ]);
     }
 
@@ -138,10 +136,11 @@ class KendaraanController extends Controller
 
     public function edit($id)
     {
+        $kendaraan = Kendaraan::where('id', $id)->first();
         return view('kendaraan.edit', [
             'title' => 'Kendaraan',
-            'kendaraan' => Kendaraan::where('id', $id)->first(),
-            'series' => SeriKendaraan::all(),
+            'kendaraan' => $kendaraan,
+            'series' => SeriKendaraan::where('id', $kendaraan->seri_kendaraans_id)->orWhere('status', 'ada')->get(),
             'kilometers' => KategoriKilometerKendaraan::all(),
         ]);
     }

@@ -165,7 +165,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(BookingController::class)->group(function () {
         Route::get('/booking', 'index')->name('booking');
         Route::post('/booking/cari', 'search')->name('booking.search');
-        // Route::post('/booking/booking', 'booking')->name('booking.booking');
+        Route::post('/booking', 'booking')->name('booking');
 
         // Route::post('/booking/hapus/{id}', 'delete')->name('booking.delete');
     });

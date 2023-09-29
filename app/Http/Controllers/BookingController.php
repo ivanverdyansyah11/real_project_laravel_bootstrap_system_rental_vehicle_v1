@@ -14,7 +14,8 @@ class BookingController extends Controller
     {
         return view('booking.index', [
             'title' => 'Booking',
-            'bookings' => Pemesanan::paginate(6),
+            'kendaraans' => Kendaraan::where('status', 'ready')->orWhere('status', 'booking')->paginate(6),
+            'pelanggans' => Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
         ]);
     }
 

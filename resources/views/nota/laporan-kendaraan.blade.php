@@ -27,6 +27,11 @@
                         <td scope="col" class="text-end">{{ $kendaraan->seri_kendaraan->nomor_seri }}</td>
                     </tr>
                     <tr>
+                        <td scope="col">Nomor Plat Kendaraan</td>
+                        <td scope="col-1">:</td>
+                        <td scope="col" class="text-end">{{ $kendaraan->seri_kendaraan->nomor_plat }}</td>
+                    </tr>
+                    <tr>
                         <td scope="col">Kategori Kilometer Kendaraan</td>
                         <td scope="col-1">:</td>
                         <td scope="col" class="text-end">Kilometer {{ $kendaraan->kilometer_kendaraan->jumlah }}</td>
@@ -49,17 +54,27 @@
                     <tr>
                         <td scope="col">Kilometer Diservis</td>
                         <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $kendaraan->kilometer }}</td>
+                        <td scope="col" class="text-end">{{ $kendaraan->kilometer }} km</td>
                     </tr>
                     <tr>
                         <td scope="col">Kilometer Saat Ini</td>
                         <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $kendaraan->kilometer_saat_ini }}</td>
+                        <td scope="col" class="text-end">{{ $kendaraan->kilometer_saat_ini }} km</td>
                     </tr>
                     <tr>
-                        <td scope="col">Tarif Sewa</td>
+                        <td scope="col">Tarif Sewa Hari</td>
                         <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $kendaraan->tarif_sewa }}</td>
+                        <td scope="col" class="text-end">Rp. {{ $kendaraan->tarif_sewa_hari }}</td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Tarif Sewa Minggu</td>
+                        <td scope="col-1">:</td>
+                        <td scope="col" class="text-end">Rp. {{ $kendaraan->tarif_sewa_minggu }}</td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Tarif Sewa Bulan</td>
+                        <td scope="col-1">:</td>
+                        <td scope="col" class="text-end">Rp. {{ $kendaraan->tarif_sewa_bulan }}</td>
                     </tr>
                     <tr>
                         <td scope="col">Tahun Pembuatan</td>
