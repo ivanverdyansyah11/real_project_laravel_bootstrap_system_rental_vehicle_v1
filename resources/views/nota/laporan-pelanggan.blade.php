@@ -3,7 +3,7 @@
 @section('content')
     <div class="report-nota row justify-content-center my-5">
         <div class="col-md-9 col-lg-7 col-xl-6">
-            <div class="nota-paper">
+            <div class="nota-paper mx-3 mx-md-0">
                 <div class="wrapper d-flex justify-content-between align-items-end">
                     <img src="{{ asset('assets/img/brand/brand-text.svg') }}" alt="Brand Nusa Kendala Logo Teks"
                         class="img-fluid login-brand d-none d-md-inline-block" draggable="false" width="240">
