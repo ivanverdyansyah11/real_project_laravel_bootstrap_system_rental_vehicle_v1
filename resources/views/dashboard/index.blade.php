@@ -16,7 +16,7 @@
                 <div class="card-default d-flex align-items-start justify-content-between">
                     <div class="card-caption">
                         <p class="caption-name">Kendaraan Terdaftar</p>
-                        <h4 class="caption-value">23</h4>
+                        <h4 class="caption-value">{{ $kendaraan->count() }}</h4>
                     </div>
                     <div class="wrapper-icon d-flex justify-content-center align-items-center">
                         <img src="{{ asset('assets/img/dashboard/stok.svg') }}" class="img-fluid dashboard-img"
@@ -28,7 +28,7 @@
                 <div class="card-default d-flex align-items-start justify-content-between">
                     <div class="card-caption">
                         <p class="caption-name">Pelanggan Terdaftar</p>
-                        <h4 class="caption-value">07</h4>
+                        <h4 class="caption-value">{{ $pelanggan->count() }}</h4>
                     </div>
                     <div class="wrapper-icon d-flex justify-content-center align-items-center">
                         <img src="{{ asset('assets/img/dashboard/pelanggan.svg') }}" class="img-fluid dashboard-img"
@@ -40,7 +40,7 @@
                 <div class="card-default d-flex align-items-start justify-content-between">
                     <div class="card-caption">
                         <p class="caption-name">Sopir Terdaftar</p>
-                        <h4 class="caption-value">23</h4>
+                        <h4 class="caption-value">{{ $sopir->count() }}</h4>
                     </div>
                     <div class="wrapper-icon d-flex justify-content-center align-items-center">
                         <img src="{{ asset('assets/img/dashboard/pelanggan.svg') }}" class="img-fluid dashboard-img"
@@ -64,7 +64,7 @@
                     </div>
                     <div class="card-caption">
                         <p class="caption-name">Kendaraan Dibooking</p>
-                        <h4 class="caption-value">04 <span>Kendaraan</span></h4>
+                        <h4 class="caption-value">{{ $kendaraanBooking->count() }} <span>Kendaraan</span></h4>
                     </div>
                 </div>
                 <div
@@ -80,7 +80,7 @@
                     </div>
                     <div class="card-caption">
                         <p class="caption-name">Kendaraan Dipesan</p>
-                        <h4 class="caption-value">04 <span>Kendaraan</span></h4>
+                        <h4 class="caption-value">{{ $kendaraanPesan->count() }} <span>Kendaraan</span></h4>
                     </div>
                 </div>
                 <div class="card-default card-other w-100 d-flex flex-column align-items-start justify-content-between">
@@ -95,7 +95,7 @@
                     </div>
                     <div class="card-caption">
                         <p class="caption-name">Kendaraan Diservis</p>
-                        <h4 class="caption-value">04 <span>Kendaraan</span></h4>
+                        <h4 class="caption-value">{{ $kendaraanServis->count() }} <span>Kendaraan</span></h4>
                     </div>
                 </div>
             </div>
@@ -106,23 +106,20 @@
                         <div class="wrapper position-relative d-none d-md-inline-block">
                             <button type="button"
                                 class="button-other button-reverse button-small d-flex align-items-center">
-                                Tahun ini
+                                <p>Tahun ini</p>
                                 <img src="{{ asset('assets/img/button/arrow-down.svg') }}" alt="Arrow Icon"
                                     class="img-fluid button-icon">
                             </button>
                             <div class="modal-other d-flex flex-column">
-                                <a href="" class="modal-link {{ Request::is('dashboard') ? 'active' : '' }}">Tahun
-                                    Ini</a>
-                                <a href=""
-                                    class="modal-link {{ Request::is('dashboard/bulan*') ? 'active' : '' }}">Bulan Ini</a>
-                                <a href=""
-                                    class="modal-link {{ Request::is('dashboard/minggu*') ? 'active' : '' }}">Minggu
-                                    Ini</a>
+                                <button type="button" class="button-tahun modal-link active">Tahun
+                                    Ini</button>
+                                <button type="button" class="button-bulan modal-link">Bulan
+                                    Ini</button>
                             </div>
                         </div>
-
                     </div>
-                    <canvas id="chartVehicle" class="w-100" style="max-height: 400px;"></canvas>
+                    <canvas id="chartVehicleYear" class="chart w-100" style="max-height: 400px;"></canvas>
+                    <canvas id="chartVehicleMonth" class="chart w-100 disabled" style="max-height: 400px;"></canvas>
                 </div>
             </div>
         </div>
@@ -133,17 +130,36 @@
     <script>
         const buttonOther = document.querySelector('.button-other');
         const modalOther = document.querySelector('.modal-other');
-        const ctx = document.getElementById('chartVehicle');
+        const buttonYear = document.querySelector('.button-tahun');
+        const buttonMonth = document.querySelector('.button-bulan');
+        const ctxYear = document.getElementById('chartVehicleYear');
+        const ctxMonth = document.getElementById('chartVehicleMonth');
 
         buttonOther.addEventListener('click', function() {
             modalOther.classList.toggle('active');
+        });
+
+        buttonMonth.addEventListener('click', function() {
+            buttonOther.children[0].innerHTML = this.innerHTML;
+            buttonYear.classList.remove('active');
+            ctxYear.classList.add('disabled');
+            buttonMonth.classList.add('active');
+            ctxMonth.classList.remove('disabled');
+        });
+
+        buttonYear.addEventListener('click', function() {
+            buttonOther.children[0].innerHTML = this.innerHTML;
+            buttonMonth.classList.remove('active');
+            ctxMonth.classList.add('disabled');
+            buttonYear.classList.add('active');
+            ctxYear.classList.remove('disabled');
         });
 
         Chart.defaults.color = '#939393';
         Chart.defaults.font.size = 12;
         Chart.defaults.font.weight = 600;
 
-        new Chart(ctx, {
+        new Chart(ctxYear, {
             type: 'bar',
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
@@ -167,6 +183,51 @@
                     showLine: false,
                     borderRadius: 9999,
                     borderSkipped: false,
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false,
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 200,
+                        ticks: {
+                            stepSize: 50,
+                        },
+                    },
+                },
+                animation: false,
+                showLine: false,
+            }
+        });
+
+        new Chart(ctxMonth, {
+            type: 'bar',
+            data: {
+                labels: ['Minggu Pertama', 'Minggu Kedua', 'Minggu Ketiga', 'Minggu Keempat'],
+                datasets: [{
+                    data: [160, 143, 127, 169],
+                    borderWidth: 0,
+                    backgroundColor: [
+                        'rgba(226, 92, 39)',
+                        'rgba(255, 122, 69)',
+                        'rgba(226, 92, 39)',
+                        'rgba(255, 122, 69)',
+                    ],
+                    showLine: false,
+                    borderRadius: 9999,
+                    borderSkipped: false,
+                    barPercentage: 0.4,
                 }]
             },
             options: {

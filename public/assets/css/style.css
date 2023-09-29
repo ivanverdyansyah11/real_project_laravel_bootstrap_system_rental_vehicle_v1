@@ -932,7 +932,7 @@ body {
 }
 
 .modal-other {
-    width: 180px;
+    width: 140px;
     padding: 4px 0;
     border-radius: var(--rounded-lg);
     border: var(--border-style);
@@ -1020,6 +1020,12 @@ body {
     margin-top: 46px;
     text-align: center;
     color: rgba(var(--dark-color), 0.52);
+}
+
+.chart.disabled {
+    position: absolute;
+    top: -400px;
+    z-index: -10;
 }
 /* END CONTENT STYLE */
 
