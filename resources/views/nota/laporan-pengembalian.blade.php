@@ -11,7 +11,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <h5 class="title">Data Pelepasan Kendaraan</h5>
+                        <h5 class="title">Data Pengembalian Kendaraan</h5>
                         <table class="table table-bordered">
                             <tr>
                                 <td scope="col">Nama Pelanggan</td>
