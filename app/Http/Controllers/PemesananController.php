@@ -19,7 +19,7 @@ class PemesananController extends Controller
     {
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
-            'kendaraans' => Kendaraan::where('status', 'booking')->with('jenis_kendaraan', 'brand_kendaraan')->paginate(6),
+            'pemesanans' => Pemesanan::paginate(6),
         ]);
     }
 
@@ -29,7 +29,9 @@ class PemesananController extends Controller
             ->where('nama_kendaraan', 'like', '%' . $request->search . '%')
             ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
             ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa_hari', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa_minggu', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa_bulan', 'like', '%' . $request->search . '%')
             ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
             ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
             ->orWhere('warna', 'like', '%' . $request->search . '%')
@@ -50,34 +52,22 @@ class PemesananController extends Controller
         }
 
         $validatedData = $request->validate([
-            'pelanggans_id' => 'required|integer',
-            'kendaraans_id' => 'required|integer',
-            'tanggal_booking' => 'required|date',
+            'pelanggans_id' => 'required|string',
+            'jenis_kendaraans_id' => 'required|string',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_akhir' => 'required|date',
         ]);
-
-        $pemesananID = Pemesanan::latest()->first();
-        if ($pemesananID) {
-            $validatedDataPemesanan['pemesanans_id'] = $pemesananID->id + 1;
-        } else {
-            $validatedDataPemesanan['pemesanans_id'] = 1;
-        }
-
-        $validatedDataPemesanan['jenis_kendaraan'] = 'lengkap';
-        $validatedDataPemesanan['nama_pemesan'] = 'lengkap';
 
         if (is_string($validatedData['pelanggans_id'])) {
             $validatedData['pelanggans_id'] = (int)$validatedData['pelanggans_id'];
         }
 
-        if (is_string($validatedData['kendaraans_id'])) {
-            $validatedData['kendaraans_id'] = (int)$validatedData['kendaraans_id'];
+        if (is_string($validatedData['jenis_kendaraans_id'])) {
+            $validatedData['jenis_kendaraans_id'] = (int)$validatedData['jenis_kendaraans_id'];
         }
 
         $pemesanan = Pemesanan::create($validatedData);
         $pemesananID = Pemesanan::latest()->first();
-        $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first()->update([
-            'status' => 'booking',
-        ]);
 
         $pelanggan = Pelanggan::where('id', $validatedData['pelanggans_id'])->first()->update([
             'status' => 'tidak ada',
@@ -89,7 +79,7 @@ class PemesananController extends Controller
             'kategori_laporan' => 'booking',
         ]);
 
-        if ($pemesanan && $kendaraan && $pelanggan && $laporan) {
+        if ($pemesanan && $pelanggan && $laporan) {
             return redirect(route('kendaraan'))->with('success', 'Berhasil Tambah Pemesanan!');
         } else {
             return redirect(route('kendaraan'))->with('failed', 'Gagal Tambah Pemesanan!');

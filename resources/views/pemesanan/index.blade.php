@@ -18,46 +18,58 @@
         <div class="row mb-4">
             <div
                 class="col-12 d-flex flex-column flex-md-row justify-content-md-between align-items-end align-items-md-center">
-                <form class="form-search d-inline-block" method="POST" action="{{ route('pemesanan.search') }}">
+                <form class="form-search d-flex gap-3" method="POST" action="{{ route('pemesanan.search') }}">
                     @csrf
-                    <input type="text" class="input-search" placeholder=" " name="search">
-                    <label class="d-flex align-items-center">
-                        <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
-                            class="img-fluid search-icon">
-                        <p>Cari kendaraan..</p>
-                    </label>
+                    <div class="wrapper-searching position-relative">
+                        <input type="text" class="input-search" placeholder=" " name="tanggal_mulai">
+                        <label class="d-flex align-items-center">
+                            <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
+                                class="img-fluid search-icon">
+                            <p>Cari tanggal mulai..</p>
+                        </label>
+                    </div>
+                    <div class="wrapper-searching position-relative">
+                        <input type="text" class="input-search" placeholder=" " name="tanggal_akhir">
+                        <label class="d-flex align-items-center">
+                            <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
+                                class="img-fluid search-icon">
+                            <p>Cari tanggal mulai..</p>
+                        </label>
+                    </div>
                 </form>
             </div>
         </div>
-        <div class="row">
-            @if ($kendaraans->count() == 0)
-                <div class="col-12 text-center mt-5">
-                    <p style="font-size: 0.913rem;">Tidak Ada Data Kendaraan Dibooking!</p>
+        <div class="row table-default">
+            <div class="col-12 table-row table-header">
+                <div class="row table-data gap-4">
+                    <div class="col data-header">Nama</div>
+                    <div class="col d-none d-lg-inline-block data-header">Nomor Telepon</div>
+                    <div class="col d-none d-lg-inline-block data-header">Tanggal Mulai</div>
+                    <div class="col d-none d-lg-inline-block data-header">Tanggal Akhir</div>
+                    <div class="col-3 col-xl-2 data-header"></div>
+                </div>
+            </div>
+            @if ($pemesanans->count() == 0)
+                <div class="col-12 table-row table-border">
+                    <div class="row table-data gap-4 align-items-center">
+                        <div class="col data-value data-length">Tidak Ada Data Pemesanan!</div>
+                    </div>
                 </div>
             @else
-                @foreach ($kendaraans as $kendaraan)
-                    <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                        <div class="card-product">
-                            <div class="wrapper-img d-flex justify-content-center align-items-center">
-                                <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
-                                    alt="Car Thumbnail Image" class="img-fluid product-img">
+                @foreach ($pemesanans as $pemesanan)
+                    <div class="col-12 table-row table-border">
+                        <div class="row table-data gap-4 align-items-center">
+                            <div class="col data-value data-length">{{ $pemesanan->pelanggan->nama }}</div>
+                            <div class="col data-value data-length data-length-none">
+                                {{ $pemesanan->pelanggan->nomor_telepon ?: '-' }}
                             </div>
-                            <div class="product-content">
-                                <p class="product-name">{{ $kendaraan->nama_kendaraan }}</p>
-                                <div class="wrapper-other d-flex align-items-center justify-content-between">
-                                    <div class="wrapper-tahun d-flex align-items-center">
-                                        <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
-                                            class="img-fluid kendaraan-icon">
-                                        <p class="product-year">{{ $kendaraan->tahun_pembuatan }}</p>
-                                    </div>
-                                    <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa }}</h6>
-                                </div>
-                                <div class="wrapper-button d-flex flex-column">
-                                    <a href="{{ route('pemesanan.release', $kendaraan->id) }}"
-                                        class="button-primary w-100">Pemesanan</a>
-                                    <button type="button" class="button-primary-blur w-100" data-bs-toggle="modal"
-                                        data-bs-target="#hapusBookingModal" data-id="{{ $kendaraan->id }}">Hapus
-                                        Booking</button>
+                            <div class="col data-value data-length data-length-none">{{ $pemesanan->tanggal_mulai }}</div>
+                            <div class="col data-value data-length data-length-none">{{ $pemesanan->tanggal_akhir }}</div>
+                            <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
+                                <div class="wrapper-action d-flex">
+                                    <a class="button-action button-detail d-flex justify-content-center align-items-center">
+                                        <div class="detail-icon"></div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +78,7 @@
             @endif
         </div>
         <div class="col-12 d-flex justify-content-end mt-4">
-            {{ $kendaraans->links() }}
+            {{ $pemesanans->links() }}
         </div>
     </div>
 

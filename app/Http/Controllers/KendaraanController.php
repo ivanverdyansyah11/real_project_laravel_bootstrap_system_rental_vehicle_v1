@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisKendaraan;
 use App\Models\KategoriKilometerKendaraan;
 use App\Models\Kendaraan;
 use App\Models\Laporan;
@@ -15,6 +16,7 @@ class KendaraanController extends Controller
     {
         return view('kendaraan.index', [
             'title' => 'Kendaraan',
+            'jenises' => JenisKendaraan::all(),
             'kendaraans' => Kendaraan::with('jenis_kendaraan', 'brand_kendaraan')->paginate(6),
             'pelanggans' => Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
         ]);

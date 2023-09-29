@@ -17,7 +17,8 @@ class CreatePemesanansTable extends Migration
             $table->id();
             $table->bigInteger('pelanggans_id')->index();
             $table->bigInteger('jenis_kendaraans_id')->index();
-            $table->date('tanggal_booking');
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_akhir');
             $table->timestamps();
             $table->softDeletes();
         });

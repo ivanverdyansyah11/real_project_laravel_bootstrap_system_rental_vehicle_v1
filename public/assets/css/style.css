@@ -829,7 +829,7 @@ body {
     background-image: url('../img/button/delete.svg');
 }
 
-.form-search {
+.wrapper-search {
     width: 260px;
     position: relative;
 }

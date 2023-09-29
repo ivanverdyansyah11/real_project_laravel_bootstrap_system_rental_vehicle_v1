@@ -20,12 +20,14 @@
                 class="col-12 d-flex flex-column flex-md-row justify-content-md-between align-items-end align-items-md-center">
                 <form class="form-search d-inline-block" method="POST" action="{{ route('kendaraan.search') }}">
                     @csrf
-                    <input type="text" class="input-search" placeholder=" " name="search">
-                    <label class="d-flex align-items-center">
-                        <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
-                            class="img-fluid search-icon">
-                        <p>Cari kendaraan..</p>
-                    </label>
+                    <div class="wrapper-search">
+                        <input type="text" class="input-search" placeholder=" " name="search">
+                        <label class="d-flex align-items-center">
+                            <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
+                                class="img-fluid search-icon">
+                            <p>Cari kendaraan..</p>
+                        </label>
+                    </div>
                 </form>
                 <a href="{{ route('kendaraan.create') }}" class="button-primary d-none d-md-flex align-items-center">
                     <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
@@ -57,11 +59,8 @@
                                     <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa_hari }}</h6>
                                 </div>
                                 <div class="wrapper-button d-flex">
-                                    <button type="button" class="button-primary w-100" data-bs-toggle="modal"
-                                        data-bs-target="#bookingKendaraanModal"
-                                        data-id="{{ $kendaraan->id }}">Booking</button>
                                     <a href="{{ route('kendaraan.detail', $kendaraan->id) }}"
-                                        class="button-primary-blur w-100">Detail</a>
+                                        class="button-primary w-100">Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +74,7 @@
     </div>
 
     {{-- MODAL DETAIL BOOKING KENDARAAN --}}
-    <div class="modal fade" id="bookingKendaraanModal" tabindex="-1" aria-labelledby="bookingKendaraanModalLabel"
+    {{-- <div class="modal fade" id="bookingKendaraanModal" tabindex="-1" aria-labelledby="bookingKendaraanModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -111,11 +110,20 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-12 mb-4">
+                            <div class="input-wrapper">
+                                <label for="tanggal_mulai">Tanggal Mulai</label>
+                                <input type="date" class="input" id="tanggal_mulai" name="tanggal_mulai">
+                                @error('tanggal_mulai')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
-                                <label for="tanggal_booking">Tanggal Booking</label>
-                                <input type="date" class="input" id="tanggal_booking" name="tanggal_booking">
-                                @error('tanggal_booking')
+                                <label for="tanggal_akhir">Tanggal Akhir</label>
+                                <input type="date" class="input" id="tanggal_akhir" name="tanggal_akhir">
+                                @error('tanggal_akhir')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -131,7 +139,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
     {{-- END MODAL DETAIL BOOKING KENDARAAN --}}
 
     <script>

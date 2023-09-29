@@ -20,12 +20,14 @@
                 class="col-12 d-flex flex-column flex-md-row justify-content-md-between align-items-end align-items-md-center">
                 <form class="form-search d-inline-block" method="POST" action="{{ route('pajak.search') }}">
                     @csrf
-                    <input type="text" class="input-search" placeholder=" " name="search">
-                    <label class="d-flex align-items-center">
-                        <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
-                            class="img-fluid search-icon">
-                        <p>Cari kendaraan..</p>
-                    </label>
+                    <div class="wrapper-search">
+                        <input type="text" class="input-search" placeholder=" " name="search">
+                        <label class="d-flex align-items-center">
+                            <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
+                                class="img-fluid search-icon">
+                            <p>Cari kendaraan..</p>
+                        </label>
+                    </div>
                 </form>
             </div>
         </div>
