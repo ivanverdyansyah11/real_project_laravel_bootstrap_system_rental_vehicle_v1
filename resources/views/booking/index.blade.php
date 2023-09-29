@@ -39,32 +39,37 @@
                 </form>
             </div>
         </div>
-        <div class="row">
-            @if ($kendaraans->count() == 0)
-                <div class="col-12 text-center mt-5">
-                    <p style="font-size: 0.913rem;">Tidak Ada Data Kendaraan!</p>
+        <div class="row table-default">
+            <div class="col-12 table-row table-header">
+                <div class="row table-data gap-4">
+                    <div class="col data-header">Nama</div>
+                    <div class="col d-none d-lg-inline-block data-header">Nomor Telepon</div>
+                    <div class="col d-none d-lg-inline-block data-header">Tanggal Mulai</div>
+                    <div class="col d-none d-lg-inline-block data-header">Tanggal Akhir</div>
+                    <div class="col-3 col-xl-2 data-header"></div>
+                </div>
+            </div>
+            @if ($bookings->count() == 0)
+                <div class="col-12 table-row table-border">
+                    <div class="row table-data gap-4 align-items-center">
+                        <div class="col data-value data-length">Tidak Ada Data Pemesanan!</div>
+                    </div>
                 </div>
             @else
-                @foreach ($kendaraans as $kendaraan)
-                    <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                        <div class="card-product">
-                            <div class="wrapper-img d-flex justify-content-center align-items-center">
-                                <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
-                                    alt="Car Thumbnail Image" class="img-fluid product-img">
+                @foreach ($bookings as $booking)
+                    <div class="col-12 table-row table-border">
+                        <div class="row table-data gap-4 align-items-center">
+                            <div class="col data-value data-length">{{ $booking->pelanggan->nama }}</div>
+                            <div class="col data-value data-length data-length-none">
+                                {{ $booking->pelanggan->nomor_telepon ?: '-' }}
                             </div>
-                            <div class="product-content">
-                                <p class="product-name">{{ $kendaraan->nama_kendaraan }}</p>
-                                <div class="wrapper-other d-flex align-items-center justify-content-between">
-                                    <div class="wrapper-tahun d-flex align-items-center">
-                                        <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
-                                            class="img-fluid kendaraan-icon">
-                                        <p class="product-year">{{ $kendaraan->tahun_pembuatan }}</p>
-                                    </div>
-                                    <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa_hari }}</h6>
-                                </div>
-                                <div class="wrapper-button d-flex">
-                                    <a href="{{ route('kendaraan.detail', $kendaraan->id) }}"
-                                        class="button-primary w-100">Detail</a>
+                            <div class="col data-value data-length data-length-none">{{ $booking->tanggal_mulai }}</div>
+                            <div class="col data-value data-length data-length-none">{{ $booking->tanggal_akhir }}</div>
+                            <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
+                                <div class="wrapper-action d-flex">
+                                    <a class="button-action button-detail d-flex justify-content-center align-items-center">
+                                        <div class="detail-icon"></div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +78,7 @@
             @endif
         </div>
         <div class="col-12 d-flex justify-content-end mt-4">
-            {{ $kendaraans->links() }}
+            {{ $bookings->links() }}
         </div>
     </div>
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BrandKendaraanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisKendaraanController;
@@ -160,11 +161,19 @@ Route::middleware('auth')->group(function () {
         Route::post('/pengguna/hapus/{id}', 'delete')->name('pengguna.delete');
     });
 
+    // BOOKING
+    Route::controller(BookingController::class)->group(function () {
+        Route::get('/booking', 'index')->name('booking');
+        Route::post('/booking/cari', 'search')->name('booking.search');
+        // Route::post('/booking/booking', 'booking')->name('booking.booking');
+
+        // Route::post('/booking/hapus/{id}', 'delete')->name('booking.delete');
+    });
+
     // PEMESANAN
     Route::controller(PemesananController::class)->group(function () {
         Route::get('/pemesanan', 'index')->name('pemesanan');
         Route::post('/pemesanan/cari', 'search')->name('pemesanan.search');
-        Route::post('/pemesanan/booking', 'booking')->name('pemesanan.booking');
 
         Route::get('/pemesanan/release/{id}', 'release')->name('pemesanan.release');
         Route::post('/pemesanan/release/{id}', 'releaseAction')->name('pemesanan.release.action');

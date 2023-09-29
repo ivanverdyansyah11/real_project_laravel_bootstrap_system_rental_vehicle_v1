@@ -56,7 +56,7 @@
                     </div>
                 @endif
                 <a href="{{ route('pemesanan') }}"
-                    class="menu-link d-flex flex-column {{ Request::is('pemesanan*') ? 'active' : '' }}">
+                    class="menu-link d-flex flex-column {{ Request::is('booking*') || Request::is('pemesanan*') ? 'active' : 'd-none' }}">
                     <div class="link-item d-flex align-items-center">
                         <div class="icon-sidebar-wrapper">
                             <div class="sidebar-icon pemesanan-icon"></div>
@@ -64,6 +64,11 @@
                         <p>Pemesanan</p>
                     </div>
                 </a>
+                <div
+                    class="menu-link d-flex flex-column {{ Request::is('booking*') || Request::is('pemesanan*') ? 'active' : 'd-none' }}">
+                    <a href="{{ route('booking') }}"
+                        class="link-child {{ Request::is('booking*') ? 'active' : '' }}">Booking</a>
+                </div>
                 <a href="{{ route('pengembalian') }}"
                     class="menu-link d-flex flex-column {{ Request::is('pengembalian*') || Request::is('penambahan-sewa*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">

@@ -19,7 +19,7 @@ class PemesananController extends Controller
     {
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
-            'pemesanans' => Pemesanan::paginate(6),
+            'kendaraans' => Kendaraan::where('status', 'ready')->orWhere('status', 'booking')->paginate(6),
         ]);
     }
 
