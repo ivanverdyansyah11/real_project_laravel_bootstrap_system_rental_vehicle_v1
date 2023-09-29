@@ -39,6 +39,54 @@
                                 <td scope="col" class="text-end">
                                     {{ $pengembalian->pelepasan_pemesanan->kendaraan->nomor_polisi }}</td>
                             </tr>
+                            <tr>
+                                <td scope="col">Jenis Pembayaran</td>
+                                <td scope="col-1">:</td>
+                                <td scope="col" class="text-end">
+                                    {{ $pengembalian->jenis_pembayaran }}</td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Total Bayar</td>
+                                <td scope="col-1">:</td>
+                                <td scope="col" class="text-end">
+                                    {{ $pengembalian->total_bayar }}</td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Metode Bayar</td>
+                                <td scope="col-1">:</td>
+                                <td scope="col" class="text-end">
+                                    {{ $pengembalian->metode_bayar }}</td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Tanggal Kembali</td>
+                                <td scope="col-1">:</td>
+                                <td scope="col" class="text-end">
+                                    {{ $pengembalian->tanggal_kembali }}</td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Kilometer Kembali</td>
+                                <td scope="col-1">:</td>
+                                <td scope="col" class="text-end">
+                                    {{ $pengembalian->kilometer_kembali }}</td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Bensin Kembali</td>
+                                <td scope="col-1">:</td>
+                                <td scope="col" class="text-end">
+                                    {{ $pengembalian->bensin_kembali }}</td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Ketepatan Waktu</td>
+                                <td scope="col-1">:</td>
+                                <td scope="col" class="text-end">
+                                    {{ $pengembalian->ketepatan_waktu }}</td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Terlambat</td>
+                                <td scope="col-1">:</td>
+                                <td scope="col" class="text-end">
+                                    {{ $pengembalian->terlambat ?: '-' }}</td>
+                            </tr>
                         </table>
                     </div>
                     <div class="col-12">
