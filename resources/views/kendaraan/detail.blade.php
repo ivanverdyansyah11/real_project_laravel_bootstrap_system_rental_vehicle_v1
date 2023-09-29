@@ -43,108 +43,110 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="stnk_nama">STNK Atas Nama</label>
-                                    <input type="text" id="stnk_nama" class="input" autocomplete="off" disabled
-                                        value="{{ $kendaraan->stnk_nama }}">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="stnk_nama">STNK Atas Nama</label>
+                                        <input type="text" id="stnk_nama" class="input" autocomplete="off" disabled
+                                            value="{{ $kendaraan->stnk_nama }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="nama_kendaraan">Nama Kendaraan</label>
-                                    <input type="text" id="nama_kendaraan" class="input" autocomplete="off" disabled
-                                        value="{{ $kendaraan->nama_kendaraan }}">
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="nama_kendaraan">Nama Kendaraan</label>
+                                        <input type="text" id="nama_kendaraan" class="input" autocomplete="off" disabled
+                                            value="{{ $kendaraan->nama_kendaraan }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="jenis">Jenis Kendaraan</label>
-                                    <input type="text" id="jenis" class="input" autocomplete="off"
-                                        value="{{ $kendaraan->jenis_kendaraan->nama }}" disabled>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="jenis">Jenis Kendaraan</label>
+                                        <input type="text" id="jenis" class="input" autocomplete="off"
+                                            value="{{ $kendaraan->jenis_kendaraan->nama }}" disabled>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="brand">Brand Kendaraan</label>
-                                    <input type="text" id="brand" class="input" autocomplete="off"
-                                        value="{{ $kendaraan->brand_kendaraan->nama }}" disabled>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="brand">Brand Kendaraan</label>
+                                        <input type="text" id="brand" class="input" autocomplete="off"
+                                            value="{{ $kendaraan->brand_kendaraan->nama }}" disabled>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="seri">Nomor Seri</label>
-                                    <input type="text" id="seri" class="input" autocomplete="off"
-                                        value="{{ $kendaraan->seri_kendaraan->nomor_seri }}" disabled>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="seri">Nomor Seri</label>
+                                        <input type="text" id="seri" class="input" autocomplete="off"
+                                            value="{{ $kendaraan->seri_kendaraan->nomor_seri }}" disabled>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="kilometer">Kategori Kilometer</label>
-                                    <input type="text" id="kilometer" class="input" autocomplete="off"
-                                        value="{{ $kendaraan->kilometer_kendaraan->jumlah }}" disabled>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="kilometer">Kategori Kilometer</label>
+                                        <input type="text" id="kilometer" class="input" autocomplete="off"
+                                            value="{{ $kendaraan->kilometer_kendaraan->jumlah }}" disabled>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="nomor_polisi">Nomor Polisi</label>
-                                    <input type="text" id="nomor_polisi" class="input" autocomplete="off" disabled
-                                        value="{{ $kendaraan->nomor_polisi }}">
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="nomor_polisi">Nomor Polisi</label>
+                                        <input type="text" id="nomor_polisi" class="input" autocomplete="off" disabled
+                                            value="{{ $kendaraan->nomor_polisi }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="kilometer">Kilometer</label>
-                                    <input type="text" id="kilometer" class="input" autocomplete="off" disabled
-                                        value="{{ $kendaraan->kilometer_saat_ini }}">
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="kilometer">Kilometer</label>
+                                        <input type="text" id="kilometer" class="input" autocomplete="off" disabled
+                                            value="{{ $kendaraan->kilometer_saat_ini }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="tarif_sewa">Tarif Sewa</label>
-                                    <input type="text" id="tarif_sewa" class="input" autocomplete="off" disabled
-                                        value="{{ $kendaraan->tarif_sewa }}">
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="tarif_sewa">Tarif Sewa</label>
+                                        <input type="text" id="tarif_sewa" class="input" autocomplete="off" disabled
+                                            value="{{ $kendaraan->tarif_sewa }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="tahun_pembuatan">Tahun Pembuatan</label>
-                                    <input type="text" id="tahun_pembuatan" class="input" autocomplete="off"
-                                        disabled value="{{ $kendaraan->tahun_pembuatan }}">
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="tahun_pembuatan">Tahun Pembuatan</label>
+                                        <input type="text" id="tahun_pembuatan" class="input" autocomplete="off"
+                                            disabled value="{{ $kendaraan->tahun_pembuatan }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="tanggal_pembelian">Tanggal Pembelian</label>
-                                    <input type="text" id="tanggal_pembelian" class="input" autocomplete="off"
-                                        disabled value="{{ $kendaraan->tanggal_pembelian }}">
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="tanggal_pembelian">Tanggal Pembelian</label>
+                                        <input type="text" id="tanggal_pembelian" class="input" autocomplete="off"
+                                            disabled value="{{ $kendaraan->tanggal_pembelian }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="warna">Warna</label>
-                                    <input type="text" id="warna" class="input" autocomplete="off" disabled
-                                        value="{{ $kendaraan->warna }}">
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="warna">Warna</label>
+                                        <input type="text" id="warna" class="input" autocomplete="off" disabled
+                                            value="{{ $kendaraan->warna }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="input-wrapper">
-                                    <label for="nomor_rangka">Nomor Rangka</label>
-                                    <input type="text" id="nomor_rangka" class="input" autocomplete="off" disabled
-                                        value="{{ $kendaraan->nomor_rangka }}">
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="nomor_rangka">Nomor Rangka</label>
+                                        <input type="text" id="nomor_rangka" class="input" autocomplete="off"
+                                            disabled value="{{ $kendaraan->nomor_rangka }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 row-button">
-                                <div class="input-wrapper">
-                                    <label for="nomor_mesin">Nomor Mesin</label>
-                                    <input type="text" id="nomor_mesin" class="input" autocomplete="off" disabled
-                                        value="{{ $kendaraan->nomor_mesin }}">
+                                <div class="col-md-6 row-button">
+                                    <div class="input-wrapper">
+                                        <label for="nomor_mesin">Nomor Mesin</label>
+                                        <input type="text" id="nomor_mesin" class="input" autocomplete="off"
+                                            disabled value="{{ $kendaraan->nomor_mesin }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="button-wrapper d-flex">
-                                    <a href="{{ route('kendaraan') }}" class="button-reverse">Kembali ke Halaman</a>
+                                <div class="col-12">
+                                    <div class="button-wrapper d-flex">
+                                        <a href="{{ route('kendaraan') }}" class="button-reverse">Kembali ke Halaman</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
