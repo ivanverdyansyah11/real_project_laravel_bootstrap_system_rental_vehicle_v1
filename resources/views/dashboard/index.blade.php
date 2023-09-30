@@ -17,7 +17,7 @@
                     <div class="card-caption">
                         <p class="caption-name">Kendaraan Terdaftar</p>
                         <h4 class="caption-value">{{ $kendaraan->count() }}</h4>
-                    </div> 
+                    </div>
                     <div class="wrapper-icon d-flex justify-content-center align-items-center">
                         <img src="{{ asset('assets/img/dashboard/stok.svg') }}" class="img-fluid dashboard-img"
                             alt="Stok Kendaraan Icon" width="18">
@@ -125,9 +125,45 @@
         </div>
     </div>
 
+    <p id="labelJan" class="d-none">{{ $kendaraanPerBulan[1] }}</p>
+    <p id="labelFeb" class="d-none">{{ $kendaraanPerBulan[2] }}</p>
+    <p id="labelMar" class="d-none">{{ $kendaraanPerBulan[3] }}</p>
+    <p id="labelApr" class="d-none">{{ $kendaraanPerBulan[4] }}</p>
+    <p id="labelMei" class="d-none">{{ $kendaraanPerBulan[5] }}</p>
+    <p id="labelJun" class="d-none">{{ $kendaraanPerBulan[6] }}</p>
+    <p id="labelJul" class="d-none">{{ $kendaraanPerBulan[7] }}</p>
+    <p id="labelAgu" class="d-none">{{ $kendaraanPerBulan[8] }}</p>
+    <p id="labelSep" class="d-none">{{ $kendaraanPerBulan[9] }}</p>
+    <p id="labelOkt" class="d-none">{{ $kendaraanPerBulan[10] }}</p>
+    <p id="labelNov" class="d-none">{{ $kendaraanPerBulan[11] }}</p>
+    <p id="labelDes" class="d-none">{{ $kendaraanPerBulan[12] }}</p>
+
+    <p id="labelMingguPertama" class="d-none">{{ $kendaraanPerMinggu[0] }}</p>
+    <p id="labelMingguKedua" class="d-none">{{ $kendaraanPerMinggu[1] }}</p>
+    <p id="labelMingguKetiga" class="d-none">{{ $kendaraanPerMinggu[2] }}</p>
+    <p id="labelMingguKeempat" class="d-none">{{ $kendaraanPerMinggu[3] }}</p>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
+        const labelJan = document.getElementById('labelJan').textContent;
+        const labelFeb = document.getElementById('labelFeb').textContent;
+        const labelMar = document.getElementById('labelMar').textContent;
+        const labelApr = document.getElementById('labelApr').textContent;
+        const labelMei = document.getElementById('labelMei').textContent;
+        const labelJun = document.getElementById('labelJun').textContent;
+        const labelJul = document.getElementById('labelJul').textContent;
+        const labelAgu = document.getElementById('labelAgu').textContent;
+        const labelSep = document.getElementById('labelSep').textContent;
+        const labelOkt = document.getElementById('labelOkt').textContent;
+        const labelNov = document.getElementById('labelNov').textContent;
+        const labelDes = document.getElementById('labelDes').textContent;
+
+        const labelMingguPertama = document.getElementById('labelMingguPertama').textContent;
+        const labelMingguKedua = document.getElementById('labelMingguKedua').textContent;
+        const labelMingguKetiga = document.getElementById('labelMingguKetiga').textContent;
+        const labelMingguKeempat = document.getElementById('labelMingguKeempat').textContent;
+
         const buttonOther = document.querySelector('.button-other');
         const modalOther = document.querySelector('.modal-other');
         const buttonYear = document.querySelector('.button-tahun');

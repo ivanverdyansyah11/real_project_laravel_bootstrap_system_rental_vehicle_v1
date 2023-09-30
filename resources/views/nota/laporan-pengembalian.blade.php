@@ -34,10 +34,10 @@
                                     {{ $pengembalian->pelepasan_pemesanan->kendaraan->nama_kendaraan }}</td>
                             </tr>
                             <tr>
-                                <td scope="col">Nomor Polisi</td>
+                                <td scope="col">Nomor Plat</td>
                                 <td scope="col-1">:</td>
                                 <td scope="col" class="text-end">
-                                    {{ $pengembalian->pelepasan_pemesanan->kendaraan->nomor_polisi }}</td>
+                                    {{ $pengembalian->pelepasan_pemesanan->kendaraan->seri_kendaraan->nomor_plat }}</td>
                             </tr>
                             <tr>
                                 <td scope="col">Jenis Pembayaran</td>

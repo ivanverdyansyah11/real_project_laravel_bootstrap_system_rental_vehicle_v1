@@ -219,23 +219,21 @@
                                         @enderror
                                     </div>
                                 </div>
-                                @if ($pemesanan->kendaraan->jenis_kendaraans_id === $jenis_kendaraan->id)
-                                    <div class="col-md-6 mb-4">
-                                        <div class="input-wrapper">
-                                            <label for="ban_serep">Ban Serep</label>
-                                            <select id="ban_serep" class="input" name="ban_serep"
-                                                value="{{ old('ban_serep') }}">
-                                                <option value="-">Pilih ban serep</option>
-                                                <option value="ada">Ada</option>
-                                                <option value="tidak ada">Tidak Ada</option>
-                                                <option value="kosong">Kosong</option>
-                                            </select>
-                                            @error('ban_serep')
-                                                <p class="caption-error mt-2">{{ $message }}</p>
-                                            @enderror
-                                        </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="ban_serep">Ban Serep</label>
+                                        <select id="ban_serep" class="input" name="ban_serep"
+                                            value="{{ old('ban_serep') }}">
+                                            <option value="-">Pilih ban serep</option>
+                                            <option value="ada">Ada</option>
+                                            <option value="tidak ada">Tidak Ada</option>
+                                            <option value="kosong">Kosong</option>
+                                        </select>
+                                        @error('ban_serep')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
                                     </div>
-                                @endif
+                                </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="biaya_tambahan">Biaya Tambahan</label>

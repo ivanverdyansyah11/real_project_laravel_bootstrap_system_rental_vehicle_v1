@@ -32,6 +32,11 @@
                         <td scope="col" class="text-end">{{ $kendaraan->seri_kendaraan->nomor_plat }}</td>
                     </tr>
                     <tr>
+                        <td scope="col">Nomor Plat Kendaraan</td>
+                        <td scope="col-1">:</td>
+                        <td scope="col" class="text-end">{{ $kendaraan->seri_kendaraan->nomor_plat }}</td>
+                    </tr>
+                    <tr>
                         <td scope="col">Kategori Kilometer Kendaraan</td>
                         <td scope="col-1">:</td>
                         <td scope="col" class="text-end">Kilometer {{ $kendaraan->kilometer_kendaraan->jumlah }}</td>

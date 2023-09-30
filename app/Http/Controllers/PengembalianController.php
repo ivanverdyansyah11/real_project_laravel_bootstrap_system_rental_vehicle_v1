@@ -47,7 +47,6 @@ class PengembalianController extends Controller
             'title' => 'Pengembalian',
             'pemesanan' => PelepasanPemesanan::where('kendaraans_id', $id)->with('kendaraan')->latest()->first(),
             'pembayaran' => PembayaranPemesanan::where('kendaraans_id', $id)->latest()->first(),
-            'jenis_kendaraan' => JenisKendaraan::where('nama', "Kendaraan Beroda 4")->first(),
         ]);
     }
 

@@ -47,7 +47,7 @@
                                     <div class="input-wrapper">
                                         <label for="tarifSewa">Tarif Sewa</label>
                                         <input type="text" id="tarifSewa" class="input" autocomplete="off" disabled
-                                            value="{{ $pemesanan->kendaraan->tarif_sewa }}">
+                                            value="{{ $pemesanan->kendaraan->tarif_sewa_hari }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
