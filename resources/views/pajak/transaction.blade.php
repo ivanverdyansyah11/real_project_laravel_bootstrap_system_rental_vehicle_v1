@@ -109,7 +109,7 @@
                             <div class="input-wrapper">
                                 <label for="jumlah_bayar">Jumlah Bayar</label>
                                 <input type="text" id="jumlah_bayar" class="input" autocomplete="off"
-                                    name="jumlah_bayar">
+                                    name="jumlah_bayar" pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
                                 @error('jumlah_bayar')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror

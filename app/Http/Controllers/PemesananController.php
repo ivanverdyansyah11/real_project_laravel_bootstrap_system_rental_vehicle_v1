@@ -12,6 +12,7 @@ use App\Models\PelepasanPemesanan;
 use App\Models\PembayaranPemesanan;
 use App\Models\Pemesanan;
 use App\Models\Sopir;
+use Carbon\Carbon;
 
 class PemesananController extends Controller
 {
@@ -28,6 +29,16 @@ class PemesananController extends Controller
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
             'bookings' => Pemesanan::where('status', 'booking')->where('kendaraans_id', $id)->paginate(6),
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $bookings = Pemesanan::where('tanggal_mulai', '>=', $request->tanggal_mulai)->where('tanggal_akhir', '<=', $request->tanggal_akhir)->paginate(6);
+
+        return view('pemesanan.index', [
+            'title' => 'Pemesanan',
+            'bookings' => $bookings,
         ]);
     }
 

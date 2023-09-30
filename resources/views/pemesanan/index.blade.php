@@ -21,7 +21,7 @@
                 <form class="form-search d-flex gap-3" method="POST" action="{{ route('pemesanan.search') }}">
                     @csrf
                     <div class="wrapper-searching position-relative">
-                        <input type="text" class="input-search" placeholder=" " name="tanggal_mulai">
+                        <input type="text" class="input-search" placeholder=" " name="tanggal_mulai" required>
                         <label class="d-flex align-items-center">
                             <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
                                 class="img-fluid search-icon">
@@ -29,13 +29,15 @@
                         </label>
                     </div>
                     <div class="wrapper-searching position-relative">
-                        <input type="text" class="input-search" placeholder=" " name="tanggal_akhir">
+                        <input type="text" class="input-search" placeholder=" " name="tanggal_akhir" required>
                         <label class="d-flex align-items-center">
                             <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
                                 class="img-fluid search-icon">
                             <p>Cari tanggal berakhir..</p>
                         </label>
                     </div>
+                    <button type="submit" class="button-searching-tanggal position-absolute"
+                        style="top: -100px;">lorem</button>
                 </form>
             </div>
         </div>
