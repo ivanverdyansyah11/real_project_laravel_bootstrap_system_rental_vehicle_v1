@@ -43,11 +43,10 @@
             <div class="col-12 table-row table-header">
                 <div class="row table-data gap-4">
                     <div class="col data-header">Nama</div>
-                    <div class="col d-none d-lg-inline-block data-header">Nomor Telepon</div>
                     <div class="col d-none d-lg-inline-block data-header">Kendaraan</div>
-                    <div class="col d-none d-lg-inline-block data-header">Nomor Plat</div>
                     <div class="col d-none d-lg-inline-block data-header">Tanggal Mulai</div>
                     <div class="col d-none d-lg-inline-block data-header">Tanggal Akhir</div>
+                    <div class="col d-none d-lg-inline-block data-header">Status Kendaraan</div>
                     <div class="col-3 col-xl-2 data-header"></div>
                 </div>
             </div>
@@ -62,13 +61,14 @@
                     <div class="col-12 table-row table-border">
                         <div class="row table-data gap-4 align-items-center">
                             <div class="col data-value data-length">{{ $booking->pelanggan->nama }}</div>
-                            <div class="col data-value data-length">{{ $booking->pelanggan->nomor_telepon }}</div>
                             <div class="col data-value data-length data-length-none">
                                 {{ $booking->kendaraan->nama_kendaraan }}</div>
-                            <div class="col data-value data-length data-length-none">
-                                {{ $booking->kendaraan->seri_kendaraan->nomor_plat }}</div>
                             <div class="col data-value data-length data-length-none">{{ $booking->tanggal_mulai }}</div>
                             <div class="col data-value data-length data-length-none">{{ $booking->tanggal_akhir }}</div>
+                            <div
+                                class="col data-value data-length data-length-none {{ $booking->kendaraan->status == 'dipesan' ? 'status-false' : 'status-true' }}">
+                                {{ $booking->kendaraan->status == 'dipesan' ? 'Sudah Dipesan' : 'Ready' }}
+                            </div>
                             <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
                                 <div class="wrapper-action d-flex">
                                     <button type="button"

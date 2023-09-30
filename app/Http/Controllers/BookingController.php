@@ -19,27 +19,28 @@ class BookingController extends Controller
         ]);
     }
 
-    // public function search(Request $request)
-    // {
-    //     $kendaraans = Kendaraan::where('status', 'booking')
-    //         ->where('nama_kendaraan', 'like', '%' . $request->search . '%')
-    //         ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
-    //         ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
-    //         ->orWhere('tarif_sewa_hari', 'like', '%' . $request->search . '%')
-    //         ->orWhere('tarif_sewa_minggu', 'like', '%' . $request->search . '%')
-    //         ->orWhere('tarif_sewa_bulan', 'like', '%' . $request->search . '%')
-    //         ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
-    //         ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
-    //         ->orWhere('warna', 'like', '%' . $request->search . '%')
-    //         ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
-    //         ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')
-    //         ->paginate(6);
+    public function search(Request $request)
+    {
+        $kendaraans = Kendaraan::where('status', 'ready')->orWhere('status', 'booking')
+            ->where('nama_kendaraan', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
+            ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa_hari', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa_minggu', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa_bulan', 'like', '%' . $request->search . '%')
+            ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
+            ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
+            ->orWhere('warna', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')
+            ->paginate(6);
 
-    //     return view('pemesanan.index', [
-    //         'title' => 'Pemesanan',
-    //         'kendaraans' => $kendaraans,
-    //     ]);
-    // }
+        return view('booking.index', [
+            'title' => 'Pemesanan',
+            'kendaraans' => $kendaraans,
+            'pelanggans' => Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
+        ]);
+    }
 
     function booking(Request $request)
     {

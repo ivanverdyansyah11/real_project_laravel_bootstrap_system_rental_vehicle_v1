@@ -19,29 +19,15 @@ class PemesananController extends Controller
     {
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
-            'bookings' => Pemesanan::paginate(6),
+            'bookings' => Pemesanan::where('status', 'booking')->paginate(6),
         ]);
     }
 
-    public function search(Request $request)
+    public function searchBooking($id)
     {
-        $kendaraans = Kendaraan::where('status', 'booking')
-            ->where('nama_kendaraan', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
-            ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa_hari', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa_minggu', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa_bulan', 'like', '%' . $request->search . '%')
-            ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
-            ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
-            ->orWhere('warna', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')
-            ->paginate(6);
-
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
-            'kendaraans' => $kendaraans,
+            'bookings' => Pemesanan::where('status', 'booking')->where('kendaraans_id', $id)->paginate(6),
         ]);
     }
 

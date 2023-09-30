@@ -18,7 +18,7 @@
         <div class="row mb-4">
             <div
                 class="col-12 d-flex flex-column flex-md-row justify-content-md-between align-items-end align-items-md-center">
-                <form class="form-search d-inline-block" method="POST" action="{{ route('kendaraan.search') }}">
+                <form class="form-search d-inline-block" method="POST" action="{{ route('booking.search') }}">
                     @csrf
                     <div class="wrapper-search">
                         <input type="text" class="input-search" placeholder=" " name="search">
