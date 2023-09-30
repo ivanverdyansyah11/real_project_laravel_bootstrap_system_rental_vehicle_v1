@@ -200,7 +200,9 @@
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
                 datasets: [{
-                    data: [160, 143, 127, 169, 188, 154, 135, 96, 76, 125, 150, 180],
+                    data: [labelJan, labelFeb, labelMar, labelApr, labelMei, labelJun, labelJul, labelAgu,
+                        labelSep, labelOkt, labelNov, labelDes
+                    ],
                     borderWidth: 0,
                     backgroundColor: [
                         'rgba(226, 92, 39)',
@@ -252,7 +254,7 @@
             data: {
                 labels: ['Minggu Pertama', 'Minggu Kedua', 'Minggu Ketiga', 'Minggu Keempat'],
                 datasets: [{
-                    data: [160, 143, 127, 169],
+                    data: [labelMingguPertama, labelMingguKedua, labelMingguKetiga, labelMingguKeempat],
                     borderWidth: 0,
                     backgroundColor: [
                         'rgba(226, 92, 39)',

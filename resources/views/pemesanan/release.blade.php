@@ -421,6 +421,10 @@
             let tanggalAkhir;
             let totalTarifSewa;
 
+            if (waktuSewaHarian.value == '') {
+                waktuSewaHarian.value = '0';
+            }
+
             let tanggalMulai = moment(tanggalDiambilValue);
             if (waktuSewaMingguan.value && waktuSewaBulanan.value) {
                 jumlahHari = parseInt(waktuSewaHarian.value) + parseInt(waktuSewaMingguan.value) * 7;
@@ -476,6 +480,10 @@
             let tanggalAkhir;
             let totalTarifSewa;
 
+            if (waktuSewaMingguan.value == '') {
+                waktuSewaMingguan.value = '0';
+            }
+
             tanggalMulai = moment(tanggalDiambilValue);
             if (waktuSewaHarian.value && waktuSewaBulanan.value) {
                 jumlahHari = parseInt(waktuSewaHarian.value) + parseInt(waktuSewaMingguan.value) * 7;
@@ -530,6 +538,10 @@
             let jumlahBulan;
             let tanggalAkhir;
             let totalTarifSewa;
+
+            if (waktuSewaBulanan.value == '') {
+                waktuSewaBulanan.value = '0';
+            }
 
             tanggalMulai = moment(tanggalDiambilValue);
             if (waktuSewaHarian.value && waktuSewaMingguan.value) {
