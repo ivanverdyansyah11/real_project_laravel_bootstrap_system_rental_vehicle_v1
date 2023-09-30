@@ -18,22 +18,14 @@
         <div class="row mb-4">
             <div
                 class="col-12 d-flex flex-column flex-md-row justify-content-md-between align-items-end align-items-md-center">
-                <form class="form-search d-flex gap-3" method="POST" action="{{ route('pemesanan.search') }}">
+                <form class="form-search d-inline-block" method="POST" action="{{ route('kendaraan.search') }}">
                     @csrf
-                    <div class="wrapper-searching position-relative">
-                        <input type="text" class="input-search" placeholder=" " name="tanggal_mulai">
+                    <div class="wrapper-search">
+                        <input type="text" class="input-search" placeholder=" " name="search">
                         <label class="d-flex align-items-center">
                             <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
                                 class="img-fluid search-icon">
-                            <p>Cari tanggal mulai..</p>
-                        </label>
-                    </div>
-                    <div class="wrapper-searching position-relative">
-                        <input type="text" class="input-search" placeholder=" " name="tanggal_akhir">
-                        <label class="d-flex align-items-center">
-                            <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
-                                class="img-fluid search-icon">
-                            <p>Cari tanggal mulai..</p>
+                            <p>Cari kendaraan..</p>
                         </label>
                     </div>
                 </form>
@@ -69,7 +61,8 @@
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#bookingKendaraanModal"
                                         data-id="{{ $kendaraan->id }}" class="button-primary w-100">Booking</button>
                                     @if ($kendaraan->status == 'booking')
-                                        <a href="{{ route('pemesanan.search.booking', $kendaraan->id) }}" class="button-primary-blur w-100">Lihat Penyewa</a>
+                                        <a href="{{ route('pemesanan.search.booking', $kendaraan->id) }}"
+                                            class="button-primary-blur w-100">Lihat Penyewa</a>
                                     @else
                                         <button type="button" class="button-primary-blur w-100">Belum Dibooking</button>
                                     @endif
@@ -85,7 +78,7 @@
         </div>
     </div>
 
-    {{-- MODAL DETAIL BOOKING KENDARAAN --}}
+    {{-- MODAL BOOKING KENDARAAN --}}
     <div class="modal fade" id="bookingKendaraanModal" tabindex="-1" aria-labelledby="bookingKendaraanModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -139,7 +132,7 @@
             </div>
         </div>
     </div>
-    {{-- END MODAL DETAIL BOOKING KENDARAAN --}}
+    {{-- END MODAL BOOKING KENDARAAN --}}
 
     <script>
         $(document).on('click', '[data-bs-target="#bookingKendaraanModal"]', function() {

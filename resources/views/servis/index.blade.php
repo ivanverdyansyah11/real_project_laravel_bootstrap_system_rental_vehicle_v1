@@ -52,7 +52,7 @@
                                             class="img-fluid kendaraan-icon">
                                         <p class="product-year">{{ $kendaraan->tahun_pembuatan }}</p>
                                     </div>
-                                    <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa }}</h6>
+                                    <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa_hari }}</h6>
                                 </div>
                                 <div class="wrapper-button d-flex">
                                     <a href="{{ route('servis.check', $kendaraan->id) }}"

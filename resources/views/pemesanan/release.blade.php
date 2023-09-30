@@ -22,11 +22,9 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <form class="form d-inline-block w-100"
-                    action="{{ route('pemesanan.release.action', $pemesanan->kendaraans_id) }}" method="POST"
-                    enctype="multipart/form-data">
+                <form class="form d-inline-block w-100" action="{{ route('pemesanan.release.action', $pemesanan->id) }}"
+                    method="POST" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" id="tarifSewa" value="{{ $pemesanan->kendaraan->tarif_sewa }}">
                     <div class="row">
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
                             <div class="input-wrapper">
@@ -83,6 +81,20 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
+                                        <label for="nama_penyewa">Nama Pelanggan</label>
+                                        <input type="text" id="nama_penyewa" class="input" autocomplete="off"
+                                            value="{{ $pemesanan->pelanggan->nama }}" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="nama_kendaraan">Nama Kendaraan</label>
+                                        <input type="text" id="nama_kendaraan" class="input" autocomplete="off"
+                                            value="{{ $pemesanan->kendaraan->nama_kendaraan }}" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
                                         <label for="kilometer_keluar">Kilometer Keluar</label>
                                         <input type="text" id="kilometer_keluar" class="input" autocomplete="off"
                                             name="kilometer_keluar" value="{{ old('kilometer_keluar') }}" pattern="[0-9]*"
@@ -99,26 +111,6 @@
                                             name="bensin_keluar" value="{{ old('bensin_keluar') }}" pattern="[0-9]*"
                                             title="Hanya angka 0-9 diperbolehkan">
                                         @error('bensin_keluar')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="tanggal_diambil">Tanggal Diambil</label>
-                                        <input type="date" id="tanggal_diambil" class="input" autocomplete="off"
-                                            name="tanggal_diambil">
-                                        @error('tanggal_diambil')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="tanggal_kembali">Tanggal Kembali</label>
-                                        <input type="date" id="tanggal_kembali" class="input" autocomplete="off"
-                                            name="tanggal_kembali" disabled>
-                                        @error('tanggal_kembali')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -168,23 +160,96 @@
                                         @enderror
                                     </div>
                                 </div>
-                                @if ($pemesanan->kendaraan->jenis_kendaraans_id === $jenis_kendaraan->id)
-                                    <div class="col-md-6">
-                                        <div class="input-wrapper">
-                                            <label for="ban_serep">Ban Serep</label>
-                                            <select id="ban_serep" class="input" name="ban_serep"
-                                                value="{{ old('ban_serep') }}">
-                                                <option value="-">Pilih ban serep</option>
-                                                <option value="ada">Ada</option>
-                                                <option value="tidak ada">Tidak Ada</option>
-                                                <option value="kosong">Kosong</option>
-                                            </select>
-                                            @error('ban_serep')
-                                                <p class="caption-error mt-2">{{ $message }}</p>
-                                            @enderror
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="input-wrapper">
+                                        <label for="ban_serep">Ban Serep</label>
+                                        <select id="ban_serep" class="input" name="ban_serep"
+                                            value="{{ old('ban_serep') }}">
+                                            <option value="-">Pilih ban serep</option>
+                                            <option value="ada">Ada</option>
+                                            <option value="tidak ada">Tidak Ada</option>
+                                            <option value="kosong">Kosong</option>
+                                        </select>
+                                        @error('ban_serep')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
                                     </div>
-                                @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4 mt-2">
+                        <div class="input-wrapper">
+                            <div class="input-line position-relative mb-2">
+                                <div class="line"></div>
+                                <p>Menentukan Pelepasan Kendaraan</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="input-wrapper">
+                                <label for="tarif_sewa_hari">Tarif Sewa Kendaran Harian</label>
+                                <input type="text" id="tarif_sewa_hari" class="input" autocomplete="off"
+                                    pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan"
+                                    value="{{ $pemesanan->kendaraan->tarif_sewa_hari }}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="input-wrapper">
+                                <label for="tarif_sewa_minggu">Tarif Sewa Kendaran Mingguan</label>
+                                <input type="text" id="tarif_sewa_minggu" class="input" autocomplete="off"
+                                    pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan"
+                                    value="{{ $pemesanan->kendaraan->tarif_sewa_minggu }}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="input-wrapper">
+                                <label for="tarif_sewa_bulan">Tarif Sewa Kendaran Bulanan</label>
+                                <input type="text" id="tarif_sewa_bulan" class="input" autocomplete="off"
+                                    pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan"
+                                    value="{{ $pemesanan->kendaraan->tarif_sewa_bulan }}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="input-wrapper">
+                                <label for="waktu_sewa_hari">Total Harian</label>
+                                <input type="text" id="waktu_sewa_hari" class="input" autocomplete="off"
+                                    pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="input-wrapper">
+                                <label for="waktu_sewa_minggu">Total Mingguan</label>
+                                <input type="text" id="waktu_sewa_minggu" class="input" autocomplete="off"
+                                    pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="input-wrapper">
+                                <label for="waktu_sewa_bulan">Total Bulanan</label>
+                                <input type="text" id="waktu_sewa_bulan" class="input" autocomplete="off"
+                                    pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="input-wrapper">
+                                <label for="tanggal_diambil">Tanggal Diambil</label>
+                                <input type="date" id="tanggal_diambil" class="input" autocomplete="off"
+                                    name="tanggal_diambil">
+                                @error('tanggal_diambil')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="input-wrapper">
+                                <label for="tanggal_kembali">Tanggal Kembali</label>
+                                <input type="date" id="tanggal_kembali" class="input" autocomplete="off"
+                                    name="tanggal_kembali" disabled>
+                                @error('tanggal_kembali')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -324,14 +389,22 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
     <script>
-        let tanggalDiambil = document.querySelector('#tanggal_diambil');
-        const tanggalKembali = document.querySelector('#tanggal_kembali');
-        const waktuSewa = document.querySelector('#waktu_sewa');
-        const tarifSewa = document.querySelector('#tarifSewa');
-        const totalTarifSewa = document.querySelector('#total_tarif_sewa');
+        const inputTanggalKembali = document.querySelector('#tanggal_kembali');
+        const inputTanggalDiambil = document.querySelector('#tanggal_diambil');
         const jenisPembayaran = document.querySelector('#jenis_pembayaran');
         const totalBayar = document.querySelector('#total_bayar');
+
+        let waktuSewaHarian = document.querySelector('#waktu_sewa_hari');
+        let waktuSewaMingguan = document.querySelector('#waktu_sewa_minggu');
+        let waktuSewaBulanan = document.querySelector('#waktu_sewa_bulan');
+        let tarifSewaHarian = parseInt(document.querySelector('#tarif_sewa_hari').value);
+        let tarifSewaMingguan = parseInt(document.querySelector('#tarif_sewa_minggu').value);
+        let tarifSewaBulanan = parseInt(document.querySelector('#tarif_sewa_bulan').value);
+        let tarifSewa = document.querySelector('#total_tarif_sewa');
+        const waktuSewa = document.querySelector('#waktu_sewa');
 
         jenisPembayaran.addEventListener('change', function() {
             if (jenisPembayaran.value == "-" || jenisPembayaran.value == "belum bayar") {
@@ -341,44 +414,187 @@
             }
         });
 
-        tanggalDiambil.addEventListener('change', function() {
-            if (tanggalDiambil.value !== "") {
-                tanggalKembali.removeAttribute("disabled");
+        waktuSewaHarian.addEventListener('change', function() {
+            let tanggalDiambilValue = document.querySelector('#tanggal_diambil').value;
+            let jumlahHari;
+            let jumlahBulan;
+            let tanggalAkhir;
+            let totalTarifSewa;
+
+            let tanggalMulai = moment(tanggalDiambilValue);
+            if (waktuSewaMingguan.value && waktuSewaBulanan.value) {
+                jumlahHari = parseInt(waktuSewaHarian.value) + parseInt(waktuSewaMingguan.value) * 7;
+                jumlahBulan = parseInt(waktuSewaBulanan.value);
+                tanggalAkhir = tanggalMulai.add(jumlahHari, 'days').add(jumlahBulan, 'months');
+
+                let totalTarifSewaMinggu = tarifSewaMingguan * parseInt(waktuSewaMingguan.value);
+                let totalTarifSewaHari = tarifSewaHarian * parseInt(waktuSewaHarian.value);
+                let totalTarifSewaBulan = tarifSewaBulanan * jumlahBulan;
+                totalTarifSewa = totalTarifSewaMinggu + totalTarifSewaHari + totalTarifSewaBulan;
+
+            } else if (waktuSewaMingguan.value) {
+                jumlahHari = parseInt(waktuSewaHarian.value) + parseInt(waktuSewaMingguan.value) * 7;
+                tanggalAkhir = tanggalMulai.add(jumlahHari, 'days');
+
+                let totalTarifSewaMinggu = tarifSewaMingguan * parseInt(waktuSewaMingguan.value);
+                let totalTarifSewaHari = tarifSewaHarian * parseInt(waktuSewaHarian.value);
+                totalTarifSewa = totalTarifSewaMinggu + totalTarifSewaHari;
+
+            } else if (waktuSewaBulanan.value) {
+                jumlahHari = parseInt(waktuSewaHarian.value);
+                jumlahBulan = parseInt(waktuSewaBulanan.value);
+                tanggalAkhir = tanggalMulai.add(jumlahHari, 'days').add(jumlahBulan, 'months');
+
+                let totalTarifSewaBulan = tarifSewaBulanan * jumlahBulan;
+                let totalTarifSewaHari = tarifSewaHarian * parseInt(waktuSewaHarian.value);
+                totalTarifSewa = totalTarifSewaBulan + totalTarifSewaHari;
+
             } else {
-                tanggalKembali.setAttribute("disabled", "disabled");
-                tanggalKembali.value = "-";
-                waktuSewa.value = "";
+                jumlahHari = parseInt(waktuSewaHarian.value);
+                tanggalAkhir = tanggalMulai.add(jumlahHari, 'days');
+                totalTarifSewa = tarifSewaHarian * parseInt(waktuSewaHarian.value);
             }
+
+            let tahun = tanggalAkhir.format('YYYY');
+            let bulan = tanggalAkhir.format('MM');
+            let tanggal = tanggalAkhir.format('DD');
+
+            inputTanggalKembali.value = `${tahun}-${bulan}-${tanggal}`;
+            tarifSewa.value = totalTarifSewa;
+
+            let tanggalMulaiSewa = moment(tanggalDiambilValue);
+            let tanggalKembaliSewa = moment(inputTanggalKembali.value);
+            let totalWaktuSewa = tanggalKembaliSewa.diff(tanggalMulaiSewa, 'days');
+
+            waktuSewa.value = totalWaktuSewa;
         });
 
-        tanggalKembali.addEventListener('change', function() {
-            const tanggal_datang = new Date(tanggalDiambil.value);
-            const tanggal_kembali = new Date(tanggalKembali.value);
-            const tarifSewaValue = parseInt(tarifSewa.value);
+        waktuSewaMingguan.addEventListener('change', function() {
+            let tanggalDiambilValue = document.querySelector('#tanggal_diambil').value;
+            let jumlahHari;
+            let jumlahBulan;
+            let tanggalAkhir;
+            let totalTarifSewa;
 
-            const selisihWaktu = tanggal_kembali - tanggal_datang;
-            const selisihHari = selisihWaktu / (1000 * 60 * 60 * 24);
+            tanggalMulai = moment(tanggalDiambilValue);
+            if (waktuSewaHarian.value && waktuSewaBulanan.value) {
+                jumlahHari = parseInt(waktuSewaHarian.value) + parseInt(waktuSewaMingguan.value) * 7;
+                jumlahBulan = parseInt(waktuSewaBulanan.value);
+                tanggalAkhir = tanggalMulai.add(jumlahHari, 'days').add(jumlahBulan, 'months');
 
-            waktu_sewa.value = selisihHari;
-            totalTarifSewa.value = selisihHari * tarifSewaValue;
+                let totalTarifSewaMinggu = tarifSewaMingguan * parseInt(waktuSewaMingguan.value);
+                let totalTarifSewaHari = tarifSewaHarian * parseInt(waktuSewaHarian.value);
+                let totalTarifSewaBulan = tarifSewaBulanan * jumlahBulan;
+                totalTarifSewa = totalTarifSewaMinggu + totalTarifSewaHari + totalTarifSewaBulan;
+
+            } else if (waktuSewaHarian.value) {
+                jumlahHari = parseInt(waktuSewaMingguan.value) * 7 + parseInt(waktuSewaHarian.value);
+                tanggalAkhir = tanggalMulai.add(jumlahHari, 'days');
+
+                let totalTarifSewaHari = tarifSewaHarian * parseInt(waktuSewaHarian.value);
+                let totalTarifSewaMinggu = tarifSewaMingguan * parseInt(waktuSewaMingguan.value);
+                totalTarifSewa = totalTarifSewaHari + totalTarifSewaMinggu;
+
+            } else if (waktuSewaBulanan.value) {
+                jumlahHari = parseInt(waktuSewaMingguan.value) * 7;
+                jumlahBulan = parseInt(waktuSewaBulanan.value);
+                tanggalAkhir = tanggalMulai.add(jumlahHari, 'days').add(jumlahBulan, 'months');
+
+                let totalTarifSewaBulan = tarifSewaBulanan * jumlahBulan;
+                let totalTarifSewaMinggu = tarifSewaMingguan * parseInt(waktuSewaMingguan.value);
+                totalTarifSewa = totalTarifSewaBulan + totalTarifSewaMinggu;
+
+            } else {
+                jumlahHari = parseInt(waktuSewaMingguan.value) * 7;
+                tanggalAkhir = tanggalMulai.add(jumlahHari, 'days');
+                totalTarifSewa = tarifSewaMingguan * parseInt(waktuSewaMingguan.value);
+            }
+
+            let tahun = tanggalAkhir.format('YYYY');
+            let bulan = tanggalAkhir.format('MM');
+            let tanggal = tanggalAkhir.format('DD');
+
+            inputTanggalKembali.value = `${tahun}-${bulan}-${tanggal}`;
+            tarifSewa.value = totalTarifSewa;
+
+            let tanggalMulaiSewa = moment(tanggalDiambilValue);
+            let tanggalKembaliSewa = moment(inputTanggalKembali.value);
+            let totalWaktuSewa = tanggalKembaliSewa.diff(tanggalMulaiSewa, 'days');
+
+            waktuSewa.value = totalWaktuSewa;
         });
 
-        waktuSewa.addEventListener('change', function() {
-            const tanggalSaatIni = new Date(tanggalDiambil.value);
+        waktuSewaBulanan.addEventListener('change', function() {
+            let tanggalDiambilValue = document.querySelector('#tanggal_diambil').value;
+            let jumlahHari;
+            let jumlahBulan;
+            let tanggalAkhir;
+            let totalTarifSewa;
 
-            const waktuSewaValue = parseInt(waktuSewa.value);
-            const tarifSewaValue = parseInt(tarifSewa.value);
-            tanggalSaatIni.setDate(tanggalSaatIni.getDate() + waktuSewaValue);
+            tanggalMulai = moment(tanggalDiambilValue);
+            if (waktuSewaHarian.value && waktuSewaMingguan.value) {
+                jumlahHari = parseInt(waktuSewaMingguan.value) * 7 + parseInt(waktuSewaHarian.value);
+                jumlahBulan = parseInt(waktuSewaBulanan.value);
+                tanggalAkhir = tanggalMulai.add(jumlahHari, 'days').add(jumlahBulan, 'months');
 
-            const tahun = tanggalSaatIni.getFullYear();
-            const bulan = String(tanggalSaatIni.getMonth() + 1).padStart(2, "0");
-            const tanggal = String(tanggalSaatIni.getDate()).padStart(2, "0");
+                let totalTarifSewaMinggu = tarifSewaMingguan * parseInt(waktuSewaMingguan.value);
+                let totalTarifSewaHari = tarifSewaHarian * parseInt(waktuSewaHarian.value);
+                let totalTarifSewaBulan = tarifSewaBulanan * jumlahBulan;
+                totalTarifSewa = totalTarifSewaMinggu + totalTarifSewaHari + totalTarifSewaBulan;
 
-            const tanggalKeDepan = `${tahun}-${bulan}-${tanggal}`;
-            const totalTarifWaktu = waktuSewaValue * tarifSewaValue;
+            } else if (waktuSewaMingguan.value) {
+                jumlahHari = parseInt(waktuSewaMingguan.value) * 7;
+                jumlahBulan = parseInt(waktuSewaBulanan.value);
+                tanggalAkhir = tanggalMulai.add(jumlahHari, 'days').add(jumlahBulan, 'months');
 
-            tanggalKembali.value = tanggalKeDepan;
-            totalTarifSewa.value = totalTarifWaktu;
+                let totalTarifSewaBulan = tarifSewaBulanan * jumlahBulan;
+                let totalTarifSewaMinggu = tarifSewaMingguan * parseInt(waktuSewaMingguan.value);
+                totalTarifSewa = totalTarifSewaBulan + totalTarifSewaMinggu;
+
+            } else if (waktuSewaHarian.value) {
+                jumlahHari = parseInt(waktuSewaHarian.value);
+                jumlahBulan = parseInt(waktuSewaBulanan.value);
+                tanggalAkhir = tanggalMulai.add(jumlahHari, 'days').add(jumlahBulan, 'months');
+
+                let totalTarifSewaBulan = tarifSewaBulanan * jumlahBulan;
+                let totalTarifSewaHari = tarifSewaHarian * parseInt(waktuSewaHarian.value);
+                totalTarifSewa = totalTarifSewaBulan + totalTarifSewaHari;
+
+            } else {
+                jumlahBulan = parseInt(waktuSewaBulanan.value);
+                tanggalAkhir = tanggalMulai.add(jumlahBulan, 'months');
+
+                totalTarifSewa = tarifSewaBulanan * jumlahBulan;
+            }
+
+            let tahun = tanggalAkhir.format('YYYY');
+            let bulan = tanggalAkhir.format('MM');
+            let tanggal = tanggalAkhir.format('DD');
+
+            inputTanggalKembali.value = `${tahun}-${bulan}-${tanggal}`;
+            tarifSewa.value = totalTarifSewa;
+
+            let tanggalMulaiSewa = moment(tanggalDiambilValue);
+            let tanggalKembaliSewa = moment(inputTanggalKembali.value);
+            let totalWaktuSewa = tanggalKembaliSewa.diff(tanggalMulaiSewa, 'days');
+
+            waktuSewa.value = totalWaktuSewa;
+        });
+
+        inputTanggalDiambil.addEventListener('change', function() {
+            if (inputTanggalDiambil.value !== "") {
+                inputTanggalKembali.removeAttribute("disabled");
+                waktuSewaHarian.removeAttribute("disabled");
+                waktuSewaMingguan.removeAttribute("disabled");
+                waktuSewaBulanan.removeAttribute("disabled");
+            } else {
+                inputTanggalKembali.setAttribute("disabled", "disabled");
+                inputTanggalKembali.value = "-";
+                waktuSewa.value = "0";
+                waktuSewaHarian.value = "0";
+                waktuSewaMingguan.value = "0";
+                waktuSewaBulanan.value = "0";
+            }
         });
 
         const tagCreateDocument = document.querySelector('.tag-create-document');

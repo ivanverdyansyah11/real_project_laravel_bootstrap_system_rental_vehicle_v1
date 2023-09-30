@@ -45,70 +45,21 @@ class PemesananController extends Controller
         ]);
     }
 
-    function booking(Request $request)
-    {
-        if ($request->pelanggans_id == '-') {
-            return redirect(route('kendaraan'))->with('failed', 'Isi Form Input Pelanggan Terlebih Dahulu!');
-        }
-
-        $validatedData = $request->validate([
-            'pelanggans_id' => 'required|string',
-            'jenis_kendaraans_id' => 'required|string',
-            'tanggal_mulai' => 'required|date',
-            'tanggal_akhir' => 'required|date',
-        ]);
-
-        if (is_string($validatedData['pelanggans_id'])) {
-            $validatedData['pelanggans_id'] = (int)$validatedData['pelanggans_id'];
-        }
-
-        if (is_string($validatedData['jenis_kendaraans_id'])) {
-            $validatedData['jenis_kendaraans_id'] = (int)$validatedData['jenis_kendaraans_id'];
-        }
-
-        $pemesanan = Pemesanan::create($validatedData);
-        $pemesananID = Pemesanan::latest()->first();
-
-        $pelanggan = Pelanggan::where('id', $validatedData['pelanggans_id'])->first()->update([
-            'status' => 'tidak ada',
-        ]);
-
-        $laporan = Laporan::create([
-            'penggunas_id' => auth()->user()->id,
-            'relations_id' => $pemesananID->id,
-            'kategori_laporan' => 'booking',
-        ]);
-
-        if ($pemesanan && $pelanggan && $laporan) {
-            return redirect(route('kendaraan'))->with('success', 'Berhasil Tambah Pemesanan!');
-        } else {
-            return redirect(route('kendaraan'))->with('failed', 'Gagal Tambah Pemesanan!');
-        }
-    }
-
     public function release($id)
     {
         return view('pemesanan.release', [
             'title' => 'Pemesanan',
-            'pemesanan' => Pemesanan::where('kendaraans_id', $id)->first(),
-            'jenis_kendaraan' => JenisKendaraan::where('nama', "Kendaraan Beroda 4")->first(),
+            'pemesanan' => Pemesanan::where('id', $id)->first(),
             'sopirs' => Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
         ]);
     }
 
     public function releaseAction($id, Request $request)
     {
-        $pemesanan = Pemesanan::where('kendaraans_id', $id)->with('pelanggan', 'kendaraan')->first();
+        $pemesanan = Pemesanan::where('id', $id)->with('pelanggan', 'kendaraan')->first();
 
-        $jenis_kendaraan = JenisKendaraan::where('nama', "Kendaraan Beroda 4")->first();
-        if ($pemesanan->kendaraan->jenis_kendaraans_id == $jenis_kendaraan->id) {
-            if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->ban_serep == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-') {
-                return redirect(route('pemesanan.release', $id))->with('failed', 'Isi Form Input Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
-            }
-        } else {
-            if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-') {
-                return redirect(route('pemesanan.release', $id))->with('failed', 'Isi Form Input Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
-            }
+        if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->ban_serep == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-') {
+            return redirect(route('pemesanan.release', $id))->with('failed', 'Isi Form Input Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
         }
 
         $validatedData = $request->validate([
@@ -122,6 +73,7 @@ class PemesananController extends Controller
             'sarung_jok' => 'required|string',
             'karpet' => 'required|string',
             'kondisi_kendaraan' => 'required|string',
+            'ban_serep' => 'required|string',
         ]);
 
         $validatedDataPembayaran = $request->validate([
@@ -140,10 +92,6 @@ class PemesananController extends Controller
 
         if (is_string($validatedData['bensin_keluar'])) {
             $validatedData['bensin_keluar'] = (int)$validatedData['bensin_keluar'];
-        }
-
-        if ($pemesanan->kendaraan->jenis_kendaraans_id == $jenis_kendaraan->id) {
-            $validatedData['ban_serep'] = $request->ban_serep;
         }
 
         $validatedData['pemesanans_id'] = $pemesanan->id;
@@ -213,34 +161,14 @@ class PemesananController extends Controller
             'kategori_laporan' => 'pemesanan',
         ]);
 
-        if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan && $laporan) {
+        $pemesanan = $pemesanan->update([
+            'status' => 'selesai booking',
+        ]);
+
+        if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan && $laporan && $pemesanan) {
             return redirect(route('pemesanan'))->with('success', 'Berhasil Melakukan Pelepasan Kendaraan!');
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Melakukan Pelepasan Kendaraan!');
-        }
-    }
-
-    public function delete($id)
-    {
-        $pemesanan = Pemesanan::where('kendaraans_id', $id)->first();
-
-        $pelanggan = Pelanggan::where('id', $pemesanan->pelanggans_id)->first()->update([
-            'status' => 'ada',
-        ]);
-
-        $laporan = Laporan::where('relations_id', $pemesanan->id)->where('kategori_laporan', 'booking')->first();
-        $laporan = $laporan->delete();
-
-        $pemesanan = $pemesanan->delete();
-
-        $kendaraan = Kendaraan::where('id', $id)->first()->update([
-            'status' => 'ready',
-        ]);
-
-        if ($kendaraan && $pemesanan && $pelanggan && $laporan) {
-            return redirect(route('kendaraan'))->with('success', 'Berhasil Hapus Pemesanan Kendaraan!');
-        } else {
-            return redirect(route('kendaraan'))->with('failed', 'Gagal Hapus Pemesanan Kendaraan!');
         }
     }
 }

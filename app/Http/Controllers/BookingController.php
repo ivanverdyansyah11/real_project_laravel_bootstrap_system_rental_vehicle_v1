@@ -54,6 +54,8 @@ class BookingController extends Controller
             'tanggal_akhir' => 'required|date',
         ]);
 
+        $validatedData['status'] = 'booking';
+
         if (is_string($validatedData['pelanggans_id'])) {
             $validatedData['pelanggans_id'] = (int)$validatedData['pelanggans_id'];
         }
@@ -82,6 +84,56 @@ class BookingController extends Controller
             return redirect(route('booking'))->with('success', 'Berhasil Booking Kendaraan!');
         } else {
             return redirect(route('booking'))->with('failed', 'Gagal Booking Kendaraan!');
+        }
+    }
+
+    function detail($id)
+    {
+        $pemesanan = Pemesanan::where('id', $id)->with('pelanggan', 'kendaraan')->first();
+        return response()->json($pemesanan);
+    }
+
+    function update($id, Request $request)
+    {
+        $validatedData = $request->validate([
+            'tanggal_mulai' => 'required|date',
+            'tanggal_akhir' => 'required|date',
+        ]);
+
+        $pemesanan = Pemesanan::where('id', $id)->first()->update($validatedData);
+
+        if ($pemesanan) {
+            return redirect(route('pemesanan'))->with('success', 'Berhasil Update Booking Kendaraan!');
+        } else {
+            return redirect(route('pemesanan'))->with('failed', 'Gagal Update Booking Kendaraan!');
+        }
+    }
+
+    public function delete($id)
+    {
+        $pemesanan = Pemesanan::where('id', $id)->first();
+        $pemesananCount = Pemesanan::where('kendaraans_id', $pemesanan->kendaraans_id)->count();
+
+        $pelanggan = Pelanggan::where('id', $pemesanan->pelanggans_id)->first()->update([
+            'status' => 'ada',
+        ]);
+
+        $laporan = Laporan::where('relations_id', $pemesanan->id)->where('kategori_laporan', 'booking')->first();
+        $laporan = $laporan->delete();
+
+        if ($pemesananCount == 1) {
+            Kendaraan::where('id', $pemesanan->kendaraans_id)->first()->update([
+                'status' => 'ready',
+            ]);
+        }
+
+        $pemesanan = $pemesanan->delete();
+
+
+        if ($pemesanan && $pelanggan && $laporan) {
+            return redirect(route('pemesanan'))->with('success', 'Berhasil Hapus Booking Kendaraan!');
+        } else {
+            return redirect(route('pemesanan'))->with('failed', 'Gagal Hapus Booking Kendaraan!');
         }
     }
 }

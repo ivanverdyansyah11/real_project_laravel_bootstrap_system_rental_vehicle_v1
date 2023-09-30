@@ -780,13 +780,15 @@ body {
     stroke: none;
 }
 
-.button-action.button-detail {
+.button-action.button-detail,
+.button-action.button-approve {
     background-color: rgba(var(--blue-color), 0.12);
     border: var(--border-style);
     border-color: transparent;
 }
 
-.button-action.button-detail:hover {
+.button-action.button-detail:hover,
+.button-action.button-approve:hover {
     border: 1px solid rgba(var(--blue-color), 0.24);
 }
 
@@ -812,7 +814,8 @@ body {
 
 .detail-icon,
 .edit-icon,
-.delete-icon {
+.delete-icon,
+.approve-icon {
     width: 16px;
     height: 16px;
     background-image: url('../img/button/detail.svg');
@@ -827,6 +830,10 @@ body {
 
 .delete-icon {
     background-image: url('../img/button/delete.svg');
+}
+
+.approve-icon {
+    background-image: url('../img/button/approve.svg');
 }
 
 .wrapper-search {
