@@ -166,6 +166,7 @@ Route::middleware('auth')->group(function () {
     // BOOKING
     Route::controller(BookingController::class)->group(function () {
         Route::get('/booking', 'index')->name('booking');
+        Route::post('/booking/check', 'check')->name('booking.check');
         Route::get('/booking/detail/{id}', 'detail')->name('booking.detail');
         Route::post('/booking/edit/{id}', 'update')->name('booking.update');
         Route::post('/booking/cari', 'search')->name('booking.search');

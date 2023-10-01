@@ -42,6 +42,15 @@ class BookingController extends Controller
         ]);
     }
 
+    function check()
+    {
+        $pelanggan = Pelanggan::where('status', 'ada')->count();
+
+        if ($pelanggan == 0) {
+            return redirect(route('booking'))->with('failed', 'Tambahkan Pelanggan Terlebih Dahulu!');
+        }
+    }
+
     function booking(Request $request)
     {
         if ($request->pelanggans_id == '-') {

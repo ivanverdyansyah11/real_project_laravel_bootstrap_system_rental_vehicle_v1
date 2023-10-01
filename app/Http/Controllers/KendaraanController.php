@@ -22,8 +22,7 @@ class KendaraanController extends Controller
 
     public function search(Request $request)
     {
-        $kendaraans = Kendaraan::where('status', 'ready')
-            ->orWhere('nomor_plat', 'like', '%' . $request->search . '%')
+        $kendaraans = Kendaraan::where('nomor_plat', 'like', '%' . $request->search . '%')
             ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
             ->orWhere('tarif_sewa_hari', 'like', '%' . $request->search . '%')
             ->orWhere('tarif_sewa_minggu', 'like', '%' . $request->search . '%')

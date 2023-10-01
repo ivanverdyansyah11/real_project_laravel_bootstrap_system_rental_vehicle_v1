@@ -58,8 +58,16 @@
                                     <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa_hari }}</h6>
                                 </div>
                                 <div class="wrapper-button d-flex flex-column">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#bookingKendaraanModal"
-                                        data-id="{{ $kendaraan->id }}" class="button-primary w-100">Booking</button>
+                                    @if (\App\Models\Pelanggan::where('status', 'ada')->count() == 0)
+                                        <form action="{{ route('booking.check') }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="button-primary w-100">Booking</button>
+                                        </form>
+                                    @else
+                                        <button type="button" data-bs-toggle="modal"
+                                            data-bs-target="#bookingKendaraanModal" data-id="{{ $kendaraan->id }}"
+                                            class="button-primary w-100">Booking</button>
+                                    @endif
                                     @if ($kendaraan->status == 'booking')
                                         <a href="{{ route('pemesanan.search.booking', $kendaraan->id) }}"
                                             class="button-primary-blur w-100">Lihat Penyewa</a>
