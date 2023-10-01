@@ -84,12 +84,10 @@
                             </div>
                             <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
                                 <div class="wrapper-action d-flex">
-                                    <button type="button"
-                                        class="button-action button-approve d-flex justify-content-center align-items-center"
-                                        data-bs-toggle="modal" data-bs-target="#detailBookingModal"
-                                        data-id="{{ $booking->id }}">
+                                    <a href="{{ route('booking.detail', $booking->id) }}"
+                                        class="button-action button-approve d-flex justify-content-center align-items-center">
                                         <div class="approve-icon"></div>
-                                    </button>
+                                    </a>
                                     <a href="{{ route('booking.update', $booking->id) }}"
                                         class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
                                         <div class="edit-icon"></div>

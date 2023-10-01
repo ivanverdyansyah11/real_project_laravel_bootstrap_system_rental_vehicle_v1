@@ -345,12 +345,20 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="sopirs_id">Penyewaan Sopir</label>
-                                        <select id="sopirs_id" class="input" name="sopirs_id"
-                                            value="{{ old('sopirs_id') }}">
-                                            <option value="-">Pilih penyewaan sopir</option>
-                                            @foreach ($sopirs as $sopir)
-                                                <option value="{{ $sopir->id }}">{{ $sopir->nama }}</option>
-                                            @endforeach
+                                        <select id="sopirs_id" class="input" name="sopirs_id">
+                                            @if ($pemesanan->sopirs_id == null)
+                                                <option value="-">Pilih penyewaan sopir</option>
+                                                @foreach ($sopirs as $sopir)
+                                                    <option value="{{ $sopir->id }}">
+                                                        {{ $sopir->nama }}</option>
+                                                @endforeach
+                                            @else
+                                                @foreach ($sopirs as $sopir)
+                                                    <option value="{{ $sopir->id }}"
+                                                        {{ $sopir->id == $pemesanan->sopirs_id ? 'selected' : '' }}>
+                                                        {{ $sopir->nama }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                         @error('sopirs_id')
                                             <p class="caption-error mt-2">{{ $message }}</p>

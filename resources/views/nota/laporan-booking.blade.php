@@ -27,15 +27,14 @@
                         <td scope="col" class="text-end">{{ $booking->pelanggan->alamat }}</td>
                     </tr>
                     <tr>
-                        <td scope="col">Nama Kendaraan</td>
+                        <td scope="col">Nomor Plat Kendaraan</td>
                         <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $booking->kendaraan->brand_kendaraan->nama }}
-                            {{ $booking->kendaraan->nama_kendaraan }}</td>
+                        <td scope="col" class="text-end">{{ $booking->kendaraan->nomor_plat }}</td>
                     </tr>
                     <tr>
-                        <td scope="col">Nomor Plat</td>
+                        <td scope="col">Nomor Seri</td>
                         <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $booking->kendaraan->seri_kendaraan->nomor_plat }}</td>
+                        <td scope="col" class="text-end">{{ $booking->kendaraan->seri_kendaraan->nomor_seri }}</td>
                     </tr>
                     <tr>
                         <td scope="col">Tarif Sewa</td>

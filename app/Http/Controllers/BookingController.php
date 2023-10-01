@@ -99,6 +99,16 @@ class BookingController extends Controller
         }
     }
 
+    public function detail($id)
+    {
+        $pemesanan = Pemesanan::where('id', $id)->with('kendaraan', 'pelanggan', 'sopir')->first();
+
+        return view('pemesanan.detail', [
+            'title' => 'Booking',
+            'pemesanan' => $pemesanan,
+        ]);
+    }
+
     public function edit($id)
     {
         $pemesanan = Pemesanan::where('id', $id)->with('kendaraan', 'pelanggan', 'sopir')->first();
