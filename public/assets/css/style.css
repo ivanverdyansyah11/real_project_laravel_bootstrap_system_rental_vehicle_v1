@@ -841,6 +841,17 @@ body {
     position: relative;
 }
 
+.form-search .input {
+    position: relative;
+    width: 100%;
+    padding: 16px;
+    border-radius: var(--rounded-md);
+    border: var(--border-style);
+    background-color: rgba(var(--dark-color), 0.03);
+    font-size: 0.875rem;
+    width: 260px;
+}
+
 .form-search .input-search {
     position: relative;
     width: 100%;
@@ -863,7 +874,8 @@ body {
     gap: var(--rounded-lg);
 }
 
-.form-search label p {
+.form-search label p,
+.form-search p {
     color: rgba(var(--dark-color), 0.52);
     font-size: 0.875rem;
     font-family: var(--urbanist-medium);

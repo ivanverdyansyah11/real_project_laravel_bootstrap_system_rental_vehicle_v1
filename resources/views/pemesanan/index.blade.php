@@ -21,20 +21,12 @@
                 <form class="form-search d-flex gap-3" method="POST" action="{{ route('pemesanan.search') }}">
                     @csrf
                     <div class="wrapper-searching position-relative">
-                        <input type="text" class="input-search" placeholder=" " name="tanggal_mulai" required>
-                        <label class="d-flex align-items-center">
-                            <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
-                                class="img-fluid search-icon">
-                            <p>Cari tanggal mulai..</p>
-                        </label>
+                        <p class="mb-2">Tanggal mulai</p>
+                        <input type="date" class="input" name="tanggal_mulai" required>
                     </div>
                     <div class="wrapper-searching position-relative">
-                        <input type="text" class="input-search" placeholder=" " name="tanggal_akhir" required>
-                        <label class="d-flex align-items-center">
-                            <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
-                                class="img-fluid search-icon">
-                            <p>Cari tanggal berakhir..</p>
-                        </label>
+                        <p class="mb-2">Tanggal berakhir</p>
+                        <input type="date" class="input" name="tanggal_akhir" required>
                     </div>
                     <button type="submit" class="button-searching-tanggal position-absolute"
                         style="top: -100px;">lorem</button>
@@ -127,8 +119,7 @@
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="tanggal_mulai">Tanggal Mulai</label>
-                                <input type="text" class="input" id="tanggal_mulai" data-value="tanggal_mulai"
-                                    disabled>
+                                <input type="text" class="input" id="tanggal_mulai" data-value="tanggal_mulai" disabled>
                             </div>
                         </div>
                         <div class="col-12 row-button">
