@@ -38,6 +38,8 @@ class PemesananController extends Controller
 
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_akhir' => $request->tanggal_akhir,
             'bookings' => $bookings,
         ]);
     }

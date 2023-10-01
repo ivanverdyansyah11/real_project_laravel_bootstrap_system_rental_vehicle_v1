@@ -22,14 +22,16 @@
                     @csrf
                     <div class="wrapper-searching position-relative">
                         <p class="mb-2">Tanggal mulai</p>
-                        <input type="date" class="input" name="tanggal_mulai" required>
+                        <input type="date" class="input" name="tanggal_mulai" required
+                            @if (isset($tanggal_mulai)) value="{{ $tanggal_mulai }}" @endif>
                     </div>
                     <div class="wrapper-searching position-relative">
                         <p class="mb-2">Tanggal berakhir</p>
-                        <input type="date" class="input" name="tanggal_akhir" required>
+                        <input type="date" class="input" name="tanggal_akhir" required
+                            @if (isset($tanggal_akhir)) value="{{ $tanggal_akhir }}" @endif>
                     </div>
-                    <button type="submit" class="button-searching-tanggal position-absolute"
-                        style="top: -100px;">lorem</button>
+                    <button type="submit" class="button-searching-tanggal position-absolute" style="top: -100px;">
+                    </button>
                 </form>
             </div>
         </div>
