@@ -33,6 +33,23 @@
                     <button type="submit" class="button-searching-tanggal position-absolute" style="top: -100px;">
                     </button>
                 </form>
+                @if (
+                    \App\Models\Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count() == 0 ||
+                        \App\Models\Kendaraan::where('status', 'ready')->orWhere('status', 'booking')->count() == 0)
+                    <form action="{{ route('booking.check') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="button-primary d-none d-md-flex align-items-center">
+                            <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon"
+                                class="img-fluid button-icon">
+                            Booking
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('booking.create') }}" class="button-primary d-none d-md-flex align-items-center">
+                        <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
+                        Booking
+                    </a>
+                @endif
             </div>
         </div>
         <div class="row table-default">
@@ -73,12 +90,10 @@
                                         data-id="{{ $booking->id }}">
                                         <div class="approve-icon"></div>
                                     </button>
-                                    <button type="button"
-                                        class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
-                                        data-bs-toggle="modal" data-bs-target="#editBookingModal"
-                                        data-id="{{ $booking->id }}">
+                                    <a href="{{ route('booking.update', $booking->id) }}"
+                                        class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
                                         <div class="edit-icon"></div>
-                                    </button>
+                                    </a>
                                     <button type="button"
                                         class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
                                         data-bs-toggle="modal" data-bs-target="#hapusBookingModal"
@@ -96,89 +111,6 @@
             {{ $bookings->links() }}
         </div>
     </div>
-
-    {{-- MODAL PEMESANAN KENDARAAN --}}
-    <div class="modal fade" id="detailBookingModal" tabindex="-1" aria-labelledby="detailBookingModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <h3 class="title">Detail Booking Kendaraan</h3>
-                <form class="form d-inline-block w-100">
-                    <div class="row">
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="nama_penyewa">Nama Penyewa</label>
-                                <input type="text" class="input" id="nama_penyewa" data-value="nama_penyewa" disabled>
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tanggal_mulai">Tanggal Mulai</label>
-                                <input type="text" class="input" id="tanggal_mulai" data-value="tanggal_mulai" disabled>
-                            </div>
-                        </div>
-                        <div class="col-12 row-button">
-                            <div class="input-wrapper">
-                                <label for="tanggal_akhir">Tanggal Akhir</label>
-                                <input type="text" class="input" id="tanggal_akhir" data-value="tanggal_akhir" disabled>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="button-wrapper d-flex">
-                                <a href="" class="button-primary button-pemesanan">Pesan Kendaraan</a>
-                                <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal
-                                    Pesan</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    {{-- END MODAL PEMESANAN KENDARAAN --}}
-
-    {{-- MODAL EDIT BOOKING KENDARAAN --}}
-    <div class="modal fade" id="editBookingModal" tabindex="-1" aria-labelledby="editBookingModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <h3 class="title">Edit Booking Kendaraan</h3>
-                <form id="editBooking" class="form d-inline-block w-100" method="POST">
-                    @csrf
-                    <div class="row">
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tanggal_mulai">Tanggal Mulai</label>
-                                <input type="date" class="input" id="tanggal_mulai" name="tanggal_mulai"
-                                    data-value="tanggal_mulai">
-                                @error('tanggal_mulai')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-12 row-button">
-                            <div class="input-wrapper">
-                                <label for="tanggal_akhir">Tanggal Akhir</label>
-                                <input type="date" class="input" id="tanggal_akhir" name="tanggal_akhir"
-                                    data-value="tanggal_akhir">
-                                @error('tanggal_akhir')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="button-wrapper d-flex">
-                                <button type="submit" class="button-primary">Simpan Perubahan</button>
-                                <button type="button" class="button-reverse" data-bs-dismiss="modal">Batal
-                                    Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    {{-- END MODAL EDIT BOOKING KENDARAAN --}}
 
     {{-- MODAL HAPUS BOOKING --}}
     <div class="modal modal-delete fade" id="hapusBookingModal" tabindex="-1" aria-labelledby="hapusBookingModalLabel"

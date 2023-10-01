@@ -42,7 +42,7 @@
             @if ($penggunas->count() == 0)
                 <div class="col-12 table-row table-border">
                     <div class="row table-data gap-4 align-items-center">
-                        <div class="col data-value data-length">Tidak Ada Data Pengguna!</div>
+                        <div class="col data-value data-length"></div>
                     </div>
                 </div>
             @else
@@ -82,8 +82,66 @@
                 @endforeach
             @endif
         </div>
-        <div class="col-12 d-flex justify-content-end mt-4">
-            {{ $penggunas->links() }}
+        {{-- <div class="row">
+            <div class="col-12">
+                <table id="tablePengguna" class="table-default">
+                    <thead class="table-row table-header">
+                        <tr class="table-data">
+                            <td class="data-header">Nama Lengkap</td>
+                            <td class="data-header">Email</td>
+                            <td class="data-header">Role</td>
+                            @if (auth()->user()->role == 'admin')
+                                <td class="data-header"></td>
+                            @endif
+                        </tr>
+                    </thead>
+                    @if ($penggunas->count() == 0)
+                        <tbody class="table-row table-border">
+                            <tr class="table-data">
+                                <td class="data-value">Tidak Ada Data Pengguna!</td>
+                            </tr>
+                        </tbody>
+                    @else
+                        <tbody class="table-row table-border">
+                            @foreach ($penggunas as $pengguna)
+                                <tr class="table-data">
+                                    <td class="data-value">{{ $pengguna->nama_lengkap }}</td>
+                                    <td class="data-value">{{ $pengguna->email }}</td>
+                                    <td class="data-value text-capitalize">{{ $pengguna->role }}
+                                    </td>
+                                    <td class="data-value">
+                                        <div class="wrapper-action d-flex">
+                                            <button type="button"
+                                                class="button-action button-detail d-flex justify-content-center align-items-center"
+                                                data-bs-toggle="modal" data-bs-target="#detailPenggunaModal"
+                                                data-id="{{ $pengguna->id }}">
+                                                <div class="detail-icon"></div>
+                                            </button>
+                                            <button type="button"
+                                                class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
+                                                data-bs-toggle="modal" data-bs-target="#editPenggunaModal"
+                                                data-id="{{ $pengguna->id }}">
+                                                <div class="edit-icon"></div>
+                                            </button>
+                                            <button type="button"
+                                                class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
+                                                data-bs-toggle="modal" data-bs-target="#hapusPenggunaModal"
+                                                data-id="{{ $pengguna->id }}">
+                                                <div class="delete-icon"></div>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    @endif
+                </table>
+            </div>
+        </div> --}}
+        <div class="row">
+            <div class="col-12 d-flex justify-content-end mt-4">
+                {{ $penggunas->links() }}
+            </div>
         </div>
     </div>
 
@@ -239,6 +297,13 @@
     {{-- END MODAL HAPUS PENGGUNA --}}
 
     <script>
+        // $(document).ready(function() {
+        //     $('#tablePengguna').DataTable({
+        //         paging: false,
+        //         responsive: true,
+        //     });
+        // });
+
         $(document).on('click', '[data-bs-target="#detailPenggunaModal"]', function() {
             let id = $(this).data('id');
             $.ajax({

@@ -771,6 +771,10 @@ body {
     gap: 6px;
 }
 
+.table-default.dataTable {
+    width: 100% !important;
+}
+
 .button-action {
     width: 42px;
     height: 42px;

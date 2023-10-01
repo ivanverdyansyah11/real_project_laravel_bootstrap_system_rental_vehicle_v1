@@ -20,6 +20,11 @@ class Pemesanan extends Model
         return $this->belongsTo(Pelanggan::class, 'pelanggans_id');
     }
 
+    public function sopir()
+    {
+        return $this->belongsTo(Sopir::class, 'sopirs_id');
+    }
+
     public function pelepasan_pemesanan()
     {
         return $this->belongsTo(PelepasanPemesanan::class, 'id');

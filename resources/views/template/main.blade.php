@@ -10,6 +10,7 @@
     {{-- STYLE CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/datatables.min.css') }}">
     {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
     {{-- <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}"> --}}
     {{-- END STYLE CSS --}}
@@ -42,6 +43,8 @@
     {{-- SCRIPT JS --}}
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dataTables.bootstrap5.min.js') }}"></script>
     {{-- END SCRIPT JS --}}
 </body>
 

@@ -55,20 +55,15 @@
                             class="link-child {{ Request::is('kilometer-kendaraan*') ? 'active' : '' }}">Kilometer</a>
                     </div>
                 @endif
-                <a href="{{ route('booking') }}"
-                    class="menu-link d-flex flex-column {{ Request::is('booking*') || Request::is('pemesanan*') ? 'active' : '' }}">
+                <a href="{{ route('pemesanan') }}"
+                    class="menu-link d-flex flex-column {{ Request::is('pemesanan*') || Request::is('booking*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
                         <div class="icon-sidebar-wrapper">
                             <div class="sidebar-icon pemesanan-icon"></div>
                         </div>
-                        <p>Booking</p>
+                        <p>Pemesanan</p>
                     </div>
                 </a>
-                <div
-                    class="menu-link d-flex flex-column {{ Request::is('booking*') || Request::is('pemesanan*') ? 'active' : 'd-none' }}">
-                    <a href="{{ route('pemesanan') }}"
-                        class="link-child {{ Request::is('pemesanan*') ? 'active' : '' }}">Pemesanan</a>
-                </div>
                 <a href="{{ route('pengembalian') }}"
                     class="menu-link d-flex flex-column {{ Request::is('pengembalian*') || Request::is('penambahan-sewa*') ? 'active' : '' }}">
                     <div class="link-item d-flex align-items-center">
