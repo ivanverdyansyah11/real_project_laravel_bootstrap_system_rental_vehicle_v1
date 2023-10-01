@@ -88,17 +88,16 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="nama_kendaraan">Nama Kendaraan</label>
-                                        <input type="text" id="nama_kendaraan" class="input" autocomplete="off"
-                                            value="{{ $pemesanan->kendaraan->nama_kendaraan }}" disabled>
+                                        <label for="nomor_plat">Nomor Plat</label>
+                                        <input type="text" id="nomor_plat" class="input" autocomplete="off"
+                                            value="{{ $pemesanan->kendaraan->nomor_plat }}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="kilometer_keluar">Kilometer Keluar</label>
-                                        <input type="text" id="kilometer_keluar" class="input" autocomplete="off"
-                                            name="kilometer_keluar" value="{{ old('kilometer_keluar') }}" pattern="[0-9]*"
-                                            title="Hanya angka 0-9 diperbolehkan">
+                                        <input type="number" id="kilometer_keluar" class="input" autocomplete="off"
+                                            name="kilometer_keluar" value="{{ old('kilometer_keluar') }}">
                                         @error('kilometer_keluar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -107,9 +106,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="bensin_keluar">Bensin Keluar</label>
-                                        <input type="text" id="bensin_keluar" class="input" autocomplete="off"
-                                            name="bensin_keluar" value="{{ old('bensin_keluar') }}" pattern="[0-9]*"
-                                            title="Hanya angka 0-9 diperbolehkan">
+                                        <input type="number" id="bensin_keluar" class="input" autocomplete="off"
+                                            name="bensin_keluar" value="{{ old('bensin_keluar') }}">
                                         @error('bensin_keluar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -151,9 +149,9 @@
                                         <select id="kondisi_kendaraan" class="input" name="kondisi_kendaraan"
                                             value="{{ old('kondisi_kendaraan') }}">
                                             <option value="-">Pilih kondisi kendaraan</option>
-                                            <option value="ada">Ada</option>
-                                            <option value="tidak ada">Tidak Ada</option>
-                                            <option value="kosong">Kosong</option>
+                                            <option value="baik">Baik</option>
+                                            <option value="rusak ringan">Rusak Ringan</option>
+                                            <option value="rusak berat">Rusak Berat</option>
                                         </select>
                                         @error('kondisi_kendaraan')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -214,22 +212,22 @@
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="waktu_sewa_hari">Total Harian</label>
-                                <input type="text" id="waktu_sewa_hari" class="input" autocomplete="off"
-                                    pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan" disabled>
+                                <input type="number" id="waktu_sewa_hari" class="input" autocomplete="off"
+                                    value="0">
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="waktu_sewa_minggu">Total Mingguan</label>
-                                <input type="text" id="waktu_sewa_minggu" class="input" autocomplete="off"
-                                    pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan" disabled>
+                                <input type="number" id="waktu_sewa_minggu" class="input" autocomplete="off"
+                                    value="0">
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="waktu_sewa_bulan">Total Bulanan</label>
-                                <input type="text" id="waktu_sewa_bulan" class="input" autocomplete="off"
-                                    pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan" disabled>
+                                <input type="number" id="waktu_sewa_bulan" class="input" autocomplete="off"
+                                    value="0">
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
@@ -285,7 +283,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="waktu_sewa">Waktu Sewa (Hari)</label>
-                                        <input type="text" id="waktu_sewa" class="input" autocomplete="off"
+                                        <input type="number" id="waktu_sewa" class="input" autocomplete="off"
                                             name="waktu_sewa" pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
                                         @error('waktu_sewa')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -295,9 +293,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="total_tarif_sewa">Total Tarif Sewa</label>
-                                        <input type="text" id="total_tarif_sewa" class="input" autocomplete="off"
-                                            name="total_tarif_sewa" pattern="[0-9]*"
-                                            title="Hanya angka 0-9 diperbolehkan">
+                                        <input type="number" id="total_tarif_sewa" class="input" autocomplete="off"
+                                            name="total_tarif_sewa">
                                         @error('total_tarif_sewa')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -321,9 +318,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="total_bayar">Total Bayar</label>
-                                        <input type="text" id="total_bayar" class="input" autocomplete="off"
-                                            name="total_bayar" value="{{ old('total_bayar') }}" pattern="[0-9]*"
-                                            title="Hanya angka 0-9 diperbolehkan" disabled>
+                                        <input type="number" id="total_bayar" class="input" autocomplete="off"
+                                            name="total_bayar" value="{{ old('total_bayar') }}" disabled>
                                         @error('total_bayar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -392,8 +388,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
     <script>
-        const inputTanggalKembali = document.querySelector('#tanggal_kembali');
         const inputTanggalDiambil = document.querySelector('#tanggal_diambil');
+        const inputTanggalKembali = document.querySelector('#tanggal_kembali');
         const jenisPembayaran = document.querySelector('#jenis_pembayaran');
         const totalBayar = document.querySelector('#total_bayar');
 
@@ -412,6 +408,29 @@
             } else {
                 totalBayar.removeAttribute("disabled");
             }
+        });
+
+        inputTanggalDiambil.addEventListener('change', function() {
+            let jumlahHari;
+            let jumlahBulan;
+            let tanggalAkhir;
+            let totalTarifSewa;
+
+            let tanggalMulai = moment(inputTanggalDiambil.value);
+            jumlahHari = parseInt(waktuSewaHarian.value) + parseInt(waktuSewaMingguan.value) * 7;
+            jumlahBulan = parseInt(waktuSewaBulanan.value);
+            tanggalAkhir = tanggalMulai.add(jumlahHari, 'days').add(jumlahBulan, 'months');
+
+            let tahun = tanggalAkhir.format('YYYY');
+            let bulan = tanggalAkhir.format('MM');
+            let tanggal = tanggalAkhir.format('DD');
+
+            inputTanggalKembali.value = `${tahun}-${bulan}-${tanggal}`;
+            let tanggalMulaiSewa = moment(inputTanggalDiambil.value);
+            let tanggalKembaliSewa = moment(inputTanggalKembali.value);
+            let totalWaktuSewa = tanggalKembaliSewa.diff(tanggalMulaiSewa, 'days');
+
+            waktuSewa.value = totalWaktuSewa;
         });
 
         waktuSewaHarian.addEventListener('change', function() {
@@ -591,22 +610,6 @@
             let totalWaktuSewa = tanggalKembaliSewa.diff(tanggalMulaiSewa, 'days');
 
             waktuSewa.value = totalWaktuSewa;
-        });
-
-        inputTanggalDiambil.addEventListener('change', function() {
-            if (inputTanggalDiambil.value !== "") {
-                inputTanggalKembali.removeAttribute("disabled");
-                waktuSewaHarian.removeAttribute("disabled");
-                waktuSewaMingguan.removeAttribute("disabled");
-                waktuSewaBulanan.removeAttribute("disabled");
-            } else {
-                inputTanggalKembali.setAttribute("disabled", "disabled");
-                inputTanggalKembali.value = "-";
-                waktuSewa.value = "0";
-                waktuSewaHarian.value = "0";
-                waktuSewaMingguan.value = "0";
-                waktuSewaBulanan.value = "0";
-            }
         });
 
         const tagCreateDocument = document.querySelector('.tag-create-document');

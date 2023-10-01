@@ -210,9 +210,9 @@
                                         <select id="kondisi_kendaraan" class="input" name="kondisi_kendaraan"
                                             value="{{ old('kondisi_kendaraan') }}">
                                             <option value="-">Pilih kondisi kendaraan</option>
-                                            <option value="ada">Ada</option>
-                                            <option value="tidak ada">Tidak Ada</option>
-                                            <option value="kosong">Kosong</option>
+                                            <option value="baik">Baik</option>
+                                            <option value="rusak ringan">Rusak Ringan</option>
+                                            <option value="rusak berat">Rusak Berat</option>
                                         </select>
                                         @error('kondisi_kendaraan')
                                             <p class="caption-error mt-2">{{ $message }}</p>

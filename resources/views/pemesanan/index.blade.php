@@ -113,13 +113,6 @@
                         </div>
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="nama_kendaraan">Nama Kendaraan</label>
-                                <input type="text" class="input" id="nama_kendaraan" data-value="nama_kendaraan"
-                                    disabled>
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
                                 <label for="tanggal_mulai">Tanggal Mulai</label>
                                 <input type="text" class="input" id="tanggal_mulai" data-value="tanggal_mulai" disabled>
                             </div>
@@ -127,8 +120,7 @@
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="tanggal_akhir">Tanggal Akhir</label>
-                                <input type="text" class="input" id="tanggal_akhir" data-value="tanggal_akhir"
-                                    disabled>
+                                <input type="text" class="input" id="tanggal_akhir" data-value="tanggal_akhir" disabled>
                             </div>
                         </div>
                         <div class="col-12">
