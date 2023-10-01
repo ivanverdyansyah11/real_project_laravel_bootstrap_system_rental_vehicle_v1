@@ -49,7 +49,6 @@ class SeriKendaraanController extends Controller
 
         $validatedData = $request->validate([
             'nomor_seri' => 'required|string',
-            'nomor_plat' => 'required|string',
             'jenis_kendaraans_id' => 'required|string',
             'brand_kendaraans_id' => 'required|string',
         ]);
@@ -71,7 +70,6 @@ class SeriKendaraanController extends Controller
             'jenis_kendaraans_id' => 'required|string',
             'brand_kendaraans_id' => 'required|string',
             'nomor_seri' => 'required|string',
-            'nomor_plat' => 'required|string',
         ]);
 
         if (is_string($validatedData['jenis_kendaraans_id'])) {

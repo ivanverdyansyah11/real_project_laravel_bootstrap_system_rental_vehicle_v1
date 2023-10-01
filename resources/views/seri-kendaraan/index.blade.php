@@ -40,7 +40,6 @@
             <div class="col-12 table-row table-header">
                 <div class="row table-data gap-4">
                     <div class="col data-header">Nomor Seri</div>
-                    <div class="col data-header d-none d-lg-inline-block">Nomor Plat</div>
                     <div class="col data-header d-none d-lg-inline-block">Jenis Kendaraan</div>
                     <div class="col data-header d-none d-lg-inline-block">Brand Kendaraan</div>
                     <div class="col-3 col-xl-2 data-header"></div>
@@ -57,7 +56,6 @@
                     <div class="col-12 table-row table-border">
                         <div class="row table-data gap-4 align-items-center">
                             <div class="col data-value data-length">{{ $seri->nomor_seri }}</div>
-                            <div class="col data-value data-length data-length-none">{{ $seri->nomor_plat }}</div>
                             <div class="col data-value data-length data-length-none">{{ $seri->jenis_kendaraan->nama }}
                             </div>
                             <div class="col data-value data-length data-length-none">{{ $seri->brand_kendaraan->nama }}
@@ -108,15 +106,6 @@
                                 <input type="text" id="nomor" class="input" autocomplete="off" name="nomor_seri"
                                     pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
                                 @error('nomor_seri')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="nomor_plat">Nomor Plat</label>
-                                <input type="text" id="nomor_plat" class="input" autocomplete="off" name="nomor_plat">
-                                @error('nomor_plat')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -180,13 +169,6 @@
                         </div>
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="nomor_plat">Nomor Plat</label>
-                                <input type="text" id="nomor_plat" class="input" autocomplete="off"
-                                    data-value="nomor_plat" disabled>
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
                                 <label for="jenis">Jenis Kendaraan</label>
                                 <input type="text" id="nomor" class="input" autocomplete="off"
                                     data-value="jenis_kendaraan" disabled>
@@ -224,16 +206,6 @@
                                     name="nomor_seri" data-value="nomor_seri" pattern="[0-9]*"
                                     title="Hanya angka 0-9 diperbolehkan">
                                 @error('nomor_seri')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-wrapper">
-                                <label for="nomor_plat">Nomor Plat</label>
-                                <input type="text" id="nomor_plat" class="input" autocomplete="off"
-                                    name="nomor_plat" data-value="nomor_plat">
-                                @error('nomor_plat')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -307,7 +279,6 @@
                 url: '/seri-kendaraan/detail/' + id,
                 success: function(data) {
                     $('[data-value="nomor_seri"]').val(data[0].nomor_seri);
-                    $('[data-value="nomor_plat"]').val(data[0].nomor_plat);
                     $('[data-value="jenis_kendaraan"]').val(data[0].jenis_kendaraan.nama);
                     $('[data-value="brand_kendaraan"]').val(data[0].brand_kendaraan.nama);
                 }
@@ -325,7 +296,6 @@
                 url: '/seri-kendaraan/detail/' + id,
                 success: function(data) {
                     $('[data-value="nomor_seri"]').val(data[0].nomor_seri);
-                    $('[data-value="nomor_plat"]').val(data[0].nomor_plat);
                     $('[data-value="jenis_kendaraan"]').append(
                         `<option value="${data[0].jenis_kendaraan.id}">${data[0].jenis_kendaraan.nama}</option>`
                     );

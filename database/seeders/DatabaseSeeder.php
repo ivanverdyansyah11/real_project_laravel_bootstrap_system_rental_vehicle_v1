@@ -111,21 +111,21 @@ class DatabaseSeeder extends Seeder
         //     'kategori_laporan' => 'sopir',
         // ]);
 
-        // JenisKendaraan::create([
-        //     'nama' => 'Kendaraan Beroda 2',
-        // ]);
+        JenisKendaraan::create([
+            'nama' => 'Kendaraan Beroda 2',
+        ]);
 
-        // JenisKendaraan::create([
-        //     'nama' => 'Kendaraan Beroda 4',
-        // ]);
+        JenisKendaraan::create([
+            'nama' => 'Kendaraan Beroda 4',
+        ]);
 
-        // BrandKendaraan::create([
-        //     'nama' => 'Honda',
-        // ]);
+        BrandKendaraan::create([
+            'nama' => 'Honda',
+        ]);
 
-        // BrandKendaraan::create([
-        //     'nama' => 'Toyota',
-        // ]);
+        BrandKendaraan::create([
+            'nama' => 'Toyota',
+        ]);
 
         // SeriKendaraan::create([
         //     'nomor_plat' => 'DK 1234 ASD',
