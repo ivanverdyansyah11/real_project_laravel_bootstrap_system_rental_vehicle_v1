@@ -127,30 +127,28 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Toyota',
         ]);
 
-        // SeriKendaraan::create([
-        //     'nomor_plat' => 'DK 1234 ASD',
-        //     'nomor_seri' => '00656676867',
-        //     'jenis_kendaraans_id' => 1,
-        //     'brand_kendaraans_id' => 1,
-        // ]);
+        SeriKendaraan::create([
+            'nomor_seri' => '00656676867',
+            'jenis_kendaraans_id' => 1,
+            'brand_kendaraans_id' => 1,
+        ]);
 
-        // SeriKendaraan::create([
-        //     'nomor_plat' => 'DK 9876 HYT',
-        //     'nomor_seri' => '00546546768',
-        //     'jenis_kendaraans_id' => 2,
-        //     'brand_kendaraans_id' => 2,
-        // ]);
+        SeriKendaraan::create([
+            'nomor_seri' => '00546546768',
+            'jenis_kendaraans_id' => 2,
+            'brand_kendaraans_id' => 2,
+        ]);
 
-        // KategoriKilometerKendaraan::create([
-        //     'jumlah' => '2500',
-        // ]);
+        KategoriKilometerKendaraan::create([
+            'jumlah' => '2500',
+        ]);
 
-        // KategoriKilometerKendaraan::create([
-        //     'jumlah' => '5000',
-        // ]);
+        KategoriKilometerKendaraan::create([
+            'jumlah' => '5000',
+        ]);
 
-        // KategoriKilometerKendaraan::create([
-        //     'jumlah' => '10000',
-        // ]);
+        KategoriKilometerKendaraan::create([
+            'jumlah' => '10000',
+        ]);
     }
 }

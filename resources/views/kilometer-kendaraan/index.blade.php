@@ -80,7 +80,7 @@
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Tambah Kilometer Kendaraan</h3>
+                <h3 class="title">Tambah Kategori Kilometer</h3>
                 <form class="form d-inline-block w-100" method="POST" action="{{ route('kilometerKendaraan.store') }}">
                     @csrf
                     <div class="row">
@@ -112,7 +112,7 @@
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Detail Kilometer Kendaraan</h3>
+                <h3 class="title">Detail Kategori Kilometer</h3>
                 <form class="form d-inline-block w-100">
                     <div class="row">
                         <div class="col-12 row-button">
@@ -137,7 +137,7 @@
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Edit Kilometer Kendaraan</h3>
+                <h3 class="title">Edit Kategori Kilometer</h3>
                 <form id="editKilometer" class="form d-inline-block w-100" method="POST">
                     @csrf
                     @csrf
@@ -171,7 +171,7 @@
         aria-labelledby="hapusKilometerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3 class="title">Hapus Kilometer Kendaraan</h3>
+                <h3 class="title">Hapus Kategori Kilometer</h3>
                 <form id="hapusKilometer" class="form d-inline-block w-100" method="POST">
                     @csrf
                     <p class="caption-description row-button">Konfirmasi Penghapusan Kategori Kilometer Kendaraan: Apakah
