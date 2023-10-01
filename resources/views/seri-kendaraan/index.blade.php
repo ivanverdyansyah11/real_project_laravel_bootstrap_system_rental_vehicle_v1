@@ -18,11 +18,22 @@
         <div class="row mb-4">
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <h5 class="subtitle">Data Seri Kendaraan</h5>
-                <button type="button" class="button-primary d-none d-md-flex align-items-center" data-bs-toggle="modal"
-                    data-bs-target="#tambahSeriModal">
-                    <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
-                    Tambah
-                </button>
+                @if ($jenises->count() == 0 || $brands->count() == 0)
+                    <form action="{{ route('seriKendaraan.check') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="button-primary d-none d-md-flex align-items-center">
+                            <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon"
+                                class="img-fluid button-icon">
+                            Tambah
+                        </button>
+                    </form>
+                @else
+                    <button type="button" class="button-primary d-none d-md-flex align-items-center" data-bs-toggle="modal"
+                        data-bs-target="#tambahSeriModal">
+                        <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
+                        Tambah
+                    </button>
+                @endif
             </div>
         </div>
         <div class="row table-default">

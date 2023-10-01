@@ -27,6 +27,20 @@ class SeriKendaraanController extends Controller
         return response()->json([$seri, $jenises, $brands]);
     }
 
+    function check()
+    {
+        $jenises = JenisKendaraan::count();
+        $brands = BrandKendaraan::count();
+
+        if ($jenises == 0 && $brands == 0) {
+            return redirect(route('seriKendaraan'))->with('failed', 'Tambahkan Jenis dan Brand Kendaraan Terlebih Dahulu!');
+        } elseif ($jenises == 0) {
+            return redirect(route('seriKendaraan'))->with('failed', 'Tambahkan Jenis Kendaraan Terlebih Dahulu!');
+        } elseif ($brands == 0) {
+            return redirect(route('seriKendaraan'))->with('failed', 'Tambahkan Brand Kendaraan Terlebih Dahulu!');
+        }
+    }
+
     function store(Request $request)
     {
         if ($request->jenis_kendaraans_id == '-' || $request->brand_kendaraans_id == '-') {
