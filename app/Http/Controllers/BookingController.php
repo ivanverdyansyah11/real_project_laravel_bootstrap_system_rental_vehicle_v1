@@ -22,8 +22,7 @@ class BookingController extends Controller
     public function search(Request $request)
     {
         $kendaraans = Kendaraan::where('status', 'ready')->orWhere('status', 'booking')
-            ->where('nama_kendaraan', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
+            ->where('nomor_plat', 'like', '%' . $request->search . '%')
             ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
             ->orWhere('tarif_sewa_hari', 'like', '%' . $request->search . '%')
             ->orWhere('tarif_sewa_minggu', 'like', '%' . $request->search . '%')

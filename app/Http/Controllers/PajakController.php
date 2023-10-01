@@ -19,10 +19,11 @@ class PajakController extends Controller
 
     public function search(Request $request)
     {
-        $kendaraans = Kendaraan::where('nama_kendaraan', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
+        $kendaraans = Kendaraan::where('nomor_plat', 'like', '%' . $request->search . '%')
             ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa_hari', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa_minggu', 'like', '%' . $request->search . '%')
+            ->orWhere('tarif_sewa_bulan', 'like', '%' . $request->search . '%')
             ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
             ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
             ->orWhere('warna', 'like', '%' . $request->search . '%')
