@@ -64,7 +64,7 @@
                         <div class="row table-data gap-4 align-items-center">
                             <div class="col data-value data-length">{{ $booking->pelanggan->nama }}</div>
                             <div class="col data-value data-length data-length-none">
-                                {{ $booking->kendaraan->nama_kendaraan }}</div>
+                                {{ $booking->kendaraan->nomor_plat }}</div>
                             <div class="col data-value data-length data-length-none">{{ $booking->tanggal_mulai }}</div>
                             <div class="col data-value data-length data-length-none">{{ $booking->tanggal_akhir }}</div>
                             <div

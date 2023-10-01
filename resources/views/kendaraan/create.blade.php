@@ -57,26 +57,12 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="nama_kendaraan">Nama Kendaraan</label>
-                                        <input type="text" id="nama_kendaraan" class="input" autocomplete="off"
-                                            name="nama_kendaraan">
-                                        @error('nama_kendaraan')
+                                        <label for="nomor_plat">Nomor Plat</label>
+                                        <input type="text" id="nomor_plat" class="input" autocomplete="off"
+                                            name="nomor_plat">
+                                        @error('nomor_plat')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="jenis">Jenis Kendaraan</label>
-                                        <input type="text" id="jenis" class="input" autocomplete="off"
-                                            value="Pilih nomor seri terlebih dahulu!" disabled data-value="jenis_kendaraan">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="brand">Brand Kendaraan</label>
-                                        <input type="text" id="brand" class="input" autocomplete="off"
-                                            value="Pilih nomor seri terlebih dahulu!" disabled data-value="brand_kendaraan">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
@@ -110,12 +96,16 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="nomor_polisi">Nomor Polisi</label>
-                                        <input type="text" id="nomor_polisi" class="input" autocomplete="off"
-                                            name="nomor_polisi" pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
-                                        @error('nomor_polisi')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
+                                        <label for="jenis">Jenis Kendaraan</label>
+                                        <input type="text" id="jenis" class="input" autocomplete="off"
+                                            value="Pilih nomor seri terlebih dahulu!" disabled data-value="jenis_kendaraan">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="brand">Brand Kendaraan</label>
+                                        <input type="text" id="brand" class="input" autocomplete="off"
+                                            value="Pilih nomor seri terlebih dahulu!" disabled data-value="brand_kendaraan">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">

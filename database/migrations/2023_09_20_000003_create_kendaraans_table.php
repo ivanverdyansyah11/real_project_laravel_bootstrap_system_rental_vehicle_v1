@@ -21,7 +21,6 @@ class CreateKendaraansTable extends Migration
             $table->bigInteger('kategori_kilometer_kendaraans_id')->index();
             $table->string('foto_kendaraan');
             $table->string('stnk_nama');
-            $table->string('nama_kendaraan');
             $table->string('nomor_plat');
             $table->string('kilometer');
             $table->string('kilometer_saat_ini');

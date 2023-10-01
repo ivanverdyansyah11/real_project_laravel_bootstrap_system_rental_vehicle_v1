@@ -29,10 +29,21 @@
                         </label>
                     </div>
                 </form>
-                <a href="{{ route('kendaraan.create') }}" class="button-primary d-none d-md-flex align-items-center">
-                    <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
-                    Tambah
-                </a>
+                @if (\App\Models\SeriKendaraan::count() == 0)
+                    <form action="{{ route('kendaraan.check') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="button-primary d-none d-md-flex align-items-center">
+                            <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon"
+                                class="img-fluid button-icon">
+                            Tambah
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('kendaraan.create') }}" class="button-primary d-none d-md-flex align-items-center">
+                        <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
+                        Tambah
+                    </a>
+                @endif
             </div>
         </div>
         <div class="row">
@@ -49,7 +60,7 @@
                                     alt="Car Thumbnail Image" class="img-fluid product-img">
                             </div>
                             <div class="product-content">
-                                <p class="product-name">{{ $kendaraan->nama_kendaraan }}</p>
+                                <p class="product-name">{{ $kendaraan->nomor_plat }}</p>
                                 <div class="wrapper-other d-flex align-items-center justify-content-between">
                                     <div class="wrapper-tahun d-flex align-items-center">
                                         <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"

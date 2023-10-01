@@ -23,8 +23,7 @@ class KendaraanController extends Controller
     public function search(Request $request)
     {
         $kendaraans = Kendaraan::where('status', 'ready')
-            ->where('nama_kendaraan', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_polisi', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_plat', 'like', '%' . $request->search . '%')
             ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
             ->orWhere('tarif_sewa_hari', 'like', '%' . $request->search . '%')
             ->orWhere('tarif_sewa_minggu', 'like', '%' . $request->search . '%')
@@ -74,6 +73,15 @@ class KendaraanController extends Controller
         return response()->json($seri);
     }
 
+    function check()
+    {
+        $series = SeriKendaraan::count();
+
+        if ($series == 0) {
+            return redirect(route('kendaraan'))->with('failed', 'Tambahkan Nomor Seri Kendaraan Terlebih Dahulu!');
+        }
+    }
+
     function store(Request $request)
     {
         if ($request->seri_kendaraans_id == '-' || $request->kategori_kilometer_kendaraans_id == '-') {
@@ -89,8 +97,7 @@ class KendaraanController extends Controller
             'kategori_kilometer_kendaraans_id' => 'required|string',
             'foto_kendaraan' => 'required|image|max:2048',
             'stnk_nama' => 'required|string|max:255',
-            'nama_kendaraan' => 'required|string|max:255',
-            'nomor_polisi' => 'required|string|max:255',
+            'nomor_plat' => 'required|string|max:255',
             'kilometer' => 'required|string|max:255',
             'tarif_sewa_hari' => 'required|string|max:255',
             'tarif_sewa_minggu' => 'required|string|max:255',
@@ -109,7 +116,7 @@ class KendaraanController extends Controller
 
         if (!empty($validatedData['foto_kendaraan'])) {
             $image = $request->file('foto_kendaraan');
-            $imageName = $validatedData['nama_kendaraan'] . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = $validatedData['stnk_nama'] . '-foto' . '.' . $image->getClientOriginalExtension();;
             $image->move(public_path('assets/img/kendaraan-images/'), $imageName);
             $validatedData['foto_kendaraan'] = $imageName;
         }
@@ -160,8 +167,7 @@ class KendaraanController extends Controller
             'seri_kendaraans_id' => 'required|string',
             'kategori_kilometer_kendaraans_id' => 'required|string',
             'stnk_nama' => 'required|string|max:255',
-            'nama_kendaraan' => 'required|string|max:255',
-            'nomor_polisi' => 'required|string|max:255',
+            'nomor_plat' => 'required|string|max:255',
             'tarif_sewa_hari' => 'required|string|max:255',
             'tarif_sewa_minggu' => 'required|string|max:255',
             'tarif_sewa_bulan' => 'required|string|max:255',
@@ -183,7 +189,7 @@ class KendaraanController extends Controller
             }
 
             $image = $request->file('foto_kendaraan');
-            $imageName = $validatedData['nama_kendaraan'] . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = $validatedData['stnk_nama'] . '-foto' . '.' . $image->getClientOriginalExtension();;
             $image->move(public_path('assets/img/kendaraan-images/'), $imageName);
             $validatedData['foto_kendaraan'] = $imageName;
         } else {

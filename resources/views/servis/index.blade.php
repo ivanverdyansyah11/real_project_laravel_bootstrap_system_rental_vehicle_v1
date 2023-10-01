@@ -45,7 +45,7 @@
                                     alt="Car Thumbnail Image" class="img-fluid product-img">
                             </div>
                             <div class="product-content">
-                                <p class="product-name m-0">{{ $kendaraan->nama_kendaraan }}</p>
+                                <p class="product-name m-0">{{ $kendaraan->nomor_plat }}</p>
                                 <div class="wrapper-other d-flex align-items-center justify-content-between">
                                     <div class="wrapper-tahun d-flex align-items-center">
                                         <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"

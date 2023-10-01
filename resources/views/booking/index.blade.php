@@ -46,7 +46,7 @@
                             </div>
                             <div class="product-content">
                                 <div class="wrapper d-flex align-items-center justify-content-between">
-                                    <p class="product-name">{{ $kendaraan->nama_kendaraan }}</p>
+                                    <p class="product-name">{{ $kendaraan->nomor_plat }}</p>
                                     <p class="status-true text-capitalize">{{ $kendaraan->status }}</p>
                                 </div>
                                 <div class="wrapper-other d-flex align-items-center justify-content-between">
