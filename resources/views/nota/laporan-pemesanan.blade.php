@@ -25,21 +25,15 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td scope="col">Nama Kendaraan</td>
-                                <td scope="col-1">:</td>
-                                <td scope="col" class="text-end">{{ $pemesanan->kendaraan->brand_kendaraan->nama }}
-                                    {{ $pemesanan->kendaraan->nama_kendaraan }}</td>
-                            </tr>
-                            <tr>
                                 <td scope="col">Nomor Plat</td>
                                 <td scope="col-1">:</td>
-                                <td scope="col" class="text-end">{{ $pemesanan->kendaraan->seri_kendaraan->nomor_plat }}
+                                <td scope="col" class="text-end">{{ $pemesanan->kendaraan->nomor_plat }}
                                 </td>
                             </tr>
                             <tr>
                                 <td scope="col">Kilometer Keluar</td>
                                 <td scope="col-1">:</td>
-                                <td scope="col" class="text-end">{{ $pemesanan->kilometer_keluar }}</td>
+                                <td scope="col" class="text-end">{{ $pemesanan->kilometer_keluar }} km</td>
                             </tr>
                             <tr>
                                 <td scope="col">Bensin Keluar</td>
@@ -84,13 +78,13 @@
                                 <td scope="col">Total Tarif Sewa</td>
                                 <td scope="col-1">:</td>
                                 <td scope="col" class="text-end">
-                                    {{ $pemesanan->pembayaran_pemesanan->total_tarif_sewa }}
+                                    Rp. {{ $pemesanan->pembayaran_pemesanan->total_tarif_sewa }}
                                 </td>
                             </tr>
                             <tr>
                                 <td scope="col">Total Bayar</td>
                                 <td scope="col-1">:</td>
-                                <td scope="col" class="text-end">{{ $pemesanan->pembayaran_pemesanan->total_bayar }}
+                                <td scope="col" class="text-end">Rp. {{ $pemesanan->pembayaran_pemesanan->total_bayar }}
                                 </td>
                             </tr>
                             <tr>

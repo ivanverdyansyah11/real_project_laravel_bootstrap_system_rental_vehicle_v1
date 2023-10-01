@@ -37,14 +37,23 @@
                         <td scope="col" class="text-end">{{ $booking->kendaraan->seri_kendaraan->nomor_seri }}</td>
                     </tr>
                     <tr>
-                        <td scope="col">Tarif Sewa</td>
+                        <td scope="col">Nama Sopir</td>
                         <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $booking->kendaraan->tarif_sewa }}</td>
+                        @if ($booking->sopirs_id == null)
+                            <td scope="col" class="text-end">Tidak memilih sopir</td>
+                        @else
+                            <td scope="col" class="text-end">{{ $booking->sopir->nama }}</td>
+                        @endif
                     </tr>
                     <tr>
-                        <td scope="col">Tanggal Booking</td>
+                        <td scope="col">Tanggal Mulai Booking</td>
                         <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $booking->tanggal_booking }}</td>
+                        <td scope="col" class="text-end">{{ $booking->tanggal_mulai }}</td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Tanggal Mulai Berakhir</td>
+                        <td scope="col-1">:</td>
+                        <td scope="col" class="text-end">{{ $booking->tanggal_akhir }}</td>
                     </tr>
                 </table>
                 <p class="copyright">Diproduksi oleh Nusa Kendala Rental Kendaraan</p>

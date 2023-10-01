@@ -57,15 +57,8 @@ class PengembalianController extends Controller
 
         $pembayaran = PembayaranPemesanan::where('kendaraans_id', $id)->with('sopir')->latest()->first();
 
-        $jenis_kendaraan = JenisKendaraan::where('nama', "Kendaraan Beroda 4")->first();
-        if ($pemesanan->kendaraan->jenis_kendaraans_id == $jenis_kendaraan->id) {
-            if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->ban_serep == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-' || $request->ketepatan_waktu == '-') {
-                return redirect(route('pengembalian.restoration', $id))->with('failed', 'Isi Form Input Pengembalian Kendaraan Terlebih Dahulu!');
-            }
-        } else {
-            if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-' || $request->ketepatan_waktu == '-') {
-                return redirect(route('pengembalian.restoration', $id))->with('failed', 'Isi Form Input Pengembalian Kendaraan Terlebih Dahulu!');
-            }
+        if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->ban_serep == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-' || $request->ketepatan_waktu == '-') {
+            return redirect(route('pengembalian.restoration', $id))->with('failed', 'Isi Form Input Pengembalian Kendaraan Terlebih Dahulu!');
         }
 
         $validatedData = $request->validate([
@@ -81,6 +74,7 @@ class PengembalianController extends Controller
             'sarung_jok' => 'required|string',
             'karpet' => 'required|string',
             'kondisi_kendaraan' => 'required|string',
+            'ban_serep' => 'required|string',
             'biaya_tambahan' => 'nullable|string',
             'keterangan' => 'nullable|string',
         ]);
@@ -104,10 +98,6 @@ class PengembalianController extends Controller
 
         if (is_string($validatedData['bensin_kembali'])) {
             $validatedData['bensin_kembali'] = (int)$validatedData['bensin_kembali'];
-        }
-
-        if ($pemesanan->kendaraan->jenis_kendaraans_id == $jenis_kendaraan->id) {
-            $validatedData['ban_serep'] = $request->ban_serep;
         }
 
         $kategori_kilometer = (int)$pemesanan->kendaraan->kilometer_kendaraan->jumlah;

@@ -27,14 +27,9 @@
                         <td scope="col" class="text-end">{{ $kendaraan->seri_kendaraan->nomor_seri }}</td>
                     </tr>
                     <tr>
-                        <td scope="col">Nomor Plat Kendaraan</td>
+                        <td scope="col">Nomor Plat</td>
                         <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $kendaraan->seri_kendaraan->nomor_plat }}</td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Nomor Plat Kendaraan</td>
-                        <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $kendaraan->seri_kendaraan->nomor_plat }}</td>
+                        <td scope="col" class="text-end">{{ $kendaraan->nomor_plat }}</td>
                     </tr>
                     <tr>
                         <td scope="col">Kategori Kilometer Kendaraan</td>
@@ -45,11 +40,6 @@
                         <td scope="col">Nama Pada STNK</td>
                         <td scope="col-1">:</td>
                         <td scope="col" class="text-end">{{ $kendaraan->stnk_nama }}</td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Nomor Plat</td>
-                        <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $kendaraan->nomor_plat }}</td>
                     </tr>
                     <tr>
                         <td scope="col">Kilometer Diservis</td>

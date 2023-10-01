@@ -27,17 +27,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td scope="col">Nama Kendaraan</td>
-                                <td scope="col-1">:</td>
-                                <td scope="col" class="text-end">
-                                    {{ $pengembalian->pelepasan_pemesanan->kendaraan->brand_kendaraan->nama }}
-                                    {{ $pengembalian->pelepasan_pemesanan->kendaraan->nama_kendaraan }}</td>
-                            </tr>
-                            <tr>
                                 <td scope="col">Nomor Plat</td>
                                 <td scope="col-1">:</td>
                                 <td scope="col" class="text-end">
-                                    {{ $pengembalian->pelepasan_pemesanan->kendaraan->seri_kendaraan->nomor_plat }}</td>
+                                    {{ $pengembalian->pelepasan_pemesanan->kendaraan->nomor_plat }}</td>
                             </tr>
                             <tr>
                                 <td scope="col">Jenis Pembayaran</td>
@@ -49,7 +42,7 @@
                                 <td scope="col">Total Bayar</td>
                                 <td scope="col-1">:</td>
                                 <td scope="col" class="text-end">
-                                    {{ $pengembalian->total_bayar }}</td>
+                                    Rp. {{ $pengembalian->total_bayar }}</td>
                             </tr>
                             <tr>
                                 <td scope="col">Metode Bayar</td>
@@ -85,7 +78,7 @@
                                 <td scope="col">Terlambat</td>
                                 <td scope="col-1">:</td>
                                 <td scope="col" class="text-end">
-                                    {{ $pengembalian->terlambat ?: '-' }}</td>
+                                    {{ $pengembalian->terlambat ?: '-' }} hari</td>
                             </tr>
                         </table>
                     </div>
@@ -107,13 +100,11 @@
                                 <td scope="col-1">:</td>
                                 <td scope="col" class="text-end">{{ $pengembalian->kondisi_kendaraan }}</td>
                             </tr>
-                            @if ($pengembalian->ban_serep)
-                                <tr>
-                                    <td scope="col">Ban Serep</td>
-                                    <td scope="col-1">:</td>
-                                    <td scope="col" class="text-end">{{ $pengembalian->ban_serep }}</td>
-                                </tr>
-                            @endif
+                            <tr>
+                                <td scope="col">Ban Serep</td>
+                                <td scope="col-1">:</td>
+                                <td scope="col" class="text-end">{{ $pengembalian->ban_serep }}</td>
+                            </tr>
                         </table>
                     </div>
                     <div class="col-12">

@@ -12,17 +12,10 @@
                 <h5 class="title">Data Pajak Kendaraan</h5>
                 <table class="table table-bordered">
                     <tr>
-                        <td scope="col">Nama Kendaraan</td>
-                        <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">
-                            {{ $pajak->kendaraan->brand_kendaraan->nama }}
-                            {{ $pajak->kendaraan->nama_kendaraan }}</td>
-                    </tr>
-                    <tr>
                         <td scope="col">Nomor Plat</td>
                         <td scope="col-1">:</td>
                         <td scope="col" class="text-end">
-                            {{ $pajak->kendaraan->seri_kendaraan->nomor_plat }}</td>
+                            {{ $pajak->kendaraan->nomor_plat }}</td>
                     </tr>
                     <tr>
                         <td scope="col">Jenis Pajak</td>
@@ -42,7 +35,7 @@
                     <tr>
                         <td scope="col">Jumlah Bayar</td>
                         <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $pajak->jumlah_bayar }}</td>
+                        <td scope="col" class="text-end">Rp. {{ $pajak->jumlah_bayar }}</td>
                     </tr>
                 </table>
                 <p class="copyright">Diproduksi oleh Nusa Kendala Rental Kendaraan</p>

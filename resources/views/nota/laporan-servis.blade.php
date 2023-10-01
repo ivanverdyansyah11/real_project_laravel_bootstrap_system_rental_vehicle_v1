@@ -12,17 +12,10 @@
                 <h5 class="title">Data Servis Kendaraan</h5>
                 <table class="table table-bordered">
                     <tr>
-                        <td scope="col">Nama Kendaraan</td>
-                        <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">
-                            {{ $servis->kendaraan->brand_kendaraan->nama }}
-                            {{ $servis->kendaraan->nama_kendaraan }}</td>
-                    </tr>
-                    <tr>
                         <td scope="col">Nomor Plat</td>
                         <td scope="col-1">:</td>
                         <td scope="col" class="text-end">
-                            {{ $servis->kendaraan->seri_kendaraan->nomor_plat }}</td>
+                            {{ $servis->kendaraan->nomor_plat }}</td>
                     </tr>
                     <tr>
                         <td scope="col">Tanggal Servis</td>
@@ -33,7 +26,7 @@
                         <td scope="col">Kategori Kilometer Kendaraan</td>
                         <td scope="col-1">:</td>
                         <td scope="col" class="text-end">
-                            {{ $servis->kendaraan->kilometer_kendaraan->jumlah }}</td>
+                            {{ $servis->kendaraan->kilometer_kendaraan->jumlah }} km</td>
                     </tr>
                     <tr>
                         <td scope="col">Kilometer Sebelum Diservis</td>
@@ -68,7 +61,7 @@
                     <tr>
                         <td scope="col">Total Bayar</td>
                         <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $servis->total_bayar }}</td>
+                        <td scope="col" class="text-end">Rp. {{ $servis->total_bayar }}</td>
                     </tr>
                     <tr>
                         <td scope="col">Keterangan</td>

@@ -132,7 +132,7 @@
                             <div class="col data-value data-length data-length-none">{{ $laporan->created_at }}</div>
                             <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
                                 <div class="wrapper-action d-flex">
-                                    <a href="{{ route('laporan.nota', $laporan->id) }}"
+                                    <a href="{{ route('laporan.nota', $laporan->id) }}" target="_blank"
                                         class="button-action button-detail d-flex justify-content-center align-items-center">
                                         <div class="detail-icon"></div>
                                     </a>
