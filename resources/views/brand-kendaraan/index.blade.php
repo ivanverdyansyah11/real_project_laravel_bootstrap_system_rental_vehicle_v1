@@ -17,7 +17,17 @@
         </div>
         <div class="row mb-4">
             <div class="col-12 d-flex justify-content-between align-items-center">
-                <h5 class="subtitle">Data Brand Kendaraan</h5>
+                <form class="form-search d-inline-block" method="POST" action="{{ route('brandKendaraan.search') }}">
+                    @csrf
+                    <div class="wrapper-search">
+                        <input type="text" class="input-search" placeholder=" " name="search">
+                        <label class="d-flex align-items-center">
+                            <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
+                                class="img-fluid search-icon">
+                            <p>Cari brand..</p>
+                        </label>
+                    </div>
+                </form>
                 <button type="button" class="button-primary d-none d-md-flex align-items-center" data-bs-toggle="modal"
                     data-bs-target="#tambahBrandModal">
                     <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
@@ -116,8 +126,8 @@
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Brand Kendaraan</label>
-                                <input type="text" id="nama" class="input" autocomplete="off" data-value="nama"
-                                    disabled>
+                                <input type="text" id="nama" class="input" autocomplete="off"
+                                    data-value="nama" disabled>
                             </div>
                         </div>
                         <div class="col-12">
@@ -131,7 +141,8 @@
     {{-- END MODAL DETAIL BRAND KENDARAAN --}}
 
     {{-- MODAL EDIT BRAND KENDARAAN --}}
-    <div class="modal fade" id="editBrandModal" tabindex="-1" aria-labelledby="editBrandModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editBrandModal" tabindex="-1" aria-labelledby="editBrandModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <h3 class="title">Edit Brand Kendaraan</h3>

@@ -17,6 +17,22 @@ class SopirController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $sopirs = Sopir::where('nama', 'like', '%' . $request->search . '%')
+            ->orWhere('nik', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_telepon', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_ktp', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_sim', 'like', '%' . $request->search . '%')
+            ->orWhere('alamat', 'like', '%' . $request->search . '%')
+            ->paginate(6);
+
+        return view('sopir.index', [
+            'title' => 'Sopir',
+            'sopirs' => $sopirs,
+        ]);
+    }
+
     public function detail($id)
     {
         return view('sopir.detail', [

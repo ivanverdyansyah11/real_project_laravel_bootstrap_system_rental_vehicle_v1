@@ -17,7 +17,17 @@
         </div>
         <div class="row mb-4">
             <div class="col-12 d-flex justify-content-between align-items-center">
-                <h5 class="subtitle">Data Kilometer Kendaraan</h5>
+                <form class="form-search d-inline-block" method="POST" action="{{ route('kilometerKendaraan.search') }}">
+                    @csrf
+                    <div class="wrapper-search">
+                        <input type="text" class="input-search" placeholder=" " name="search">
+                        <label class="d-flex align-items-center">
+                            <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
+                                class="img-fluid search-icon">
+                            <p>Cari kilometer..</p>
+                        </label>
+                    </div>
+                </form>
                 <button type="button" class="button-primary d-none d-md-flex align-items-center" data-bs-toggle="modal"
                     data-bs-target="#tambahKilometerModal">
                     <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">

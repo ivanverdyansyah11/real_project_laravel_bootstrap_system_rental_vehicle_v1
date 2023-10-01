@@ -18,10 +18,38 @@
         <div class="row mb-4">
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <h5 class="subtitle">Data Laporan</h5>
-                {{-- <button type="button" class="button-primary d-none d-md-flex align-items-center">
-                    <img src="{{ asset('assets/img/button/export.svg') }}" alt="Export Icon" class="img-fluid button-icon">
-                    Export
-                </button> --}}
+                <div class="wrapper position-relative">
+                    <button type="button"
+                        class="button-other position-relative button-primary-blur d-flex align-items-center">
+                        <img src="{{ asset('assets/img/button/filter.svg') }}" alt="Icon Filter"
+                            class="img-fluid button-icon">
+                        Filter Kategori Laporan
+                        <img src="{{ asset('assets/img/button/arrow-down-primary.svg') }}" alt="Icon Filter"
+                            class="img-fluid button-icon" style="margin-left: 6px;">
+                    </button>
+                    <div class="modal-other d-flex flex-column">
+                        <a href="{{ route('laporan') }}"
+                            class="modal-link {{ Request::is('laporan') ? 'active' : '' }}">Tampilkan Semua</a>
+                        <a href="{{ route('laporan.pelanggan') }}"
+                            class="modal-link {{ Request::is('laporan/1') ? 'active' : '' }}">Pelanggan</a>
+                        <a href="{{ route('laporan.sopir') }}"
+                            class="modal-link {{ Request::is('laporan/2') ? 'active' : '' }}">Sopir</a>
+                        <a href="{{ route('laporan.kendaraan') }}"
+                            class="modal-link {{ Request::is('laporan/3') ? 'active' : '' }}">Kendaraan</a>
+                        <a href="{{ route('laporan.booking') }}"
+                            class="modal-link {{ Request::is('laporan/4') ? 'active' : '' }}">Booking</a>
+                        <a href="{{ route('laporan.pemesanan') }}"
+                            class="modal-link {{ Request::is('laporan/5') ? 'active' : '' }}">Pemesanan</a>
+                        <a href="{{ route('laporan.pengembalian') }}"
+                            class="modal-link {{ Request::is('laporan/6') ? 'active' : '' }}">Pengembalian</a>
+                        <a href="{{ route('laporan.penambahan') }}"
+                            class="modal-link {{ Request::is('laporan/7') ? 'active' : '' }}">Penambahan</a>
+                        <a href="{{ route('laporan.servis') }}"
+                            class="modal-link {{ Request::is('laporan/8') ? 'active' : '' }}">Servis</a>
+                        <a href="{{ route('laporan.pajak') }}"
+                            class="modal-link {{ Request::is('laporan/9') ? 'active' : '' }}">Pajak</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row table-default">
@@ -54,27 +82,27 @@
                             @elseif ($laporan->kategori_laporan == 'kendaraan')
                                 <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
                                     {{ \App\Models\Kendaraan::where('id', $laporan->relations_id)->first()->stnk_nama }}
-                                    telah menyewakan kendaraannya berupa
-                                    {{ \App\Models\Kendaraan::where('id', $laporan->relations_id)->first()->nama_kendaraan }}
+                                    telah menyewakan kendaraannya dengan nomor
+                                    {{ \App\Models\Kendaraan::where('id', $laporan->relations_id)->first()->nomor_plat }}
                                 </div>
                             @elseif ($laporan->kategori_laporan == 'booking')
                                 <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
                                     Kendaraan
-                                    {{ \App\Models\Pemesanan::where('id', $laporan->relations_id)->with('pelanggan')->first()->kendaraan->nama_kendaraan }}
+                                    {{ \App\Models\Pemesanan::where('id', $laporan->relations_id)->with('pelanggan')->first()->kendaraan->nomor_plat }}
                                     telah dibooking oleh
                                     {{ \App\Models\Pemesanan::where('id', $laporan->relations_id)->with('pelanggan')->first()->pelanggan->nama }}
                                 </div>
                             @elseif ($laporan->kategori_laporan == 'pemesanan')
                                 <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
                                     Kendaraan
-                                    {{ \App\Models\PelepasanPemesanan::where('id', $laporan->relations_id)->with('kendaraan')->first()->kendaraan->nama_kendaraan }}
+                                    {{ \App\Models\PelepasanPemesanan::where('id', $laporan->relations_id)->with('kendaraan')->first()->kendaraan->nomor_plat }}
                                     telah dipesan oleh
                                     {{ \App\Models\PelepasanPemesanan::where('id', $laporan->relations_id)->with('pemesanan')->first()->pemesanan->pelanggan->nama }}
                                 </div>
                             @elseif ($laporan->kategori_laporan == 'pengembalian')
                                 <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
                                     Kendaraan
-                                    {{ \App\Models\Pengembalian::where('id', $laporan->relations_id)->with('pelepasan_pemesanan')->first()->pelepasan_pemesanan->kendaraan->nama_kendaraan }}
+                                    {{ \App\Models\Pengembalian::where('id', $laporan->relations_id)->with('pelepasan_pemesanan')->first()->pelepasan_pemesanan->kendaraan->nomor_plat }}
                                     dikembalikan
                                     {{ \App\Models\Pengembalian::where('id', $laporan->relations_id)->first()->ketepatan_waktu }}
                                     waktu
@@ -83,18 +111,18 @@
                                 <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
                                     {{ \App\Models\PenambahanSewa::where('id', $laporan->relations_id)->with('pelepasan_pemesanan')->first()->pelepasan_pemesanan->pemesanan->pelanggan->nama }}
                                     menambahkan penyewaan pada kendaraan
-                                    {{ \App\Models\PenambahanSewa::where('id', $laporan->relations_id)->with('kendaraan')->first()->kendaraan->nama_kendaraan }}
+                                    {{ \App\Models\PenambahanSewa::where('id', $laporan->relations_id)->with('kendaraan')->first()->kendaraan->nomor_plat }}
                                 </div>
                             @elseif ($laporan->kategori_laporan == 'servis')
                                 <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
                                     Kendaraan
-                                    {{ \App\Models\Servis::where('id', $laporan->relations_id)->with('kendaraan')->first()->kendaraan->nama_kendaraan }}
+                                    {{ \App\Models\Servis::where('id', $laporan->relations_id)->with('kendaraan')->first()->kendaraan->nomor_plat }}
                                     telah diservis
                                 </div>
                             @elseif ($laporan->kategori_laporan == 'pajak')
                                 <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
                                     Kendaraan
-                                    {{ \App\Models\Pajak::where('id', $laporan->relations_id)->with('kendaraan')->first()->kendaraan->nama_kendaraan }}
+                                    {{ \App\Models\Pajak::where('id', $laporan->relations_id)->with('kendaraan')->first()->kendaraan->nomor_plat }}
                                     telah membayar
                                     {{ \App\Models\Pajak::where('id', $laporan->relations_id)->first()->jenis_pajak }}
                                 </div>
@@ -119,4 +147,13 @@
             {{ $laporans->links() }}
         </div>
     </div>
+
+    <script>
+        const buttonOther = document.querySelector('.button-other');
+        const modalOther = document.querySelector('.modal-other');
+
+        buttonOther.addEventListener('click', function() {
+            modalOther.classList.toggle('active');
+        });
+    </script>
 @endsection

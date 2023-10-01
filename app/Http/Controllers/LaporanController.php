@@ -31,6 +31,141 @@ class LaporanController extends Controller
         }
     }
 
+    public function laporanPelanggan()
+    {
+        if (auth()->user()->role == 'admin') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'pelanggan')->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        } elseif (auth()->user()->role == 'staff') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'pelanggan')->where('penggunas_id', auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        }
+    }
+
+    public function laporanSopir()
+    {
+        if (auth()->user()->role == 'admin') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'sopir')->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        } elseif (auth()->user()->role == 'staff') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'sopir')->where('penggunas_id', auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        }
+    }
+
+    public function laporanKendaraan()
+    {
+        if (auth()->user()->role == 'admin') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'kendaraan')->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        } elseif (auth()->user()->role == 'staff') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'kendaraan')->where('penggunas_id', auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        }
+    }
+
+    public function laporanBooking()
+    {
+        if (auth()->user()->role == 'admin') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'booking')->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        } elseif (auth()->user()->role == 'staff') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'booking')->where('penggunas_id', auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        }
+    }
+
+    public function laporanPemesanan()
+    {
+        if (auth()->user()->role == 'admin') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'pemesanan')->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        } elseif (auth()->user()->role == 'staff') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'pemesanan')->where('penggunas_id', auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        }
+    }
+
+    public function laporanPengembalian()
+    {
+        if (auth()->user()->role == 'admin') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'pengembalian')->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        } elseif (auth()->user()->role == 'staff') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'pengembalian')->where('penggunas_id', auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        }
+    }
+
+    public function laporanPenambahan()
+    {
+        if (auth()->user()->role == 'admin') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'penambahan')->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        } elseif (auth()->user()->role == 'staff') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'penambahan')->where('penggunas_id', auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        }
+    }
+
+    public function laporanServis()
+    {
+        if (auth()->user()->role == 'admin') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'servis')->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        } elseif (auth()->user()->role == 'staff') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'servis')->where('penggunas_id', auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        }
+    }
+
+    public function laporanPajak()
+    {
+        if (auth()->user()->role == 'admin') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'pajak')->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        } elseif (auth()->user()->role == 'staff') {
+            return view('laporan.index', [
+                'title' => 'Laporan',
+                'laporans' => Laporan::where('kategori_laporan', 'pajak')->where('penggunas_id', auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(6),
+            ]);
+        }
+    }
+
     public function nota($id)
     {
         $laporan = Laporan::where('id', $id)->with('pengguna')->first();

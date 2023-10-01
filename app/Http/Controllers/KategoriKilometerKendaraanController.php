@@ -15,6 +15,16 @@ class KategoriKilometerKendaraanController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $kilometers = KategoriKilometerKendaraan::where('jumlah', 'like', '%' . $request->search . '%')->paginate(6);
+
+        return view('kilometer-kendaraan.index', [
+            'title' => 'Kendaraan',
+            'kilometers' => $kilometers,
+        ]);
+    }
+
     function detail($id)
     {
         $kilometer = KategoriKilometerKendaraan::where('id', $id)->first();

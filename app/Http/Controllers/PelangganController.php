@@ -17,6 +17,22 @@ class PelangganController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $pelanggans = Pelanggan::where('nama', 'like', '%' . $request->search . '%')
+            ->orWhere('nik', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_telepon', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_ktp', 'like', '%' . $request->search . '%')
+            ->orWhere('nomor_kk', 'like', '%' . $request->search . '%')
+            ->orWhere('alamat', 'like', '%' . $request->search . '%')
+            ->paginate(6);
+
+        return view('pelanggan.index', [
+            'title' => 'Pelanggan',
+            'pelanggans' => $pelanggans,
+        ]);
+    }
+
     public function detail($id)
     {
         return view('pelanggan.detail', [

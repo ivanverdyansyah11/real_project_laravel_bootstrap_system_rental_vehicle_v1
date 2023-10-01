@@ -19,6 +19,23 @@ class SeriKendaraanController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $keyword = $request->search;
+        $series = SeriKendaraan::where('nomor_seri', 'like', '%' . $keyword . '%')->orWhereHas('jenis_kendaraan', function ($query) use ($keyword) {
+            $query->where('nama', 'like', '%' . $keyword . '%');
+        })->orWhereHas('brand_kendaraan', function ($query) use ($keyword) {
+            $query->where('nama', 'like', '%' . $keyword . '%');
+        })->paginate(6);
+
+        return view('seri-kendaraan.index', [
+            'title' => 'Kendaraan',
+            'series' => $series,
+            'jenises' => JenisKendaraan::all(),
+            'brands' => BrandKendaraan::all(),
+        ]);
+    }
+
     function detail($id)
     {
         $seri = SeriKendaraan::where('id', $id)->with('jenis_kendaraan', 'brand_kendaraan')->first();

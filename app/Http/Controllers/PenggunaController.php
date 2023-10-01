@@ -16,6 +16,19 @@ class PenggunaController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $penggunas = Auth::where('nama_lengkap', 'like', '%' . $request->search . '%')
+            ->orWhere('email', 'like', '%' . $request->search . '%')
+            ->orWhere('role', 'like', '%' . $request->search . '%')
+            ->paginate(6);
+
+        return view('pengguna.index', [
+            'title' => 'Pengguna',
+            'penggunas' => $penggunas,
+        ]);
+    }
+
     function detail($id)
     {
         $pengguna = Auth::where('id', $id)->first();

@@ -17,7 +17,17 @@
         </div>
         <div class="row mb-4">
             <div class="col-12 d-flex justify-content-between align-items-center">
-                <h5 class="subtitle">Data Seri Kendaraan</h5>
+                <form class="form-search d-inline-block" method="POST" action="{{ route('seriKendaraan.search') }}">
+                    @csrf
+                    <div class="wrapper-search">
+                        <input type="text" class="input-search" placeholder=" " name="search">
+                        <label class="d-flex align-items-center">
+                            <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
+                                class="img-fluid search-icon">
+                            <p>Cari seri..</p>
+                        </label>
+                    </div>
+                </form>
                 @if ($jenises->count() == 0 || $brands->count() == 0)
                     <form action="{{ route('seriKendaraan.check') }}" method="POST">
                         @csrf

@@ -68,6 +68,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // JENIS KENDARAAN
     Route::controller(JenisKendaraanController::class)->group(function () {
         Route::get('/jenis-kendaraan', 'index')->name('jenisKendaraan');
+        Route::post('/jenis-kendaraan/cari', 'search')->name('jenisKendaraan.search');
         Route::get('/jenis-kendaraan/detail/{id}', 'detail')->name('jenisKendaraan.detail');
         Route::post('/jenis-kendaraan/tambah', 'store')->name('jenisKendaraan.store');
         Route::post('/jenis-kendaraan/edit/{id}', 'update')->name('jenisKendaraan.update');
@@ -77,6 +78,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // BRAND KENDARAAN
     Route::controller(BrandKendaraanController::class)->group(function () {
         Route::get('/brand-kendaraan', 'index')->name('brandKendaraan');
+        Route::post('/brand-kendaraan/cari', 'search')->name('brandKendaraan.search');
         Route::get('/brand-kendaraan/detail/{id}', 'detail')->name('brandKendaraan.detail');
         Route::post('/brand-kendaraan/tambah', 'store')->name('brandKendaraan.store');
         Route::post('/brand-kendaraan/edit/{id}', 'update')->name('brandKendaraan.update');
@@ -86,6 +88,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // SERI KENDARAAN
     Route::controller(SeriKendaraanController::class)->group(function () {
         Route::get('/seri-kendaraan', 'index')->name('seriKendaraan');
+        Route::post('/seri-kendaraan/cari', 'search')->name('seriKendaraan.search');
         Route::get('/seri-kendaraan/detail/{id}', 'detail')->name('seriKendaraan.detail');
         Route::post('/seri-kendaraan/check', 'check')->name('seriKendaraan.check');
         Route::post('/seri-kendaraan/tambah', 'store')->name('seriKendaraan.store');
@@ -96,6 +99,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // KATEGORI KILOMETER KENDARAAN
     Route::controller(KategoriKilometerKendaraanController::class)->group(function () {
         Route::get('/kilometer-kendaraan', 'index')->name('kilometerKendaraan');
+        Route::post('/kilometer-kendaraan/cari', 'search')->name('kilometerKendaraan.search');
         Route::get('/kilometer-kendaraan/detail/{id}', 'detail')->name('kilometerKendaraan.detail');
         Route::post('/kilometer-kendaraan/tambah', 'store')->name('kilometerKendaraan.store');
         Route::post('/kilometer-kendaraan/edit/{id}', 'update')->name('kilometerKendaraan.update');
@@ -105,8 +109,8 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // PELANGGAN
     Route::controller(PelangganController::class)->group(function () {
         Route::get('/pelanggan', 'index')->name('pelanggan');
+        Route::post('/pelanggan/cari', 'search')->name('pelanggan.search');
         Route::get('/pelanggan/detail/{id}', 'detail')->name('pelanggan.detail');
-
         Route::get('/pelanggan/tambah', 'create')->name('pelanggan.create');
         Route::post('/pelanggan/tambah', 'store')->name('pelanggan.store');
         Route::get('/pelanggan/edit/{id}', 'edit')->name('pelanggan.edit');
@@ -117,8 +121,8 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // SOPIR
     Route::controller(SopirController::class)->group(function () {
         Route::get('/sopir', 'index')->name('sopir');
+        Route::post('/sopir/cari', 'search')->name('sopir.search');
         Route::get('/sopir/detail/{id}', 'detail')->name('sopir.detail');
-
         Route::get('/sopir/tambah', 'create')->name('sopir.create');
         Route::post('/sopir/tambah', 'store')->name('sopir.store');
         Route::get('/sopir/edit/{id}', 'edit')->name('sopir.edit');
@@ -157,6 +161,7 @@ Route::middleware('auth')->group(function () {
     // PENGGUNA
     Route::controller(PenggunaController::class)->group(function () {
         Route::get('/pengguna', 'index')->name('pengguna');
+        Route::post('/pengguna/cari', 'search')->name('pengguna.search');
         Route::get('/pengguna/detail/{id}', 'detail')->name('pengguna.detail');
         Route::post('/pengguna/tambah', 'store')->name('pengguna.store');
         Route::post('/pengguna/edit/{id}', 'update')->name('pengguna.update');
@@ -165,8 +170,6 @@ Route::middleware('auth')->group(function () {
 
     // BOOKING
     Route::controller(BookingController::class)->group(function () {
-        Route::get('/booking', 'index')->name('booking');
-        Route::post('/booking/cari', 'search')->name('booking.search');
         Route::post('/booking/check', 'check')->name('booking.check');
         Route::get('/booking/kendaraan/{id}', 'getKendaraan')->name('booking.kendaraan');
         Route::get('/booking/kendaraan/{id}/{idBrand}', 'getKendaraanByJenisBrand')->name('booking.kendaraan');
@@ -198,6 +201,15 @@ Route::middleware('auth')->group(function () {
     // LAPORAN
     Route::controller(LaporanController::class)->group(function () {
         Route::get('/laporan', 'index')->name('laporan');
+        Route::get('/laporan/1', 'laporanPelanggan')->name('laporan.pelanggan');
+        Route::get('/laporan/2', 'laporanSopir')->name('laporan.sopir');
+        Route::get('/laporan/3', 'laporanKendaraan')->name('laporan.kendaraan');
+        Route::get('/laporan/4', 'laporanBooking')->name('laporan.booking');
+        Route::get('/laporan/5', 'laporanPemesanan')->name('laporan.pemesanan');
+        Route::get('/laporan/6', 'laporanPengembalian')->name('laporan.pengembalian');
+        Route::get('/laporan/7', 'laporanPenambahan')->name('laporan.penambahan');
+        Route::get('/laporan/8', 'laporanServis')->name('laporan.servis');
+        Route::get('/laporan/9', 'laporanPajak')->name('laporan.pajak');
         Route::get('/laporan/nota/{id}', 'nota')->name('laporan.nota');
     });
 });

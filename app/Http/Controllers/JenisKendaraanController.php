@@ -15,6 +15,16 @@ class JenisKendaraanController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $jenises = JenisKendaraan::where('nama', 'like', '%' . $request->search . '%')->paginate(6);
+
+        return view('jenis-kendaraan.index', [
+            'title' => 'Kendaraan',
+            'jenises' => $jenises,
+        ]);
+    }
+
     function detail($id)
     {
         $jenis = JenisKendaraan::where('id', $id)->first();

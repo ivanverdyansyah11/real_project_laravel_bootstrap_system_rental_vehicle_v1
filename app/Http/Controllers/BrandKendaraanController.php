@@ -15,6 +15,16 @@ class BrandKendaraanController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $brands = BrandKendaraan::where('nama', 'like', '%' . $request->search . '%')->paginate(6);
+
+        return view('brand-kendaraan.index', [
+            'title' => 'Kendaraan',
+            'brands' => $brands,
+        ]);
+    }
+
     function detail($id)
     {
         $brand = BrandKendaraan::where('id', $id)->first();

@@ -17,7 +17,17 @@
         </div>
         <div class="row mb-4">
             <div class="col-12 d-flex justify-content-between align-items-center">
-                <h5 class="subtitle">Data Sopir</h5>
+                <form class="form-search d-inline-block" method="POST" action="{{ route('sopir.search') }}">
+                    @csrf
+                    <div class="wrapper-search">
+                        <input type="text" class="input-search" placeholder=" " name="search">
+                        <label class="d-flex align-items-center">
+                            <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
+                                class="img-fluid search-icon">
+                            <p>Cari sopir..</p>
+                        </label>
+                    </div>
+                </form>
                 <a href="{{ route('sopir.create') }}" class="button-primary d-none d-md-flex align-items-center">
                     <img src="{{ asset('assets/img/button/add.svg') }}" alt="Button Tambah Icon"
                         class="img-fluid button-icon">

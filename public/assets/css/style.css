@@ -956,7 +956,7 @@ body {
 }
 
 .modal-other {
-    width: 140px;
+    width: 100%;
     padding: 4px 0;
     border-radius: var(--rounded-lg);
     border: var(--border-style);
