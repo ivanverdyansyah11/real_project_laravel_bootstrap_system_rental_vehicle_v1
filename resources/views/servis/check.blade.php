@@ -38,9 +38,9 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="nama_kendaraan">Nama Kendaraan</label>
-                                        <input type="text" id="nama_kendaraan" class="input" autocomplete="off" disabled
-                                            value="{{ $kendaraan->nama_kendaraan }}">
+                                        <label for="nomor_plat">Nomor Plat</label>
+                                        <input type="text" id="nomor_plat" class="input" autocomplete="off" disabled
+                                            value="{{ $kendaraan->nomor_plat }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
@@ -63,7 +63,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="kilometer_sebelum">Kilometer Sebelum</label>
-                                        <input type="text" id="kilometer_sebelum" name="kilometer_sebelum" class="input"
+                                        <input type="number" id="kilometer_sebelum" name="kilometer_sebelum" class="input"
                                             autocomplete="off" value="{{ $kendaraan->kilometer }}">
                                         @error('kilometer_sebelum')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -73,7 +73,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="kilometer_setelah">Kilometer Setelah</label>
-                                        <input type="text" id="kilometer_setelah" name="kilometer_setelah" class="input"
+                                        <input type="number" id="kilometer_setelah" name="kilometer_setelah" class="input"
                                             autocomplete="off" value="{{ $kendaraan->kilometer_saat_ini }}">
                                         @error('kilometer_setelah')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -139,7 +139,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="total_bayar">Total Bayar</label>
-                                        <input type="text" id="total_bayar" class="input" autocomplete="off"
+                                        <input type="number" id="total_bayar" class="input" autocomplete="off"
                                             name="total_bayar">
                                         @error('total_bayar')
                                             <p class="caption-error mt-2">{{ $message }}</p>

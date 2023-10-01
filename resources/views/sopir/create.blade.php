@@ -73,8 +73,7 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nik">NIK</label>
-                                    <input type="text" id="nik" class="input" autocomplete="off" name="nik"
-                                        pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
+                                    <input type="number" id="nik" class="input" autocomplete="off" name="nik">
                                     @error('nik')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -83,8 +82,8 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nomor_telepon">Nomor Telepon</label>
-                                    <input type="text" id="nomor_telepon" class="input" autocomplete="off"
-                                        name="nomor_telepon" pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
+                                    <input type="number" id="nomor_telepon" class="input" autocomplete="off"
+                                        name="nomor_telepon">
                                     @error('nomor_telepon')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -93,8 +92,7 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nomor_ktp">Nomor KTP</label>
-                                    <input type="text" id="nomor_ktp" class="input" autocomplete="off" name="nomor_ktp"
-                                        pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
+                                    <input type="number" id="nomor_ktp" class="input" autocomplete="off" name="nomor_ktp">
                                     @error('nomor_ktp')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -103,8 +101,7 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nomor_sim">Nomor SIM</label>
-                                    <input type="text" id="nomor_sim" class="input" autocomplete="off" name="nomor_sim"
-                                        pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
+                                    <input type="number" id="nomor_sim" class="input" autocomplete="off" name="nomor_sim">
                                     @error('nomor_sim')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror

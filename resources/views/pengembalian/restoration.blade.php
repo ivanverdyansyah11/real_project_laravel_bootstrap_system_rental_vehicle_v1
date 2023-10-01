@@ -102,9 +102,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="total_bayar">Total Bayar</label>
-                                        <input type="text" id="total_bayar" class="input" autocomplete="off"
-                                            name="total_bayar" value="{{ old('total_bayar') }}" pattern="[0-9]*"
-                                            title="Hanya angka 0-9 diperbolehkan">
+                                        <input type="number" id="total_bayar" class="input" autocomplete="off"
+                                            name="total_bayar" value="{{ old('total_bayar') }}">
                                         @error('total_bayar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -133,8 +132,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="kilometer_kembali">Kilometer Kembali</label>
-                                        <input type="text" id="kilometer_kembali" name="kilometer_kembali"
-                                            class="input" autocomplete="off" pattern="[0-9]*">
+                                        <input type="number" id="kilometer_kembali" name="kilometer_kembali"
+                                            class="input" autocomplete="off">
                                         @error('kilometer_kembali')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -143,8 +142,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="bensin_kembali">Bensin Kembali</label>
-                                        <input type="text" id="bensin_kembali" name="bensin_kembali" class="input"
-                                            autocomplete="off" title="Hanya angka 0-9 diperbolehkan">
+                                        <input type="number" id="bensin_kembali" name="bensin_kembali" class="input"
+                                            autocomplete="off">
                                         @error('bensin_kembali')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -166,9 +165,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="terlambat">Terlambat (Max 3 Jam)</label>
-                                        <input type="text" id="terlambat" name="terlambat" class="input"
-                                            autocomplete="off" pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan"
-                                            disabled>
+                                        <input type="number" id="terlambat" name="terlambat" class="input"
+                                            autocomplete="off" disabled>
                                         @error('terlambat')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -237,8 +235,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="biaya_tambahan">Biaya Tambahan</label>
-                                        <input type="text" id="biaya_tambahan" name="biaya_tambahan" class="input"
-                                            autocomplete="off" pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
+                                        <input type="number" id="biaya_tambahan" name="biaya_tambahan" class="input"
+                                            autocomplete="off">
                                         @error('biaya_tambahan')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror

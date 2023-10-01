@@ -114,9 +114,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="kilometer">Kilometer</label>
-                                        <input type="text" id="kilometer" class="input" autocomplete="off"
-                                            value="{{ $kendaraan->kilometer_saat_ini }}" name="kilometer" pattern="[0-9]*"
-                                            title="Hanya angka 0-9 diperbolehkan">
+                                        <input type="number" id="kilometer" class="input" autocomplete="off"
+                                            value="{{ $kendaraan->kilometer_saat_ini }}" name="kilometer">
                                         @error('kilometer')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -125,9 +124,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="tarif_sewa_hari">Tarif Sewa Harian</label>
-                                        <input type="text" id="tarif_sewa_hari" class="input" autocomplete="off"
-                                            value="{{ $kendaraan->tarif_sewa_hari }}" name="tarif_sewa_hari"
-                                            pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
+                                        <input type="number" id="tarif_sewa_hari" class="input" autocomplete="off"
+                                            value="{{ $kendaraan->tarif_sewa_hari }}" name="tarif_sewa_hari">
                                         @error('tarif_sewa_hari')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -136,9 +134,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="tarif_sewa_minggu">Tarif Sewa Mingguan</label>
-                                        <input type="text" id="tarif_sewa_minggu" class="input" autocomplete="off"
-                                            value="{{ $kendaraan->tarif_sewa_minggu }}" name="tarif_sewa_minggu"
-                                            pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
+                                        <input type="number" id="tarif_sewa_minggu" class="input" autocomplete="off"
+                                            value="{{ $kendaraan->tarif_sewa_minggu }}" name="tarif_sewa_minggu">
                                         @error('tarif_sewa_minggu')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -147,9 +144,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="tarif_sewa_bulan">Tarif Sewa Bulanan</label>
-                                        <input type="text" id="tarif_sewa_bulan" class="input" autocomplete="off"
-                                            value="{{ $kendaraan->tarif_sewa_bulan }}" name="tarif_sewa_bulan"
-                                            pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
+                                        <input type="number" id="tarif_sewa_bulan" class="input" autocomplete="off"
+                                            value="{{ $kendaraan->tarif_sewa_bulan }}" name="tarif_sewa_bulan">
                                         @error('tarif_sewa_bulan')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -191,8 +187,7 @@
                                     <div class="input-wrapper">
                                         <label for="nomor_rangka">Nomor Rangka</label>
                                         <input type="text" id="nomor_rangka" class="input" autocomplete="off"
-                                            value="{{ $kendaraan->nomor_rangka }}" name="nomor_rangka" pattern="[0-9]*"
-                                            title="Hanya angka 0-9 diperbolehkan">
+                                            value="{{ $kendaraan->nomor_rangka }}" name="nomor_rangka">
                                         @error('nomor_rangka')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -202,8 +197,7 @@
                                     <div class="input-wrapper">
                                         <label for="nomor_mesin">Nomor Mesin</label>
                                         <input type="text" id="nomor_mesin" class="input" autocomplete="off"
-                                            value="{{ $kendaraan->nomor_mesin }}" name="nomor_mesin" pattern="[0-9]*"
-                                            title="Hanya angka 0-9 diperbolehkan">
+                                            value="{{ $kendaraan->nomor_mesin }}" name="nomor_mesin">
                                         @error('nomor_mesin')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror

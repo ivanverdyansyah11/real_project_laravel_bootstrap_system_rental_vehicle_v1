@@ -189,7 +189,6 @@
                             <div class="input-wrapper">
                                 <label for="tarif_sewa_hari">Tarif Sewa Kendaran Harian</label>
                                 <input type="text" id="tarif_sewa_hari" class="input" autocomplete="off"
-                                    pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan"
                                     value="{{ $pemesanan->kendaraan->tarif_sewa_hari }}" disabled>
                             </div>
                         </div>
@@ -197,7 +196,6 @@
                             <div class="input-wrapper">
                                 <label for="tarif_sewa_minggu">Tarif Sewa Kendaran Mingguan</label>
                                 <input type="text" id="tarif_sewa_minggu" class="input" autocomplete="off"
-                                    pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan"
                                     value="{{ $pemesanan->kendaraan->tarif_sewa_minggu }}" disabled>
                             </div>
                         </div>
@@ -205,7 +203,6 @@
                             <div class="input-wrapper">
                                 <label for="tarif_sewa_bulan">Tarif Sewa Kendaran Bulanan</label>
                                 <input type="text" id="tarif_sewa_bulan" class="input" autocomplete="off"
-                                    pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan"
                                     value="{{ $pemesanan->kendaraan->tarif_sewa_bulan }}" disabled>
                             </div>
                         </div>
@@ -244,7 +241,7 @@
                             <div class="input-wrapper">
                                 <label for="tanggal_kembali">Tanggal Kembali</label>
                                 <input type="date" id="tanggal_kembali" class="input" autocomplete="off"
-                                    name="tanggal_kembali" disabled>
+                                    name="tanggal_kembali">
                                 @error('tanggal_kembali')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -284,7 +281,7 @@
                                     <div class="input-wrapper">
                                         <label for="waktu_sewa">Waktu Sewa (Hari)</label>
                                         <input type="number" id="waktu_sewa" class="input" autocomplete="off"
-                                            name="waktu_sewa" pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan">
+                                            name="waktu_sewa" value="0">
                                         @error('waktu_sewa')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -294,7 +291,7 @@
                                     <div class="input-wrapper">
                                         <label for="total_tarif_sewa">Total Tarif Sewa</label>
                                         <input type="number" id="total_tarif_sewa" class="input" autocomplete="off"
-                                            name="total_tarif_sewa">
+                                            name="total_tarif_sewa" value="0">
                                         @error('total_tarif_sewa')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror

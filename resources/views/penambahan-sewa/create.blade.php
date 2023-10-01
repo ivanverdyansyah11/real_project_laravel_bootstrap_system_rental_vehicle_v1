@@ -38,9 +38,9 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="kendaraan">Kendaraan</label>
-                                        <input type="text" id="kendaraan" class="input" autocomplete="off" disabled
-                                            value="{{ $pemesanan->kendaraan->nama_kendaraan }}">
+                                        <label for="nomor_plat">Nomor Plat</label>
+                                        <input type="text" id="nomor_plat" class="input" autocomplete="off" disabled
+                                            value="{{ $pemesanan->kendaraan->nomor_plat }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
@@ -53,8 +53,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="jumlah_hari">Jumlah Hari</label>
-                                        <input type="text" id="jumlah_hari" class="input" autocomplete="off"
-                                            pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan" name="jumlah_hari">
+                                        <input type="number" id="jumlah_hari" class="input" autocomplete="off"
+                                            name="jumlah_hari">
                                     </div>
                                     @error('keterangan')
                                         <p class="caption-error mt-2">{{ $message }}</p>
@@ -63,8 +63,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="total_biaya">Total Biaya</label>
-                                        <input type="text" id="total_biaya" class="input" autocomplete="off"
-                                            pattern="[0-9]*" title="Hanya angka 0-9 diperbolehkan" name="total_biaya">
+                                        <input type="number" id="total_biaya" class="input" autocomplete="off"
+                                            name="total_biaya">
                                         @error('keterangan')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
