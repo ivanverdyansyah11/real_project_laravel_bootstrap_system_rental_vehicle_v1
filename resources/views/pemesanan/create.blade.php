@@ -66,7 +66,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6 row-button">
+                        <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="pelanggans_id">Pelanggan</label>
                                 <select id="pelanggans_id" class="input" name="pelanggans_id">
@@ -80,7 +80,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6 row-button">
+                        <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="sopirs_id">Sopir</label>
                                 <select id="sopirs_id" class="input" name="sopirs_id">
@@ -128,7 +128,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6 mb-4 row-button">
+                        <div class="col-md-6 row-button">
                             <div class="input-wrapper">
                                 <label for="seri">Seri Kendaraan</label>
                                 <input type="text" id="seri" class="input" autocomplete="off" disabled
@@ -151,6 +151,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
     <script>
+        $("#pelanggans_id").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#sopirs_id").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#jenis_kendaraan").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#brand_kendaraan").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#kendaraans_id").select2({
+            theme: "bootstrap-5",
+        });
+
         $("#jenis_kendaraan").change(function() {
             let idJenis = $(this).val();
             let idBrand = $("#brand_kendaraan").val();

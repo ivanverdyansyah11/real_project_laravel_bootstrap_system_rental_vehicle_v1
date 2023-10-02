@@ -48,9 +48,9 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="jenis_pembayaran">Jenis Pembayaran Sebelumnya</label>
-                                        <input type="text" id="jenis_pembayaran" class="input" autocomplete="off"
-                                            value="{{ $pembayaran->jenis_pembayaran }}" disabled>
+                                        <label for="jenis_pembayaran_sebelumnya">Jenis Pembayaran Sebelumnya</label>
+                                        <input type="text" id="jenis_pembayaran_sebelumnya" class="input"
+                                            autocomplete="off" value="{{ $pembayaran->jenis_pembayaran }}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
@@ -76,16 +76,6 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="tanggal_kembali">Pengembalian Tanggal</label>
-                                        <input type="date" id="tanggal_kembali" name="tanggal_kembali" class="input"
-                                            autocomplete="off">
-                                        @error('tanggal_kembali')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
                                         <label for="jenis_pembayaran">Jenis Pembayaran</label>
                                         <select id="jenis_pembayaran" class="input" name="jenis_pembayaran"
                                             value="{{ old('jenis_pembayaran') }}">
@@ -95,16 +85,6 @@
                                             <option value="belum bayar">Belum Bayar</option>
                                         </select>
                                         @error('jenis_pembayaran')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="total_bayar">Total Bayar</label>
-                                        <input type="number" id="total_bayar" class="input" autocomplete="off"
-                                            name="total_bayar" value="{{ old('total_bayar') }}">
-                                        @error('total_bayar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -125,6 +105,26 @@
                                             <option value="e-money">e-Money</option>
                                         </select>
                                         @error('metode_bayar')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="tanggal_kembali">Pengembalian Tanggal</label>
+                                        <input type="date" id="tanggal_kembali" name="tanggal_kembali" class="input"
+                                            autocomplete="off">
+                                        @error('tanggal_kembali')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="total_bayar">Total Bayar</label>
+                                        <input type="number" id="total_bayar" class="input" autocomplete="off"
+                                            name="total_bayar" value="{{ old('total_bayar') }}">
+                                        @error('total_bayar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -166,7 +166,7 @@
                                     <div class="input-wrapper">
                                         <label for="terlambat">Terlambat (Max 3 Jam)</label>
                                         <input type="number" id="terlambat" name="terlambat" class="input"
-                                            autocomplete="off" disabled>
+                                            autocomplete="off">
                                         @error('terlambat')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -268,19 +268,37 @@
     </div>
 
     <script>
+        $("#sarung_jok").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#karpet").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#kondisi_kendaraan").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#ban_serep").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#jenis_pembayaran").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#metode_bayar").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#ketepatan_waktu").select2({
+            theme: "bootstrap-5",
+        });
+
         const tagCreateTransaction = document.querySelector('.tag-create-transaction');
         const inputCreateTransaction = document.querySelector('.input-create-transaction');
         const buttonCreateTransaction = document.querySelector('.button-create-transaction');
-        const ketepatanWaktu = document.querySelector('#ketepatan_waktu');
-        const terlambat = document.querySelector('#terlambat');
-
-        ketepatanWaktu.addEventListener('change', function() {
-            if (ketepatanWaktu.value == "tidak tepat") {
-                terlambat.removeAttribute("disabled");
-            } else {
-                terlambat.setAttribute("disabled", "disabled");
-            }
-        });
 
         buttonCreateTransaction.addEventListener('click', function() {
             inputCreateTransaction.click();

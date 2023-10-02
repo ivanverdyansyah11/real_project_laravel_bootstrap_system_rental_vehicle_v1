@@ -52,16 +52,6 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="tanggal_servis">Tanggal Servis</label>
-                                        <input type="date" id="tanggal_servis" name="tanggal_servis" class="input"
-                                            autocomplete="off">
-                                        @error('tanggal_servis')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
                                         <label for="kilometer_sebelum">Kilometer Sebelum</label>
                                         <input type="number" id="kilometer_sebelum" name="kilometer_sebelum" class="input"
                                             autocomplete="off" value="{{ $kendaraan->kilometer }}">
@@ -76,6 +66,26 @@
                                         <input type="number" id="kilometer_setelah" name="kilometer_setelah" class="input"
                                             autocomplete="off" value="{{ $kendaraan->kilometer_saat_ini }}">
                                         @error('kilometer_setelah')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="tanggal_servis">Tanggal Servis</label>
+                                        <input type="date" id="tanggal_servis" name="tanggal_servis" class="input"
+                                            autocomplete="off">
+                                        @error('tanggal_servis')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="total_bayar">Total Bayar</label>
+                                        <input type="number" id="total_bayar" class="input" autocomplete="off"
+                                            name="total_bayar">
+                                        @error('total_bayar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -136,16 +146,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="total_bayar">Total Bayar</label>
-                                        <input type="number" id="total_bayar" class="input" autocomplete="off"
-                                            name="total_bayar">
-                                        @error('total_bayar')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
                                 <div class="col-12 row-button">
                                     <div class="input-wrapper">
                                         <label for="keterangan">Keterangan</label>
@@ -170,4 +170,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $("#air_accu").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#air_waiper").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#ban").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#oli").select2({
+            theme: "bootstrap-5",
+        });
+    </script>
 @endsection

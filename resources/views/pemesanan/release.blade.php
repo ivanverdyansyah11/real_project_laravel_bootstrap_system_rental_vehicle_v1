@@ -316,7 +316,7 @@
                                     <div class="input-wrapper">
                                         <label for="total_bayar">Total Bayar</label>
                                         <input type="number" id="total_bayar" class="input" autocomplete="off"
-                                            name="total_bayar" value="{{ old('total_bayar') }}" disabled>
+                                            name="total_bayar" value="{{ old('total_bayar') }}">
                                         @error('total_bayar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -393,10 +393,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
     <script>
+        $("#sarung_jok").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#karpet").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#kondisi_kendaraan").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#ban_serep").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#jenis_pembayaran").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#metode_bayar").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#sopirs_id").select2({
+            theme: "bootstrap-5",
+        });
+
         const inputTanggalDiambil = document.querySelector('#tanggal_diambil');
         const inputTanggalKembali = document.querySelector('#tanggal_kembali');
-        const jenisPembayaran = document.querySelector('#jenis_pembayaran');
-        const totalBayar = document.querySelector('#total_bayar');
 
         let waktuSewaHarian = document.querySelector('#waktu_sewa_hari');
         let waktuSewaMingguan = document.querySelector('#waktu_sewa_minggu');
@@ -406,14 +432,6 @@
         let tarifSewaBulanan = parseInt(document.querySelector('#tarif_sewa_bulan').value);
         let tarifSewa = document.querySelector('#total_tarif_sewa');
         const waktuSewa = document.querySelector('#waktu_sewa');
-
-        jenisPembayaran.addEventListener('change', function() {
-            if (jenisPembayaran.value == "-" || jenisPembayaran.value == "belum bayar") {
-                totalBayar.setAttribute("disabled", "disabled");
-            } else {
-                totalBayar.removeAttribute("disabled");
-            }
-        });
 
         inputTanggalDiambil.addEventListener('change', function() {
             let jumlahHari;

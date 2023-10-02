@@ -122,8 +122,8 @@
                         </div>
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="jenis">Jenis Kendaraan</label>
-                                <select id="jenis" class="input" name="jenis_kendaraans_id">
+                                <label for="jenis_kendaraan_add">Jenis Kendaraan</label>
+                                <select id="jenis_kendaraan_add" class="input" name="jenis_kendaraans_id">
                                     <option value="-">Pilih jenis kendaraan</option>
                                     @foreach ($jenises as $jenis)
                                         <option value="{{ $jenis->id }}">{{ $jenis->nama }}</option>
@@ -136,8 +136,8 @@
                         </div>
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
-                                <label for="brand">Brand Kendaraan</label>
-                                <select id="brand" class="input" name="brand_kendaraans_id">
+                                <label for="brand_kendaraan_add">Brand Kendaraan</label>
+                                <select id="brand_kendaraan_add" class="input" name="brand_kendaraans_id">
                                     <option value="-">Pilih brand kendaraan</option>
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}">{{ $brand->nama }}</option>
@@ -222,8 +222,8 @@
                         </div>
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="jenis">Jenis Kendaraan</label>
-                                <select id="jenis" class="input" name="jenis_kendaraans_id"
+                                <label for="jenis_kendaraan_edit">Jenis Kendaraan</label>
+                                <select id="jenis_kendaraan_edit" class="input" name="jenis_kendaraans_id"
                                     data-value="jenis_kendaraan">
                                 </select>
                                 @error('jenis_kendaraans_id')
@@ -233,8 +233,8 @@
                         </div>
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
-                                <label for="brand">Brand Kendaraan</label>
-                                <select id="brand" class="input" name="brand_kendaraans_id"
+                                <label for="brand_kendaraan_edit">Brand Kendaraan</label>
+                                <select id="brand_kendaraan_edit" class="input" name="brand_kendaraans_id"
                                     data-value="brand_kendaraan">
                                 </select>
                                 @error('brand_kendaraans_id')
@@ -282,6 +282,22 @@
     {{-- END MODAL HAPUS SERI KENDARAAN --}}
 
     <script>
+        $("#jenis_kendaraan_add").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#brand_kendaraan_add").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#jenis_kendaraan_edit").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#brand_kendaraan_edit").select2({
+            theme: "bootstrap-5",
+        });
+
         $(document).on('click', '[data-bs-target="#detailSeriModal"]', function() {
             let id = $(this).data('id');
             $.ajax({

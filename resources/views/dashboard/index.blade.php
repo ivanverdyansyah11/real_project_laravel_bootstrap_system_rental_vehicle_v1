@@ -101,7 +101,7 @@
             </div>
             <div class="col-12 col-lg">
                 <div class="card-default" style="padding: 26px !important;">
-                    <div class="card-header d-flex justify-content-between align-items-center">
+                    <div class="header-card d-flex justify-content-between align-items-center">
                         <h6 class="subtitle">Grafik Penyewaan Kendaraan</h6>
                         <div class="wrapper position-relative d-none d-md-inline-block">
                             <button type="button"

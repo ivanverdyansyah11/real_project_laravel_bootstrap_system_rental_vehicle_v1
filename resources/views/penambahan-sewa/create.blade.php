@@ -70,7 +70,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12 mb-4">
+                                <div class="col-12 row-button">
                                     <div class="input-wrapper">
                                         <label for="keterangan">Keterangan</label>
                                         <input type="text" id="keterangan" class="input" autocomplete="off"

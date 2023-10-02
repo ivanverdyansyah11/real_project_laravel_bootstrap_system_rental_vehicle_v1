@@ -78,16 +78,6 @@
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
-                                <label for="tanggal_bayar">Tanggal Bayar</label>
-                                <input type="date" id="tanggal_bayar" class="input" autocomplete="off"
-                                    name="tanggal_bayar">
-                                @error('tanggal_bayar')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
                                 <label for="metode_bayar">Metode Pembayaran</label>
                                 <select id="metode_bayar" class="input" name="metode_bayar">
                                     <option value="-">Pilih metode pembayaran</option>
@@ -101,6 +91,16 @@
                                     <option value="e-money">e-Money</option>
                                 </select>
                                 @error('metode_bayar')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="input-wrapper">
+                                <label for="tanggal_bayar">Tanggal Bayar</label>
+                                <input type="date" id="tanggal_bayar" class="input" autocomplete="off"
+                                    name="tanggal_bayar">
+                                @error('tanggal_bayar')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -127,4 +127,13 @@
             </div>
         </div>
     </div>
+    <script>
+        $("#jenis_pajak").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#metode_bayar").select2({
+            theme: "bootstrap-5",
+        });
+    </script>
 @endsection

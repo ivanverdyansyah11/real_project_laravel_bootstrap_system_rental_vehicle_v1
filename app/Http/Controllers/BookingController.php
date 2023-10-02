@@ -126,7 +126,7 @@ class BookingController extends Controller
     function update($id, Request $request)
     {
         $pemesanan = Pemesanan::where('id', $id)->first();
-        $kendaraan = Pemesanan::where('kendaraans_id', $pemesanan->kendaraans_id)->count();
+        $kendaraan = Pemesanan::where('kendaraans_id', $pemesanan->kendaraans_id)->where('status', 'booking')->count();
         if ($kendaraan == 1) {
             Kendaraan::where('id', $pemesanan->kendaraans_id)->first()->update([
                 'status' => 'ready',

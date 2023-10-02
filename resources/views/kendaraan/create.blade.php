@@ -215,6 +215,14 @@
     </div>
 
     <script>
+        $("#seriData").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#kilometerData").select2({
+            theme: "bootstrap-5",
+        });
+
         const tagCreateKendaraan = document.querySelector('.tag-create-image');
         const inputCreateKendaraan = document.querySelector('.input-create-image');
         const buttonCreate = document.querySelector('.button-create');

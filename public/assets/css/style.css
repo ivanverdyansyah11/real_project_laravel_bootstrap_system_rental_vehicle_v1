@@ -675,7 +675,8 @@ body {
 
 .button-primary:hover,
 .button-primary-full:hover {
-    filter: contrast(120%);
+    filter: contrast(120%) !important;
+    color: white !important;
 }
 
 .button-reverse {
@@ -694,11 +695,13 @@ body {
 }
 
 .button-primary-blur:hover {
-    border-color: rgba(var(--primary-color), 0.24);
+    border-color: rgba(var(--primary-color), 0.24) !important;
+    color: rgba(var(--primary-color), 1) !important;
 }
 
 .button-reverse:hover {
     background-color: rgba(var(--dark-color), 0.05);
+    color: rgba(var(--dark-color), 1) !important;
 }
 
 .button-small {
@@ -1008,13 +1011,13 @@ body {
     color: rgba(var(--red-color), 1) !important;
 }
 
-.card-header {
+.header-card {
     margin-bottom: 16px;
     position: relative;
     z-index: 1;
 }
 
-.card-header .subtitle {
+.header-card .subtitle {
     font-size: 1.125rem;
     font-family: var(--urbanist-medium);
     margin-bottom: 0 !important;
@@ -1051,6 +1054,10 @@ body {
     position: absolute;
     top: -400px;
     z-index: -10;
+}
+
+.select2 {
+    width: 100% !important;
 }
 /* END CONTENT STYLE */
 

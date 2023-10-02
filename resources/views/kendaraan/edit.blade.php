@@ -79,8 +79,8 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="kilometer">Kategori Kilometer</label>
-                                        <select id="kilometer" class="input" name="kategori_kilometer_kendaraans_id">
+                                        <label for="kilometerData">Kategori Kilometer</label>
+                                        <select id="kilometerData" class="input" name="kategori_kilometer_kendaraans_id">
                                             @foreach ($kilometers as $kilometer)
                                                 @if ($kendaraan->kategori_kilometer_kendaraans_id == $kilometer->id)
                                                     <option value="{{ $kilometer->id }}" selected>{{ $kilometer->jumlah }}
@@ -219,6 +219,14 @@
     </div>
 
     <script>
+        $("#seriData").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#kilometerData").select2({
+            theme: "bootstrap-5",
+        });
+
         const tagEditKendaraan = document.querySelector('.tag-edit-image');
         const inputEditKendaraan = document.querySelector('.input-edit-image');
         const buttonEdit = document.querySelector('.button-edit-image');

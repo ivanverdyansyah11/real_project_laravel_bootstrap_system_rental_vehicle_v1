@@ -63,7 +63,7 @@
                                 value="{{ $pemesanan->kendaraan->nomor_plat }}" disabled>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-4 row-button">
+                    <div class="col-md-6 row-button">
                         <div class="input-wrapper">
                             <label for="seri">Seri Kendaraan</label>
                             <input type="text" id="seri" class="input" autocomplete="off" disabled
