@@ -16,9 +16,9 @@
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col-12 d-flex justify-content-between align-items-center">
+            <div class="col-12 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 gap-md-0">
                 <h5 class="subtitle">Data Laporan</h5>
-                <div class="wrapper position-relative">
+                <div class="wrapper position-relative" style="width: max-content;">
                     <button type="button"
                         class="button-other position-relative button-primary-blur d-flex align-items-center">
                         <img src="{{ asset('assets/img/button/filter.svg') }}" alt="Icon Filter"
@@ -72,35 +72,35 @@
                     <div class="col-12 table-row table-border">
                         <div class="row table-data gap-4 align-items-center">
                             @if ($laporan->kategori_laporan == 'pelanggan')
-                                <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
+                                <div class="col col-lg-4 col-xl-5 data-value data-length">
                                     {{ \App\Models\Pelanggan::where('id', $laporan->relations_id)->first()->nama }} telah
                                     terdaftar menjadi salah satu pelanggan kami</div>
                             @elseif ($laporan->kategori_laporan == 'sopir')
-                                <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
+                                <div class="col col-lg-4 col-xl-5 data-value data-length">
                                     {{ \App\Models\Sopir::where('id', $laporan->relations_id)->first()->nama }} telah
                                     terdaftar menjadi salah satu sopir kami</div>
                             @elseif ($laporan->kategori_laporan == 'kendaraan')
-                                <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
+                                <div class="col col-lg-4 col-xl-5 data-value data-length">
                                     {{ \App\Models\Kendaraan::where('id', $laporan->relations_id)->first()->stnk_nama }}
                                     telah menyewakan kendaraannya dengan nomor
                                     {{ \App\Models\Kendaraan::where('id', $laporan->relations_id)->first()->nomor_plat }}
                                 </div>
                             @elseif ($laporan->kategori_laporan == 'booking')
-                                <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
+                                <div class="col col-lg-4 col-xl-5 data-value data-length">
                                     Kendaraan
                                     {{ \App\Models\Pemesanan::where('id', $laporan->relations_id)->with('pelanggan')->first()->kendaraan->nomor_plat }}
                                     telah dibooking oleh
                                     {{ \App\Models\Pemesanan::where('id', $laporan->relations_id)->with('pelanggan')->first()->pelanggan->nama }}
                                 </div>
                             @elseif ($laporan->kategori_laporan == 'pemesanan')
-                                <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
+                                <div class="col col-lg-4 col-xl-5 data-value data-length">
                                     Kendaraan
                                     {{ \App\Models\PelepasanPemesanan::where('id', $laporan->relations_id)->with('kendaraan')->first()->kendaraan->nomor_plat }}
                                     telah dipesan oleh
                                     {{ \App\Models\PelepasanPemesanan::where('id', $laporan->relations_id)->with('pemesanan')->first()->pemesanan->pelanggan->nama }}
                                 </div>
                             @elseif ($laporan->kategori_laporan == 'pengembalian')
-                                <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
+                                <div class="col col-lg-4 col-xl-5 data-value data-length">
                                     Kendaraan
                                     {{ \App\Models\Pengembalian::where('id', $laporan->relations_id)->with('pelepasan_pemesanan')->first()->pelepasan_pemesanan->kendaraan->nomor_plat }}
                                     dikembalikan
@@ -108,19 +108,19 @@
                                     waktu
                                 </div>
                             @elseif ($laporan->kategori_laporan == 'penambahan')
-                                <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
+                                <div class="col col-lg-4 col-xl-5 data-value data-length">
                                     {{ \App\Models\PenambahanSewa::where('id', $laporan->relations_id)->with('pelepasan_pemesanan')->first()->pelepasan_pemesanan->pemesanan->pelanggan->nama }}
                                     menambahkan penyewaan pada kendaraan
                                     {{ \App\Models\PenambahanSewa::where('id', $laporan->relations_id)->with('kendaraan')->first()->kendaraan->nomor_plat }}
                                 </div>
                             @elseif ($laporan->kategori_laporan == 'servis')
-                                <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
+                                <div class="col col-lg-4 col-xl-5 data-value data-length">
                                     Kendaraan
                                     {{ \App\Models\Servis::where('id', $laporan->relations_id)->with('kendaraan')->first()->kendaraan->nomor_plat }}
                                     telah diservis
                                 </div>
                             @elseif ($laporan->kategori_laporan == 'pajak')
-                                <div class="col-md-3 col-lg-4 col-xl-5 data-value data-length">
+                                <div class="col col-lg-4 col-xl-5 data-value data-length">
                                     Kendaraan
                                     {{ \App\Models\Pajak::where('id', $laporan->relations_id)->with('kendaraan')->first()->kendaraan->nomor_plat }}
                                     telah membayar
@@ -130,7 +130,7 @@
                             <div class="col data-value data-length data-length-none">{{ $laporan->pengguna->nama_lengkap }}
                             </div>
                             <div class="col data-value data-length data-length-none">{{ $laporan->created_at }}</div>
-                            <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
+                            <div class="col-2 col-md-3 col-xl-2 data-value d-flex justify-content-end">
                                 <div class="wrapper-action d-flex">
                                     <a href="{{ route('laporan.nota', $laporan->id) }}" target="_blank"
                                         class="button-action button-detail d-flex justify-content-center align-items-center">

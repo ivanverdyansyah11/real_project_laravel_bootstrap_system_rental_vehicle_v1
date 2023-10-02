@@ -16,8 +16,7 @@
             </div>
         </div>
         <div class="row mb-4">
-            <div
-                class="col-12 d-flex flex-column flex-md-row justify-content-md-between align-items-end align-items-md-center">
+            <div class="col-12 d-flex flex-column flex-md-row justify-content-between items-md-center">
                 <form class="form-search d-inline-block" method="POST" action="{{ route('pajak.search') }}">
                     @csrf
                     <div class="wrapper-search">

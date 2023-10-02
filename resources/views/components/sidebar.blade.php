@@ -111,7 +111,7 @@
                         <p>Pengguna</p>
                     </div>
                 </a>
-                <form class="w-100">
+                <form class="w-100" method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
                         class="menu-link w-100 d-inline-block d-lg-none flex-column {{ Request::is('logout*') ? 'active' : '' }}">

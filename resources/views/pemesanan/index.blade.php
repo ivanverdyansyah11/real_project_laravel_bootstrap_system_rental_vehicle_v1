@@ -16,9 +16,9 @@
             </div>
         </div>
         <div class="row mb-4">
-            <div
-                class="col-12 d-flex flex-column flex-md-row justify-content-md-between align-items-end align-items-md-center">
-                <form class="form-search d-flex gap-3" method="POST" action="{{ route('pemesanan.search') }}">
+            <div class="col-12 d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
+                <form class="form-search d-flex gap-3 flex-column flex-md-row" method="POST"
+                    action="{{ route('pemesanan.search') }}">
                     @csrf
                     <div class="wrapper-searching position-relative">
                         <p class="mb-2">Tanggal mulai</p>
@@ -38,14 +38,16 @@
                         \App\Models\Kendaraan::where('status', 'ready')->orWhere('status', 'booking')->count() == 0)
                     <form action="{{ route('booking.check') }}" method="POST">
                         @csrf
-                        <button type="submit" class="button-primary d-none d-md-flex align-items-center">
+                        <button type="submit" class="button-primary d-none d-md-flex align-items-center"
+                            style="height: max-content;">
                             <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon"
                                 class="img-fluid button-icon">
                             Booking
                         </button>
                     </form>
                 @else
-                    <a href="{{ route('booking.create') }}" class="button-primary d-none d-md-flex align-items-center">
+                    <a href="{{ route('booking.create') }}" class="button-primary d-none d-md-flex align-items-center"
+                        style="height: max-content;">
                         <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
                         Booking
                     </a>
