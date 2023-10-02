@@ -45,7 +45,7 @@
                             </div>
                             <div class="product-content">
                                 <p class="product-name">{{ $kendaraan->nomor_plat }}</p>
-                                <div class="wrapper-other d-flex align-items-center justify-content-between">
+                                <div class="wrapper-other d-flex align-items-center justify-content-between mb-0 mb-md-3">
                                     <div class="wrapper-tahun d-flex align-items-center">
                                         <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
                                             class="img-fluid kendaraan-icon">
@@ -53,7 +53,7 @@
                                     </div>
                                     <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa_hari }}</h6>
                                 </div>
-                                <div class="wrapper-button d-flex flex-column">
+                                <div class="wrapper-button d-none d-md-flex flex-column">
                                     <a href="{{ route('pengembalian.restoration', $kendaraan->id) }}"
                                         class="button-primary w-100">Pengembalian</a>
                                     @if (auth()->user()->role == 'admin')

@@ -45,12 +45,12 @@
                             </div>
                             <div class="product-content">
                                 <p class="product-name">{{ $kendaraan->nomor_plat }}</p>
-                                <div class="wrapper-other d-flex align-items-center justify-content-between">
+                                <div class="wrapper-other d-flex align-items-center justify-content-between mb-0 mb-md-3">
                                     <div class="wrapper-tahun d-flex align-items-center">
                                         <p class="product-year">No. Seri: {{ $kendaraan->seri_kendaraan->nomor_seri }}</p>
                                     </div>
                                 </div>
-                                <div class="wrapper-button d-flex">
+                                <div class="wrapper-button d-none d-md-flex">
                                     <a href="{{ route('pajak.transaction', $kendaraan->id) }}"
                                         class="button-primary w-100">Bayar Pajak</a>
                                 </div>

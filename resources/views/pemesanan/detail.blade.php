@@ -56,7 +56,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
                             <label for="kendaraans_id">Kendaraan</label>
                             <input type="text" id="kendaraans_id" class="input" autocomplete="off"
@@ -70,12 +70,17 @@
                                 value="{{ $pemesanan->kendaraan->seri_kendaraan->nomor_seri }}">
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 d-none d-md-inline-block">
                         <div class="button-wrapper d-flex">
                             <a href="{{ route('pemesanan.release', $pemesanan->id) }}" class="button-primary">Pesan
                                 Kendaraan</a>
                             <a href="{{ route('pemesanan') }}" class="button-reverse">Batal
                                 Pesan</a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="button-wrapper d-flex d-md-none">
+                            <a href="{{ route('pemesanan') }}" class="button-reverse">Kembali ke Page</a>
                         </div>
                     </div>
                 </div>
