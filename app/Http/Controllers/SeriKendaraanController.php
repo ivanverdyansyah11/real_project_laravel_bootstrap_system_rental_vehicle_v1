@@ -36,14 +36,6 @@ class SeriKendaraanController extends Controller
         ]);
     }
 
-    function detail($id)
-    {
-        $seri = SeriKendaraan::where('id', $id)->with('jenis_kendaraan', 'brand_kendaraan')->first();
-        $jenises = JenisKendaraan::all();
-        $brands = BrandKendaraan::all();
-        return response()->json([$seri, $jenises, $brands]);
-    }
-
     function check()
     {
         $jenises = JenisKendaraan::count();
@@ -56,6 +48,23 @@ class SeriKendaraanController extends Controller
         } elseif ($brands == 0) {
             return redirect(route('seriKendaraan'))->with('failed', 'Tambahkan Brand Kendaraan Terlebih Dahulu!');
         }
+    }
+
+    function detail($id)
+    {
+        return view('seri-kendaraan.detail', [
+            'title' => 'Kendaraan',
+            'seri' => SeriKendaraan::where('id', $id)->with('jenis_kendaraan', 'brand_kendaraan')->first(),
+        ]);
+    }
+
+    function create()
+    {
+        return view('seri-kendaraan.create', [
+            'title' => 'Kendaraan',
+            'jenises' => JenisKendaraan::all(),
+            'brands' => BrandKendaraan::all(),
+        ]);
     }
 
     function store(Request $request)
@@ -79,6 +88,16 @@ class SeriKendaraanController extends Controller
         } else {
             return redirect(route('seriKendaraan'))->with('failed', 'Gagal Tambah Seri Kendaraan!');
         }
+    }
+
+    function edit($id)
+    {
+        return view('seri-kendaraan.edit', [
+            'title' => 'Kendaraan',
+            'seri' => SeriKendaraan::where('id', $id)->with('jenis_kendaraan', 'brand_kendaraan')->first(),
+            'jenises' => JenisKendaraan::all(),
+            'brands' => BrandKendaraan::all(),
+        ]);
     }
 
     function update($id, Request $request)

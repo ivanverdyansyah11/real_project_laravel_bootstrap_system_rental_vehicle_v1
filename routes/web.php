@@ -89,9 +89,12 @@ Route::middleware(['auth', 'owner'])->group(function () {
     Route::controller(SeriKendaraanController::class)->group(function () {
         Route::get('/seri-kendaraan', 'index')->name('seriKendaraan');
         Route::post('/seri-kendaraan/cari', 'search')->name('seriKendaraan.search');
-        Route::get('/seri-kendaraan/detail/{id}', 'detail')->name('seriKendaraan.detail');
         Route::post('/seri-kendaraan/check', 'check')->name('seriKendaraan.check');
+        Route::get('/seri-kendaraan/detail/{id}', 'detail')->name('seriKendaraan.detail');
+
+        Route::get('/seri-kendaraan/tambah', 'create')->name('seriKendaraan.create');
         Route::post('/seri-kendaraan/tambah', 'store')->name('seriKendaraan.store');
+        Route::get('/seri-kendaraan/edit/{id}', 'edit')->name('seriKendaraan.edit');
         Route::post('/seri-kendaraan/edit/{id}', 'update')->name('seriKendaraan.update');
         Route::post('/seri-kendaraan/hapus/{id}', 'delete')->name('seriKendaraan.delete');
     });
