@@ -97,7 +97,7 @@
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Kategori Kilometer</label>
-                                <input type="text" id="nama" class="input" autocomplete="off" name="jumlah">
+                                <input type="number" id="nama" class="input" autocomplete="off" name="jumlah">
                                 @error('jumlah')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -128,7 +128,7 @@
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Kategori Kilometer</label>
-                                <input type="text" id="nama" class="input" autocomplete="off" disabled
+                                <input type="number" id="nama" class="input" autocomplete="off" disabled
                                     data-value="jumlah">
                             </div>
                         </div>
@@ -155,7 +155,7 @@
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Kategori Kilometer</label>
-                                <input type="text" id="nama" class="input" autocomplete="off"
+                                <input type="number" id="nama" class="input" autocomplete="off"
                                     data-value="jumlah" name="jumlah">
                                 @error('jumlah')
                                     <p class="caption-error mt-2">{{ $message }}</p>

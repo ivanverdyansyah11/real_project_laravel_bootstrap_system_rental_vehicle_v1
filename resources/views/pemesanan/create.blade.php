@@ -114,7 +114,14 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-4">
+                            <div class="input-wrapper">
+                                <label for="seri">Seri Kendaraan</label>
+                                <input type="text" id="seri" class="input" autocomplete="off" disabled
+                                    placeholder="Pilih kendaraan terlebih dahulu!" data-value="seri_kendaraan">
+                            </div>
+                        </div>
+                        <div class="col-md-6 row-button">
                             <div class="input-wrapper">
                                 <label for="kendaraans_id">Kendaraan</label>
                                 <select id="kendaraans_id" class="input" name="kendaraans_id">
@@ -126,13 +133,6 @@
                                 @error('kendaraans_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6 row-button">
-                            <div class="input-wrapper">
-                                <label for="seri">Seri Kendaraan</label>
-                                <input type="text" id="seri" class="input" autocomplete="off" disabled
-                                    placeholder="Pilih kendaraan terlebih dahulu!" data-value="seri_kendaraan">
                             </div>
                         </div>
                         <div class="col-12">
