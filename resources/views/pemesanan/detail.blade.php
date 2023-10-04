@@ -58,16 +58,16 @@
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
-                            <label for="kendaraans_id">Kendaraan</label>
-                            <input type="text" id="kendaraans_id" class="input" autocomplete="off"
-                                value="{{ $pemesanan->kendaraan->nomor_plat }}" disabled>
+                            <label for="seri">Seri Kendaraan</label>
+                            <input type="text" id="seri" class="input" autocomplete="off" disabled
+                                value="{{ $pemesanan->kendaraan->seri_kendaraan->nomor_seri }}">
                         </div>
                     </div>
                     <div class="col-md-6 row-button">
                         <div class="input-wrapper">
-                            <label for="seri">Seri Kendaraan</label>
-                            <input type="text" id="seri" class="input" autocomplete="off" disabled
-                                value="{{ $pemesanan->kendaraan->seri_kendaraan->nomor_seri }}">
+                            <label for="kendaraans_id">Kendaraan</label>
+                            <input type="text" id="kendaraans_id" class="input" autocomplete="off"
+                                value="{{ $pemesanan->kendaraan->nomor_plat }}" disabled>
                         </div>
                     </div>
                     <div class="col-12 d-none d-md-inline-block">

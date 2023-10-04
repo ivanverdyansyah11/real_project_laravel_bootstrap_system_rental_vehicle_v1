@@ -175,7 +175,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(BookingController::class)->group(function () {
         Route::post('/booking/check', 'check')->name('booking.check');
         Route::get('/booking/kendaraan/{id}', 'getKendaraan')->name('booking.kendaraan');
-        Route::get('/booking/kendaraan/{id}/{idBrand}', 'getKendaraanByJenisBrand')->name('booking.kendaraan');
+        Route::get('/booking/kendaraan/{id}/{idBrand}/{idSeri}', 'getKendaraanByJenisBrand')->name('booking.kendaraan');
         Route::get('/booking/detail/{id}', 'detail')->name('booking.detail');
         Route::get('/booking/tambah/', 'booking')->name('booking.create');
         Route::post('/booking/tambah/', 'bookingAction')->name('booking.create.action');

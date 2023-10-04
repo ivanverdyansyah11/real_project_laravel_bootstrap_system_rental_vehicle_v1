@@ -8,6 +8,7 @@ use App\Models\Kendaraan;
 use App\Models\Laporan;
 use App\Models\Pelanggan;
 use App\Models\Pemesanan;
+use App\Models\SeriKendaraan;
 use App\Models\Sopir;
 use Illuminate\Http\Request;
 
@@ -28,9 +29,9 @@ class BookingController extends Controller
         return response()->json($kendaraan);
     }
 
-    function getKendaraanByJenisBrand($idJenis, $idBrand)
+    function getKendaraanByJenisBrand($idJenis, $idBrand, $idSeri)
     {
-        $kendaraan = Kendaraan::where('jenis_kendaraans_id', $idJenis)->where('brand_kendaraans_id', $idBrand)->where('status', 'ready')->orWhere('status', 'booking')->with('jenis_kendaraan', 'brand_kendaraan', 'seri_kendaraan')->get();
+        $kendaraan = Kendaraan::where('jenis_kendaraans_id', $idJenis)->where('brand_kendaraans_id', $idBrand)->where('seri_kendaraans_id', $idSeri)->where('status', 'ready')->orWhere('status', 'booking')->with('jenis_kendaraan', 'brand_kendaraan', 'seri_kendaraan')->get();
         return response()->json($kendaraan);
     }
 
@@ -41,6 +42,7 @@ class BookingController extends Controller
             'kendaraans' => Kendaraan::where('status', 'ready')->orWhere('status', 'booking')->get(),
             'jenises' => JenisKendaraan::all(),
             'brands' => BrandKendaraan::all(),
+            'series' => SeriKendaraan::all(),
             'pelanggans' => Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
             'sopirs' => Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
         ]);

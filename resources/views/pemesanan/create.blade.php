@@ -120,7 +120,7 @@
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
-                                <label for="seri">Seri Kendaraan</label>
+                                <label for="seri_kendaraan">Seri Kendaraan</label>
                                 <select id="seri_kendaraan" class="input">
                                     @foreach ($series as $seri)
                                         <option value="{{ $seri->id }}">{{ $seri->nomor_seri }}</option>
@@ -174,6 +174,10 @@
             theme: "bootstrap-5",
         });
 
+        $("#seri_kendaraan").select2({
+            theme: "bootstrap-5",
+        });
+
         $("#kendaraans_id").select2({
             theme: "bootstrap-5",
         });
@@ -181,10 +185,11 @@
         $("#jenis_kendaraan").change(function() {
             let idJenis = $(this).val();
             let idBrand = $("#brand_kendaraan").val();
+            let idSeri = $("#seri_kendaraan").val();
             $('#kendaraans_id option').remove();
             $.ajax({
                 type: 'get',
-                url: '/booking/kendaraan/' + idJenis + '/' + idBrand,
+                url: '/booking/kendaraan/' + idJenis + '/' + idBrand + '/' + idSeri,
                 success: function(data) {
                     if (data.length == 0) {
                         $('#kendaraans_id').append(
@@ -207,10 +212,11 @@
         $("#brand_kendaraan").change(function() {
             let idBrand = $(this).val();
             let idJenis = $("#jenis_kendaraan").val();
+            let idSeri = $("#seri_kendaraan").val();
             $('#kendaraans_id option').remove();
             $.ajax({
                 type: 'get',
-                url: '/booking/kendaraan/' + idJenis + '/' + idBrand,
+                url: '/booking/kendaraan/' + idJenis + '/' + idBrand + '/' + idSeri,
                 success: function(data) {
                     if (data.length == 0) {
                         $('#kendaraans_id').append(
@@ -230,13 +236,29 @@
             });
         });
 
-        $("#kendaraans_id").change(function() {
-            let id = $(this).val();
+        $("#seri_kendaraan").change(function() {
+            let idSeri = $(this).val();
+            let idJenis = $("#jenis_kendaraan").val();
+            let idBrand = $("#brand_kendaraan").val();
+            $('#kendaraans_id option').remove();
             $.ajax({
                 type: 'get',
-                url: '/booking/kendaraan/' + id,
+                url: '/booking/kendaraan/' + idJenis + '/' + idBrand + '/' + idSeri,
                 success: function(data) {
-                    $('[data-value="seri_kendaraan"]').val(data.seri_kendaraan.nomor_seri);
+                    if (data.length == 0) {
+                        $('#kendaraans_id').append(
+                            `<option value="-">Data kendaraan tidak ditemukan!</option>`
+                        );
+                    } else {
+                        $('#kendaraans_id').append(
+                            `<option value="-">Pilih kendaraan!</option>`
+                        );
+                        data.forEach(kendaraan => {
+                            $('#kendaraans_id').append(
+                                `<option value="${kendaraan.id}">${kendaraan.nomor_plat}</option>`
+                            );
+                        });
+                    }
                 }
             });
         });
