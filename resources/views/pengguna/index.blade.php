@@ -111,7 +111,8 @@
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Lengkap</label>
-                                <input type="text" id="nama" name="nama_lengkap" class="input" autocomplete="off">
+                                <input type="text" id="nama" name="nama_lengkap" class="input" autocomplete="off"
+                                    value="{{ old('nama_lengkap') }}">
                                 @error('nama_lengkap')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -120,7 +121,8 @@
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" name="email" class="input" autocomplete="off">
+                                <input type="email" id="email" name="email" class="input" autocomplete="off"
+                                    value="{{ old('email') }}">
                                 @error('email')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -129,7 +131,8 @@
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="password">Password</label>
-                                <input type="password" id="password" name="password" class="input" autocomplete="off">
+                                <input type="password" id="password" name="password" class="input" autocomplete="off"
+                                    value="{{ old('password') }}">
                                 @error('password')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror

@@ -79,8 +79,6 @@ class SeriKendaraanController extends Controller
             'brand_kendaraans_id' => 'required|string',
         ]);
 
-        $validatedData['status'] = 'ada';
-
         $seri = SeriKendaraan::create($validatedData);
 
         if ($seri) {
