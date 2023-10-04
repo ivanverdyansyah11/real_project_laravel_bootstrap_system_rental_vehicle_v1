@@ -50,7 +50,7 @@
                             <div class="input-wrapper">
                                 <label for="tanggal_mulai">Tanggal Diambil</label>
                                 <input type="date" id="tanggal_mulai" class="input" autocomplete="off"
-                                    name="tanggal_mulai">
+                                    name="tanggal_mulai" value="{{ old('tanggal_mulai') }}">
                                 @error('tanggal_mulai')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -60,7 +60,7 @@
                             <div class="input-wrapper">
                                 <label for="tanggal_akhir">Tanggal Kembali</label>
                                 <input type="date" id="tanggal_akhir" class="input" autocomplete="off"
-                                    name="tanggal_akhir">
+                                    name="tanggal_akhir" value="{{ old('tanggal_akhir') }}">
                                 @error('tanggal_akhir')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
