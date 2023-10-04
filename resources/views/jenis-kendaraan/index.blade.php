@@ -96,7 +96,8 @@
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Jenis Kendaraan</label>
-                                <input type="text" id="nama" class="input" autocomplete="off" name="nama">
+                                <input type="text" id="nama" class="input" autocomplete="off" name="nama"
+                                    value="{{ old('nama') }}">
                                 @error('nama')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
