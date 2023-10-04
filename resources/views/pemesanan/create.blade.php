@@ -72,7 +72,9 @@
                                 <select id="pelanggans_id" class="input" name="pelanggans_id">
                                     <option value="-">Pilih nama pelanggan</option>
                                     @foreach ($pelanggans as $pelanggan)
-                                        <option value="{{ $pelanggan->id }}">{{ $pelanggan->nama }}</option>
+                                        <option value="{{ $pelanggan->id }}"
+                                            {{ old('pelanggans_id') == $pelanggan->id ? 'selected' : '' }}>
+                                            {{ $pelanggan->nama }}</option>
                                     @endforeach
                                 </select>
                                 @error('pelanggans_id')
@@ -86,7 +88,9 @@
                                 <select id="sopirs_id" class="input" name="sopirs_id">
                                     <option value="-">Pilih nama sopir</option>
                                     @foreach ($sopirs as $sopir)
-                                        <option value="{{ $sopir->id }}">{{ $sopir->nama }}</option>
+                                        <option value="{{ $sopir->id }}"
+                                            {{ old('sopirs_id') == $sopir->id ? 'selected' : '' }}>
+                                            {{ $sopir->nama }}</option>
                                     @endforeach
                                 </select>
                                 @error('sopirs_id')
@@ -117,8 +121,11 @@
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="seri">Seri Kendaraan</label>
-                                <input type="text" id="seri" class="input" autocomplete="off" disabled
-                                    placeholder="Pilih kendaraan terlebih dahulu!" data-value="seri_kendaraan">
+                                <select id="seri_kendaraan" class="input">
+                                    @foreach ($series as $seri)
+                                        <option value="{{ $seri->id }}">{{ $seri->nomor_seri }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6 row-button">
