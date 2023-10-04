@@ -67,9 +67,13 @@
                                 <label for="jenis_pajak">Jenis Pajak</label>
                                 <select id="jenis_pajak" class="input" name="jenis_pajak">
                                     <option value="-">Pilih jenis pajak kendaraan</option>
-                                    <option value="samsat">Samsat</option>
-                                    <option value="angsuran">Angsuran</option>
-                                    <option value="ganti nomor polisi">Ganti Nomor Polisi</option>
+                                    <option value="samsat" {{ old('jenis_pajak') == 'samsat' ? 'selected' : '' }}>Samsat
+                                    </option>
+                                    <option value="angsuran" {{ old('jenis_pajak') == 'angsuran' ? 'selected' : '' }}>
+                                        Angsuran</option>
+                                    <option value="ganti nomor polisi"
+                                        {{ old('jenis_pajak') == 'ganti nomor polisi' ? 'selected' : '' }}>Ganti Nomor
+                                        Polisi</option>
                                 </select>
                                 @error('jenis_pajak')
                                     <p class="caption-error mt-2">{{ $message }}</p>
@@ -81,14 +85,30 @@
                                 <label for="metode_bayar">Metode Pembayaran</label>
                                 <select id="metode_bayar" class="input" name="metode_bayar">
                                     <option value="-">Pilih metode pembayaran</option>
-                                    <option value="transfer bank">Transfer Bank</option>
-                                    <option value="internet banking">Internet Banking (E-Banking)</option>
-                                    <option value="mobile banking">Mobile Banking</option>
-                                    <option value="virtual account">Virtual Account (VA)</option>
-                                    <option value="online credit card">Online Credit Card</option>
-                                    <option value="rekening bersama">Rekening Bersama (Rekber)</option>
-                                    <option value="payPal">PayPal</option>
-                                    <option value="e-money">e-Money</option>
+                                    <option value="transfer bank"
+                                        {{ old('metode_bayar') == 'transfer bank' ? 'selected' : '' }}>Transfer Bank
+                                    </option>
+                                    <option value="internet banking"
+                                        {{ old('metode_bayar') == 'internet banking' ? 'selected' : '' }}>Internet Banking
+                                        (E-Banking)</option>
+                                    <option value="mobile banking"
+                                        {{ old('metode_bayar') == 'mobile banking' ? 'selected' : '' }}>Mobile Banking
+                                    </option>
+                                    <option value="virtual account"
+                                        {{ old('metode_bayar') == 'virtual account' ? 'selected' : '' }}>Virtual Account
+                                        (VA)
+                                    </option>
+                                    <option value="online credit card"
+                                        {{ old('metode_bayar') == 'online credit card' ? 'selected' : '' }}>Online Credit
+                                        Card
+                                    </option>
+                                    <option value="rekening bersama"
+                                        {{ old('metode_bayar') == 'rekening bersama' ? 'selected' : '' }}>Rekening Bersama
+                                        (Rekber)</option>
+                                    <option value="payPal" {{ old('metode_bayar') == 'payPal' ? 'selected' : '' }}>
+                                        PayPal</option>
+                                    <option value="e-money" {{ old('metode_bayar') == 'e-money' ? 'selected' : '' }}>
+                                        e-Money</option>
                                 </select>
                                 @error('metode_bayar')
                                     <p class="caption-error mt-2">{{ $message }}</p>
@@ -99,7 +119,7 @@
                             <div class="input-wrapper">
                                 <label for="tanggal_bayar">Tanggal Bayar</label>
                                 <input type="date" id="tanggal_bayar" class="input" autocomplete="off"
-                                    name="tanggal_bayar">
+                                    name="tanggal_bayar" value="{{ old('tanggal_bayar') }}">
                                 @error('tanggal_bayar')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -109,7 +129,7 @@
                             <div class="input-wrapper">
                                 <label for="jumlah_bayar">Jumlah Bayar</label>
                                 <input type="number" id="jumlah_bayar" class="input" autocomplete="off"
-                                    name="jumlah_bayar">
+                                    name="jumlah_bayar" value="{{ old('jumlah_bayar') }}">
                                 @error('jumlah_bayar')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror

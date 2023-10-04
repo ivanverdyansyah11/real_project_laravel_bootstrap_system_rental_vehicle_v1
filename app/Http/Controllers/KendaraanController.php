@@ -61,7 +61,7 @@ class KendaraanController extends Controller
     {
         return view('kendaraan.create', [
             'title' => 'Kendaraan',
-            'series' => SeriKendaraan::where('status', 'ada')->get(),
+            'series' => SeriKendaraan::get(),
             'kilometers' => KategoriKilometerKendaraan::all(),
         ]);
     }
@@ -142,7 +142,7 @@ class KendaraanController extends Controller
         return view('kendaraan.edit', [
             'title' => 'Kendaraan',
             'kendaraan' => $kendaraan,
-            'series' => SeriKendaraan::where('id', $kendaraan->seri_kendaraans_id)->orWhere('status', 'ada')->get(),
+            'series' => SeriKendaraan::get(),
             'kilometers' => KategoriKilometerKendaraan::all(),
         ]);
     }
