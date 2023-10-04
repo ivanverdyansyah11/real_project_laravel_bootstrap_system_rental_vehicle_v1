@@ -28,7 +28,8 @@
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="nomor">Seri Kendaraan</label>
-                                <input type="text" id="nomor" class="input" autocomplete="off" name="nomor_seri">
+                                <input type="text" id="nomor" class="input" autocomplete="off" name="nomor_seri"
+                                    value="{{ old('nomor_seri') }}">
                                 @error('nomor_seri')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
