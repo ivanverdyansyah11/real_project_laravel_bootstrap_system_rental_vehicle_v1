@@ -111,12 +111,44 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6 row-button">
+                            <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="alamat">Alamat</label>
                                     <input type="text" id="alamat" class="input" autocomplete="off"
                                         name="alamat" value="{{ $pelanggan->alamat }}">
                                     @error('alamat')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="data_ktp">Data KTP</label>
+                                    <select name="data_ktp" class="input" id="data_ktp">
+                                        <option value="-">Pilih kelengkapan ktp</option>
+                                        <option value="benar" {{ $pelanggan->data_ktp == 'benar' ? 'selected' : '' }}>
+                                            Sudah Benar</option>
+                                        <option value="salah" {{ $pelanggan->data_ktp == 'salah' ? 'selected' : '' }}>
+                                            Belum Benar</option>
+                                    </select>
+                                    @error('data_ktp')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 row-button">
+                                <div class="input-wrapper">
+                                    <label for="data_kk">Data KK</label>
+                                    <select name="data_kk" class="input" id="data_kk">
+                                        <option value="-">Pilih kelengkapan kk</option>
+                                        <option value="benar" {{ $pelanggan->data_kk == 'benar' ? 'selected' : '' }}>
+                                            Sudah
+                                            Benar</option>
+                                        <option value="salah" {{ $pelanggan->data_kk == 'salah' ? 'selected' : '' }}>
+                                            Belum
+                                            Benar</option>
+                                    </select>
+                                    @error('data_kk')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -136,6 +168,14 @@
     </div>
 
     <script>
+        $("#data_ktp").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#data_kk").select2({
+            theme: "bootstrap-5",
+        });
+
         const tagEditKTP = document.querySelector('.tag-edit-ktp');
         const inputEditKTP = document.querySelector('.input-edit-ktp');
         const buttonEditKTP = document.querySelector('.button-edit-ktp');

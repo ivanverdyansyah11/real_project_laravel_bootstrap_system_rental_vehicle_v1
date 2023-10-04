@@ -38,14 +38,14 @@
                                 <div class="input-wrapper">
                                     <label for="email">Email</label>
                                     <input type="email" id="email" class="input" name="email"
-                                        autocomplete="off">
+                                        value="{{ old('email') }}" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-12 row-button">
                                 <div class="input-wrapper">
                                     <label for="password">Password</label>
                                     <input type="password" id="password" class="input" name="password"
-                                        autocomplete="off">
+                                        value="{{ old('password') }}" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-12">

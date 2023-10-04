@@ -23,6 +23,8 @@ class CreateSopirsTable extends Migration
             $table->string('foto_ktp')->nullable();
             $table->string('foto_sim')->nullable();
             $table->text('alamat');
+            $table->enum('data_ktp', ['benar', 'salah']);
+            $table->enum('data_sim', ['benar', 'salah']);
             $table->enum('status', ['ada', 'tidak ada']);
             $table->enum('kelengkapan_ktp', ['lengkap', 'belum lengkap']);
             $table->enum('kelengkapan_sim', ['lengkap', 'belum lengkap']);

@@ -61,6 +61,8 @@
                             <div class="col data-value data-length data-length-none">{{ $pelanggan->alamat }}</div>
                             @if (
                                 $pelanggan->kelengkapan_ktp == 'lengkap' &&
+                                    $pelanggan->data_ktp == 'benar' &&
+                                    $pelanggan->data_kk == 'benar' &&
                                     $pelanggan->kelengkapan_kk == 'lengkap' &&
                                     $pelanggan->kelengkapan_nomor_telepon == 'lengkap')
                                 <div class="col data-value data-length data-length-none status-true">Lengkap</div>

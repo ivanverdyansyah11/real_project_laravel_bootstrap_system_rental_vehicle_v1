@@ -59,6 +59,8 @@ class PelangganController extends Controller
             'foto_ktp' => 'nullable|image|max:2048',
             'foto_kk' => 'nullable|image|max:2048',
             'alamat' => 'required|string',
+            'data_ktp' => 'required|string',
+            'data_kk' => 'required|string',
         ]);
 
         $validatedData['status'] = 'ada';
@@ -129,6 +131,8 @@ class PelangganController extends Controller
             'nomor_ktp' => 'nullable|string',
             'nomor_kk' => 'nullable|string',
             'alamat' => 'required|string',
+            'data_ktp' => 'required|string',
+            'data_kk' => 'required|string',
         ]);
 
         if ($request->file('foto_ktp')) {
