@@ -111,12 +111,44 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6 row-button">
+                            <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="alamat">Alamat</label>
                                     <input type="text" id="alamat" class="input" autocomplete="off"
                                         value="{{ $sopir->alamat }}" name="alamat">
                                     @error('alamat')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="data_ktp">Data KTP</label>
+                                    <select name="data_ktp" class="input" id="data_ktp">
+                                        <option value="-">Pilih kelengkapan ktp</option>
+                                        <option value="benar" {{ $sopir->data_ktp == 'benar' ? 'selected' : '' }}>
+                                            Sudah Benar</option>
+                                        <option value="salah" {{ $sopir->data_ktp == 'salah' ? 'selected' : '' }}>
+                                            Belum Benar</option>
+                                    </select>
+                                    @error('data_ktp')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 row-button">
+                                <div class="input-wrapper">
+                                    <label for="data_sim">Data SIM</label>
+                                    <select name="data_sim" class="input" id="data_sim">
+                                        <option value="-">Pilih kelengkapan sim</option>
+                                        <option value="benar" {{ $sopir->data_sim == 'benar' ? 'selected' : '' }}>
+                                            Sudah
+                                            Benar</option>
+                                        <option value="salah" {{ $sopir->data_sim == 'salah' ? 'selected' : '' }}>
+                                            Belum
+                                            Benar</option>
+                                    </select>
+                                    @error('data_sim')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>

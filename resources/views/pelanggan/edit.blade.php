@@ -125,7 +125,6 @@
                                 <div class="input-wrapper">
                                     <label for="data_ktp">Data KTP</label>
                                     <select name="data_ktp" class="input" id="data_ktp">
-                                        <option value="-">Pilih kelengkapan ktp</option>
                                         <option value="benar" {{ $pelanggan->data_ktp == 'benar' ? 'selected' : '' }}>
                                             Sudah Benar</option>
                                         <option value="salah" {{ $pelanggan->data_ktp == 'salah' ? 'selected' : '' }}>
@@ -140,7 +139,6 @@
                                 <div class="input-wrapper">
                                     <label for="data_kk">Data KK</label>
                                     <select name="data_kk" class="input" id="data_kk">
-                                        <option value="-">Pilih kelengkapan kk</option>
                                         <option value="benar" {{ $pelanggan->data_kk == 'benar' ? 'selected' : '' }}>
                                             Sudah
                                             Benar</option>

@@ -59,7 +59,13 @@ class SopirController extends Controller
             'foto_ktp' => 'nullable|image|max:2048',
             'foto_sim' => 'nullable|image|max:2048',
             'alamat' => 'required|string',
+            'data_ktp' => 'required|string',
+            'data_sim' => 'required|string',
         ]);
+
+        if ($validatedData['data_ktp'] == '-' || $validatedData['data_sim'] == '-') {
+            return redirect(route('pelanggan.create'))->with('failed', 'Isi Form Input Kelengkapan KTP & SIM Terlebih Dahulu!');
+        }
 
         $validatedData['status'] = "ada";
 
@@ -129,6 +135,8 @@ class SopirController extends Controller
             'nomor_ktp' => 'nullable|string',
             'nomor_sim' => 'nullable|string',
             'alamat' => 'required|string',
+            'data_ktp' => 'required|string',
+            'data_sim' => 'required|string',
         ]);
 
         if ($request->file('foto_ktp')) {

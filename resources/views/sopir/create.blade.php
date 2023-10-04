@@ -64,7 +64,8 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nama">Nama</label>
-                                    <input type="text" id="nama" class="input" autocomplete="off" name="nama">
+                                    <input type="text" id="nama" class="input" autocomplete="off" name="nama"
+                                        value="{{ old('nama') }}">
                                     @error('nama')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -73,7 +74,8 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nik">NIK</label>
-                                    <input type="number" id="nik" class="input" autocomplete="off" name="nik">
+                                    <input type="number" id="nik" class="input" autocomplete="off" name="nik"
+                                        value="{{ old('nik') }}">
                                     @error('nik')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -83,7 +85,7 @@
                                 <div class="input-wrapper">
                                     <label for="nomor_telepon">Nomor Telepon</label>
                                     <input type="number" id="nomor_telepon" class="input" autocomplete="off"
-                                        name="nomor_telepon">
+                                        name="nomor_telepon" value="{{ old('nomor_telepon') }}">
                                     @error('nomor_telepon')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -92,7 +94,8 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nomor_ktp">Nomor KTP</label>
-                                    <input type="number" id="nomor_ktp" class="input" autocomplete="off" name="nomor_ktp">
+                                    <input type="number" id="nomor_ktp" class="input" autocomplete="off" name="nomor_ktp"
+                                        value="{{ old('nomor_ktp') }}">
                                     @error('nomor_ktp')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -101,18 +104,49 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nomor_sim">Nomor SIM</label>
-                                    <input type="number" id="nomor_sim" class="input" autocomplete="off" name="nomor_sim">
+                                    <input type="number" id="nomor_sim" class="input" autocomplete="off" name="nomor_sim"
+                                        value="{{ old('nomor_sim') }}">
                                     @error('nomor_sim')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="alamat">Alamat</label>
+                                    <input type="text" id="alamat" class="input" autocomplete="off"
+                                        name="alamat" value="{{ old('alamat') }}">
+                                    @error('alamat')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="data_ktp">Data KTP</label>
+                                    <select name="data_ktp" class="input" id="data_ktp">
+                                        <option value="-">Pilih kelengkapan ktp</option>
+                                        <option value="benar" {{ old('data_ktp') == 'benar' ? 'selected' : '' }}>Sudah
+                                            Benar</option>
+                                        <option value="salah" {{ old('data_ktp') == 'salah' ? 'selected' : '' }}>Belum
+                                            Benar</option>
+                                    </select>
+                                    @error('data_ktp')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 row-button">
                                 <div class="input-wrapper">
-                                    <label for="alamat">Alamat</label>
-                                    <input type="text" id="alamat" class="input" autocomplete="off"
-                                        name="alamat">
-                                    @error('alamat')
+                                    <label for="data_sim">Data SIM</label>
+                                    <select name="data_sim" class="input" id="data_sim">
+                                        <option value="-">Pilih kelengkapan sim</option>
+                                        <option value="benar" {{ old('data_sim') == 'benar' ? 'selected' : '' }}>Sudah
+                                            Benar</option>
+                                        <option value="salah" {{ old('data_sim') == 'salah' ? 'selected' : '' }}>Belum
+                                            Benar</option>
+                                    </select>
+                                    @error('data_sim')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>

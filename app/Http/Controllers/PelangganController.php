@@ -63,6 +63,10 @@ class PelangganController extends Controller
             'data_kk' => 'required|string',
         ]);
 
+        if ($validatedData['data_ktp'] == '-' || $validatedData['data_kk'] == '-') {
+            return redirect(route('pelanggan.create'))->with('failed', 'Isi Form Input Kelengkapan KTP & KK Terlebih Dahulu!');
+        }
+
         $validatedData['status'] = 'ada';
 
         if (!empty($validatedData['foto_ktp'])) {
