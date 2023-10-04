@@ -54,9 +54,9 @@
                                     <div class="input-wrapper">
                                         <label for="jumlah_hari">Jumlah Hari</label>
                                         <input type="number" id="jumlah_hari" class="input" autocomplete="off"
-                                            name="jumlah_hari">
+                                            name="jumlah_hari" value="{{ old('jumlah_hari') }}">
                                     </div>
-                                    @error('keterangan')
+                                    @error('jumlah_hari')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -64,8 +64,8 @@
                                     <div class="input-wrapper">
                                         <label for="total_biaya">Total Biaya</label>
                                         <input type="number" id="total_biaya" class="input" autocomplete="off"
-                                            name="total_biaya">
-                                        @error('keterangan')
+                                            name="total_biaya" value="{{ old('total_biaya') }}">
+                                        @error('total_biaya')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -74,7 +74,7 @@
                                     <div class="input-wrapper">
                                         <label for="keterangan">Keterangan</label>
                                         <input type="text" id="keterangan" class="input" autocomplete="off"
-                                            name="keterangan">
+                                            name="keterangan" value="{{ old('keterangan') }}">
                                         @error('keterangan')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
