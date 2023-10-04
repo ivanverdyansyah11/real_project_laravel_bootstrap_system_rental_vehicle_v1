@@ -70,7 +70,7 @@ class SeriKendaraanController extends Controller
     function store(Request $request)
     {
         if ($request->jenis_kendaraans_id == '-' || $request->brand_kendaraans_id == '-') {
-            return redirect(route('seriKendaraan'))->with('failed', 'Isi Form Input Jenis Kendaraan dan Brand Kendaraan Terlebih Dahulu!');
+            return redirect(route('seriKendaraan.create'))->with('failed', 'Isi Form Input Jenis Kendaraan dan Brand Kendaraan Terlebih Dahulu!');
         }
 
         $validatedData = $request->validate([

@@ -41,7 +41,9 @@
                                 <select id="jenis_kendaraan_add" class="input" name="jenis_kendaraans_id">
                                     <option value="-">Pilih jenis kendaraan</option>
                                     @foreach ($jenises as $jenis)
-                                        <option value="{{ $jenis->id }}">{{ $jenis->nama }}</option>
+                                        <option value="{{ $jenis->id }}"
+                                            {{ old('jenis_kendaraans_id') == $jenis->id ? 'selected' : '' }}>
+                                            {{ $jenis->nama }}</option>
                                     @endforeach
                                 </select>
                                 @error('jenis_kendaraans_id')
@@ -55,7 +57,9 @@
                                 <select id="brand_kendaraan_add" class="input" name="brand_kendaraans_id">
                                     <option value="-">Pilih brand kendaraan</option>
                                     @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->nama }}</option>
+                                        <option value="{{ $brand->id }}"
+                                            {{ old('brand_kendaraans_id') == $brand->id ? 'selected' : '' }}>
+                                            {{ $brand->nama }}</option>
                                     @endforeach
                                 </select>
                                 @error('brand_kendaraans_id')
