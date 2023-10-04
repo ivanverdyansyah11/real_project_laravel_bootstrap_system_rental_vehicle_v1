@@ -74,7 +74,7 @@
                                     <div class="input-wrapper">
                                         <label for="tanggal_servis">Tanggal Servis</label>
                                         <input type="date" id="tanggal_servis" name="tanggal_servis" class="input"
-                                            autocomplete="off">
+                                            autocomplete="off" value="{{ old('tanggal_servis') }}">
                                         @error('tanggal_servis')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -84,7 +84,7 @@
                                     <div class="input-wrapper">
                                         <label for="total_bayar">Total Bayar</label>
                                         <input type="number" id="total_bayar" class="input" autocomplete="off"
-                                            name="total_bayar">
+                                            name="total_bayar" value="{{ old('total_bayar') }}">
                                         @error('total_bayar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -95,9 +95,12 @@
                                         <label for="air_accu">Air Accu</label>
                                         <select id="air_accu" class="input" name="air_accu">
                                             <option value="-">Pilih kondisi air accu</option>
-                                            <option value="ada">Ada</option>
-                                            <option value="tidak ada">Tidak Ada</option>
-                                            <option value="kosong">Kosong</option>
+                                            <option value="ada" {{ old('air_accu') == 'ada' ? 'selected' : '' }}>Ada
+                                            </option>
+                                            <option value="tidak ada"
+                                                {{ old('air_accu') == 'tidak ada' ? 'selected' : '' }}>Tidak Ada</option>
+                                            <option value="kosong" {{ old('air_accu') == 'kosong' ? 'selected' : '' }}>
+                                                Kosong</option>
                                         </select>
                                         @error('air_accu')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -109,9 +112,12 @@
                                         <label for="air_waiper">Air Waiper</label>
                                         <select id="air_waiper" class="input" name="air_waiper">
                                             <option value="-">Pilih kondisi air waiper</option>
-                                            <option value="ada">Ada</option>
-                                            <option value="tidak ada">Tidak Ada</option>
-                                            <option value="kosong">Kosong</option>
+                                            <option value="ada" {{ old('air_waiper') == 'ada' ? 'selected' : '' }}>Ada
+                                            </option>
+                                            <option value="tidak ada"
+                                                {{ old('air_waiper') == 'tidak ada' ? 'selected' : '' }}>Tidak Ada</option>
+                                            <option value="kosong" {{ old('air_waiper') == 'kosong' ? 'selected' : '' }}>
+                                                Kosong</option>
                                         </select>
                                         @error('air_waiper')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -123,9 +129,12 @@
                                         <label for="ban">Ban</label>
                                         <select id="ban" class="input" name="ban">
                                             <option value="-">Pilih kondisi ban</option>
-                                            <option value="ada">Ada</option>
-                                            <option value="tidak ada">Tidak Ada</option>
-                                            <option value="kosong">Kosong</option>
+                                            <option value="ada" {{ old('ban') == 'ada' ? 'selected' : '' }}>Ada
+                                            </option>
+                                            <option value="tidak ada" {{ old('ban') == 'tidak ada' ? 'selected' : '' }}>
+                                                Tidak Ada</option>
+                                            <option value="kosong" {{ old('ban') == 'kosong' ? 'selected' : '' }}>Kosong
+                                            </option>
                                         </select>
                                         @error('ban')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -137,9 +146,12 @@
                                         <label for="oli">Oli</label>
                                         <select id="oli" class="input" name="oli">
                                             <option value="-">Pilih kondisi oli</option>
-                                            <option value="ada">Ada</option>
-                                            <option value="tidak ada">Tidak Ada</option>
-                                            <option value="kosong">Kosong</option>
+                                            <option value="ada" {{ old('oli') == 'ada' ? 'selected' : '' }}>Ada
+                                            </option>
+                                            <option value="tidak ada" {{ old('oli') == 'tidak ada' ? 'selected' : '' }}>
+                                                Tidak Ada</option>
+                                            <option value="kosong" {{ old('oli') == 'kosong' ? 'selected' : '' }}>Kosong
+                                            </option>
                                         </select>
                                         @error('oli')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -150,7 +162,7 @@
                                     <div class="input-wrapper">
                                         <label for="keterangan">Keterangan</label>
                                         <input type="text" id="keterangan" class="input" autocomplete="off"
-                                            name="keterangan">
+                                            name="keterangan" value="{{ old('keterangan') }}">
                                         @error('keterangan')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
