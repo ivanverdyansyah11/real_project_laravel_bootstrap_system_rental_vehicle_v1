@@ -64,8 +64,8 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nama">Nama</label>
-                                    <input type="text" id="nama" class="input" autocomplete="off" name="nama"
-                                        value="{{ old('nama') }}">
+                                    <input type="text" id="nama" class="input" required autocomplete="off"
+                                        name="nama" value="{{ old('nama') }}">
                                     @error('nama')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -74,8 +74,8 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nik">NIK</label>
-                                    <input type="number" id="nik" class="input" autocomplete="off" name="nik"
-                                        value="{{ old('nik') }}">
+                                    <input type="number" id="nik" class="input" required autocomplete="off"
+                                        name="nik" value="{{ old('nik') }}">
                                     @error('nik')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
@@ -114,7 +114,7 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="alamat">Alamat</label>
-                                    <input type="text" id="alamat" class="input" autocomplete="off"
+                                    <input type="text" id="alamat" class="input" required autocomplete="off"
                                         name="alamat" value="{{ old('alamat') }}">
                                     @error('alamat')
                                         <p class="caption-error mt-2">{{ $message }}</p>
@@ -124,8 +124,8 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="data_ktp">Data KTP</label>
-                                    <select name="data_ktp" class="input" id="data_ktp">
-                                        <option value="-">Pilih kelengkapan ktp</option>
+                                    <select name="data_ktp" class="input" id="data_ktp" required>
+                                        <option value="">Pilih kelengkapan ktp</option>
                                         <option value="benar" {{ old('data_ktp') == 'benar' ? 'selected' : '' }}>Sudah
                                             Benar</option>
                                         <option value="salah" {{ old('data_ktp') == 'salah' ? 'selected' : '' }}>Belum
@@ -139,8 +139,8 @@
                             <div class="col-md-6 row-button">
                                 <div class="input-wrapper">
                                     <label for="data_kk">Data KK</label>
-                                    <select name="data_kk" class="input" id="data_kk">
-                                        <option value="-">Pilih kelengkapan kk</option>
+                                    <select name="data_kk" class="input" id="data_kk" required>
+                                        <option value="">Pilih kelengkapan kk</option>
                                         <option value="benar" {{ old('data_kk') == 'benar' ? 'selected' : '' }}>Sudah
                                             Benar</option>
                                         <option value="salah" {{ old('data_kk') == 'salah' ? 'selected' : '' }}>Belum
