@@ -83,7 +83,7 @@ class KendaraanController extends Controller
 
     function store(Request $request)
     {
-        if ($request->seri_kendaraans_id == '-' || $request->kategori_kilometer_kendaraans_id == '-') {
+        if ($request->seri_kendaraans_id == '' || $request->kategori_kilometer_kendaraans_id == '') {
             return redirect(route('kendaraan.create'))->with('failed', 'Isi Form Input Seri Kendaraan dan Kategori Kilometer Kendaraan Terlebih Dahulu!');
         }
 
