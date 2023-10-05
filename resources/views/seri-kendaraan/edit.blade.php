@@ -29,8 +29,8 @@
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
                                 <label for="nomor">Seri Kendaraan</label>
-                                <input type="text" id="nomor" class="input" autocomplete="off" name="nomor_seri"
-                                    value="{{ $seri->nomor_seri }}">
+                                <input type="text" id="nomor" class="input" required autocomplete="off"
+                                    name="nomor_seri" value="{{ $seri->nomor_seri }}">
                                 @error('nomor_seri')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -39,8 +39,8 @@
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="jenis_kendaraan_edit">Jenis Kendaraan</label>
-                                <select id="jenis_kendaraan_edit" class="input" name="jenis_kendaraans_id">
-                                    <option value="-">Pilih jenis kendaraan</option>
+                                <select id="jenis_kendaraan_edit" class="input" name="jenis_kendaraans_id" required>
+                                    <option value="">Pilih jenis kendaraan</option>
                                     @foreach ($jenises as $jenis)
                                         <option value="{{ $jenis->id }}"
                                             {{ $jenis->id == $seri->jenis_kendaraans_id ? 'selected' : '' }}>
@@ -55,8 +55,8 @@
                         <div class="col-md-6 row-button">
                             <div class="input-wrapper">
                                 <label for="brand_kendaraan_edit">Brand Kendaraan</label>
-                                <select id="brand_kendaraan_edit" class="input" name="brand_kendaraans_id">
-                                    <option value="-">Pilih brand kendaraan</option>
+                                <select id="brand_kendaraan_edit" class="input" name="brand_kendaraans_id" required>
+                                    <option value="">Pilih brand kendaraan</option>
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}"
                                             {{ $brand->id == $seri->brand_kendaraans_id ? 'selected' : '' }}>
