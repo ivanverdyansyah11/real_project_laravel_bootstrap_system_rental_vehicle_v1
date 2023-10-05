@@ -38,8 +38,11 @@
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="jenis_kendaraan_add">Jenis Kendaraan</label>
-                                <select id="jenis_kendaraan_add" class="input" name="jenis_kendaraans_id">
-                                    <option value="-">Pilih jenis kendaraan</option>
+                                <select id="jenis_kendaraan_add" class="input" name="jenis_kendaraans_id" required>
+                                    <option value="
+                                    
+                                    
+                                    ">Pilih jenis kendaraan</option>
                                     @foreach ($jenises as $jenis)
                                         <option value="{{ $jenis->id }}"
                                             {{ old('jenis_kendaraans_id') == $jenis->id ? 'selected' : '' }}>
@@ -54,8 +57,11 @@
                         <div class="col-md-6 row-button">
                             <div class="input-wrapper">
                                 <label for="brand_kendaraan_add">Brand Kendaraan</label>
-                                <select id="brand_kendaraan_add" class="input" name="brand_kendaraans_id">
-                                    <option value="-">Pilih brand kendaraan</option>
+                                <select id="brand_kendaraan_add" class="input" name="brand_kendaraans_id" required>
+                                    <option value="
+                                    
+                                    
+                                    ">Pilih brand kendaraan</option>
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}"
                                             {{ old('brand_kendaraans_id') == $brand->id ? 'selected' : '' }}>
