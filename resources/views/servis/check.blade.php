@@ -54,7 +54,7 @@
                                     <div class="input-wrapper">
                                         <label for="kilometer_sebelum">Kilometer Sebelum</label>
                                         <input type="number" id="kilometer_sebelum" name="kilometer_sebelum" class="input"
-                                            autocomplete="off" value="{{ $kendaraan->kilometer }}">
+                                            autocomplete="off" value="{{ $kendaraan->kilometer }}" required>
                                         @error('kilometer_sebelum')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -64,7 +64,7 @@
                                     <div class="input-wrapper">
                                         <label for="kilometer_setelah">Kilometer Setelah</label>
                                         <input type="number" id="kilometer_setelah" name="kilometer_setelah" class="input"
-                                            autocomplete="off" value="{{ $kendaraan->kilometer_saat_ini }}">
+                                            autocomplete="off" value="{{ $kendaraan->kilometer_saat_ini }}" required>
                                         @error('kilometer_setelah')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -74,7 +74,7 @@
                                     <div class="input-wrapper">
                                         <label for="tanggal_servis">Tanggal Servis</label>
                                         <input type="date" id="tanggal_servis" name="tanggal_servis" class="input"
-                                            autocomplete="off" value="{{ old('tanggal_servis') }}">
+                                            autocomplete="off" value="{{ old('tanggal_servis') }}" required>
                                         @error('tanggal_servis')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -93,8 +93,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="air_accu">Air Accu</label>
-                                        <select id="air_accu" class="input" name="air_accu">
-                                            <option value="-">Pilih kondisi air accu</option>
+                                        <select id="air_accu" class="input" name="air_accu" required>
+                                            <option value="">Pilih kondisi air accu</option>
                                             <option value="ada" {{ old('air_accu') == 'ada' ? 'selected' : '' }}>Ada
                                             </option>
                                             <option value="tidak ada"
@@ -110,8 +110,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="air_waiper">Air Waiper</label>
-                                        <select id="air_waiper" class="input" name="air_waiper">
-                                            <option value="-">Pilih kondisi air waiper</option>
+                                        <select id="air_waiper" class="input" name="air_waiper" required>
+                                            <option value="">Pilih kondisi air waiper</option>
                                             <option value="ada" {{ old('air_waiper') == 'ada' ? 'selected' : '' }}>Ada
                                             </option>
                                             <option value="tidak ada"
@@ -127,8 +127,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="ban">Ban</label>
-                                        <select id="ban" class="input" name="ban">
-                                            <option value="-">Pilih kondisi ban</option>
+                                        <select id="ban" class="input" name="ban" required>
+                                            <option value="">Pilih kondisi ban</option>
                                             <option value="ada" {{ old('ban') == 'ada' ? 'selected' : '' }}>Ada
                                             </option>
                                             <option value="tidak ada" {{ old('ban') == 'tidak ada' ? 'selected' : '' }}>
@@ -144,8 +144,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="oli">Oli</label>
-                                        <select id="oli" class="input" name="oli">
-                                            <option value="-">Pilih kondisi oli</option>
+                                        <select id="oli" class="input" name="oli" required>
+                                            <option value="">Pilih kondisi oli</option>
                                             <option value="ada" {{ old('oli') == 'ada' ? 'selected' : '' }}>Ada
                                             </option>
                                             <option value="tidak ada" {{ old('oli') == 'tidak ada' ? 'selected' : '' }}>

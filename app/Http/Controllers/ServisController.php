@@ -47,7 +47,7 @@ class ServisController extends Controller
 
     public function checkAction($id, Request $request)
     {
-        if ($request->air_accu == '-' || $request->air_waiper == '-' || $request->ban == '-' || $request->oli == '-') {
+        if ($request->air_accu == '' || $request->air_waiper == '' || $request->ban == '' || $request->oli == '') {
             return redirect(route('servis.check', $id))->with('failed', 'Isi Form Input Kelengkapan Kondisi Kendaraan Terlebih Dahulu!');
         }
 
