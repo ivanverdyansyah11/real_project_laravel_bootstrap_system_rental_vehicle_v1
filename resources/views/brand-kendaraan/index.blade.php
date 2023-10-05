@@ -96,8 +96,8 @@
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Brand Kendaraan</label>
-                                <input type="text" id="nama" class="input" autocomplete="off" name="nama"
-                                    value="{{ old('nama') }}">
+                                <input type="text" id="nama" class="input" required autocomplete="off"
+                                    name="nama" value="{{ old('nama') }}">
                                 @error('nama')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -153,7 +153,7 @@
                         <div class="col-12 row-button">
                             <div class="input-wrapper">
                                 <label for="nama">Nama Brand Kendaraan</label>
-                                <input type="text" id="nama" class="input" autocomplete="off"
+                                <input type="text" id="nama" class="input" required autocomplete="off"
                                     data-value="nama" name="nama">
                                 @error('nama')
                                     <p class="caption-error mt-2">{{ $message }}</p>
