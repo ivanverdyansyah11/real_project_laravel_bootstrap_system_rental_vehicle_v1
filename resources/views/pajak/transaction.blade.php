@@ -65,8 +65,8 @@
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="jenis_pajak">Jenis Pajak</label>
-                                <select id="jenis_pajak" class="input" name="jenis_pajak">
-                                    <option value="-">Pilih jenis pajak kendaraan</option>
+                                <select id="jenis_pajak" class="input" name="jenis_pajak" required>
+                                    <option value="">Pilih jenis pajak kendaraan</option>
                                     <option value="samsat" {{ old('jenis_pajak') == 'samsat' ? 'selected' : '' }}>Samsat
                                     </option>
                                     <option value="angsuran" {{ old('jenis_pajak') == 'angsuran' ? 'selected' : '' }}>
@@ -83,8 +83,8 @@
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="metode_bayar">Metode Pembayaran</label>
-                                <select id="metode_bayar" class="input" name="metode_bayar">
-                                    <option value="-">Pilih metode pembayaran</option>
+                                <select id="metode_bayar" class="input" name="metode_bayar" required>
+                                    <option value="">Pilih metode pembayaran</option>
                                     <option value="transfer bank"
                                         {{ old('metode_bayar') == 'transfer bank' ? 'selected' : '' }}>Transfer Bank
                                     </option>
@@ -119,7 +119,7 @@
                             <div class="input-wrapper">
                                 <label for="tanggal_bayar">Tanggal Bayar</label>
                                 <input type="date" id="tanggal_bayar" class="input" autocomplete="off"
-                                    name="tanggal_bayar" value="{{ old('tanggal_bayar') }}">
+                                    name="tanggal_bayar" value="{{ old('tanggal_bayar') }}" required>
                                 @error('tanggal_bayar')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -129,7 +129,7 @@
                             <div class="input-wrapper">
                                 <label for="jumlah_bayar">Jumlah Bayar</label>
                                 <input type="number" id="jumlah_bayar" class="input" autocomplete="off"
-                                    name="jumlah_bayar" value="{{ old('jumlah_bayar') }}">
+                                    name="jumlah_bayar" value="{{ old('jumlah_bayar') }}" required>
                                 @error('jumlah_bayar')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
