@@ -50,7 +50,7 @@
                             <div class="input-wrapper">
                                 <label for="tanggal_mulai">Tanggal Diambil</label>
                                 <input type="date" id="tanggal_mulai" class="input" autocomplete="off"
-                                    name="tanggal_mulai" value="{{ old('tanggal_mulai') }}">
+                                    name="tanggal_mulai" value="{{ old('tanggal_mulai') }}" required>
                                 @error('tanggal_mulai')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -60,7 +60,7 @@
                             <div class="input-wrapper">
                                 <label for="tanggal_akhir">Tanggal Kembali</label>
                                 <input type="date" id="tanggal_akhir" class="input" autocomplete="off"
-                                    name="tanggal_akhir" value="{{ old('tanggal_akhir') }}">
+                                    name="tanggal_akhir" value="{{ old('tanggal_akhir') }}" required>
                                 @error('tanggal_akhir')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -69,8 +69,8 @@
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="pelanggans_id">Pelanggan</label>
-                                <select id="pelanggans_id" class="input" name="pelanggans_id">
-                                    <option value="-">Pilih nama pelanggan</option>
+                                <select id="pelanggans_id" class="input" name="pelanggans_id" required>
+                                    <option value="">Pilih nama pelanggan</option>
                                     @foreach ($pelanggans as $pelanggan)
                                         <option value="{{ $pelanggan->id }}"
                                             {{ old('pelanggans_id') == $pelanggan->id ? 'selected' : '' }}>
@@ -131,8 +131,8 @@
                         <div class="col-md-6 row-button">
                             <div class="input-wrapper">
                                 <label for="kendaraans_id">Kendaraan</label>
-                                <select id="kendaraans_id" class="input" name="kendaraans_id">
-                                    <option value="-">Pilih kendaraan!</option>
+                                <select id="kendaraans_id" class="input" name="kendaraans_id" required>
+                                    <option value="">Pilih kendaraan!</option>
                                     @foreach ($kendaraans as $kendaraan)
                                         <option value="{{ $kendaraan->id }}">{{ $kendaraan->nomor_plat }}</option>
                                     @endforeach

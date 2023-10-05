@@ -50,7 +50,7 @@
                             <div class="input-wrapper">
                                 <label for="tanggal_mulai">Tanggal Diambil</label>
                                 <input type="date" id="tanggal_mulai" class="input" autocomplete="off"
-                                    name="tanggal_mulai" value="{{ $pemesanan->tanggal_mulai }}">
+                                    name="tanggal_mulai" value="{{ $pemesanan->tanggal_mulai }}" required>
                                 @error('tanggal_mulai')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -60,7 +60,7 @@
                             <div class="input-wrapper">
                                 <label for="tanggal_akhir">Tanggal Kembali</label>
                                 <input type="date" id="tanggal_akhir" class="input" autocomplete="off"
-                                    name="tanggal_akhir" value="{{ $pemesanan->tanggal_akhir }}">
+                                    name="tanggal_akhir" value="{{ $pemesanan->tanggal_akhir }}" required>
                                 @error('tanggal_akhir')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -69,7 +69,7 @@
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="pelanggans_id">Pelanggan</label>
-                                <select id="pelanggans_id" class="input" name="pelanggans_id">
+                                <select id="pelanggans_id" class="input" name="pelanggans_id" required>
                                     <option value="{{ $pemesanan->pelanggans_id }}">
                                         {{ $pemesanan->pelanggan->nama }}</option>
                                 </select>
@@ -82,19 +82,12 @@
                             <div class="input-wrapper">
                                 <label for="sopirs_id">Sopir</label>
                                 <select id="sopirs_id" class="input" name="sopirs_id">
-                                    @if ($pemesanan->sopirs_id == null)
-                                        <option value="-">Tidak memilih sopir</option>
-                                        @foreach ($sopirs as $sopir)
-                                            <option value="{{ $sopir->id }}">
-                                                {{ $sopir->nama }}</option>
-                                        @endforeach
-                                    @else
-                                        @foreach ($sopirs as $sopir)
-                                            <option value="{{ $sopir->id }}"
-                                                {{ $sopir->id == $pemesanan->sopirs_id ? 'selected' : '' }}>
-                                                {{ $sopir->nama }}</option>
-                                        @endforeach
-                                    @endif
+                                    <option value="-">Pilih nama sopir</option>
+                                    @foreach ($sopirs as $sopir)
+                                        <option value="{{ $sopir->id }}"
+                                            {{ old('sopirs_id') == $sopir->id ? 'selected' : '' }}>
+                                            {{ $sopir->nama }}</option>
+                                    @endforeach
                                 </select>
                                 @error('sopirs_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>
@@ -121,10 +114,20 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-4">
+                            <div class="input-wrapper">
+                                <label for="seri_kendaraan">Seri Kendaraan</label>
+                                <select id="seri_kendaraan" class="input">
+                                    @foreach ($series as $seri)
+                                        <option value="{{ $seri->id }}">{{ $seri->nomor_seri }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 row-button">
                             <div class="input-wrapper">
                                 <label for="kendaraans_id">Kendaraan</label>
-                                <select id="kendaraans_id" class="input" name="kendaraans_id">
+                                <select id="kendaraans_id" class="input" name="kendaraans_id" required>
                                     @foreach ($kendaraans as $kendaraan)
                                         <option value="{{ $kendaraan->id }}"
                                             {{ $kendaraan->id == $pemesanan->kendaraans_id ? 'selected' : '' }}>
@@ -134,13 +137,6 @@
                                 @error('kendaraans_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6 row-button">
-                            <div class="input-wrapper">
-                                <label for="seri">Seri Kendaraan</label>
-                                <input type="text" id="seri" class="input" autocomplete="off" disabled
-                                    value="{{ $kendaraan->seri_kendaraan->nomor_seri }}" data-value="seri_kendaraan">
                             </div>
                         </div>
                         <div class="col-12">
@@ -175,6 +171,10 @@
             theme: "bootstrap-5",
         });
 
+        $("#seri_kendaraan").select2({
+            theme: "bootstrap-5",
+        });
+
         $("#kendaraans_id").select2({
             theme: "bootstrap-5",
         });
@@ -182,10 +182,11 @@
         $("#jenis_kendaraan").change(function() {
             let idJenis = $(this).val();
             let idBrand = $("#brand_kendaraan").val();
+            let idSeri = $("#seri_kendaraan").val();
             $('#kendaraans_id option').remove();
             $.ajax({
                 type: 'get',
-                url: '/booking/kendaraan/' + idJenis + '/' + idBrand,
+                url: '/booking/kendaraan/' + idJenis + '/' + idBrand + '/' + idSeri,
                 success: function(data) {
                     if (data.length == 0) {
                         $('#kendaraans_id').append(
@@ -208,10 +209,38 @@
         $("#brand_kendaraan").change(function() {
             let idBrand = $(this).val();
             let idJenis = $("#jenis_kendaraan").val();
+            let idSeri = $("#seri_kendaraan").val();
             $('#kendaraans_id option').remove();
             $.ajax({
                 type: 'get',
-                url: '/booking/kendaraan/' + idJenis + '/' + idBrand,
+                url: '/booking/kendaraan/' + idJenis + '/' + idBrand + '/' + idSeri,
+                success: function(data) {
+                    if (data.length == 0) {
+                        $('#kendaraans_id').append(
+                            `<option value="-">Data kendaraan tidak ditemukan!</option>`
+                        );
+                    } else {
+                        $('#kendaraans_id').append(
+                            `<option value="-">Pilih kendaraan!</option>`
+                        );
+                        data.forEach(kendaraan => {
+                            $('#kendaraans_id').append(
+                                `<option value="${kendaraan.id}">${kendaraan.nomor_plat}</option>`
+                            );
+                        });
+                    }
+                }
+            });
+        });
+
+        $("#seri_kendaraan").change(function() {
+            let idSeri = $(this).val();
+            let idJenis = $("#jenis_kendaraan").val();
+            let idBrand = $("#brand_kendaraan").val();
+            $('#kendaraans_id option').remove();
+            $.ajax({
+                type: 'get',
+                url: '/booking/kendaraan/' + idJenis + '/' + idBrand + '/' + idSeri,
                 success: function(data) {
                     if (data.length == 0) {
                         $('#kendaraans_id').append(

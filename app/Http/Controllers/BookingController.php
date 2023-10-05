@@ -121,6 +121,7 @@ class BookingController extends Controller
             'kendaraans' => Kendaraan::where('status', 'ready')->orWhere('status', 'booking')->get(),
             'jenises' => JenisKendaraan::all(),
             'brands' => BrandKendaraan::all(),
+            'series' => SeriKendaraan::all(),
             'sopirs' => Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
         ]);
     }
