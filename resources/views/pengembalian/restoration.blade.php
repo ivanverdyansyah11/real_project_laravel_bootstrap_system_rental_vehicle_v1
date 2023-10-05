@@ -34,7 +34,8 @@
                                         class="img-fluid tag-create-transaction" alt="Pembayaran Image" width="80">
                                     <div class="wrapper-image w-100">
                                         <input type="file" id="image" class="input-create-transaction"
-                                            name="foto_pembayaran" value="{{ old('foto_pembayaran') }}" style="opacity: 0;">
+                                            name="foto_pembayaran" value="{{ old('foto_pembayaran') }}" style="opacity: 0;"
+                                            required>
                                         <button type="button" class="button-reverse button-create-transaction">Pilih Foto
                                             Pembayaran</button>
                                     </div>
@@ -78,8 +79,8 @@
                                     <div class="input-wrapper">
                                         <label for="jenis_pembayaran">Jenis Pembayaran</label>
                                         <select id="jenis_pembayaran" class="input" name="jenis_pembayaran"
-                                            value="{{ old('jenis_pembayaran') }}">
-                                            <option value="-">Pilih jenis pembayaran</option>
+                                            value="{{ old('jenis_pembayaran') }}" required>
+                                            <option value="">Pilih jenis pembayaran</option>
                                             <option value="lunas"
                                                 {{ old('jenis_pembayaran') == 'lunas' ? 'selected' : '' }}>Lunas
                                             </option>
@@ -141,7 +142,7 @@
                                     <div class="input-wrapper">
                                         <label for="tanggal_kembali">Pengembalian Tanggal</label>
                                         <input type="date" id="tanggal_kembali" name="tanggal_kembali" class="input"
-                                            autocomplete="off" value="{{ old('tanggal_kembali') }}">
+                                            autocomplete="off" value="{{ old('tanggal_kembali') }}" required>
                                         @error('tanggal_kembali')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -161,7 +162,8 @@
                                     <div class="input-wrapper">
                                         <label for="kilometer_kembali">Kilometer Kembali</label>
                                         <input type="number" id="kilometer_kembali" name="kilometer_kembali"
-                                            class="input" autocomplete="off" value="{{ old('kilometer_kembali') }}">
+                                            class="input" autocomplete="off" value="{{ old('kilometer_kembali') }}"
+                                            required>
                                         @error('kilometer_kembali')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -171,7 +173,7 @@
                                     <div class="input-wrapper">
                                         <label for="bensin_kembali">Bensin Kembali</label>
                                         <input type="number" id="bensin_kembali" name="bensin_kembali" class="input"
-                                            autocomplete="off" value="{{ old('bensin_kembali') }}">
+                                            autocomplete="off" value="{{ old('bensin_kembali') }}" required>
                                         @error('bensin_kembali')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -180,8 +182,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="ketepatan_waktu">Ketepatan Waktu</label>
-                                        <select id="ketepatan_waktu" name="ketepatan_waktu" class="input">
-                                            <option value="-">Pilih ketepatan pengembalian</option>
+                                        <select id="ketepatan_waktu" name="ketepatan_waktu" class="input" required>
+                                            <option value="">Pilih ketepatan pengembalian</option>
                                             <option value="tepat"
                                                 {{ old('ketepatan_waktu') == 'tepat' ? 'selected' : '' }}>Tepat</option>
                                             <option value="tidak tepat"
@@ -206,8 +208,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="sarung_jok">Sarung Jok</label>
-                                        <select id="sarung_jok" class="input" name="sarung_jok">
-                                            <option value="-">Pilih kelengkapan sarung jok</option>
+                                        <select id="sarung_jok" class="input" name="sarung_jok" required>
+                                            <option value="">Pilih kelengkapan sarung jok</option>
                                             <option value="ada" {{ old('sarung_jok') == 'ada' ? 'selected' : '' }}>Ada
                                             </option>
                                             <option value="tidak ada"
@@ -224,8 +226,8 @@
                                     <div class="input-wrapper">
                                         <label for="karpet">Karpet</label>
                                         <select id="karpet" class="input" name="karpet"
-                                            value="{{ old('karpet') }}">
-                                            <option value="-">Pilih kelengkapan karpet</option>
+                                            value="{{ old('karpet') }}" required>
+                                            <option value="">Pilih kelengkapan karpet</option>
                                             <option value="ada" {{ old('karpet') == 'ada' ? 'selected' : '' }}>Ada
                                             </option>
                                             <option value="tidak ada"
@@ -242,8 +244,8 @@
                                     <div class="input-wrapper">
                                         <label for="kondisi_kendaraan">Kondisi Kendaraan</label>
                                         <select id="kondisi_kendaraan" class="input" name="kondisi_kendaraan"
-                                            value="{{ old('kondisi_kendaraan') }}">
-                                            <option value="-">Pilih kondisi kendaraan</option>
+                                            value="{{ old('kondisi_kendaraan') }}" required>
+                                            <option value="">Pilih kondisi kendaraan</option>
                                             <option value="baik"
                                                 {{ old('kondisi_kendaraan') == 'baik' ? 'selected' : '' }}>Baik</option>
                                             <option value="rusak ringan"
@@ -262,8 +264,8 @@
                                     <div class="input-wrapper">
                                         <label for="ban_serep">Ban Serep</label>
                                         <select id="ban_serep" class="input" name="ban_serep"
-                                            value="{{ old('ban_serep') }}">
-                                            <option value="-">Pilih ban serep</option>
+                                            value="{{ old('ban_serep') }}" required>
+                                            <option value="">Pilih ban serep</option>
                                             <option value="ada" {{ old('ban_serep') == 'ada' ? 'selected' : '' }}>Ada
                                             </option>
                                             <option value="tidak ada"

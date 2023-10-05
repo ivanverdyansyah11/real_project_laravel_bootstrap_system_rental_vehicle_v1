@@ -57,7 +57,7 @@ class PengembalianController extends Controller
 
         $pembayaran = PembayaranPemesanan::where('kendaraans_id', $id)->with('sopir')->latest()->first();
 
-        if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->ban_serep == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-' || $request->ketepatan_waktu == '-') {
+        if ($request->sarung_jok == '' || $request->karpet == '' || $request->kondisi_kendaraan == '' || $request->ban_serep == '' || $request->jenis_pembayaran == '' || $request->ketepatan_waktu == '') {
             return redirect(route('pengembalian.restoration', $id))->with('failed', 'Isi Form Input Pengembalian Kendaraan Terlebih Dahulu!');
         }
 
