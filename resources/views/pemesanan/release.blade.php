@@ -33,7 +33,8 @@
                                         class="img-fluid tag-create-document" alt="Dokumen Image" width="80">
                                     <div class="wrapper-image w-100">
                                         <input type="file" id="image" class="input-create-document"
-                                            name="foto_dokumen" value="{{ old('foto_dokumen') }}" style="opacity: 0;">
+                                            name="foto_dokumen" value="{{ old('foto_dokumen') }}" style="opacity: 0;"
+                                            required>
                                         <button type="button" class="button-reverse button-create-document">Pilih Foto
                                             Dokumen</button>
                                     </div>
@@ -50,7 +51,8 @@
                                         class="img-fluid tag-create-vehicle" alt="Kendaraan Image" width="80">
                                     <div class="wrapper-image w-100">
                                         <input type="file" id="image" class="input-create-vehicle"
-                                            name="foto_kendaraan" value="{{ old('foto_kendaraan') }}" style="opacity: 0;">
+                                            name="foto_kendaraan" value="{{ old('foto_kendaraan') }}" style="opacity: 0;"
+                                            required>
                                         <button type="button" class="button-reverse button-create-vehicle">Pilih Foto
                                             Kendaraan</button>
                                     </div>
@@ -67,7 +69,8 @@
                                         class="img-fluid tag-create-customer" alt="Pelanggan Image" width="80">
                                     <div class="wrapper-image w-100">
                                         <input type="file" id="image" class="input-create-customer"
-                                            name="foto_pelanggan" value="{{ old('foto_pelanggan') }}" style="opacity: 0;">
+                                            name="foto_pelanggan" value="{{ old('foto_pelanggan') }}" style="opacity: 0;"
+                                            required>
                                         <button type="button" class="button-reverse button-create-customer">Pilih Foto
                                             Pelanggan</button>
                                     </div>
@@ -97,7 +100,7 @@
                                     <div class="input-wrapper">
                                         <label for="kilometer_keluar">Kilometer Keluar</label>
                                         <input type="number" id="kilometer_keluar" class="input" autocomplete="off"
-                                            name="kilometer_keluar" value="{{ old('kilometer_keluar') }}">
+                                            name="kilometer_keluar" value="{{ old('kilometer_keluar') }}" required>
                                         @error('kilometer_keluar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -107,7 +110,7 @@
                                     <div class="input-wrapper">
                                         <label for="bensin_keluar">Bensin Keluar</label>
                                         <input type="number" id="bensin_keluar" class="input" autocomplete="off"
-                                            name="bensin_keluar" value="{{ old('bensin_keluar') }}">
+                                            name="bensin_keluar" value="{{ old('bensin_keluar') }}" required>
                                         @error('bensin_keluar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -116,8 +119,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="sarung_jok">Sarung Jok</label>
-                                        <select id="sarung_jok" class="input" name="sarung_jok">
-                                            <option value="-">Pilih kelengkapan sarung jok</option>
+                                        <select id="sarung_jok" class="input" name="sarung_jok" required>
+                                            <option value="">Pilih kelengkapan sarung jok</option>
                                             <option value="ada" {{ old('sarung_jok') == 'ada' ? 'selected' : '' }}>Ada
                                             </option>
                                             <option value="tidak ada"
@@ -134,8 +137,8 @@
                                     <div class="input-wrapper">
                                         <label for="karpet">Karpet</label>
                                         <select id="karpet" class="input" name="karpet"
-                                            value="{{ old('karpet') }}">
-                                            <option value="-">Pilih kelengkapan karpet</option>
+                                            value="{{ old('karpet') }}" required>
+                                            <option value="">Pilih kelengkapan karpet</option>
                                             <option value="ada" {{ old('karpet') == 'ada' ? 'selected' : '' }}>Ada
                                             </option>
                                             <option value="tidak ada"
@@ -152,8 +155,8 @@
                                     <div class="input-wrapper">
                                         <label for="kondisi_kendaraan">Kondisi Kendaraan</label>
                                         <select id="kondisi_kendaraan" class="input" name="kondisi_kendaraan"
-                                            value="{{ old('kondisi_kendaraan') }}">
-                                            <option value="-">Pilih kondisi kendaraan</option>
+                                            value="{{ old('kondisi_kendaraan') }}" required>
+                                            <option value="">Pilih kondisi kendaraan</option>
                                             <option value="baik"
                                                 {{ old('kondisi_kendaraan') == 'baik' ? 'selected' : '' }}>Baik</option>
                                             <option value="rusak ringan"
@@ -172,8 +175,8 @@
                                     <div class="input-wrapper">
                                         <label for="ban_serep">Ban Serep</label>
                                         <select id="ban_serep" class="input" name="ban_serep"
-                                            value="{{ old('ban_serep') }}">
-                                            <option value="-">Pilih ban serep</option>
+                                            value="{{ old('ban_serep') }}" required>
+                                            <option value="">Pilih ban serep</option>
                                             <option value="ada" {{ old('ban_serep') == 'ada' ? 'selected' : '' }}>Ada
                                             </option>
                                             <option value="tidak ada"
@@ -244,7 +247,7 @@
                             <div class="input-wrapper">
                                 <label for="tanggal_diambil">Tanggal Diambil</label>
                                 <input type="date" id="tanggal_diambil" class="input" autocomplete="off"
-                                    name="tanggal_diambil">
+                                    name="tanggal_diambil" required>
                                 @error('tanggal_diambil')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -254,7 +257,7 @@
                             <div class="input-wrapper">
                                 <label for="tanggal_kembali">Tanggal Kembali</label>
                                 <input type="date" id="tanggal_kembali" class="input" autocomplete="off"
-                                    name="tanggal_kembali">
+                                    name="tanggal_kembali" required>
                                 @error('tanggal_kembali')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -278,7 +281,7 @@
                                     <div class="wrapper-image w-100">
                                         <input type="file" id="image" class="input-create-transaction"
                                             name="foto_pembayaran" value="{{ old('foto_pembayaran') }}"
-                                            style="opacity: 0;">
+                                            style="opacity: 0;" required>
                                         <button type="button" class="button-reverse button-create-transaction">Pilih Foto
                                             Pembayaran</button>
                                     </div>
@@ -294,7 +297,7 @@
                                     <div class="input-wrapper">
                                         <label for="waktu_sewa">Waktu Sewa (Hari)</label>
                                         <input type="number" id="waktu_sewa" class="input" autocomplete="off"
-                                            name="waktu_sewa" value="0">
+                                            name="waktu_sewa" value="0" required>
                                         @error('waktu_sewa')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -304,7 +307,7 @@
                                     <div class="input-wrapper">
                                         <label for="total_tarif_sewa">Total Tarif Sewa</label>
                                         <input type="number" id="total_tarif_sewa" class="input" autocomplete="off"
-                                            name="total_tarif_sewa" value="0">
+                                            name="total_tarif_sewa" value="0" required>
                                         @error('total_tarif_sewa')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -314,8 +317,8 @@
                                     <div class="input-wrapper">
                                         <label for="jenis_pembayaran">Jenis Pembayaran</label>
                                         <select id="jenis_pembayaran" class="input" name="jenis_pembayaran"
-                                            value="{{ old('jenis_pembayaran') }}">
-                                            <option value="-">Pilih jenis pembayaran</option>
+                                            value="{{ old('jenis_pembayaran') }}" required>
+                                            <option value="">Pilih jenis pembayaran</option>
                                             <option value="lunas"
                                                 {{ old('jenis_pembayaran') == 'lunas' ? 'selected' : '' }}>Lunas
                                             </option>

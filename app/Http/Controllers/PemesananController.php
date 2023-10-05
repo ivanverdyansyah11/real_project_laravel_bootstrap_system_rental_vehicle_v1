@@ -57,7 +57,7 @@ class PemesananController extends Controller
     {
         $pemesanan = Pemesanan::where('id', $id)->with('pelanggan', 'kendaraan')->first();
 
-        if ($request->sarung_jok == '-' || $request->karpet == '-' || $request->kondisi_kendaraan == '-' || $request->ban_serep == '-' || $request->jenis_pembayaran == '-' || $request->metode_pembayaran == '-') {
+        if ($request->sarung_jok == '' || $request->karpet == '' || $request->kondisi_kendaraan == '' || $request->ban_serep == '' || $request->jenis_pembayaran == '') {
             return redirect(route('pemesanan.release', $id))->with('failed', 'Isi Form Input Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
         }
 
