@@ -139,6 +139,10 @@ class SopirController extends Controller
             'data_sim' => 'required|string',
         ]);
 
+        if ($validatedData['data_ktp'] == '' || $validatedData['data_sim'] == '') {
+            return redirect(route('sopir.edit', $id))->with('failed', 'Isi Form Input Kelengkapan KTP & SIM Terlebih Dahulu!');
+        }
+
         if ($request->file('foto_ktp')) {
             if (file_exists(public_path('assets/img/ktp-images/') . $sopir->foto_ktp) && $sopir->foto_ktp) {
                 $oldImagePath = public_path('assets/img/ktp-images/') . $sopir->foto_ktp;

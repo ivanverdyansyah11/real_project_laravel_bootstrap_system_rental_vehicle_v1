@@ -139,6 +139,10 @@ class PelangganController extends Controller
             'data_kk' => 'required|string',
         ]);
 
+        if ($validatedData['data_ktp'] == '' || $validatedData['data_kk'] == '') {
+            return redirect(route('pelanggan.edit', $id))->with('failed', 'Isi Form Input Kelengkapan KTP & KK Terlebih Dahulu!');
+        }
+
         if ($request->file('foto_ktp')) {
             if (file_exists(public_path('assets/img/ktp-images/') . $pelanggan->foto_ktp && $pelanggan->foto_ktp)) {
                 $oldImagePath = public_path('assets/img/ktp-images/') . $pelanggan->foto_ktp;

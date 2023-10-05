@@ -69,7 +69,7 @@ class SeriKendaraanController extends Controller
 
     function store(Request $request)
     {
-        if ($request->jenis_kendaraans_id == '-' || $request->brand_kendaraans_id == '-') {
+        if ($request->jenis_kendaraans_id == '' || $request->brand_kendaraans_id == '') {
             return redirect(route('seriKendaraan.create'))->with('failed', 'Isi Form Input Jenis Kendaraan dan Brand Kendaraan Terlebih Dahulu!');
         }
 
@@ -100,6 +100,10 @@ class SeriKendaraanController extends Controller
 
     function update($id, Request $request)
     {
+        if ($request->jenis_kendaraans_id == '' || $request->brand_kendaraans_id == '') {
+            return redirect(route('seriKendaraan.edit', $id))->with('failed', 'Isi Form Input Jenis Kendaraan dan Brand Kendaraan Terlebih Dahulu!');
+        }
+
         $validatedData = $request->validate([
             'jenis_kendaraans_id' => 'required|string',
             'brand_kendaraans_id' => 'required|string',
