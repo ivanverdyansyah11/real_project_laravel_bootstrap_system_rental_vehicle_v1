@@ -54,7 +54,7 @@
                                     <div class="input-wrapper">
                                         <label for="jumlah_hari">Jumlah Hari</label>
                                         <input type="number" id="jumlah_hari" class="input" autocomplete="off"
-                                            name="jumlah_hari" value="{{ old('jumlah_hari') }}">
+                                            name="jumlah_hari" value="{{ old('jumlah_hari') }}" required>
                                     </div>
                                     @error('jumlah_hari')
                                         <p class="caption-error mt-2">{{ $message }}</p>
@@ -64,7 +64,7 @@
                                     <div class="input-wrapper">
                                         <label for="total_biaya">Total Biaya</label>
                                         <input type="number" id="total_biaya" class="input" autocomplete="off"
-                                            name="total_biaya" value="{{ old('total_biaya') }}">
+                                            name="total_biaya" value="{{ old('total_biaya') }}" required>
                                         @error('total_biaya')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
