@@ -64,7 +64,7 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nama">Nama</label>
-                                    <input type="text" id="nama" class="input" autocomplete="off"
+                                    <input type="text" id="nama" class="input" required autocomplete="off"
                                         value="{{ $sopir->nama }}" name="nama">
                                     @error('nama')
                                         <p class="caption-error mt-2">{{ $message }}</p>
@@ -74,7 +74,7 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="nik">NIK</label>
-                                    <input type="number" id="nik" class="input" autocomplete="off"
+                                    <input type="number" id="nik" class="input" required autocomplete="off"
                                         value="{{ $sopir->nik }}" name="nik">
                                     @error('nik')
                                         <p class="caption-error mt-2">{{ $message }}</p>
@@ -114,7 +114,7 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="alamat">Alamat</label>
-                                    <input type="text" id="alamat" class="input" autocomplete="off"
+                                    <input type="text" id="alamat" class="input" required autocomplete="off"
                                         value="{{ $sopir->alamat }}" name="alamat">
                                     @error('alamat')
                                         <p class="caption-error mt-2">{{ $message }}</p>
@@ -124,8 +124,8 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="data_ktp">Data KTP</label>
-                                    <select name="data_ktp" class="input" id="data_ktp">
-                                        <option value="-">Pilih kelengkapan ktp</option>
+                                    <select name="data_ktp" class="input" required id="data_ktp">
+                                        <option value="">Pilih kelengkapan ktp</option>
                                         <option value="benar" {{ $sopir->data_ktp == 'benar' ? 'selected' : '' }}>
                                             Sudah Benar</option>
                                         <option value="salah" {{ $sopir->data_ktp == 'salah' ? 'selected' : '' }}>
@@ -139,8 +139,8 @@
                             <div class="col-md-6 row-button">
                                 <div class="input-wrapper">
                                     <label for="data_sim">Data SIM</label>
-                                    <select name="data_sim" class="input" id="data_sim">
-                                        <option value="-">Pilih kelengkapan sim</option>
+                                    <select name="data_sim" class="input" required id="data_sim">
+                                        <option value="">Pilih kelengkapan sim</option>
                                         <option value="benar" {{ $sopir->data_sim == 'benar' ? 'selected' : '' }}>
                                             Sudah
                                             Benar</option>
@@ -168,6 +168,14 @@
     </div>
 
     <script>
+        $("#data_ktp").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#data_sim").select2({
+            theme: "bootstrap-5",
+        });
+
         const tagEditKTP = document.querySelector('.tag-edit-ktp');
         const inputEditKTP = document.querySelector('.input-edit-ktp');
         const buttonEditKTP = document.querySelector('.button-edit-ktp');

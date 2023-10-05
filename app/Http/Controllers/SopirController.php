@@ -63,8 +63,8 @@ class SopirController extends Controller
             'data_sim' => 'required|string',
         ]);
 
-        if ($validatedData['data_ktp'] == '-' || $validatedData['data_sim'] == '-') {
-            return redirect(route('pelanggan.create'))->with('failed', 'Isi Form Input Kelengkapan KTP & SIM Terlebih Dahulu!');
+        if ($validatedData['data_ktp'] == '' || $validatedData['data_sim'] == '') {
+            return redirect(route('sopir.create'))->with('failed', 'Isi Form Input Kelengkapan KTP & SIM Terlebih Dahulu!');
         }
 
         $validatedData['status'] = "ada";

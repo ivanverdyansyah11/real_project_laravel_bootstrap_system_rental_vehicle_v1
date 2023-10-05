@@ -17,7 +17,7 @@ class CreateSopirsTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('nik');
-            $table->string('nomor_telepon', 13)->nullable();
+            $table->string('nomor_telepon')->nullable();
             $table->string('nomor_ktp')->nullable();
             $table->string('nomor_sim')->nullable();
             $table->string('foto_ktp')->nullable();
