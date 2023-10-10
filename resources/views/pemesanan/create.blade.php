@@ -86,7 +86,7 @@
                             <div class="input-wrapper">
                                 <label for="sopirs_id">Sopir</label>
                                 <select id="sopirs_id" class="input" name="sopirs_id">
-                                    <option value="-">Pilih nama sopir</option>
+                                    <option value="">Pilih nama sopir</option>
                                     @foreach ($sopirs as $sopir)
                                         <option value="{{ $sopir->id }}"
                                             {{ old('sopirs_id') == $sopir->id ? 'selected' : '' }}>
@@ -193,11 +193,11 @@
                 success: function(data) {
                     if (data.length == 0) {
                         $('#kendaraans_id').append(
-                            `<option value="-">Data kendaraan tidak ditemukan!</option>`
+                            `<option value="">Data kendaraan tidak ditemukan!</option>`
                         );
                     } else {
                         $('#kendaraans_id').append(
-                            `<option value="-">Pilih kendaraan!</option>`
+                            `<option value="">Pilih kendaraan!</option>`
                         );
                         data.forEach(kendaraan => {
                             $('#kendaraans_id').append(
@@ -220,11 +220,11 @@
                 success: function(data) {
                     if (data.length == 0) {
                         $('#kendaraans_id').append(
-                            `<option value="-">Data kendaraan tidak ditemukan!</option>`
+                            `<option value="">Data kendaraan tidak ditemukan!</option>`
                         );
                     } else {
                         $('#kendaraans_id').append(
-                            `<option value="-">Pilih kendaraan!</option>`
+                            `<option value="">Pilih kendaraan!</option>`
                         );
                         data.forEach(kendaraan => {
                             $('#kendaraans_id').append(
@@ -247,11 +247,11 @@
                 success: function(data) {
                     if (data.length == 0) {
                         $('#kendaraans_id').append(
-                            `<option value="-">Data kendaraan tidak ditemukan!</option>`
+                            `<option value="">Data kendaraan tidak ditemukan!</option>`
                         );
                     } else {
                         $('#kendaraans_id').append(
-                            `<option value="-">Pilih kendaraan!</option>`
+                            `<option value="">Pilih kendaraan!</option>`
                         );
                         data.forEach(kendaraan => {
                             $('#kendaraans_id').append(
