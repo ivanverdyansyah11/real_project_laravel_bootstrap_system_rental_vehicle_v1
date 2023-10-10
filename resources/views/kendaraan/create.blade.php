@@ -67,9 +67,29 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="seriData">Nomor Seri</label>
-                                        <select required id="seriData" class="input" name="seri_kendaraans_id"
-                                            data-target="#seriData">
+                                        <label for="jenis_kendaraan">Jenis Kendaraan</label>
+                                        <select id="jenis_kendaraan" class="input">
+                                            @foreach ($jenises as $jenis)
+                                                <option value="{{ $jenis->id }}">{{ $jenis->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="brand_kendaraan">Brand Kendaraan</label>
+                                        <select id="brand_kendaraan" class="input">
+                                            @foreach ($brands as $brand)
+                                                <option value="{{ $brand->id }}">{{ $brand->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="seri_kendaraans_id">Nomor Seri</label>
+                                        <select required id="seri_kendaraans_id" class="input" name="seri_kendaraans_id"
+                                            data-target="#seri_kendaraans_id">
                                             <option value="">Pilih nomor seri kendaraan</option>
                                             @foreach ($series as $seri)
                                                 <option value="{{ $seri->id }}"
@@ -97,20 +117,6 @@
                                         @error('kategori_kilometer_kendaraans_id')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="jenis">Jenis Kendaraan</label>
-                                        <input type="text" required id="jenis" class="input" autocomplete="off"
-                                            value="Pilih nomor seri terlebih dahulu!" disabled data-value="jenis_kendaraan">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="brand">Brand Kendaraan</label>
-                                        <input type="text" required id="brand" class="input" autocomplete="off"
-                                            value="Pilih nomor seri terlebih dahulu!" disabled data-value="brand_kendaraan">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
@@ -225,12 +231,72 @@
     </div>
 
     <script>
-        $("#seriData").select2({
+        $("#kilometerData").select2({
             theme: "bootstrap-5",
         });
 
-        $("#kilometerData").select2({
+        $("#jenis_kendaraan").select2({
             theme: "bootstrap-5",
+        });
+
+        $("#brand_kendaraan").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#seri_kendaraans_id").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#jenis_kendaraan").change(function() {
+            let idJenis = $(this).val();
+            let idBrand = $("#brand_kendaraan").val();
+            $('#seri_kendaraans_id option').remove();
+            $.ajax({
+                type: 'get',
+                url: '/kendaraan/getSeriKendaraan/' + idJenis + '/' + idBrand,
+                success: function(data) {
+                    if (data.length == 0) {
+                        $('#seri_kendaraans_id').append(
+                            `<option value="">Data nomor seri tidak ditemukan!</option>`
+                        );
+                    } else {
+                        $('#seri_kendaraans_id').append(
+                            `<option value="">Pilih nomor seri!</option>`
+                        );
+                        data.forEach(nomorSeri => {
+                            $('#seri_kendaraans_id').append(
+                                `<option value="${nomorSeri.id}">${nomorSeri.nomor_seri}</option>`
+                            );
+                        });
+                    }
+                }
+            });
+        });
+
+        $("#brand_kendaraan").change(function() {
+            let idBrand = $(this).val();
+            let idJenis = $("#jenis_kendaraan").val();
+            $('#seri_kendaraans_id option').remove();
+            $.ajax({
+                type: 'get',
+                url: '/kendaraan/getSeriKendaraan/' + idJenis + '/' + idBrand,
+                success: function(data) {
+                    if (data.length == 0) {
+                        $('#seri_kendaraans_id').append(
+                            `<option value="">Data nomor seri tidak ditemukan!</option>`
+                        );
+                    } else {
+                        $('#seri_kendaraans_id').append(
+                            `<option value="">Pilih nomor seri!</option>`
+                        );
+                        data.forEach(nomorSeri => {
+                            $('#seri_kendaraans_id').append(
+                                `<option value="${nomorSeri.id}">${nomorSeri.nomor_seri}</option>`
+                            );
+                        });
+                    }
+                }
+            });
         });
 
         const tagCreateKendaraan = document.querySelector('.tag-create-image');
@@ -243,18 +309,6 @@
 
         inputCreateKendaraan.addEventListener('change', function() {
             tagCreateKendaraan.src = URL.createObjectURL(inputCreateKendaraan.files[0]);
-        });
-
-        $("#seriData").change(function() {
-            let id = $(this).val();
-            $.ajax({
-                type: 'get',
-                url: '/kendaraan/getSeriKendaraan/' + id,
-                success: function(data) {
-                    $('[data-value="jenis_kendaraan"]').val(data.jenis_kendaraan.nama);
-                    $('[data-value="brand_kendaraan"]').val(data.brand_kendaraan.nama);
-                }
-            });
         });
     </script>
 @endsection

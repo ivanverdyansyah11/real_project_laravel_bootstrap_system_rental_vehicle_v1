@@ -55,7 +55,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
         Route::post('/kendaraan/cari', 'search')->name('kendaraan.search');
         Route::get('/kendaraan/getDetail/{id}', 'getDetail')->name('kendaraan.detail');
         Route::get('/kendaraan/detail/{id}', 'detail')->name('kendaraan.detail');
-        Route::get('/kendaraan/getSeriKendaraan/{id}', 'getSeriKendaraan')->name('kendaraan.getSeriKendaraan');
+        Route::get('/kendaraan/getSeriKendaraan/{id}/{idBrand}', 'getSeriKendaraanByJenisBrand')->name('kendaraan.getSeriKendaraan');
         Route::post('/kendaraan/check', 'check')->name('kendaraan.check');
 
         Route::get('/kendaraan/tambah', 'create')->name('kendaraan.create');

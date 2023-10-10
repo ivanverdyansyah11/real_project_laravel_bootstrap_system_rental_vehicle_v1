@@ -61,20 +61,6 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="seri">Nomor Seri</label>
-                                        <input type="text" id="seri" class="input" autocomplete="off"
-                                            value="{{ $kendaraan->seri_kendaraan->nomor_seri }}" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="kilometer">Kategori Kilometer</label>
-                                        <input type="text" id="kilometer" class="input" autocomplete="off"
-                                            value="{{ $kendaraan->kilometer_kendaraan->jumlah }}" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
                                         <label for="jenis">Jenis Kendaraan</label>
                                         <input type="text" id="jenis" class="input" autocomplete="off"
                                             value="{{ $kendaraan->jenis_kendaraan->nama }}" disabled>
@@ -85,6 +71,20 @@
                                         <label for="brand">Brand Kendaraan</label>
                                         <input type="text" id="brand" class="input" autocomplete="off"
                                             value="{{ $kendaraan->brand_kendaraan->nama }}" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="seri">Nomor Seri</label>
+                                        <input type="text" id="seri" class="input" autocomplete="off"
+                                            value="{{ $kendaraan->seri_kendaraan->nomor_seri }}" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="kilometer">Kategori Kilometer</label>
+                                        <input type="text" id="kilometer" class="input" autocomplete="off"
+                                            value="{{ $kendaraan->kilometer_kendaraan->jumlah }}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">

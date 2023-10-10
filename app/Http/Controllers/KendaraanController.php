@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BrandKendaraan;
 use App\Models\JenisKendaraan;
 use App\Models\KategoriKilometerKendaraan;
 use App\Models\Kendaraan;
@@ -41,6 +42,12 @@ class KendaraanController extends Controller
         ]);
     }
 
+    function getSeriKendaraanByJenisBrand($idJenis, $idBrand)
+    {
+        $nomorSeri = SeriKendaraan::where('jenis_kendaraans_id', $idJenis)->where('brand_kendaraans_id', $idBrand)->with('jenis_kendaraan', 'brand_kendaraan')->get();
+        return response()->json($nomorSeri);
+    }
+
     function getDetail($id)
     {
         $kendaraan = Kendaraan::where('id', $id)->first();
@@ -61,6 +68,8 @@ class KendaraanController extends Controller
     {
         return view('kendaraan.create', [
             'title' => 'Kendaraan',
+            'jenises' => JenisKendaraan::get(),
+            'brands' => BrandKendaraan::get(),
             'series' => SeriKendaraan::get(),
             'kilometers' => KategoriKilometerKendaraan::all(),
         ]);
@@ -142,6 +151,8 @@ class KendaraanController extends Controller
         return view('kendaraan.edit', [
             'title' => 'Kendaraan',
             'kendaraan' => $kendaraan,
+            'jenises' => JenisKendaraan::get(),
+            'brands' => BrandKendaraan::get(),
             'series' => SeriKendaraan::get(),
             'kilometers' => KategoriKilometerKendaraan::all(),
         ]);
