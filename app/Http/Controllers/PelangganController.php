@@ -61,6 +61,7 @@ class PelangganController extends Controller
             'alamat' => 'required|string',
             'data_ktp' => 'required|string',
             'data_kk' => 'required|string',
+            'data_nomor_telepon' => 'required|string',
         ]);
 
         if ($validatedData['data_ktp'] == '' || $validatedData['data_kk'] == '') {
@@ -137,6 +138,7 @@ class PelangganController extends Controller
             'alamat' => 'required|string',
             'data_ktp' => 'required|string',
             'data_kk' => 'required|string',
+            'data_nomor_telepon' => 'required|string',
         ]);
 
         if ($validatedData['data_ktp'] == '' || $validatedData['data_kk'] == '') {

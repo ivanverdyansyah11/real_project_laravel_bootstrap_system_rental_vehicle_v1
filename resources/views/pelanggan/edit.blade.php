@@ -135,7 +135,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6 row-button">
+                            <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="data_kk">Data KK</label>
                                     <select name="data_kk" class="input" id="data_kk" required>
@@ -147,6 +147,24 @@
                                             Benar</option>
                                     </select>
                                     @error('data_kk')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 row-button">
+                                <div class="input-wrapper">
+                                    <label for="data_nomor_telepon">Data Nomor Telepon</label>
+                                    <select name="data_nomor_telepon" class="input" id="data_nomor_telepon" required>
+                                        <option value="benar"
+                                            {{ $pelanggan->data_nomor_telepon == 'benar' ? 'selected' : '' }}>
+                                            Sudah
+                                            Benar</option>
+                                        <option value="salah"
+                                            {{ $pelanggan->data_nomor_telepon == 'salah' ? 'selected' : '' }}>
+                                            Belum
+                                            Benar</option>
+                                    </select>
+                                    @error('data_nomor_telepon')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -171,6 +189,10 @@
         });
 
         $("#data_kk").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#data_nomor_telepon").select2({
             theme: "bootstrap-5",
         });
 
