@@ -69,7 +69,7 @@
                                     <div class="input-wrapper">
                                         <label for="jenis_kendaraan">Jenis Kendaraan</label>
                                         <select id="jenis_kendaraan" class="input">
-                                            <option value="0">Pilih nomor jenis kendaraan</option>
+                                            <option value="0">Pilih jenis kendaraan</option>
                                             @foreach ($jenises as $jenis)
                                                 <option value="{{ $jenis->id }}">{{ $jenis->nama }}</option>
                                             @endforeach
@@ -80,7 +80,7 @@
                                     <div class="input-wrapper">
                                         <label for="brand_kendaraan">Brand Kendaraan</label>
                                         <select id="brand_kendaraan" class="input">
-                                            <option value="0">Pilih nomor brand kendaraan</option>
+                                            <option value="0">Pilih brand kendaraan</option>
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}">{{ $brand->nama }}</option>
                                             @endforeach
