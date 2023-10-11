@@ -63,6 +63,7 @@
                                 $sopir->kelengkapan_ktp == 'lengkap' &&
                                     $sopir->data_ktp == 'benar' &&
                                     $sopir->data_sim == 'benar' &&
+                                    $sopir->data_nomor_telepon == 'benar' &&
                                     $sopir->kelengkapan_sim == 'lengkap' &&
                                     $sopir->kelengkapan_nomor_telepon == 'lengkap')
                                 <div class="col data-value data-length data-length-none status-true">Lengkap</div>

@@ -90,11 +90,18 @@
                                         value="{{ $sopir->data_ktp }}">
                                 </div>
                             </div>
-                            <div class="col-md-6 row-button">
+                            <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="data_sim">Data SIM</label>
                                     <input type="text" id="data_sim" class="input" autocomplete="off" disabled
                                         value="{{ $sopir->data_sim }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 row-button">
+                                <div class="input-wrapper">
+                                    <label for="data_nomor_telepon">Data Nomor Telepon</label>
+                                    <input type="text" id="data_nomor_telepon" class="input" autocomplete="off"
+                                        disabled value="{{ $sopir->data_nomor_telepon }}">
                                 </div>
                             </div>
                             <div class="col-12">

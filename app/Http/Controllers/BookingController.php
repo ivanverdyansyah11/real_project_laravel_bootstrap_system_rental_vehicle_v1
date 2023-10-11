@@ -81,17 +81,13 @@ class BookingController extends Controller
             'status' => 'booking',
         ]);
 
-        $pelanggan = Pelanggan::where('id', $validatedData['pelanggans_id'])->first()->update([
-            'status' => 'tidak ada',
-        ]);
-
         $laporan = Laporan::create([
             'penggunas_id' => auth()->user()->id,
             'relations_id' => $pemesananID->id,
             'kategori_laporan' => 'booking',
         ]);
 
-        if ($pemesanan && $kendaraan && $pelanggan && $laporan) {
+        if ($pemesanan && $kendaraan && $laporan) {
             return redirect(route('pemesanan'))->with('success', 'Berhasil Booking Kendaraan!');
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Booking Kendaraan!');
