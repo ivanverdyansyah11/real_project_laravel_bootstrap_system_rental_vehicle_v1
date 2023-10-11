@@ -29,21 +29,22 @@
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="waktu_sewa_hari">Total Harian</label>
-                                <input type="number" id="waktu_sewa_hari" class="input" autocomplete="off" value="0">
+                                <input type="number" id="waktu_sewa_hari" class="input" autocomplete="off"
+                                    value="{{ old('total_harian') ?: '0' }}" name="total_harian" required>
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="waktu_sewa_minggu">Total Mingguan</label>
                                 <input type="number" id="waktu_sewa_minggu" class="input" autocomplete="off"
-                                    value="0">
+                                    value="{{ old('total_mingguan') ?: '0' }}" name="total_mingguan" required>
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="waktu_sewa_bulan">Total Bulanan</label>
                                 <input type="number" id="waktu_sewa_bulan" class="input" autocomplete="off"
-                                    value="0">
+                                    value="{{ old('total_bulanan') ?: '0' }}" name="total_bulanan" required>
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
@@ -122,13 +123,19 @@
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
-                                <label for="seri_kendaraan">Seri Kendaraan</label>
-                                <select id="seri_kendaraan" class="input">
+                                <label for="seri_kendaraans_id">Nomor Seri</label>
+                                <select id="seri_kendaraans_id" class="input" name="seri_kendaraans_id"
+                                    data-target="#seri_kendaraans_id">
                                     <option value="0">Pilih nomor seri kendaraan</option>
                                     @foreach ($series as $seri)
-                                        <option value="{{ $seri->id }}">{{ $seri->nomor_seri }}</option>
+                                        <option value="{{ $seri->id }}"
+                                            {{ old('seri_kendaraans_id') == $seri->id ? 'selected' : '' }}>
+                                            {{ $seri->nomor_seri }}</option>
                                     @endforeach
                                 </select>
+                                @error('seri_kendaraans_id')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6 row-button">
@@ -177,7 +184,7 @@
             theme: "bootstrap-5",
         });
 
-        $("#seri_kendaraan").select2({
+        $("#seri_kendaraans_id").select2({
             theme: "bootstrap-5",
         });
 
@@ -188,23 +195,23 @@
         $("#jenis_kendaraan").change(function() {
             let idJenis = $(this).val();
             let idBrand = $("#brand_kendaraan").val();
-            let idSeri = $("#seri_kendaraan").val();
-            $('#kendaraans_id option').remove();
+            $('#seri_kendaraans_id option').remove();
             $.ajax({
                 type: 'get',
-                url: '/booking/kendaraan/' + idJenis + '/' + idBrand + '/' + idSeri,
+                url: '/kendaraan/getSeriKendaraan/' + idJenis + '/' + idBrand,
                 success: function(data) {
+                    console.log(idJenis, idBrand);
                     if (data.length == 0) {
-                        $('#kendaraans_id').append(
-                            `<option value="">Data kendaraan tidak ditemukan!</option>`
+                        $('#seri_kendaraans_id').append(
+                            `<option value="0">Data nomor seri tidak ditemukan!</option>`
                         );
                     } else {
-                        $('#kendaraans_id').append(
-                            `<option value="">Pilih kendaraan!</option>`
+                        $('#seri_kendaraans_id').append(
+                            `<option value="0">Pilih nomor seri!</option>`
                         );
-                        data.forEach(kendaraan => {
-                            $('#kendaraans_id').append(
-                                `<option value="${kendaraan.id}">${kendaraan.nomor_plat}</option>`
+                        data.forEach(nomorSeri => {
+                            $('#seri_kendaraans_id').append(
+                                `<option value="${nomorSeri.id}">${nomorSeri.nomor_seri}</option>`
                             );
                         });
                     }
@@ -215,23 +222,23 @@
         $("#brand_kendaraan").change(function() {
             let idBrand = $(this).val();
             let idJenis = $("#jenis_kendaraan").val();
-            let idSeri = $("#seri_kendaraan").val();
-            $('#kendaraans_id option').remove();
+            $('#seri_kendaraans_id option').remove();
             $.ajax({
                 type: 'get',
-                url: '/booking/kendaraan/' + idJenis + '/' + idBrand + '/' + idSeri,
+                url: '/kendaraan/getSeriKendaraan/' + idJenis + '/' + idBrand,
                 success: function(data) {
+                    console.log(idJenis, idBrand);
                     if (data.length == 0) {
-                        $('#kendaraans_id').append(
-                            `<option value="">Data kendaraan tidak ditemukan!</option>`
+                        $('#seri_kendaraans_id').append(
+                            `<option value="0">Data nomor seri tidak ditemukan!</option>`
                         );
                     } else {
-                        $('#kendaraans_id').append(
-                            `<option value="">Pilih kendaraan!</option>`
+                        $('#seri_kendaraans_id').append(
+                            `<option value="0">Pilih nomor seri!</option>`
                         );
-                        data.forEach(kendaraan => {
-                            $('#kendaraans_id').append(
-                                `<option value="${kendaraan.id}">${kendaraan.nomor_plat}</option>`
+                        data.forEach(nomorSeri => {
+                            $('#seri_kendaraans_id').append(
+                                `<option value="${nomorSeri.id}">${nomorSeri.nomor_seri}</option>`
                             );
                         });
                     }
@@ -239,14 +246,12 @@
             });
         });
 
-        $("#seri_kendaraan").change(function() {
+        $("#seri_kendaraans_id").change(function() {
             let idSeri = $(this).val();
-            let idJenis = $("#jenis_kendaraan").val();
-            let idBrand = $("#brand_kendaraan").val();
             $('#kendaraans_id option').remove();
             $.ajax({
                 type: 'get',
-                url: '/booking/kendaraan/' + idJenis + '/' + idBrand + '/' + idSeri,
+                url: '/booking/kendaraan-seri/' + idSeri,
                 success: function(data) {
                     if (data.length == 0) {
                         $('#kendaraans_id').append(

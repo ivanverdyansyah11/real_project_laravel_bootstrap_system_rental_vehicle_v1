@@ -65,7 +65,7 @@
                                         <select id="jenis_kendaraan" class="input">
                                             @foreach ($jenises as $jenis)
                                                 <option value="{{ $jenis->id }}"
-                                                    {{ $kendaraan->seri_kendaraan->jenis_kendaraan->id == $jenis->id ? 'selected' : '' }}>
+                                                    {{ $kendaraan->jenis_kendaraan->id == $jenis->id ? 'selected' : '' }}>
                                                     {{ $jenis->nama }}</option>
                                             @endforeach
                                         </select>
@@ -77,7 +77,7 @@
                                         <select id="brand_kendaraan" class="input">
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}"
-                                                    {{ $kendaraan->seri_kendaraan->brand_kendaraan->id == $brand->id ? 'selected' : '' }}>
+                                                    {{ $kendaraan->brand_kendaraan->id == $brand->id ? 'selected' : '' }}>
                                                     {{ $brand->nama }}</option>
                                             @endforeach
                                         </select>

@@ -23,15 +23,9 @@ class BookingController extends Controller
         }
     }
 
-    function getKendaraan($id)
+    function getKendaraanBySeri($idSeri)
     {
-        $kendaraan = Kendaraan::where('id', $id)->with('jenis_kendaraan', 'brand_kendaraan', 'seri_kendaraan')->first();
-        return response()->json($kendaraan);
-    }
-
-    function getKendaraanByJenisBrand($idJenis, $idBrand, $idSeri)
-    {
-        $kendaraan = Kendaraan::where('jenis_kendaraans_id', $idJenis)->where('brand_kendaraans_id', $idBrand)->where('seri_kendaraans_id', $idSeri)->where('status', 'ready')->orWhere('status', 'booking')->with('jenis_kendaraan', 'brand_kendaraan', 'seri_kendaraan')->get();
+        $kendaraan = Kendaraan::where('seri_kendaraans_id', $idSeri)->whereIn('status', ['ready', 'booking'])->with('jenis_kendaraan', 'brand_kendaraan', 'seri_kendaraan')->get();
         return response()->json($kendaraan);
     }
 
@@ -58,6 +52,9 @@ class BookingController extends Controller
             'pelanggans_id' => 'required|string',
             'kendaraans_id' => 'required|string',
             'sopirs_id' => 'nullable|string',
+            'total_harian' => 'required|string',
+            'total_mingguan' => 'required|string',
+            'total_bulanan' => 'required|string',
             'tanggal_mulai' => 'required|date',
             'tanggal_akhir' => 'required|date',
         ]);
@@ -140,6 +137,9 @@ class BookingController extends Controller
             'pelanggans_id' => 'required|string',
             'kendaraans_id' => 'required|string',
             'sopirs_id' => 'nullable|string',
+            'total_harian' => 'required|string',
+            'total_mingguan' => 'required|string',
+            'total_bulanan' => 'required|string',
             'tanggal_mulai' => 'required|date',
             'tanggal_akhir' => 'required|date',
         ]);

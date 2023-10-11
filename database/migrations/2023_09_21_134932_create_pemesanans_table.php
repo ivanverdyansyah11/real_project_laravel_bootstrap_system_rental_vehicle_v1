@@ -18,6 +18,9 @@ class CreatePemesanansTable extends Migration
             $table->bigInteger('pelanggans_id')->index();
             $table->bigInteger('sopirs_id')->index()->nullable();
             $table->bigInteger('kendaraans_id')->index();
+            $table->string('total_harian');
+            $table->string('total_mingguan');
+            $table->string('total_bulanan');
             $table->date('tanggal_mulai');
             $table->date('tanggal_akhir');
             $table->enum('status', ['booking', 'selesai booking']);
