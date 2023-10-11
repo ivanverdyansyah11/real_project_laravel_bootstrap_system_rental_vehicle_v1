@@ -17,9 +17,15 @@ class BookingController extends Controller
     function check()
     {
         $pelanggan = Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count();
+        $sopir = Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count();
+        $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking'])->count();
 
         if ($pelanggan == 0) {
-            return redirect(route('pemesanan'))->with('failed', 'Tambahkan Pelanggan Terlebih Dahulu!');
+            return redirect(route('pemesanan'))->with('failed', 'Tidak Menemukan Pelanggan yang Ready, Tambahkan Pelanggan Baru!');
+        } elseif ($sopir == 0) {
+            return redirect(route('pemesanan'))->with('failed', 'Tidak Menemukan Sopir yang Ready, Tambahkan Sopir Baru!');
+        } elseif ($kendaraan == 0) {
+            return redirect(route('pemesanan'))->with('failed', 'Tidak Menemukan Kendaraan yang Ready atau Booking Untuk Booking, Tambahkan Kendaraan Baru!');
         }
     }
 
