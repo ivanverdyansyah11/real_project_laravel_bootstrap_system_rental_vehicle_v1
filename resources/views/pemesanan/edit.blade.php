@@ -74,8 +74,11 @@
                             <div class="input-wrapper">
                                 <label for="pelanggans_id">Pelanggan</label>
                                 <select id="pelanggans_id" class="input" name="pelanggans_id" required>
-                                    <option value="{{ $pemesanan->pelanggans_id }}">
-                                        {{ $pemesanan->pelanggan->nama }}</option>
+                                    @foreach ($pelanggans as $pelanggan)
+                                        <option value="{{ $pelanggan->id }}"
+                                            {{ $pelanggan->id == $pemesanan->pelanggans_id ? 'selected' : '' }}>
+                                            {{ $pelanggan->nama }}</option>
+                                    @endforeach
                                 </select>
                                 @error('pelanggans_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>
@@ -86,12 +89,20 @@
                             <div class="input-wrapper">
                                 <label for="sopirs_id">Sopir</label>
                                 <select id="sopirs_id" class="input" name="sopirs_id">
-                                    <option value="">Pilih nama sopir</option>
-                                    @foreach ($sopirs as $sopir)
-                                        <option value="{{ $sopir->id }}"
-                                            {{ old('sopirs_id') == $sopir->id ? 'selected' : '' }}>
-                                            {{ $sopir->nama }}</option>
-                                    @endforeach
+                                    @if (!$pemesanan->sopirs_id)
+                                        <option value="">Pilih nama sopir</option>
+                                        @foreach ($sopirs as $sopir)
+                                            <option value="{{ $sopir->id }}"
+                                                {{ old('sopirs_id') == $sopir->id ? 'selected' : '' }}>
+                                                {{ $sopir->nama }}</option>
+                                        @endforeach
+                                    @else
+                                        @foreach ($sopirs as $sopir)
+                                            <option value="{{ $sopir->id }}"
+                                                {{ $sopir->id == $pemesanan->sopirs_id ? 'selected' : '' }}>
+                                                {{ $sopir->nama }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                                 @error('sopirs_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>

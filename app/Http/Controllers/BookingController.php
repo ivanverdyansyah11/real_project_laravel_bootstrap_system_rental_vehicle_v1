@@ -10,6 +10,7 @@ use App\Models\Pelanggan;
 use App\Models\Pemesanan;
 use App\Models\SeriKendaraan;
 use App\Models\Sopir;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -50,6 +51,56 @@ class BookingController extends Controller
 
     function bookingAction(Request $request)
     {
+        $pelangganCheck = Pemesanan::where('pelanggans_id', $request->pelanggans_id)
+            ->where('kendaraans_id', $request->kendaraans_id)
+            ->first();
+
+        if ($pelangganCheck) {
+            return redirect(route('booking.create'))->with('failed', 'Pelanggan ' . $pelangganCheck->pelanggan->nama . ' Sudah Booking Kendaraan Ini!');
+        }
+
+        $sopirCheck = Pemesanan::where('sopirs_id', $request->sopirs_id)
+            ->whereDate('tanggal_mulai', '<=', $request->tanggal_mulai)
+            ->whereDate('tanggal_akhir', '>=', $request->tanggal_akhir)
+            ->first();
+
+        if (!$sopirCheck) {
+            $sopirCheck = Pemesanan::where('sopirs_id', $request->sopirs_id)
+                ->whereBetween('tanggal_mulai', [$request->tanggal_mulai, $request->tanggal_akhir])
+                ->first();
+
+            if (!$sopirCheck) {
+                $sopirCheck = Pemesanan::where('sopirs_id', $request->sopirs_id)
+                    ->whereBetween('tanggal_akhir', [$request->tanggal_mulai, $request->tanggal_akhir])
+                    ->first();
+            }
+        }
+
+        $kendaraanCheck = Pemesanan::where('kendaraans_id', $request->kendaraans_id)
+            ->whereDate('tanggal_mulai', '<=', $request->tanggal_mulai)
+            ->whereDate('tanggal_akhir', '>=', $request->tanggal_akhir)
+            ->first();
+
+        if (!$kendaraanCheck) {
+            $kendaraanCheck = Pemesanan::where('kendaraans_id', $request->kendaraans_id)
+                ->whereBetween('tanggal_mulai', [$request->tanggal_mulai, $request->tanggal_akhir])
+                ->first();
+
+            if (!$kendaraanCheck) {
+                $kendaraanCheck = Pemesanan::where('kendaraans_id', $request->kendaraans_id)
+                    ->whereBetween('tanggal_akhir', [$request->tanggal_mulai, $request->tanggal_akhir])
+                    ->first();
+            }
+        }
+
+        if ($sopirCheck) {
+            return redirect(route('booking.create'))->with('failed', 'Sopir ' . $sopirCheck->sopir->nama . ' Sudah Booking Pada Tanggal Ini!');
+        } else if ($kendaraanCheck) {
+            return redirect(route('booking.create'))->with('failed', 'Kendaraan ' . $kendaraanCheck->kendaraan->nomor_plat . ' Sudah Booking Pada Tanggal Ini!');
+        }
+
+        return $request;
+
         if ($request->pelanggans_id == '-' || $request->kendaraans_id == '-') {
             return redirect(route('booking.create'))->with('failed', 'Isi Form Input Pelanggan dan Kendaraan Terlebih Dahulu!');
         }
@@ -121,6 +172,7 @@ class BookingController extends Controller
             'jenises' => JenisKendaraan::all(),
             'brands' => BrandKendaraan::all(),
             'series' => SeriKendaraan::all(),
+            'pelanggans' => Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
             'sopirs' => Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
         ]);
     }

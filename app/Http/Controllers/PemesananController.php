@@ -20,7 +20,7 @@ class PemesananController extends Controller
     {
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
-            'bookings' => Pemesanan::where('status', 'booking')->paginate(6),
+            'bookings' => Pemesanan::where('status', 'booking')->orderBy('tanggal_mulai', 'ASC')->paginate(6),
         ]);
     }
 

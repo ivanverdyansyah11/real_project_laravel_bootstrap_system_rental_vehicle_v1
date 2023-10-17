@@ -194,7 +194,7 @@ class DatabaseSeeder extends Seeder
         Kendaraan::create([
             'jenis_kendaraans_id' => 2,
             'brand_kendaraans_id' => 2,
-            'seri_kendaraans_id' => 1,
+            'seri_kendaraans_id' => 2,
             'kategori_kilometer_kendaraans_id' => 2,
             'foto_kendaraan' => 'sample-2.jpg',
             'stnk_nama' => 'Putri Sekar Wangi',
