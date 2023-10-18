@@ -87,10 +87,12 @@
                             </div>
                             <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
                                 <div class="wrapper-action d-flex">
-                                    <a href="{{ route('booking.detail', $booking->id) }}"
-                                        class="button-action button-approve d-flex justify-content-center align-items-center">
-                                        <div class="approve-icon"></div>
-                                    </a>
+                                    @if ($booking->kendaraan->status == 'booking')
+                                        <a href="{{ route('booking.detail', $booking->id) }}"
+                                            class="button-action button-approve d-flex justify-content-center align-items-center">
+                                            <div class="approve-icon"></div>
+                                        </a>
+                                    @endif
                                     <a href="{{ route('booking.update', $booking->id) }}"
                                         class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
                                         <div class="edit-icon"></div>

@@ -56,7 +56,7 @@ class BookingController extends Controller
             ->first();
 
         if ($pelangganCheck) {
-            return redirect(route('booking.create'))->with('failed', 'Pelanggan ' . $pelangganCheck->pelanggan->nama . ' Sudah Booking Kendaraan Ini!');
+            return redirect(route('booking.create'))->with('failed', 'Pelanggan ' . $pelangganCheck->pelanggan->nama . ' Sudah Booking Kendaraan ' . $pelangganCheck->kendaraan->nomor_plat . '!');
         }
 
         $sopirCheck = Pemesanan::where('sopirs_id', $request->sopirs_id)
@@ -98,8 +98,6 @@ class BookingController extends Controller
         } else if ($kendaraanCheck) {
             return redirect(route('booking.create'))->with('failed', 'Kendaraan ' . $kendaraanCheck->kendaraan->nomor_plat . ' Sudah Booking Pada Tanggal Ini!');
         }
-
-        return $request;
 
         if ($request->pelanggans_id == '-' || $request->kendaraans_id == '-') {
             return redirect(route('booking.create'))->with('failed', 'Isi Form Input Pelanggan dan Kendaraan Terlebih Dahulu!');
@@ -179,6 +177,61 @@ class BookingController extends Controller
 
     function update($id, Request $request)
     {
+        $pelangganCheck = Pemesanan::whereNotIn('id', [$id])
+            ->where('pelanggans_id', $request->pelanggans_id)
+            ->where('kendaraans_id', $request->kendaraans_id)
+            ->first();
+
+        if ($pelangganCheck) {
+            return redirect(route('booking.edit', $id))->with('failed', 'Pelanggan ' . $pelangganCheck->pelanggan->nama . ' Sudah Booking Kendaraan ' . $pelangganCheck->kendaraan->nomor_plat . '!');
+        }
+
+        $sopirCheck = Pemesanan::whereNotIn('id', [$id])
+            ->where('sopirs_id', $request->sopirs_id)
+            ->whereDate('tanggal_mulai', '<=', $request->tanggal_mulai)
+            ->whereDate('tanggal_akhir', '>=', $request->tanggal_akhir)
+            ->first();
+
+        if (!$sopirCheck) {
+            $sopirCheck = Pemesanan::whereNotIn('id', [$id])
+                ->where('sopirs_id', $request->sopirs_id)
+                ->whereBetween('tanggal_mulai', [$request->tanggal_mulai, $request->tanggal_akhir])
+                ->first();
+
+            if (!$sopirCheck) {
+                $sopirCheck = Pemesanan::whereNotIn('id', [$id])
+                    ->where('sopirs_id', $request->sopirs_id)
+                    ->whereBetween('tanggal_akhir', [$request->tanggal_mulai, $request->tanggal_akhir])
+                    ->first();
+            }
+        }
+
+        $kendaraanCheck = Pemesanan::whereNotIn('id', [$id])
+            ->where('kendaraans_id', $request->kendaraans_id)
+            ->whereDate('tanggal_mulai', '<=', $request->tanggal_mulai)
+            ->whereDate('tanggal_akhir', '>=', $request->tanggal_akhir)
+            ->first();
+
+        if (!$kendaraanCheck) {
+            $kendaraanCheck = Pemesanan::whereNotIn('id', [$id])
+                ->where('kendaraans_id', $request->kendaraans_id)
+                ->whereBetween('tanggal_mulai', [$request->tanggal_mulai, $request->tanggal_akhir])
+                ->first();
+
+            if (!$kendaraanCheck) {
+                $kendaraanCheck = Pemesanan::whereNotIn('id', [$id])
+                    ->where('kendaraans_id', $request->kendaraans_id)
+                    ->whereBetween('tanggal_akhir', [$request->tanggal_mulai, $request->tanggal_akhir])
+                    ->first();
+            }
+        }
+
+        if ($sopirCheck) {
+            return redirect(route('booking.edit', $id))->with('failed', 'Sopir ' . $sopirCheck->sopir->nama . ' Sudah Booking Pada Tanggal Ini!');
+        } else if ($kendaraanCheck) {
+            return redirect(route('booking.edit', $id))->with('failed', 'Kendaraan ' . $kendaraanCheck->kendaraan->nomor_plat . ' Sudah Booking Pada Tanggal Ini!');
+        }
+
         $pemesanan = Pemesanan::where('id', $id)->first();
         $kendaraan = Pemesanan::where('kendaraans_id', $pemesanan->kendaraans_id)->where('status', 'booking')->count();
         if ($kendaraan == 1) {

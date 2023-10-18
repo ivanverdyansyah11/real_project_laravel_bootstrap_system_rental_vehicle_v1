@@ -73,12 +73,9 @@
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="pelanggans_id">Pelanggan</label>
-                                <select id="pelanggans_id" class="input" name="pelanggans_id" required>
-                                    @foreach ($pelanggans as $pelanggan)
-                                        <option value="{{ $pelanggan->id }}"
-                                            {{ $pelanggan->id == $pemesanan->pelanggans_id ? 'selected' : '' }}>
-                                            {{ $pelanggan->nama }}</option>
-                                    @endforeach
+                                <select id="pelanggans_id" class="input" name="pelanggans_id">
+                                    <option value="{{ $pemesanan->pelanggans_id }}">{{ $pemesanan->pelanggan->nama }}
+                                    </option>
                                 </select>
                                 @error('pelanggans_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>
