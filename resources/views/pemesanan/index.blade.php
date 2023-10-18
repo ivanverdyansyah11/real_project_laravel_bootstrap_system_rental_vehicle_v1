@@ -33,10 +33,7 @@
                     <button type="submit" class="button-searching-tanggal position-absolute" style="top: -100px;">
                     </button>
                 </form>
-                @if (
-                    \App\Models\Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count() == 0 ||
-                        \App\Models\Kendaraan::whereIn('status', ['ready', 'booking'])->count() == 0 ||
-                        \App\Models\Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count() == 0)
+                @if (\App\Models\Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count() == 0 || \App\Models\Kendaraan::whereIn('status', ['ready', 'booking'])->count() == 0)
                     <form action="{{ route('booking.check') }}" method="POST">
                         @csrf
                         <button type="submit" class="button-primary d-none d-md-flex align-items-center"
@@ -82,8 +79,14 @@
                             <div class="col data-value data-length data-length-none">{{ $booking->tanggal_mulai }}</div>
                             <div class="col data-value data-length data-length-none">{{ $booking->tanggal_akhir }}</div>
                             <div
-                                class="col data-value data-length data-length-none {{ $booking->kendaraan->status == 'dipesan' ? 'status-false' : 'status-true' }}">
-                                {{ $booking->kendaraan->status == 'dipesan' ? 'Sudah Dipesan' : 'Ready' }}
+                                class="col data-value data-length data-length-none {{ $booking->kendaraan->status == 'dipesan' || $booking->kendaraan->status == 'servis' ? 'status-false' : 'status-true' }}">
+                                @if ($booking->kendaraan->status == 'dipesan')
+                                    Sudah Dipesan
+                                @elseif($booking->kendaraan->status == 'servis')
+                                    Diservis
+                                @else
+                                    Ready
+                                @endif
                             </div>
                             <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
                                 <div class="wrapper-action d-flex">

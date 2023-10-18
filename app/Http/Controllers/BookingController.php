@@ -30,10 +30,171 @@ class BookingController extends Controller
         }
     }
 
-    function getKendaraanBySeri($idSeri)
+    function getPelanggan()
     {
-        $kendaraan = Kendaraan::where('seri_kendaraans_id', $idSeri)->whereIn('status', ['ready', 'booking'])->with('jenis_kendaraan', 'brand_kendaraan', 'seri_kendaraan')->get();
-        return response()->json($kendaraan);
+        $pelanggan = Pelanggan::where('status', 'ada')
+            ->where('kelengkapan_ktp', 'lengkap')
+            ->where('kelengkapan_kk', 'lengkap')
+            ->where('kelengkapan_nomor_telepon', 'lengkap')
+            ->get();
+
+        return response()->json($pelanggan);
+    }
+
+    function getJenisKendaraan()
+    {
+        $jenis = JenisKendaraan::all();
+
+        return response()->json($jenis);
+    }
+
+    function getBrandKendaraan()
+    {
+        $brand = BrandKendaraan::all();
+
+        return response()->json($brand);
+    }
+
+    function checkPelanggan($pelanggans_id)
+    {
+        $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking'])
+            ->pluck('id')
+            ->toArray();
+
+        $kendaraanSelected = Pemesanan::where('pelanggans_id', $pelanggans_id)
+            ->pluck('kendaraans_id')
+            ->toArray();
+
+        if ($kendaraanSelected) {
+            $result = array_diff($kendaraan, $kendaraanSelected);
+        } else {
+            $result = $kendaraan;
+        }
+
+        $kendaraanResult = Kendaraan::whereIn('id', $result)->get();
+
+        return response()->json($kendaraanResult);
+    }
+
+    function checkSeriKendaraan($idSeri, $tanggalMulai, $tanggalAkhir)
+    {
+        $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
+        $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
+
+        $kendaraan = Kendaraan::where('seri_kendaraans_id', $idSeri)
+            ->whereIn('status', ['ready', 'booking'])
+            ->with('jenis_kendaraan', 'brand_kendaraan', 'seri_kendaraan')
+            ->pluck('id')
+            ->toArray();
+
+        $kendaraanSelected = Pemesanan::where('tanggal_mulai', '<=', $tanggalMulai)
+            ->where('tanggal_akhir', '>=', $tanggalAkhir)
+            ->pluck('kendaraans_id')
+            ->toArray();
+
+        if (!$kendaraanSelected) {
+            $kendaraanSelected = Pemesanan::whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
+                ->pluck('kendaraans_id')
+                ->toArray();
+
+            if (!$kendaraanSelected) {
+                $kendaraanSelected = Pemesanan::whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
+                    ->pluck('kendaraans_id')
+                    ->toArray();
+            }
+        }
+
+        if ($kendaraanSelected) {
+            $result = array_diff($kendaraan, $kendaraanSelected);
+        } else {
+            $result = $kendaraan;
+        }
+
+        $kendaraanResult = Kendaraan::whereIn('id', $result)->get();
+
+        return response()->json($kendaraanResult);
+    }
+
+    function checkKendaraan($tanggalMulai, $tanggalAkhir)
+    {
+        $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
+        $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
+
+        $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking'])
+            ->pluck('id')
+            ->toArray();
+
+        $kendaraanSelected = Pemesanan::where('tanggal_mulai', '<=', $tanggalMulai)
+            ->where('tanggal_akhir', '>=', $tanggalAkhir)
+            ->pluck('kendaraans_id')
+            ->toArray();
+
+        if (!$kendaraanSelected) {
+            $kendaraanSelected = Pemesanan::whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
+                ->pluck('kendaraans_id')
+                ->toArray();
+
+            if (!$kendaraanSelected) {
+                $kendaraanSelected = Pemesanan::whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
+                    ->pluck('kendaraans_id')
+                    ->toArray();
+            }
+        }
+
+        if ($kendaraanSelected) {
+            $result = array_diff($kendaraan, $kendaraanSelected);
+        } else {
+            $result = $kendaraan;
+        }
+
+        $kendaraanResult = Kendaraan::whereIn('id', $result)->get();
+
+        return response()->json($kendaraanResult);
+    }
+
+    function checkSopir($tanggalMulai, $tanggalAkhir)
+    {
+        $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
+        $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
+
+        $sopir = Sopir::where('status', 'ada')
+            ->where('kelengkapan_ktp', 'lengkap')
+            ->where('kelengkapan_sim', 'lengkap')
+            ->where('kelengkapan_nomor_telepon', 'lengkap')
+            ->pluck('id')
+            ->toArray();
+
+        $sopirSelected = Pemesanan::where('tanggal_mulai', '<=', $tanggalMulai)
+            ->where('tanggal_akhir', '>=', $tanggalAkhir)
+            ->pluck('sopirs_id')
+            ->toArray();
+
+        if (!$sopirSelected) {
+            $sopirSelected = Pemesanan::whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
+                ->pluck('sopirs_id')
+                ->toArray();
+
+            if (!$sopirSelected) {
+                $sopirSelected = Pemesanan::whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
+                    ->pluck('sopirs_id')
+                    ->toArray();
+            }
+        }
+
+        if ($sopirSelected) {
+            $result = array_diff($sopir, $sopirSelected);
+        } else {
+            $result = $sopir;
+        }
+
+        $sopirResult = Sopir::whereIn('id', $result)
+            ->where('status', 'ada')
+            ->where('kelengkapan_ktp', 'lengkap')
+            ->where('kelengkapan_sim', 'lengkap')
+            ->where('kelengkapan_nomor_telepon', 'lengkap')
+            ->get();
+
+        return response()->json($sopirResult);
     }
 
     public function booking()

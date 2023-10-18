@@ -110,7 +110,7 @@ class PemesananController extends Controller
 
         if (!empty($validatedData['foto_kendaraan'])) {
             $image = $request->file('foto_kendaraan');
-            $imageName = $pemesanan->kendaraan->nama_kendaraan . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = $pemesanan->kendaraan->nomor_plat . '-foto' . '.' . $image->getClientOriginalExtension();;
             $image->move(public_path('assets/img/pemesanan-kendaraan-images/'), $imageName);
             $validatedData['foto_kendaraan'] = $imageName;
         }

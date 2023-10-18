@@ -61,7 +61,7 @@
                             <div class="input-wrapper">
                                 <label for="tanggal_akhir">Tanggal Kembali</label>
                                 <input type="date" id="tanggal_akhir" class="input" autocomplete="off"
-                                    name="tanggal_akhir" value="{{ old('tanggal_akhir') }}" required>
+                                    name="tanggal_akhir" value="{{ old('tanggal_akhir') }}" required readonly>
                                 @error('tanggal_akhir')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -71,12 +71,12 @@
                             <div class="input-wrapper">
                                 <label for="pelanggans_id">Pelanggan</label>
                                 <select id="pelanggans_id" class="input" name="pelanggans_id" required>
-                                    <option value="">Pilih nama pelanggan</option>
-                                    @foreach ($pelanggans as $pelanggan)
+                                    <option value="">Pilih tanggal diambil dahulu</option>
+                                    {{-- @foreach ($pelanggans as $pelanggan)
                                         <option value="{{ $pelanggan->id }}"
                                             {{ old('pelanggans_id') == $pelanggan->id ? 'selected' : '' }}>
                                             {{ $pelanggan->nama }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                                 @error('pelanggans_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>
@@ -87,12 +87,16 @@
                             <div class="input-wrapper">
                                 <label for="sopirs_id">Sopir</label>
                                 <select id="sopirs_id" class="input" name="sopirs_id">
-                                    <option value="">Pilih nama sopir</option>
-                                    @foreach ($sopirs as $sopir)
-                                        <option value="{{ $sopir->id }}"
-                                            {{ old('sopirs_id') == $sopir->id ? 'selected' : '' }}>
-                                            {{ $sopir->nama }}</option>
-                                    @endforeach
+                                    @if ($sopirs->count() == 0)
+                                        <option value="">Tidak ada sopir ready</option>
+                                    @else
+                                        <option value="">Pilih tanggal diambil dahulu</option>
+                                        {{-- @foreach ($sopirs as $sopir)
+                                            <option value="{{ $sopir->id }}"
+                                                {{ old('sopirs_id') == $sopir->id ? 'selected' : '' }}>
+                                                {{ $sopir->nama }}</option>
+                                        @endforeach --}}
+                                    @endif
                                 </select>
                                 @error('sopirs_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>
@@ -103,10 +107,11 @@
                             <div class="input-wrapper">
                                 <label for="jenis_kendaraan">Jenis Kendaraan</label>
                                 <select id="jenis_kendaraan" class="input">
-                                    <option value="0">Pilih jenis kendaraan</option>
-                                    @foreach ($jenises as $jenis)
-                                        <option value="{{ $jenis->id }}">{{ $jenis->nama }}</option>
-                                    @endforeach
+                                    <option value="0">Pilih tanggal diambil dahulu</option>
+                                    {{-- @foreach ($jenises as $jenis)
+                                        <option value="{{ $jenis->id }}">{{ $jenis->nama }}
+                                        </option>
+                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -114,10 +119,11 @@
                             <div class="input-wrapper">
                                 <label for="brand_kendaraan">Brand Kendaraan</label>
                                 <select id="brand_kendaraan" class="input">
-                                    <option value="0">Pilih brand kendaraan</option>
-                                    @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->nama }}</option>
-                                    @endforeach
+                                    <option value="0">Pilih tanggal diambil dahulu</option>
+                                    {{-- @foreach ($brands as $brand)
+                                        <option value="{{ $brand->id }}">{{ $brand->nama }}
+                                        </option>
+                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -126,12 +132,12 @@
                                 <label for="seri_kendaraans_id">Nomor Seri</label>
                                 <select id="seri_kendaraans_id" class="input" name="seri_kendaraans_id"
                                     data-target="#seri_kendaraans_id">
-                                    <option value="0">Pilih nomor seri kendaraan</option>
-                                    @foreach ($series as $seri)
+                                    <option value="0">Pilih tanggal diambil dahulu</option>
+                                    {{-- @foreach ($series as $seri)
                                         <option value="{{ $seri->id }}"
                                             {{ old('seri_kendaraans_id') == $seri->id ? 'selected' : '' }}>
                                             {{ $seri->nomor_seri }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                                 @error('seri_kendaraans_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>
@@ -142,10 +148,10 @@
                             <div class="input-wrapper">
                                 <label for="kendaraans_id">Kendaraan</label>
                                 <select id="kendaraans_id" class="input" name="kendaraans_id" required>
-                                    <option value="">Pilih kendaraan!</option>
-                                    @foreach ($kendaraans as $kendaraan)
+                                    <option value="">Pilih tanggal diambil dahulu</option>
+                                    {{-- @foreach ($kendaraans as $kendaraan)
                                         <option value="{{ $kendaraan->id }}">{{ $kendaraan->nomor_plat }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                                 @error('kendaraans_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>
@@ -200,7 +206,6 @@
                 type: 'get',
                 url: '/kendaraan/getSeriKendaraan/' + idJenis + '/' + idBrand,
                 success: function(data) {
-                    console.log(idJenis, idBrand);
                     if (data.length == 0) {
                         $('#seri_kendaraans_id').append(
                             `<option value="0">Data nomor seri tidak ditemukan!</option>`
@@ -248,10 +253,12 @@
 
         $("#seri_kendaraans_id").change(function() {
             let idSeri = $(this).val();
+            let tanggal_mulai = $("#tanggal_mulai").val();
+            let tanggal_akhir = $("#tanggal_akhir").val();
             $('#kendaraans_id option').remove();
             $.ajax({
                 type: 'get',
-                url: '/booking/kendaraan-seri/' + idSeri,
+                url: '/booking/check-seri/' + idSeri + '/' + tanggal_mulai + '/' + tanggal_akhir,
                 success: function(data) {
                     if (data.length == 0) {
                         $('#kendaraans_id').append(
@@ -267,6 +274,67 @@
                             );
                         });
                     }
+                }
+            });
+        });
+
+        $("#pelanggans_id").change(function() {
+            let pelanggans_id = $(this).val();
+            $('#kendaraans_id option').remove();
+            $('#seri_kendaraans_id option').remove();
+            $('#jenis_kendaraan option').remove();
+            $('#brand_kendaraan option').remove();
+
+            $('#seri_kendaraans_id').append(
+                `<option value="0">Pilih jenis & brand kendaraan dahulu!</option>`
+            );
+
+            $.ajax({
+                type: 'get',
+                url: '/booking/check-pelanggan/' + pelanggans_id,
+                success: function(data) {
+                    if (data.length == 0) {
+                        $('#kendaraans_id').append(
+                            `<option value="">Data kendaraan tidak ditemukan!</option>`
+                        );
+                    } else {
+                        $('#kendaraans_id').append(
+                            `<option value="">Pilih kendaraan!</option>`
+                        );
+                        data.forEach(kendaraan => {
+                            $('#kendaraans_id').append(
+                                `<option value="${kendaraan.id}">${kendaraan.nomor_plat}</option>`
+                            );
+                        });
+                    }
+                }
+            });
+            $.ajax({
+                type: 'get',
+                url: '/booking/get-jenis',
+                success: function(data) {
+                    $('#jenis_kendaraan').append(
+                        `<option value="0">Pilih jenis kendaraan!</option>`
+                    );
+                    data.forEach(jenis => {
+                        $('#jenis_kendaraan').append(
+                            `<option value="${jenis.id}">${jenis.nama}</option>`
+                        );
+                    });
+                }
+            });
+            $.ajax({
+                type: 'get',
+                url: '/booking/get-brand',
+                success: function(data) {
+                    $('#brand_kendaraan').append(
+                        `<option value="0">Pilih brand kendaraan!</option>`
+                    );
+                    data.forEach(brand => {
+                        $('#brand_kendaraan').append(
+                            `<option value="${brand.id}">${brand.nama}</option>`
+                        );
+                    });
                 }
             });
         });
@@ -422,6 +490,91 @@
             let tanggalMulaiSewa = moment(tanggalDiambilValue);
             let tanggalKembaliSewa = moment(inputTanggalKembali.value);
             let totalWaktuSewa = tanggalKembaliSewa.diff(tanggalMulaiSewa, 'days');
+        });
+
+        $("#tanggal_mulai").change(function() {
+            let tanggal_mulai = $(this).val();
+            let tanggal_akhir = $("#tanggal_akhir").val();
+            $('#pelanggans_id option').remove();
+            $('#sopirs_id option').remove();
+            $('#kendaraans_id option').remove();
+            $('#seri_kendaraans_id option').remove();
+            $('#jenis_kendaraan option').remove();
+            $('#brand_kendaraan option').remove();
+
+            $('#seri_kendaraans_id').append(
+                `<option value="0">Pilih jenis & brand kendaraan dahulu!</option>`
+            );
+
+            $('#jenis_kendaraan').append(
+                `<option value="0">Pilih pelanggan dahulu!</option>`
+            );
+            $('#brand_kendaraan').append(
+                `<option value="0">Pilih pelanggan dahulu!</option>`
+            );
+
+            $.ajax({
+                type: 'get',
+                url: '/booking/get-pelanggan',
+                success: function(data) {
+                    if (data.length == 0) {
+                        $('#pelanggans_id').append(
+                            `<option value="">Data pelanggan tidak ditemukan!</option>`
+                        );
+                    } else {
+                        $('#pelanggans_id').append(
+                            `<option value="">Pilih pelanggan!</option>`
+                        );
+                        data.forEach(pelanggan => {
+                            $('#pelanggans_id').append(
+                                `<option value="${pelanggan.id}">${pelanggan.nama}</option>`
+                            );
+                        });
+                    }
+                }
+            });
+
+            $.ajax({
+                type: 'get',
+                url: '/booking/check-kendaraan/' + tanggal_mulai + '/' + tanggal_akhir,
+                success: function(data) {
+                    if (data.length == 0) {
+                        $('#kendaraans_id').append(
+                            `<option value="">Data kendaraan tidak ditemukan!</option>`
+                        );
+                    } else {
+                        $('#kendaraans_id').append(
+                            `<option value="">Pilih kendaraan!</option>`
+                        );
+                        data.forEach(kendaraan => {
+                            $('#kendaraans_id').append(
+                                `<option value="${kendaraan.id}">${kendaraan.nomor_plat}</option>`
+                            );
+                        });
+                    }
+                }
+            });
+
+            $.ajax({
+                type: 'get',
+                url: '/booking/check-sopir/' + tanggal_mulai + '/' + tanggal_akhir,
+                success: function(data) {
+                    if (data.length == 0) {
+                        $('#sopirs_id').append(
+                            `<option value="">Data sopir tidak ditemukan!</option>`
+                        );
+                    } else {
+                        $('#sopirs_id').append(
+                            `<option value="">Pilih sopir!</option>`
+                        );
+                        data.forEach(sopir => {
+                            $('#sopirs_id').append(
+                                `<option value="${sopir.id}">${sopir.nama}</option>`
+                            );
+                        });
+                    }
+                }
+            });
         });
     </script>
 @endsection

@@ -174,8 +174,13 @@ Route::middleware('auth')->group(function () {
     // BOOKING
     Route::controller(BookingController::class)->group(function () {
         Route::post('/booking/check', 'check')->name('booking.check');
-        Route::get('/booking/check-pelanggan/{tanggal_mulai}/{tanggal_akhir}', 'checkPelanggan')->name('booking.check.pelanggan');
-        Route::get('/booking/kendaraan-seri/{idSeri}', 'getKendaraanBySeri');
+        Route::get('/booking/get-pelanggan', 'getPelanggan');
+        Route::get('/booking/check-pelanggan/{pelanggans_id}', 'checkPelanggan');
+        Route::get('/booking/check-kendaraan/{tanggal_mulai}/{tanggal_akhir}', 'checkKendaraan');
+        Route::get('/booking/check-sopir/{tanggal_mulai}/{tanggal_akhir}', 'checkSopir');
+        Route::get('/booking/check-seri/{idSeri}/{tanggal_mulai}/{tanggal_akhir}', 'checkSeriKendaraan');
+        Route::get('/booking/get-jenis', 'getJenisKendaraan');
+        Route::get('/booking/get-brand', 'getBrandKendaraan');
         Route::get('/booking/detail/{id}', 'detail')->name('booking.detail');
         Route::get('/booking/tambah/', 'booking')->name('booking.create');
         Route::post('/booking/tambah/', 'bookingAction')->name('booking.create.action');
