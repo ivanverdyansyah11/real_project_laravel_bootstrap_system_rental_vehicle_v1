@@ -116,7 +116,7 @@
                     </div>
                     <div class="col-12">
                         <div class="button-wrapper d-flex d-md-none">
-                            <a href="{{ route('pemesanan') }}" class="button-reverse">Kembali ke Page</a>
+                            <a href="{{ route('pemesanan') }}" class="button-reverse">Kembali ke Halaman</a>
                         </div>
                     </div>
                 </div>
