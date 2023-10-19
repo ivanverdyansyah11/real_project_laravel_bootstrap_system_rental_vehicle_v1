@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BrandKendaraanController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GenerateController;
 use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KategoriKilometerKendaraanController;
 use App\Http\Controllers\KendaraanController;
@@ -221,4 +222,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/laporan/pajak', 'laporanPajak')->name('laporan.pajak');
         Route::get('/laporan/nota/{id}', 'nota')->name('laporan.nota');
     });
+
+    // Route::controller(GenerateController::class)->group(function () {
+    //     Route::get('/laporan', 'index')->name('laporan');
+    //     Route::get('/laporan/pelanggan', 'laporanPelanggan')->name('laporan.pelanggan');
+    //     Route::get('/laporan/sopir', 'laporanSopir')->name('laporan.sopir');
+    //     Route::get('/laporan/kendaraan', 'laporanKendaraan')->name('laporan.kendaraan');
+    //     Route::get('/laporan/booking', 'laporanBooking')->name('laporan.booking');
+    //     Route::get('/laporan/pemesanan', 'laporanPemesanan')->name('laporan.pemesanan');
+    //     Route::get('/laporan/pengembalian', 'laporanPengembalian')->name('laporan.pengembalian');
+    //     Route::get('/laporan/penambahan', 'laporanPenambahan')->name('laporan.penambahan');
+    //     Route::get('/laporan/servis', 'laporanServis')->name('laporan.servis');
+    //     Route::get('/laporan/pajak', 'laporanPajak')->name('laporan.pajak');
+    //     Route::get('/laporan/nota/{id}', 'nota')->name('laporan.nota');
+    // });
 });
