@@ -1059,6 +1059,12 @@ body {
 .select2 {
     width: 100% !important;
 }
+
+input#image {
+    position: absolute;
+    top: -100px;
+    left: -100px;
+}
 /* END CONTENT STYLE */
 
 

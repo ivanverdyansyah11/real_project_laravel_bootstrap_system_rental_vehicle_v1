@@ -46,7 +46,6 @@ class DatabaseSeeder extends Seeder
             'data_ktp' => 'benar',
             'data_kk' => 'benar',
             'data_nomor_telepon' => 'benar',
-            // 'status' => 'ada',
             'kelengkapan_ktp' => 'belum lengkap',
             'kelengkapan_kk' => 'belum lengkap',
             'kelengkapan_nomor_telepon' => 'lengkap',
@@ -68,7 +67,6 @@ class DatabaseSeeder extends Seeder
             'data_ktp' => 'benar',
             'data_kk' => 'benar',
             'data_nomor_telepon' => 'benar',
-            // 'status' => 'ada',
             'kelengkapan_ktp' => 'belum lengkap',
             'kelengkapan_kk' => 'belum lengkap',
             'kelengkapan_nomor_telepon' => 'lengkap',
@@ -215,6 +213,60 @@ class DatabaseSeeder extends Seeder
         Laporan::create([
             'penggunas_id' => 1,
             'relations_id' => 2,
+            'kategori_laporan' => 'kendaraan',
+        ]);
+
+        Kendaraan::create([
+            'jenis_kendaraans_id' => 1,
+            'brand_kendaraans_id' => 2,
+            'seri_kendaraans_id' => 1,
+            'kategori_kilometer_kendaraans_id' => 2,
+            'foto_kendaraan' => 'sample-3.jpg',
+            'stnk_nama' => 'Ranti Sekarini',
+            'nomor_plat' => 'L 453 HAU',
+            'kilometer' => '7000',
+            'kilometer_saat_ini' => '7000',
+            'tarif_sewa_hari' => '300000',
+            'tarif_sewa_minggu' => '1200000',
+            'tarif_sewa_bulan' => '3000000',
+            'tahun_pembuatan' => '2023',
+            'tanggal_pembelian' => '2023-10-08',
+            'warna' => 'Kuning',
+            'nomor_rangka' => '3456456575687',
+            'nomor_mesin' => '234234345456',
+            'status' => 'ready',
+        ]);
+
+        Laporan::create([
+            'penggunas_id' => 1,
+            'relations_id' => 3,
+            'kategori_laporan' => 'kendaraan',
+        ]);
+
+        Kendaraan::create([
+            'jenis_kendaraans_id' => 2,
+            'brand_kendaraans_id' => 1,
+            'seri_kendaraans_id' => 2,
+            'kategori_kilometer_kendaraans_id' => 1,
+            'foto_kendaraan' => 'sample-4.jpg',
+            'stnk_nama' => 'Dewa Putra',
+            'nomor_plat' => 'A 81 JQB',
+            'kilometer' => '10000',
+            'kilometer_saat_ini' => '10000',
+            'tarif_sewa_hari' => '400000',
+            'tarif_sewa_minggu' => '1500000',
+            'tarif_sewa_bulan' => '4000000',
+            'tahun_pembuatan' => '2021',
+            'tanggal_pembelian' => '2023-10-08',
+            'warna' => 'Merah',
+            'nomor_rangka' => '674567687684',
+            'nomor_mesin' => '98785454657',
+            'status' => 'ready',
+        ]);
+
+        Laporan::create([
+            'penggunas_id' => 1,
+            'relations_id' => 4,
             'kategori_laporan' => 'kendaraan',
         ]);
     }

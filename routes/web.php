@@ -216,6 +216,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/laporan/kendaraan', 'laporanKendaraan')->name('laporan.kendaraan');
         Route::get('/laporan/booking', 'laporanBooking')->name('laporan.booking');
         Route::get('/laporan/pemesanan', 'laporanPemesanan')->name('laporan.pemesanan');
+        Route::post('/laporan/pemesanan/{id}', 'updatePemesanan')->name('laporan.pemesanan.update');
         Route::get('/laporan/pengembalian', 'laporanPengembalian')->name('laporan.pengembalian');
         Route::get('/laporan/penambahan', 'laporanPenambahan')->name('laporan.penambahan');
         Route::get('/laporan/servis', 'laporanServis')->name('laporan.servis');

@@ -20,6 +20,8 @@ class CreatePelepasanPemesanansTable extends Migration
             $table->string('foto_dokumen');
             $table->string('foto_kendaraan');
             $table->string('foto_pelanggan');
+            $table->string('foto_nota')->nullable();
+            $table->string('foto_nota_ttd')->nullable();
             $table->string('kilometer_keluar');
             $table->string('bensin_keluar');
             $table->date('tanggal_diambil');

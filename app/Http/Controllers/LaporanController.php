@@ -13,6 +13,7 @@ use App\Models\Pengembalian;
 use App\Models\Servis;
 use App\Models\Sopir;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class LaporanController extends Controller
 {
@@ -224,6 +225,67 @@ class LaporanController extends Controller
                 'laporan' => $laporan,
                 'pajak' => Pajak::where('id', $laporan->relations_id)->with('kendaraan')->first(),
             ]);
+        }
+    }
+
+    public function updatePemesanan($id, Request $request)
+    {
+        if (is_null($request->foto_nota) && is_null($request->foto_nota_ttd)) {
+            return redirect(route('laporan.nota', $id))->with('failed', 'Silahkan input data dengan benar!');
+        }
+
+        $laporan = Laporan::where('id', $id)->first();
+        $pelepasan = PelepasanPemesanan::where('id', $laporan->relations_id)->first();
+
+        $validatedData = $request->validate([
+            'foto_nota' => 'nullable|image',
+            'foto_nota_ttd' => 'nullable|image',
+        ]);
+
+        if ($request->file('foto_nota')) {
+            $path = "assets/img/nota-images/" . $pelepasan->foto_nota;
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $image = $request->file('foto_nota');
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
+            $image->move(public_path('assets/img/nota-images/'), $imageName);
+            $validatedData['foto_nota'] = $imageName;
+        } else {
+            if (is_null($pelepasan->foto_nota)) {
+                $validatedData['foto_nota'] = null;
+            } else {
+                $validatedData['foto_nota'] = $pelepasan->foto_nota;
+            }
+        }
+
+        if ($request->file('foto_nota_ttd')) {
+            $path = "assets/img/nota-ttd-images/" . $pelepasan->foto_nota_ttd;
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $image = $request->file('foto_nota_ttd');
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
+            $image->move(public_path('assets/img/nota-ttd-images/'), $imageName);
+            $validatedData['foto_nota_ttd'] = $imageName;
+        } else {
+            if (is_null($pelepasan->foto_nota_ttd)) {
+                $validatedData['foto_nota_ttd'] = null;
+            } else {
+                $validatedData['foto_nota_ttd'] = $pelepasan->foto_nota_ttd;
+            }
+        }
+
+        $pelepasan = PelepasanPemesanan::where('id', $laporan->relations_id)->first()->update($validatedData);
+
+        if ($pelepasan) {
+            return redirect(route('laporan.nota', $id))->with('success', 'Berhasil Update Data Laporan Pemesanan!');
+        } else {
+            return redirect(route('laporan.nota', $id))->with('failed', 'Gagal Update Data Laporan Pemesanan!');
         }
     }
 }
