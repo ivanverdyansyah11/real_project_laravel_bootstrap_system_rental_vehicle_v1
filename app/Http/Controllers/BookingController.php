@@ -26,7 +26,7 @@ class BookingController extends Controller
         } elseif ($sopir == 0) {
             return redirect(route('pemesanan'))->with('failed', 'Tidak Menemukan Sopir yang Ready, Tambahkan Sopir Baru!');
         } elseif ($kendaraan == 0) {
-            return redirect(route('pemesanan'))->with('failed', 'Tidak Menemukan Kendaraan yang Ready atau Booking Untuk Booking, Tambahkan Kendaraan Baru!');
+            return redirect(route('pemesanan'))->with('failed', 'Tidak Menemukan Kendaraan yang Ready atau Booking, Tambahkan Kendaraan Baru!');
         }
     }
 

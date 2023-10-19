@@ -12,7 +12,7 @@ use App\Models\PelepasanPemesanan;
 use App\Models\PembayaranPemesanan;
 use App\Models\Pemesanan;
 use App\Models\Sopir;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 
 class PemesananController extends Controller
 {
@@ -99,21 +99,21 @@ class PemesananController extends Controller
 
         if (!empty($validatedData['foto_dokumen'])) {
             $image = $request->file('foto_dokumen');
-            $imageName = $validatedData['tanggal_diambil'] . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/pemesanan-dokumen-images/'), $imageName);
             $validatedData['foto_dokumen'] = $imageName;
         }
 
         if (!empty($validatedData['foto_kendaraan'])) {
             $image = $request->file('foto_kendaraan');
-            $imageName = $pemesanan->kendaraan->nomor_plat . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/pemesanan-kendaraan-images/'), $imageName);
             $validatedData['foto_kendaraan'] = $imageName;
         }
 
         if (!empty($validatedData['foto_pelanggan'])) {
             $image = $request->file('foto_pelanggan');
-            $imageName = $pemesanan->pelanggan->nama . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/pemesanan-pelanggan-images/'), $imageName);
             $validatedData['foto_pelanggan'] = $imageName;
         }
@@ -140,11 +140,11 @@ class PemesananController extends Controller
             $validatedDataPembayaran['metode_bayar'] = null;
         }
 
-        if (!empty($validatedData['foto_pembayaran'])) {
+        if (!empty($validatedDataPembayaran['foto_pembayaran'])) {
             $image = $request->file('foto_pembayaran');
-            $imageName = $pemesanan->pelanggan->nama . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/pembayaran-pemesanan-images/'), $imageName);
-            $validatedData['foto_pembayaran'] = $imageName;
+            $validatedDataPembayaran['foto_pembayaran'] = $imageName;
         }
 
         $pelepasanPemesanan = PelepasanPemesanan::create($validatedData);
@@ -161,6 +161,8 @@ class PemesananController extends Controller
         ]);
 
         $pemesanan = $pemesanan->update([
+            'tanggal_mulai' => $validatedData['tanggal_diambil'],
+            'tanggal_akhir' => $validatedData['tanggal_kembali'],
             'status' => 'selesai booking',
         ]);
 
