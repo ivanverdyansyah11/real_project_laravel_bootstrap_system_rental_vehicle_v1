@@ -31,23 +31,23 @@
                         <a href="{{ route('laporan') }}"
                             class="modal-link {{ Request::is('laporan') ? 'active' : '' }}">Tampilkan Semua</a>
                         <a href="{{ route('laporan.pelanggan') }}"
-                            class="modal-link {{ Request::is('laporan/1') ? 'active' : '' }}">Pelanggan</a>
+                            class="modal-link {{ Request::is('laporan/pelanggan') ? 'active' : '' }}">Pelanggan</a>
                         <a href="{{ route('laporan.sopir') }}"
-                            class="modal-link {{ Request::is('laporan/2') ? 'active' : '' }}">Sopir</a>
+                            class="modal-link {{ Request::is('laporan/sopir') ? 'active' : '' }}">Sopir</a>
                         <a href="{{ route('laporan.kendaraan') }}"
-                            class="modal-link {{ Request::is('laporan/3') ? 'active' : '' }}">Kendaraan</a>
+                            class="modal-link {{ Request::is('laporan/kendaraan') ? 'active' : '' }}">Kendaraan</a>
                         <a href="{{ route('laporan.booking') }}"
-                            class="modal-link {{ Request::is('laporan/4') ? 'active' : '' }}">Booking</a>
+                            class="modal-link {{ Request::is('laporan/booking') ? 'active' : '' }}">Booking</a>
                         <a href="{{ route('laporan.pemesanan') }}"
-                            class="modal-link {{ Request::is('laporan/5') ? 'active' : '' }}">Pemesanan</a>
+                            class="modal-link {{ Request::is('laporan/pemesanan') ? 'active' : '' }}">Pemesanan</a>
                         <a href="{{ route('laporan.pengembalian') }}"
-                            class="modal-link {{ Request::is('laporan/6') ? 'active' : '' }}">Pengembalian</a>
+                            class="modal-link {{ Request::is('laporan/pengembalian') ? 'active' : '' }}">Pengembalian</a>
                         <a href="{{ route('laporan.penambahan') }}"
-                            class="modal-link {{ Request::is('laporan/7') ? 'active' : '' }}">Penambahan</a>
+                            class="modal-link {{ Request::is('laporan/penambahan') ? 'active' : '' }}">Penambahan</a>
                         <a href="{{ route('laporan.servis') }}"
-                            class="modal-link {{ Request::is('laporan/8') ? 'active' : '' }}">Servis</a>
+                            class="modal-link {{ Request::is('laporan/servis') ? 'active' : '' }}">Servis</a>
                         <a href="{{ route('laporan.pajak') }}"
-                            class="modal-link {{ Request::is('laporan/9') ? 'active' : '' }}">Pajak</a>
+                            class="modal-link {{ Request::is('laporan/pajak') ? 'active' : '' }}">Pajak</a>
                     </div>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                             <div class="col data-value data-length data-length-none">{{ $laporan->created_at }}</div>
                             <div class="col-2 col-md-3 col-xl-2 data-value d-flex justify-content-end">
                                 <div class="wrapper-action d-flex">
-                                    <a href="{{ route('laporan.nota', $laporan->id) }}" target="_blank"
+                                    <a href="{{ route('laporan.nota', $laporan->id) }}"
                                         class="button-action button-detail d-flex justify-content-center align-items-center">
                                         <div class="detail-icon"></div>
                                     </a>

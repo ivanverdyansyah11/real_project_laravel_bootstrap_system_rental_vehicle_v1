@@ -210,15 +210,15 @@ Route::middleware('auth')->group(function () {
     // LAPORAN
     Route::controller(LaporanController::class)->group(function () {
         Route::get('/laporan', 'index')->name('laporan');
-        Route::get('/laporan/1', 'laporanPelanggan')->name('laporan.pelanggan');
-        Route::get('/laporan/2', 'laporanSopir')->name('laporan.sopir');
-        Route::get('/laporan/3', 'laporanKendaraan')->name('laporan.kendaraan');
-        Route::get('/laporan/4', 'laporanBooking')->name('laporan.booking');
-        Route::get('/laporan/5', 'laporanPemesanan')->name('laporan.pemesanan');
-        Route::get('/laporan/6', 'laporanPengembalian')->name('laporan.pengembalian');
-        Route::get('/laporan/7', 'laporanPenambahan')->name('laporan.penambahan');
-        Route::get('/laporan/8', 'laporanServis')->name('laporan.servis');
-        Route::get('/laporan/9', 'laporanPajak')->name('laporan.pajak');
+        Route::get('/laporan/pelanggan', 'laporanPelanggan')->name('laporan.pelanggan');
+        Route::get('/laporan/sopir', 'laporanSopir')->name('laporan.sopir');
+        Route::get('/laporan/kendaraan', 'laporanKendaraan')->name('laporan.kendaraan');
+        Route::get('/laporan/booking', 'laporanBooking')->name('laporan.booking');
+        Route::get('/laporan/pemesanan', 'laporanPemesanan')->name('laporan.pemesanan');
+        Route::get('/laporan/pengembalian', 'laporanPengembalian')->name('laporan.pengembalian');
+        Route::get('/laporan/penambahan', 'laporanPenambahan')->name('laporan.penambahan');
+        Route::get('/laporan/servis', 'laporanServis')->name('laporan.servis');
+        Route::get('/laporan/pajak', 'laporanPajak')->name('laporan.pajak');
         Route::get('/laporan/nota/{id}', 'nota')->name('laporan.nota');
     });
 });
