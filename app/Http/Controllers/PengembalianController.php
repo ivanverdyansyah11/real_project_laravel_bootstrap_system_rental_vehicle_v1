@@ -87,7 +87,7 @@ class PengembalianController extends Controller
 
         if (!empty($validatedData['foto_pembayaran'])) {
             $image = $request->file('foto_pembayaran');
-            $imageName = $validatedData['pelepasan_pemesanans_id'] . $pemesanan->tanggal_diambil . $pemesanan->tanggal_kembali . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/pengembalian-pemesanan-images/'), $imageName);
             $validatedData['foto_pembayaran'] = $imageName;
         }
