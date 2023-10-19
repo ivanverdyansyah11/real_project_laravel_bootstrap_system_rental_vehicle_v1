@@ -26,6 +26,7 @@
                     <div class="row">
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
                             <div class="input-wrapper">
+                                <p style="font-size: 0.875rem; opacity: 0.72;" class="mb-2">Foto KTP</p>
                                 <div class="wrapper d-flex gap-3 align-items-end">
                                     <img src="{{ $pelanggan->foto_ktp ? asset('assets/img/ktp-images/' . $pelanggan->foto_ktp) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-ktp" alt="KTP Image" width="80">
@@ -34,6 +35,7 @@
                         </div>
                         <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
                             <div class="input-wrapper">
+                                <p style="font-size: 0.875rem; opacity: 0.72;" class="mb-2">Foto KK</p>
                                 <div class="wrapper d-flex gap-3 align-items-end">
                                     <img src="{{ $pelanggan->foto_kk ? asset('assets/img/kk-images/' . $pelanggan->foto_kk) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-kk" alt="KK Image" width="80">

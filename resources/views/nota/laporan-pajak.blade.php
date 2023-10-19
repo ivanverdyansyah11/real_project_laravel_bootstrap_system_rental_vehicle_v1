@@ -25,6 +25,7 @@
                 <div class="row">
                     <div class="col-12 mb-5">
                         <div class="input-wrapper">
+                            <p style="font-size: 0.875rem; opacity: 0.72;" class="mb-2">Foto Kendaraan</p>
                             <div class="wrapper d-flex gap-3 align-items-end">
                                 <img src="{{ asset('assets/img/kendaraan-images/' . $pajak->kendaraan->foto_kendaraan) }}"
                                     class="img-fluid" alt="Kendaraan Image" width="80">

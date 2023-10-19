@@ -1,57 +1,83 @@
 @extends('template.main')
 
 @section('content')
-    <div class="report-nota row justify-content-center my-5">
-        <div class="col-md-9 col-lg-7 col-xl-6">
-            <div class="nota-paper mx-3 mx-md-0">
-                <div class="wrapper d-flex justify-content-between align-items-end">
-                    <img src="{{ asset('assets/img/brand/brand-text.svg') }}" alt="Brand Nusa Kendala Logo Teks"
-                        class="img-fluid login-brand d-none d-md-inline-block" draggable="false" width="240">
-                    <p class="paragraph">Petugas: {{ $laporan->pengguna->nama_lengkap }}</p>
+    <div class="content">
+        <div class="row">
+            <div class="col-12">
+                @if (session()->has('success'))
+                    <div class="alert alert-success mb-4" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @elseif(session()->has('failed'))
+                    <div class="alert alert-danger mb-4" role="alert">
+                        {{ session('failed') }}
+                    </div>
+                @endif
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 32px">
+            <div class="col-12 d-flex justify-content-between align-items-center">
+                <h5 class="subtitle">Laporan Data Sewa Kendaraan</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-md-6 mb-5">
+                        <div class="input-wrapper">
+                            <p style="font-size: 0.875rem; opacity: 0.72;" class="mb-2">Foto Kendaraan</p>
+                            <div class="wrapper d-flex gap-3 align-items-end">
+                                <img src="{{ asset('assets/img/kendaraan-images/' . $penambahan->pelepasan_pemesanan->kendaraan->foto_kendaraan) }}"
+                                    class="img-fluid tag-create-image" alt="Kendaraan Image" width="80">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="nomor_plat">Nomor Plat</label>
+                                    <input type="text" id="nomor_plat" class="input" autocomplete="off" readonly
+                                        value="{{ $penambahan->pelepasan_pemesanan->kendaraan->nomor_plat }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="tarifSewa">Tarif Sewa</label>
+                                    <input type="text" id="tarifSewa" class="input" autocomplete="off" readonly
+                                        value="{{ $penambahan->pelepasan_pemesanan->kendaraan->tarif_sewa_hari }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="jumlah_hari">Jumlah Hari</label>
+                                    <input type="number" id="jumlah_hari" class="input"
+                                        value="{{ $penambahan->jumlah_hari }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="total_biaya">Total Biaya</label>
+                                    <input type="number" id="total_biaya" class="input"
+                                        value="{{ $penambahan->total_biaya }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-12 row-button">
+                                <div class="input-wrapper">
+                                    <label for="keterangan">Keterangan</label>
+                                    <input type="text" id="keterangan" class="input"
+                                        value="{{ $penambahan->keterangan }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="button-wrapper d-flex">
+                                    <a href="{{ route('laporan.penambahan') }}" class="button-reverse">Kembali ke
+                                        Halaman</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h5 class="title">Data Penambahan Sewa</h5>
-                <table class="table table-bordered">
-                    <tr>
-                        <td scope="col">Nama Pelanggan</td>
-                        <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">
-                            {{ $penambahan->pelepasan_pemesanan->pemesanan->pelanggan->nama }}</td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Nomor Telepon</td>
-                        <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">
-                            {{ $penambahan->pelepasan_pemesanan->pemesanan->pelanggan->nomor_telepon }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Nomor Plat</td>
-                        <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">
-                            {{ $penambahan->pelepasan_pemesanan->kendaraan->nomor_plat }}</td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Tanggal Kembali</td>
-                        <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $penambahan->pelepasan_pemesanan->tanggal_kembali }}</td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Jumlah Hari</td>
-                        <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $penambahan->jumlah_hari }} hari</td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Total Biaya</td>
-                        <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">Rp. {{ $penambahan->total_biaya }}</td>
-                    </tr>
-                    <tr>
-                        <td scope="col">Keterangan</td>
-                        <td scope="col-1">:</td>
-                        <td scope="col" class="text-end">{{ $penambahan->keterangan }}</td>
-                    </tr>
-                </table>
-                <p class="copyright">Diproduksi oleh Nusa Kendala Rental Kendaraan</p>
             </div>
         </div>
     </div>
