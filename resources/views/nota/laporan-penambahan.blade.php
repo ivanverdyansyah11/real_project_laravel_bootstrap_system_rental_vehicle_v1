@@ -62,6 +62,20 @@
                                         value="{{ $penambahan->total_biaya }}" readonly>
                                 </div>
                             </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="penggunas_id">Pengguna Menambahkan</label>
+                                    <input type="text" id="penggunas_id" class="input" autocomplete="off" readonly
+                                        value="{{ $laporan->pengguna->nama_lengkap }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="tanggal_dibuat">Tanggal & Jam Dibuat</label>
+                                    <input type="text" id="tanggal_dibuat" class="input" autocomplete="off" readonly
+                                        value="{{ $laporan->created_at }}">
+                                </div>
+                            </div>
                             <div class="col-12 row-button">
                                 <div class="input-wrapper">
                                     <label for="keterangan">Keterangan</label>

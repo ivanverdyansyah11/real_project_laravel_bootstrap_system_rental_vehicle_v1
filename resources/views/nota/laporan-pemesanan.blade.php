@@ -195,13 +195,85 @@
                                             readonly value="{{ $laporan->created_at }}">
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="button-wrapper d-flex gap-2">
-                                        <button type="submit" class="button-primary">Simpan Perubahan</button>
-                                        <a href="{{ route('laporan.pemesanan') }}" class="button-reverse">Kembali ke
-                                            Halaman</a>
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4 mt-2">
+                <div class="input-wrapper">
+                    <div class="input-line position-relative mb-2">
+                        <div class="line"></div>
+                        <p>Pembayaran Pelepasan Kendaraan</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
+                    <div class="input-wrapper">
+                        <div class="wrapper d-flex gap-3 align-items-end">
+                            <img src="{{ asset('assets/img/pembayaran-pemesanan-images/' . $pemesanan->pembayaran_pemesanan->foto_pembayaran) }}"
+                                class="img-fluid" alt="Pembayaran Image" width="80">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="input-wrapper">
+                                <label for="waktu_sewa">Waktu Sewa (Hari)</label>
+                                <input type="number" id="waktu_sewa" class="input"
+                                    value="{{ $pemesanan->pembayaran_pemesanan->waktu_sewa }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="input-wrapper">
+                                <label for="total_tarif_sewa">Total Tarif Sewa</label>
+                                <input type="number" id="total_tarif_sewa" class="input"
+                                    value="{{ $pemesanan->pembayaran_pemesanan->total_tarif_sewa }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="input-wrapper">
+                                <label for="jenis_pembayaran">Jenis Pembayaran</label>
+                                <input type="text" id="jenis_pembayaran" class="input"
+                                    value="{{ $pemesanan->pembayaran_pemesanan->jenis_pembayaran }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="input-wrapper">
+                                <label for="total_bayar">Total Bayar</label>
+                                <input type="text" id="total_bayar" class="input"
+                                    value="{{ $pemesanan->pembayaran_pemesanan->total_bayar }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="input-wrapper">
+                                <label for="metode_bayar">Metode Pembayaran</label>
+                                <input type="text" id="metode_bayar" class="input"
+                                    value="{{ $pemesanan->pembayaran_pemesanan->metode_bayar }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="input-wrapper">
+                                <label for="sopirs_id">Penyewaan Sopir</label>
+                                <input type="text" id="sopirs_id" class="input"
+                                    value="{{ $pemesanan->pembayaran_pemesanan ? $pemesanan->pembayaran_pemesanan->sopir->nama : 'Tidak memilih sopir' }}"
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="col-12 row-button">
+                            <div class="input-wrapper">
+                                <label for="keterangan">Keterangan</label>
+                                <input type="text" id="keterangan" class="input"
+                                    value="{{ $pemesanan->pembayaran_pemesanan->keterangan }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="button-wrapper d-flex gap-2">
+                                <button type="submit" class="button-primary">Simpan Perubahan</button>
+                                <a href="{{ route('laporan.pemesanan') }}" class="button-reverse">Kembali ke
+                                    Halaman</a>
                             </div>
                         </div>
                     </div>
