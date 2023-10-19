@@ -125,10 +125,6 @@ class PengembalianController extends Controller
             ]);
         }
 
-        $pelanggan = Pelanggan::where('id', $pemesanan->pemesanan->pelanggans_id)->first()->update([
-            'status' => 'ada',
-        ]);
-
         $pengembalian = Pengembalian::create($validatedData);
         $pengembalianID = Pengembalian::latest()->first();
 
@@ -138,7 +134,7 @@ class PengembalianController extends Controller
             'kategori_laporan' => 'pengembalian',
         ]);
 
-        if ($pengembalian && $kendaraan && $pelanggan && $laporan) {
+        if ($pengembalian && $kendaraan && $laporan) {
             return redirect(route('pengembalian'))->with('success', 'Berhasil Melakukan Pengembalian Kendaraan!');
         } else {
             return redirect(route('pengembalian'))->with('failed', 'Gagal Melakukan Pengembalian Kendaraan!');

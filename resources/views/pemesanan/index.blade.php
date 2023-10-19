@@ -33,7 +33,7 @@
                     <button type="submit" class="button-searching-tanggal position-absolute" style="top: -100px;">
                     </button>
                 </form>
-                @if (\App\Models\Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count() == 0 || \App\Models\Kendaraan::whereIn('status', ['ready', 'booking'])->count() == 0)
+                @if (\App\Models\Pelanggan::where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count() == 0 || \App\Models\Kendaraan::whereIn('status', ['ready', 'booking'])->count() == 0)
                     <form action="{{ route('booking.check') }}" method="POST">
                         @csrf
                         <button type="submit" class="button-primary d-none d-md-flex align-items-center"

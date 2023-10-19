@@ -17,7 +17,7 @@ class BookingController extends Controller
 {
     function check()
     {
-        $pelanggan = Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count();
+        $pelanggan = Pelanggan::where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count();
         $sopir = Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count();
         $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking'])->count();
 
@@ -32,8 +32,7 @@ class BookingController extends Controller
 
     function getPelanggan()
     {
-        $pelanggan = Pelanggan::where('status', 'ada')
-            ->where('kelengkapan_ktp', 'lengkap')
+        $pelanggan = Pelanggan::where('kelengkapan_ktp', 'lengkap')
             ->where('kelengkapan_kk', 'lengkap')
             ->where('kelengkapan_nomor_telepon', 'lengkap')
             ->get();
@@ -205,7 +204,7 @@ class BookingController extends Controller
             'jenises' => JenisKendaraan::all(),
             'brands' => BrandKendaraan::all(),
             'series' => SeriKendaraan::all(),
-            'pelanggans' => Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
+            'pelanggans' => Pelanggan::where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
             'sopirs' => Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
         ]);
     }
@@ -331,7 +330,7 @@ class BookingController extends Controller
             'jenises' => JenisKendaraan::all(),
             'brands' => BrandKendaraan::all(),
             'series' => SeriKendaraan::all(),
-            'pelanggans' => Pelanggan::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
+            'pelanggans' => Pelanggan::where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
             'sopirs' => Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
         ]);
     }
@@ -445,10 +444,6 @@ class BookingController extends Controller
         $pemesanan = Pemesanan::where('id', $id)->first();
         $pemesananCount = Pemesanan::where('kendaraans_id', $pemesanan->kendaraans_id)->count();
 
-        $pelanggan = Pelanggan::where('id', $pemesanan->pelanggans_id)->first()->update([
-            'status' => 'ada',
-        ]);
-
         $laporan = Laporan::where('relations_id', $pemesanan->id)->where('kategori_laporan', 'booking')->first();
         $laporan = $laporan->delete();
 
@@ -461,7 +456,7 @@ class BookingController extends Controller
         $pemesanan = $pemesanan->delete();
 
 
-        if ($pemesanan && $pelanggan && $laporan) {
+        if ($pemesanan && $laporan) {
             return redirect(route('pemesanan'))->with('success', 'Berhasil Hapus Booking Kendaraan!');
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Hapus Booking Kendaraan!');

@@ -27,17 +27,19 @@ class PenambahanSewaController extends Controller
             'keterangan' => 'nullable|string'
         ]);
 
-        $pemesanan = PelepasanPemesanan::where('kendaraans_id', $id)->with('kendaraan')->latest()->first();
+        return $request;
+
+        $pelepasanPemesanan = PelepasanPemesanan::where('kendaraans_id', $id)->with('kendaraan')->latest()->first();
         $pembayaran = PembayaranPemesanan::where('kendaraans_id', $id)->latest()->first();
 
-        $validatedData['pelepasan_pemesanans_id'] = $pemesanan->id;
+        $validatedData['pelepasan_pemesanans_id'] = $pelepasanPemesanan->id;
         $validatedData['kendaraans_id'] = $id;
 
-        $tanggal_kembali = Carbon::parse($pemesanan->tanggal_kembali);
+        $tanggal_kembali = Carbon::parse($pelepasanPemesanan->tanggal_kembali);
         $jumlah_hari = (int)$validatedData['jumlah_hari'];
         $tanggal_kembali->addDays($jumlah_hari);
 
-        $pemesanan = PelepasanPemesanan::where('kendaraans_id', $id)->latest()->first()->update([
+        $pelepasanPemesanan = PelepasanPemesanan::where('kendaraans_id', $id)->latest()->first()->update([
             'tanggal_kembali' => $tanggal_kembali,
         ]);
 
@@ -58,7 +60,7 @@ class PenambahanSewaController extends Controller
             'kategori_laporan' => 'penambahan',
         ]);
 
-        if ($penambahan && $pemesanan && $pembayaran && $laporan) {
+        if ($penambahan && $pelepasanPemesanan && $pembayaran && $laporan) {
             return redirect(route('pengembalian'))->with('success', 'Berhasil Melakukan Penambahan Hari Sewa Kendaraan!');
         } else {
             return redirect(route('pengembalian'))->with('failed', 'Gagal Melakukan Penambahan Hari Sewa Kendaraan!');

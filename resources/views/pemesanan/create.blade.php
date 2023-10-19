@@ -509,6 +509,7 @@
             $('#jenis_kendaraan').append(
                 `<option value="0">Pilih pelanggan dahulu!</option>`
             );
+
             $('#brand_kendaraan').append(
                 `<option value="0">Pilih pelanggan dahulu!</option>`
             );

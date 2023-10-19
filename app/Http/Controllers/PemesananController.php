@@ -93,10 +93,6 @@ class PemesananController extends Controller
             $validatedData['bensin_keluar'] = (int)$validatedData['bensin_keluar'];
         }
 
-        $pelanggan = Pelanggan::where('id', $pemesanan->pelanggans_id)->first()->update([
-            'status' => 'tidak ada',
-        ]);
-
         $validatedData['pemesanans_id'] = $pemesanan->id;
         $validatedData['kendaraans_id'] = $pemesanan->kendaraans_id;
 
@@ -168,7 +164,7 @@ class PemesananController extends Controller
             'status' => 'selesai booking',
         ]);
 
-        if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan && $pelanggan && $laporan && $pemesanan) {
+        if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan && $laporan && $pemesanan) {
             return redirect(route('pemesanan'))->with('success', 'Berhasil Melakukan Pelepasan Kendaraan!');
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Melakukan Pelepasan Kendaraan!');
