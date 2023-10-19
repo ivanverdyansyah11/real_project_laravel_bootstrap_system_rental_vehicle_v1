@@ -6,6 +6,7 @@ use App\Models\KelengkapanPelanggan;
 use App\Models\Laporan;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class PelangganController extends Controller
 {
@@ -68,18 +69,16 @@ class PelangganController extends Controller
             return redirect(route('pelanggan.create'))->with('failed', 'Isi Form Input Kelengkapan KTP & KK Terlebih Dahulu!');
         }
 
-        $validatedData['status'] = 'ada';
-
         if (!empty($validatedData['foto_ktp'])) {
             $image = $request->file('foto_ktp');
-            $imageName = $validatedData['nik'] . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/ktp-images/'), $imageName);
             $validatedData['foto_ktp'] = $imageName;
         }
 
         if (!empty($validatedData['foto_kk'])) {
             $image = $request->file('foto_kk');
-            $imageName = $validatedData['nik'] . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/kk-images/'), $imageName);
             $validatedData['foto_kk'] = $imageName;
         }
@@ -146,13 +145,14 @@ class PelangganController extends Controller
         }
 
         if ($request->file('foto_ktp')) {
-            if (file_exists(public_path('assets/img/ktp-images/') . $pelanggan->foto_ktp && $pelanggan->foto_ktp)) {
-                $oldImagePath = public_path('assets/img/ktp-images/') . $pelanggan->foto_ktp;
-                unlink($oldImagePath);
+            $path = "assets/img/ktp-images/$pelanggan->foto_ktp";
+
+            if (File::exists($path)) {
+                File::delete($path);
             }
 
             $image = $request->file('foto_ktp');
-            $imageName = $validatedData['nik'] . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();;
             $image->move(public_path('assets/img/ktp-images/'), $imageName);
             $validatedData['foto_ktp'] = $imageName;
         } else {
@@ -160,13 +160,14 @@ class PelangganController extends Controller
         }
 
         if ($request->file('foto_kk')) {
-            if (file_exists(public_path('assets/img/kk-images/') . $pelanggan->foto_kk && $pelanggan->foto_kk)) {
-                $oldImagePath = public_path('assets/img/kk-images/') . $pelanggan->foto_kk;
-                unlink($oldImagePath);
+            $path = "assets/img/kk-images/$pelanggan->foto_kk";
+
+            if (File::exists($path)) {
+                File::delete($path);
             }
 
             $image = $request->file('foto_kk');
-            $imageName = $validatedData['nik'] . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();;
             $image->move(public_path('assets/img/kk-images/'), $imageName);
             $validatedData['foto_kk'] = $imageName;
         } else {
@@ -204,14 +205,16 @@ class PelangganController extends Controller
     {
         $pelanggan = Pelanggan::where('id', $id)->first();
 
-        if (file_exists(public_path('assets/img/ktp-images/') . $pelanggan->foto_ktp && $pelanggan->foto_ktp)) {
-            $imagePath = public_path('assets/img/ktp-images/') . $pelanggan->foto_ktp;
-            unlink($imagePath);
+        $pathKTP = "assets/img/ktp-images/$pelanggan->foto_ktp";
+
+        if (File::exists($pathKTP)) {
+            File::delete($pathKTP);
         }
 
-        if (file_exists(public_path('assets/img/kk-images/') . $pelanggan->foto_kk && $pelanggan->foto_kk)) {
-            $imagePath = public_path('assets/img/kk-images/') . $pelanggan->foto_kk;
-            unlink($imagePath);
+        $pathKK = "assets/img/kk-images/$pelanggan->foto_kk";
+
+        if (File::exists($pathKK)) {
+            File::delete($pathKK);
         }
 
         $pelanggan = $pelanggan->delete();
