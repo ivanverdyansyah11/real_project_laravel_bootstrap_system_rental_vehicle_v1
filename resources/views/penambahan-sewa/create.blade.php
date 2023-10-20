@@ -29,7 +29,7 @@
                         <div class="col-md-6 mb-5">
                             <div class="input-wrapper">
                                 <div class="wrapper d-flex gap-3 align-items-end">
-                                    <img src="{{ asset('assets/img/kendaraan-images/' . $pemesanan->kendaraan->foto_kendaraan) }}"
+                                    <img src="{{ $pemesanan->kendaraan ? asset('assets/img/kendaraan-images/' . $pemesanan->kendaraan->foto_kendaraan) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-image" alt="Kendaraan Image" width="80">
                                 </div>
                             </div>
@@ -39,15 +39,25 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="nomor_plat">Nomor Plat</label>
-                                        <input type="text" id="nomor_plat" class="input" autocomplete="off" disabled
-                                            value="{{ $pemesanan->kendaraan->nomor_plat }}">
+                                        @if ($pemesanan->kendaraan)
+                                            <input type="text" id="nomor_plat" class="input" autocomplete="off" disabled
+                                                value="{{ $pemesanan->kendaraan->nomor_plat }}">
+                                        @else
+                                            <input type="text" id="nomor_plat" class="input" autocomplete="off" disabled
+                                                value="Belum memilih kendaraan">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="tarifSewa">Tarif Sewa</label>
-                                        <input type="text" id="tarifSewa" class="input" autocomplete="off" disabled
-                                            value="{{ $pemesanan->kendaraan->tarif_sewa_hari }}">
+                                        @if ($pemesanan->kendaraan)
+                                            <input type="text" id="tarifSewa" class="input" autocomplete="off" disabled
+                                                value="{{ $pemesanan->kendaraan->tarif_sewa_hari }}">
+                                        @else
+                                            <input type="text" id="tarifSewa" class="input" autocomplete="off" disabled
+                                                value="Belum memilih kendaraan">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
