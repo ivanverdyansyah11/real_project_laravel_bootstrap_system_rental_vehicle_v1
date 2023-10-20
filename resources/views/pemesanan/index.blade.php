@@ -73,9 +73,11 @@
                 @foreach ($bookings as $booking)
                     <div class="col-12 table-row table-border">
                         <div class="row table-data gap-4 align-items-center">
-                            <div class="col data-value data-length">{{ $booking->pelanggan->nama }}</div>
+                            <div class="col data-value data-length">
+                                {{ $booking->pelanggan ? $booking->pelanggan->nama : 'Belum memilih pelanggan' }}</div>
                             <div class="col data-value data-length data-length-none">
-                                {{ $booking->kendaraan->nomor_plat }}</div>
+                                {{ $booking->kendaraan ? $booking->kendaraan->nomor_plat : 'Belum memilih kendaraan' }}
+                            </div>
                             <div class="col data-value data-length data-length-none">{{ $booking->tanggal_mulai }}</div>
                             <div class="col data-value data-length data-length-none">{{ $booking->tanggal_akhir }}</div>
                             <div

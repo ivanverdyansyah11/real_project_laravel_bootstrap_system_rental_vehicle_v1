@@ -85,15 +85,25 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="nama_penyewa">Nama Pelanggan</label>
-                                        <input type="text" id="nama_penyewa" class="input" autocomplete="off"
-                                            value="{{ $pemesanan->pelanggan->nama }}" disabled>
+                                        @if ($pemesanan->pelanggan)
+                                            <input type="text" id="nama_penyewa" class="input" autocomplete="off"
+                                                value="{{ $pemesanan->pelanggan->nama }}" disabled>
+                                        @else
+                                            <input type="text" id="nama_penyewa" class="input" autocomplete="off"
+                                                value="Belum memilih pelanggan" disabled>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="nomor_plat">Nomor Plat</label>
-                                        <input type="text" id="nomor_plat" class="input" autocomplete="off"
-                                            value="{{ $pemesanan->kendaraan->nomor_plat }}" disabled>
+                                        @if ($pemesanan->kendaraan)
+                                            <input type="text" id="nomor_plat" class="input" autocomplete="off"
+                                                value="{{ $pemesanan->kendaraan->nomor_plat }}" disabled>
+                                        @else
+                                            <input type="text" id="nomor_plat" class="input" autocomplete="off"
+                                                value="Belum memilih kendaraan" disabled>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
@@ -204,22 +214,37 @@
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="tarif_sewa_hari">Tarif Sewa Kendaran Harian</label>
-                                <input type="text" id="tarif_sewa_hari" class="input" autocomplete="off"
-                                    value="{{ $pemesanan->kendaraan->tarif_sewa_hari }}" disabled>
+                                @if ($pemesanan->kendaraan)
+                                    <input type="text" id="tarif_sewa_hari" class="input" autocomplete="off"
+                                        value="{{ $pemesanan->kendaraan->tarif_sewa_hari }}" disabled>
+                                @else
+                                    <input type="text" id="tarif_sewa_hari" class="input" autocomplete="off"
+                                        value="Belum memilih kendaraan" disabled>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="tarif_sewa_minggu">Tarif Sewa Kendaran Mingguan</label>
-                                <input type="text" id="tarif_sewa_minggu" class="input" autocomplete="off"
-                                    value="{{ $pemesanan->kendaraan->tarif_sewa_minggu }}" disabled>
+                                @if ($pemesanan->kendaraan)
+                                    <input type="text" id="tarif_sewa_minggu" class="input" autocomplete="off"
+                                        value="{{ $pemesanan->kendaraan->tarif_sewa_minggu }}" disabled>
+                                @else
+                                    <input type="text" id="tarif_sewa_minggu" class="input" autocomplete="off"
+                                        value="Belum memilih kendaraan" disabled>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="tarif_sewa_bulan">Tarif Sewa Kendaran Bulanan</label>
-                                <input type="text" id="tarif_sewa_bulan" class="input" autocomplete="off"
-                                    value="{{ $pemesanan->kendaraan->tarif_sewa_bulan }}" disabled>
+                                @if ($pemesanan->kendaraan)
+                                    <input type="text" id="tarif_sewa_bulan" class="input" autocomplete="off"
+                                        value="{{ $pemesanan->kendaraan->tarif_sewa_bulan }}" disabled>
+                                @else
+                                    <input type="text" id="tarif_sewa_bulan" class="input" autocomplete="off"
+                                        value="Belum memilih kendaraan" disabled>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
@@ -257,7 +282,7 @@
                             <div class="input-wrapper">
                                 <label for="tanggal_kembali">Tanggal Kembali</label>
                                 <input type="date" id="tanggal_kembali" class="input" autocomplete="off"
-                                    name="tanggal_kembali" required>
+                                    name="tanggal_kembali" required readonly>
                                 @error('tanggal_kembali')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
@@ -297,7 +322,7 @@
                                     <div class="input-wrapper">
                                         <label for="waktu_sewa">Waktu Sewa (Hari)</label>
                                         <input type="number" id="waktu_sewa" class="input" autocomplete="off"
-                                            name="waktu_sewa" value="0" required>
+                                            name="waktu_sewa" value="0" required readonly>
                                         @error('waktu_sewa')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -307,7 +332,7 @@
                                     <div class="input-wrapper">
                                         <label for="total_tarif_sewa">Total Tarif Sewa</label>
                                         <input type="number" id="total_tarif_sewa" class="input" autocomplete="off"
-                                            name="total_tarif_sewa" value="0" required>
+                                            name="total_tarif_sewa" value="0" required readonly>
                                         @error('total_tarif_sewa')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -391,17 +416,26 @@
                                     <div class="input-wrapper">
                                         <label for="sopirs_id">Penyewaan Sopir</label>
                                         <select id="sopirs_id" class="input" name="sopirs_id">
-                                            @if ($pemesanan->sopirs_id == null)
+                                            @if ($pemesanan->sopir)
+                                                @if ($pemesanan->sopirs_id == null)
+                                                    <option value="-">Pilih penyewaan sopir</option>
+                                                    @foreach ($sopirs as $sopir)
+                                                        <option value="{{ $sopir->id }}"
+                                                            {{ old('sopirs_id') == $sopir->id ? 'selected' : '' }}>
+                                                            {{ $sopir->nama }}</option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($sopirs as $sopir)
+                                                        <option value="{{ $sopir->id }}"
+                                                            {{ $sopir->id == $pemesanan->sopirs_id ? 'selected' : '' }}>
+                                                            {{ $sopir->nama }}</option>
+                                                    @endforeach
+                                                @endif
+                                            @else
                                                 <option value="-">Pilih penyewaan sopir</option>
                                                 @foreach ($sopirs as $sopir)
                                                     <option value="{{ $sopir->id }}"
                                                         {{ old('sopirs_id') == $sopir->id ? 'selected' : '' }}>
-                                                        {{ $sopir->nama }}</option>
-                                                @endforeach
-                                            @else
-                                                @foreach ($sopirs as $sopir)
-                                                    <option value="{{ $sopir->id }}"
-                                                        {{ $sopir->id == $pemesanan->sopirs_id ? 'selected' : '' }}>
                                                         {{ $sopir->nama }}</option>
                                                 @endforeach
                                             @endif

@@ -62,48 +62,78 @@
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
                             <label for="pelanggans_id">Pelanggan</label>
-                            <input type="text" id="pelanggans_id" class="input" autocomplete="off"
-                                value="{{ $pemesanan->pelanggan->nama }}" disabled>
+                            @if ($pemesanan->pelanggan)
+                                <input type="text" id="pelanggans_id" class="input" autocomplete="off"
+                                    value="{{ $pemesanan->pelanggan->nama }}" disabled>
+                            @else
+                                <input type="text" id="pelanggans_id" class="input" autocomplete="off"
+                                    value="Belum memilih pelanggan" disabled>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
                             <label for="sopirs_id">Sopir</label>
-                            @if ($pemesanan->sopirs_id == null)
-                                <input type="text" id="sopirs_id" class="input" autocomplete="off"
-                                    value="Tidak memilih sopir" disabled>
+                            @if ($pemesanan->sopir)
+                                @if ($pemesanan->sopirs_id == null)
+                                    <input type="text" id="sopirs_id" class="input" autocomplete="off"
+                                        value="Tidak memilih sopir" disabled>
+                                @else
+                                    <input type="text" id="sopirs_id" class="input" autocomplete="off"
+                                        value="{{ $pemesanan->sopir->nama }}" disabled>
+                                @endif
                             @else
                                 <input type="text" id="sopirs_id" class="input" autocomplete="off"
-                                    value="{{ $pemesanan->sopir->nama }}" disabled>
+                                    value="Belum memilih sopir" disabled>
                             @endif
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
                             <label for="jenis">Jenis Kendaraan</label>
-                            <input type="text" id="jenis" class="input" autocomplete="off" disabled
-                                value="{{ $pemesanan->kendaraan->jenis_kendaraan->nama }}">
+                            @if ($pemesanan->kendaraan->jenis_kendaraan)
+                                <input type="text" id="jenis" class="input" autocomplete="off" disabled
+                                    value="{{ $pemesanan->kendaraan->jenis_kendaraan->nama }}">
+                            @else
+                                <input type="text" id="jenis" class="input" autocomplete="off" disabled
+                                    value="Belum memilih jenis kendaraan">
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
                             <label for="brand">Brand Kendaraan</label>
-                            <input type="text" id="brand" class="input" autocomplete="off" disabled
-                                value="{{ $pemesanan->kendaraan->brand_kendaraan->nama }}">
+                            @if ($pemesanan->kendaraan->brand_kendaraan)
+                                <input type="text" id="brand" class="input" autocomplete="off" disabled
+                                    value="{{ $pemesanan->kendaraan->brand_kendaraan->nama }}">
+                            @else
+                                <input type="text" id="brand" class="input" autocomplete="off" disabled
+                                    value="Belum memilih brand kendaraan">
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
                             <label for="seri">Seri Kendaraan</label>
-                            <input type="text" id="seri" class="input" autocomplete="off" disabled
-                                value="{{ $pemesanan->kendaraan->seri_kendaraan->nomor_seri }}">
+                            @if ($pemesanan->kendaraan->seri_kendaraan)
+                                <input type="text" id="seri" class="input" autocomplete="off" disabled
+                                    value="{{ $pemesanan->kendaraan->seri_kendaraan->nomor_seri }}">
+                            @else
+                                <input type="text" id="seri" class="input" autocomplete="off" disabled
+                                    value="Belum memilih seri kendaraan">
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-6 row-button">
                         <div class="input-wrapper">
                             <label for="kendaraans_id">Kendaraan</label>
-                            <input type="text" id="kendaraans_id" class="input" autocomplete="off"
-                                value="{{ $pemesanan->kendaraan->nomor_plat }}" disabled>
+                            @if ($pemesanan->kendaraan)
+                                <input type="text" id="kendaraans_id" class="input" autocomplete="off"
+                                    value="{{ $pemesanan->kendaraan->nomor_plat }}" disabled>
+                            @else
+                                <input type="text" id="kendaraans_id" class="input" autocomplete="off"
+                                    value="Belum memilih kendaraan" disabled>
+                            @endif
                         </div>
                     </div>
                     <div class="col-12 d-none d-md-inline-block">

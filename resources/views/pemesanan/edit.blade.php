@@ -73,9 +73,18 @@
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="pelanggans_id">Pelanggan</label>
-                                <select id="pelanggans_id" class="input" name="pelanggans_id">
-                                    <option value="{{ $pemesanan->pelanggans_id }}">{{ $pemesanan->pelanggan->nama }}
-                                    </option>
+                                <select id="pelanggans_id" class="input" name="pelanggans_id" required>
+                                    @if ($pemesanan->pelanggan)
+                                        <option value="{{ $pemesanan->pelanggans_id }}">{{ $pemesanan->pelanggan->nama }}
+                                        </option>
+                                    @else
+                                        <option value="">Belum memilih pelanggan</option>
+                                        @foreach ($pelanggans as $pelanggan)
+                                            <option value="{{ $pelanggan->id }}"
+                                                {{ old('pelanggans_id') == $pelanggan->id ? 'selected' : '' }}>
+                                                {{ $pelanggan->nama }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                                 @error('pelanggans_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>
@@ -85,24 +94,33 @@
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="sopirs_id">Sopir</label>
-                                <select id="sopirs_id" class="input" name="sopirs_id">
-                                    @if (!$pemesanan->sopirs_id)
+                                <select id="sopirs_id" class="input" name="sopirs_id" required>
+                                    @if ($pemesanan->sopir)
+                                        @if (!$pemesanan->sopirs_id)
+                                            <option value="">Pilih nama sopir</option>
+                                            @foreach ($sopirs as $sopir)
+                                                <option value="{{ $sopir->id }}"
+                                                    {{ old('sopirs_id') == $sopir->id ? 'selected' : '' }}>
+                                                    {{ $sopir->nama }}</option>
+                                            @endforeach
+                                        @elseif($pemesanan->sopir->status == 'tidak ada')
+                                            <option value="">Sopir sudah dipesan silahkan ganti sopir</option>
+                                            @foreach ($sopirs as $sopir)
+                                                <option value="{{ $sopir->id }}">
+                                                    {{ $sopir->nama }}</option>
+                                            @endforeach
+                                        @else
+                                            @foreach ($sopirs as $sopir)
+                                                <option value="{{ $sopir->id }}"
+                                                    {{ $sopir->id == $pemesanan->sopirs_id ? 'selected' : '' }}>
+                                                    {{ $sopir->nama }}</option>
+                                            @endforeach
+                                        @endif
+                                    @else
                                         <option value="">Pilih nama sopir</option>
                                         @foreach ($sopirs as $sopir)
                                             <option value="{{ $sopir->id }}"
                                                 {{ old('sopirs_id') == $sopir->id ? 'selected' : '' }}>
-                                                {{ $sopir->nama }}</option>
-                                        @endforeach
-                                    @elseif($pemesanan->sopir->status == 'tidak ada')
-                                        <option value="">Sopir sudah dipesan silahkan ganti sopir</option>
-                                        @foreach ($sopirs as $sopir)
-                                            <option value="{{ $sopir->id }}">
-                                                {{ $sopir->nama }}</option>
-                                        @endforeach
-                                    @else
-                                        @foreach ($sopirs as $sopir)
-                                            <option value="{{ $sopir->id }}"
-                                                {{ $sopir->id == $pemesanan->sopirs_id ? 'selected' : '' }}>
                                                 {{ $sopir->nama }}</option>
                                         @endforeach
                                     @endif
@@ -116,11 +134,19 @@
                             <div class="input-wrapper">
                                 <label for="jenis_kendaraan">Jenis Kendaraan</label>
                                 <select id="jenis_kendaraan" class="input">
-                                    @foreach ($jenises as $jenis)
-                                        <option value="{{ $jenis->id }}"
-                                            {{ $pemesanan->kendaraan->jenis_kendaraan->id == $jenis->id ? 'selected' : '' }}>
-                                            {{ $jenis->nama }}</option>
-                                    @endforeach
+                                    @if ($pemesanan->kendaraan->jenis_kendaraan)
+                                        @foreach ($jenises as $jenis)
+                                            <option value="{{ $jenis->id }}"
+                                                {{ $pemesanan->kendaraan->jenis_kendaraan->id == $jenis->id ? 'selected' : '' }}>
+                                                {{ $jenis->nama }}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="0">Pilih jenis kendaraan</option>
+                                        @foreach ($jenises as $jenis)
+                                            <option value="{{ $jenis->id }}">
+                                                {{ $jenis->nama }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -128,11 +154,19 @@
                             <div class="input-wrapper">
                                 <label for="brand_kendaraan">Brand Kendaraan</label>
                                 <select id="brand_kendaraan" class="input">
-                                    @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}"
-                                            {{ $pemesanan->kendaraan->brand_kendaraan->id == $brand->id ? 'selected' : '' }}>
-                                            {{ $brand->nama }}</option>
-                                    @endforeach
+                                    @if ($pemesanan->kendaraan->brand_kendaraan)
+                                        @foreach ($brands as $brand)
+                                            <option value="{{ $brand->id }}"
+                                                {{ $pemesanan->kendaraan->brand_kendaraan->id == $brand->id ? 'selected' : '' }}>
+                                                {{ $brand->nama }}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="0">Pilih brand kendaraan</option>
+                                        @foreach ($brands as $brand)
+                                            <option value="{{ $brand->id }}">
+                                                {{ $brand->nama }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -140,11 +174,19 @@
                             <div class="input-wrapper">
                                 <label for="seri_kendaraans_id">Seri Kendaraan</label>
                                 <select id="seri_kendaraans_id" class="input">
-                                    @foreach ($series as $seri)
-                                        <option value="{{ $seri->id }}"
-                                            {{ $pemesanan->kendaraan->seri_kendaraan->id == $seri->id ? 'selected' : '' }}>
-                                            {{ $seri->nomor_seri }}</option>
-                                    @endforeach
+                                    @if ($pemesanan->kendaraan->seri_kendaraan)
+                                        @foreach ($series as $seri)
+                                            <option value="{{ $seri->id }}"
+                                                {{ $pemesanan->kendaraan->seri_kendaraan->id == $seri->id ? 'selected' : '' }}>
+                                                {{ $seri->nomor_seri }}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="0">Pilih seri kendaraan</option>
+                                        @foreach ($series as $seri)
+                                            <option value="{{ $seri->id }}">
+                                                {{ $seri->nomor_seri }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -152,16 +194,25 @@
                             <div class="input-wrapper">
                                 <label for="kendaraans_id">Kendaraan</label>
                                 <select id="kendaraans_id" class="input" name="kendaraans_id" required>
-                                    @if ($pemesanan->kendaraan->status == 'dipesan')
-                                        <option value="">Kendaraan sudah dipesan silahkan ganti kendaraan</option>
+                                    @if ($pemesanan->kendaraan)
+                                        @if ($pemesanan->kendaraan->status == 'dipesan')
+                                            <option value="">Kendaraan sudah dipesan silahkan ganti kendaraan
+                                            </option>
+                                            @foreach ($kendaraans as $kendaraan)
+                                                <option value="{{ $kendaraan->id }}">
+                                                    {{ $kendaraan->nomor_plat }}</option>
+                                            @endforeach
+                                        @else
+                                            @foreach ($kendaraans as $kendaraan)
+                                                <option value="{{ $kendaraan->id }}"
+                                                    {{ $kendaraan->id == $pemesanan->kendaraans_id ? 'selected' : '' }}>
+                                                    {{ $kendaraan->nomor_plat }}</option>
+                                            @endforeach
+                                        @endif
+                                    @else
+                                        <option value="">Pilih kendaraan</option>
                                         @foreach ($kendaraans as $kendaraan)
                                             <option value="{{ $kendaraan->id }}">
-                                                {{ $kendaraan->nomor_plat }}</option>
-                                        @endforeach
-                                    @else
-                                        @foreach ($kendaraans as $kendaraan)
-                                            <option value="{{ $kendaraan->id }}"
-                                                {{ $kendaraan->id == $pemesanan->kendaraans_id ? 'selected' : '' }}>
                                                 {{ $kendaraan->nomor_plat }}</option>
                                         @endforeach
                                     @endif
