@@ -29,10 +29,6 @@
 
 <body>
 
-    {{-- @if (Request::is('laporan/nota*'))
-        @yield('content')
-    @else
-    @endif --}}
     <div class="container-fluid dashboard p-0 d-flex">
         @include('components.sidebar')
 

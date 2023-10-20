@@ -18,6 +18,11 @@
         <div class="row" style="margin-bottom: 32px">
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <h5 class="subtitle">Laporan Data Pemesanan Kendaraan</h5>
+                <a href="{{ route('laporan.pemesanan.print', $laporan->id) }}"
+                    class="button-primary d-flex gap-2 align-items-center">
+                    <div class="export-icon"></div>
+                    Print Pelepasan
+                </a>
             </div>
         </div>
         <form action="{{ route('laporan.pemesanan.update', $laporan->id) }}" method="POST" enctype="multipart/form-data">

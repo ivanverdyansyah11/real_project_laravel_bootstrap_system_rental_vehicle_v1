@@ -221,20 +221,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/laporan/penambahan', 'laporanPenambahan')->name('laporan.penambahan');
         Route::get('/laporan/servis', 'laporanServis')->name('laporan.servis');
         Route::get('/laporan/pajak', 'laporanPajak')->name('laporan.pajak');
-        Route::get('/laporan/nota/{id}', 'nota')->name('laporan.nota');
+        Route::get('/laporan/pemesanan/{id}', 'detailLaporan')->name('laporan.pemesanan.detail');
+        Route::get('/laporan/pemesanan/{id}/print', 'generatePemesanan')->name('laporan.pemesanan.print');
     });
-
-    // Route::controller(GenerateController::class)->group(function () {
-    //     Route::get('/laporan', 'index')->name('laporan');
-    //     Route::get('/laporan/pelanggan', 'laporanPelanggan')->name('laporan.pelanggan');
-    //     Route::get('/laporan/sopir', 'laporanSopir')->name('laporan.sopir');
-    //     Route::get('/laporan/kendaraan', 'laporanKendaraan')->name('laporan.kendaraan');
-    //     Route::get('/laporan/booking', 'laporanBooking')->name('laporan.booking');
-    //     Route::get('/laporan/pemesanan', 'laporanPemesanan')->name('laporan.pemesanan');
-    //     Route::get('/laporan/pengembalian', 'laporanPengembalian')->name('laporan.pengembalian');
-    //     Route::get('/laporan/penambahan', 'laporanPenambahan')->name('laporan.penambahan');
-    //     Route::get('/laporan/servis', 'laporanServis')->name('laporan.servis');
-    //     Route::get('/laporan/pajak', 'laporanPajak')->name('laporan.pajak');
-    //     Route::get('/laporan/nota/{id}', 'nota')->name('laporan.nota');
-    // });
 });

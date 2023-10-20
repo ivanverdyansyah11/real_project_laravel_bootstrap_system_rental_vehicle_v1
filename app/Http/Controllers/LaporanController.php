@@ -14,6 +14,7 @@ use App\Models\Servis;
 use App\Models\Sopir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class LaporanController extends Controller
 {
@@ -167,7 +168,7 @@ class LaporanController extends Controller
         }
     }
 
-    public function nota($id)
+    public function detailLaporan($id)
     {
         $laporan = Laporan::where('id', $id)->with('pengguna')->first();
 
@@ -287,5 +288,24 @@ class LaporanController extends Controller
         } else {
             return redirect(route('laporan.nota', $id))->with('failed', 'Gagal Update Data Laporan Pemesanan!');
         }
+    }
+
+    public function generatePemesanan($id)
+    {
+        $laporan = Laporan::where('id', $id)->with('pengguna')->first();
+        $pemesanan = PelepasanPemesanan::where('id', $laporan->relations_id)
+            ->with('kendaraan', 'pemesanan', 'pembayaran_pemesanan')
+            ->first();
+
+        $data = [
+            'title' => 'Nusa Kendala Sewa Kendaraan',
+            'pemesanan' => $pemesanan,
+            'penambahan' => PenambahanSewa::where('pelepasan_pemesanans_id', $pemesanan->id)
+                ->first(),
+        ];
+
+        $pdf = PDF::loadView('nota.generate-pemesanan', $data);
+
+        return $pdf->download('itsolutionstuff.pdf');
     }
 }

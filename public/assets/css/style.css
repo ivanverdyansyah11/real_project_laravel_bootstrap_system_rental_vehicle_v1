@@ -822,7 +822,8 @@ body {
 .detail-icon,
 .edit-icon,
 .delete-icon,
-.approve-icon {
+.approve-icon,
+.export-icon {
     width: 16px;
     height: 16px;
     background-image: url('../img/button/detail.svg');
@@ -841,6 +842,10 @@ body {
 
 .approve-icon {
     background-image: url('../img/button/approve.svg');
+}
+
+.export-icon {
+    background-image: url('../img/button/export.svg');
 }
 
 .wrapper-search {

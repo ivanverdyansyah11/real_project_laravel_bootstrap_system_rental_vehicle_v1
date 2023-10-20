@@ -61,6 +61,8 @@ class PemesananController extends Controller
             return redirect(route('pemesanan.release', $id))->with('failed', 'Isi Form Input Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
         }
 
+        return $request;
+
         $validatedData = $request->validate([
             'foto_dokumen' => 'required|image',
             'foto_kendaraan' => 'required|image',
