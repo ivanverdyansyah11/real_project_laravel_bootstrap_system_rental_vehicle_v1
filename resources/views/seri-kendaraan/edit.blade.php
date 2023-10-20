@@ -41,7 +41,6 @@
                                 <label for="jenis_kendaraan_edit">Jenis Kendaraan</label>
                                 <select id="jenis_kendaraan_edit" class="input" name="jenis_kendaraans_id" required>
                                     @if ($seri->jenis_kendaraan)
-                                        <option value="">Pilih jenis kendaraan</option>
                                         @foreach ($jenises as $jenis)
                                             <option value="{{ $jenis->id }}"
                                                 {{ $jenis->id == $seri->jenis_kendaraans_id ? 'selected' : '' }}>
@@ -65,7 +64,6 @@
                                 <label for="brand_kendaraan_edit">Brand Kendaraan</label>
                                 <select id="brand_kendaraan_edit" class="input" name="brand_kendaraans_id" required>
                                     @if ($seri->brand_kendaraan)
-                                        <option value="">Pilih brand kendaraan</option>
                                         @foreach ($brands as $brand)
                                             <option value="{{ $brand->id }}"
                                                 {{ $brand->id == $seri->brand_kendaraans_id ? 'selected' : '' }}>

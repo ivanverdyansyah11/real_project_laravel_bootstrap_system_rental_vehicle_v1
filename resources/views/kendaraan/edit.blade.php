@@ -63,11 +63,19 @@
                                     <div class="input-wrapper">
                                         <label for="jenis_kendaraan">Jenis Kendaraan</label>
                                         <select id="jenis_kendaraan" class="input">
-                                            @foreach ($jenises as $jenis)
-                                                <option value="{{ $jenis->id }}"
-                                                    {{ $kendaraan->jenis_kendaraan->id == $jenis->id ? 'selected' : '' }}>
-                                                    {{ $jenis->nama }}</option>
-                                            @endforeach
+                                            @if ($kendaraan->jenis_kendaraan)
+                                                @foreach ($jenises as $jenis)
+                                                    <option value="{{ $jenis->id }}"
+                                                        {{ $kendaraan->jenis_kendaraan->id == $jenis->id ? 'selected' : '' }}>
+                                                        {{ $jenis->nama }}</option>
+                                                @endforeach
+                                            @else
+                                                <option value="0">Pilih jenis kendaraan</option>
+                                                @foreach ($jenises as $jenis)
+                                                    <option value="{{ $jenis->id }}">
+                                                        {{ $jenis->nama }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </div>
                                 </div>
@@ -75,11 +83,19 @@
                                     <div class="input-wrapper">
                                         <label for="brand_kendaraan">Brand Kendaraan</label>
                                         <select id="brand_kendaraan" class="input">
-                                            @foreach ($brands as $brand)
-                                                <option value="{{ $brand->id }}"
-                                                    {{ $kendaraan->brand_kendaraan->id == $brand->id ? 'selected' : '' }}>
-                                                    {{ $brand->nama }}</option>
-                                            @endforeach
+                                            @if ($kendaraan->brand_kendaraan)
+                                                @foreach ($brands as $brand)
+                                                    <option value="{{ $brand->id }}"
+                                                        {{ $kendaraan->brand_kendaraan->id == $brand->id ? 'selected' : '' }}>
+                                                        {{ $brand->nama }}</option>
+                                                @endforeach
+                                            @else
+                                                <option value="0">Pilih brand kendaraan</option>
+                                                @foreach ($brands as $brand)
+                                                    <option value="{{ $brand->id }}">
+                                                        {{ $brand->nama }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </div>
                                 </div>
@@ -87,14 +103,21 @@
                                     <div class="input-wrapper">
                                         <label for="seri_kendaraans_id">Nomor Seri</label>
                                         <select required id="seri_kendaraans_id" class="input" name="seri_kendaraans_id">
-                                            @foreach ($series as $seri)
-                                                @if ($kendaraan->seri_kendaraans_id == $seri->id)
-                                                    <option value="{{ $seri->id }}" selected>{{ $seri->nomor_seri }}
+                                            @if ($kendaraan->seri_kendaraan)
+                                                @foreach ($series as $seri)
+                                                    <option value="{{ $seri->id }}"
+                                                        {{ $kendaraan->seri_kendaraans_id == $seri->id ? 'selected' : '' }}>
+                                                        {{ $seri->nomor_seri }}
                                                     </option>
-                                                @else
-                                                    <option value="{{ $seri->id }}">{{ $seri->nomor_seri }}</option>
-                                                @endif
-                                            @endforeach
+                                                @endforeach
+                                            @else
+                                                <option value="0">Pilih seri kendaraan</option>
+                                                @foreach ($series as $seri)
+                                                    <option value="{{ $seri->id }}">
+                                                        {{ $seri->nomor_seri }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                         @error('seri_kendaraans_id')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -106,14 +129,21 @@
                                         <label for="kilometerData">Kategori Kilometer</label>
                                         <select required id="kilometerData" class="input"
                                             name="kategori_kilometer_kendaraans_id">
-                                            @foreach ($kilometers as $kilometer)
-                                                @if ($kendaraan->kategori_kilometer_kendaraans_id == $kilometer->id)
-                                                    <option value="{{ $kilometer->id }}" selected>{{ $kilometer->jumlah }}
+                                            @if ($kendaraan->kilometer_kendaraan)
+                                                @foreach ($kilometers as $kilometer)
+                                                    <option value="{{ $kilometer->id }}"
+                                                        {{ $kendaraan->kategori_kilometer_kendaraans_id == $kilometer->id ? 'selected' : '' }}>
+                                                        {{ $kilometer->jumlah }}
                                                     </option>
-                                                @else
-                                                    <option value="{{ $kilometer->id }}">{{ $kilometer->jumlah }}</option>
-                                                @endif
-                                            @endforeach
+                                                @endforeach
+                                            @else
+                                                <option value="0">Pilih kategori kilometer kendaraan</option>
+                                                @foreach ($kilometers as $kilometer)
+                                                    <option value="{{ $kilometer->id }}">
+                                                        {{ $kilometer->jumlah }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                         @error('kategori_kilometer_kendaraans_id')
                                             <p class="caption-error mt-2">{{ $message }}</p>
