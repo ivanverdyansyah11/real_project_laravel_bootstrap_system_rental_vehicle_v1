@@ -223,5 +223,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/laporan/pajak', 'laporanPajak')->name('laporan.pajak');
         Route::get('/laporan/pemesanan/{id}', 'detailLaporan')->name('laporan.pemesanan.detail');
         Route::get('/laporan/pemesanan/{id}/print', 'generatePemesanan')->name('laporan.pemesanan.print');
+        Route::get('/laporan/pengembalian/{id}/print', 'generatePengembalian')->name('laporan.pengembalian.print');
     });
 });

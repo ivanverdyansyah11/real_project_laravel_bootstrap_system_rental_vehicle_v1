@@ -251,21 +251,21 @@
                             <div class="input-wrapper">
                                 <label for="waktu_sewa_hari">Total Harian</label>
                                 <input type="number" id="waktu_sewa_hari" class="input" autocomplete="off"
-                                    value="0">
+                                    value="{{ old('total_harian') ?: '0' }}" name="total_harian" required>
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="waktu_sewa_minggu">Total Mingguan</label>
                                 <input type="number" id="waktu_sewa_minggu" class="input" autocomplete="off"
-                                    value="0">
+                                    value="{{ old('total_mingguan') ?: '0' }}" name="total_mingguan" required>
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="waktu_sewa_bulan">Total Bulanan</label>
                                 <input type="number" id="waktu_sewa_bulan" class="input" autocomplete="off"
-                                    value="0">
+                                    value="{{ old('total_bulanan') ?: '0' }}" name="total_bulanan" required>
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">

@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Print Nota Pemesanan & Pembayaran Kendaraan</title>
+    <title>Print Nota Pemesanan & Pengembalian Kendaraan</title>
 </head>
 
 <body>
     <div class="container" style="border: 1px solid #000000; padding: 24px;">
         <h1 style="text-align: center; margin-bottom: 42px;">{{ $title }}</h1>
 
+        <h3 style="margin-bottom: 12px;">Data Pelanggan</h3>
         <table style="border-collapse:collapse;">
             <tbody>
                 <tr>
@@ -43,6 +44,12 @@
                         {{ $pemesanan->pemesanan->pelanggan->nomor_telepon }}
                     </td>
                 </tr>
+            </tbody>
+        </table>
+
+        <h3 style="margin-bottom: 12px; margin-top: 24px;">Data Pemesanan</h3>
+        <table style="border-collapse:collapse;">
+            <tbody>
                 <tr>
                     <td style="border:1px solid black; padding: 5px; width: 200px;">Nomor Plat Kendaraan</td>
                     <td style="border:1px solid black; padding: 5px;">:</td>
@@ -90,14 +97,14 @@
                     <td style="border:1px solid black; padding: 5px; width: 200px;">Biaya Sewa</td>
                     <td style="border:1px solid black; padding: 5px;">:</td>
                     <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">
-                        {{ $pemesanan->pembayaran_pemesanan->total_tarif_sewa ? 'Rp. ' . $pemesanan->pembayaran_pemesanan->total_tarif_sewa : '-' }}
+                        Rp. {{ $pemesanan->pembayaran_pemesanan->total_tarif_sewa }}
                     </td>
                 </tr>
                 <tr>
                     <td style="border:1px solid black; padding: 5px; width: 200px;">Total Bayar Saat Ini</td>
                     <td style="border:1px solid black; padding: 5px;">:</td>
                     <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">
-                        {{ $pemesanan->pembayaran_pemesanan->total_bayar ? 'Rp. ' . $pemesanan->pembayaran_pemesanan->total_bayar : '-' }}
+                        Rp. {{ $pemesanan->pembayaran_pemesanan->total_bayar }}
                     </td>
                 </tr>
                 <tr>
@@ -105,6 +112,54 @@
                     <td style="border:1px solid black; padding: 5px;">:</td>
                     <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">
                         {{ $pemesanan->pembayaran_pemesanan->keterangan ? $pemesanan->pembayaran_pemesanan->keterangan : '-' }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 style="margin-bottom: 12px; margin-top: 24px;">Data Pengembalian</h3>
+        <table style="border-collapse:collapse;">
+            <tbody>
+                <tr>
+                    <td style="border:1px solid black; padding: 5px; width: 200px;">Tanggal Dikembalikan</td>
+                    <td style="border:1px solid black; padding: 5px;">:</td>
+                    <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">
+                        {{ $pengembalian->tanggal_kembali }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black; padding: 5px; width: 200px;">Ketepatan Waktu</td>
+                    <td style="border:1px solid black; padding: 5px;">:</td>
+                    <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">
+                        {{ $pengembalian->ketepatan_waktu ? $pengembalian->ketepatan_waktu : '-' }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black; padding: 5px; width: 200px;">Terlambat</td>
+                    <td style="border:1px solid black; padding: 5px;">:</td>
+                    <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">
+                        {{ $pengembalian->terlambat ? $pengembalian->terlambat . ' jam' : '-' }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black; padding: 5px; width: 200px;">Total Bayar Menyusul</td>
+                    <td style="border:1px solid black; padding: 5px;">:</td>
+                    <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">
+                        {{ $pengembalian->total_bayar ? 'Rp. ' . $pengembalian->total_bayar : '-' }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black; padding: 5px; width: 200px;">Biaya Tambahan</td>
+                    <td style="border:1px solid black; padding: 5px;">:</td>
+                    <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">
+                        {{ $pengembalian->biaya_tambahan ? 'Rp. ' . $pengembalian->biaya_tambahan : '-' }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black; padding: 5px; width: 200px;">Keterangan Lainnya</td>
+                    <td style="border:1px solid black; padding: 5px;">:</td>
+                    <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">
+                        {{ $pengembalian->keterangan ? $pengembalian->keterangan : '-' }}
                     </td>
                 </tr>
             </tbody>

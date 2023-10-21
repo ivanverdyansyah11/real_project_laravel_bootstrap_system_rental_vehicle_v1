@@ -306,6 +306,33 @@ class LaporanController extends Controller
 
         $pdf = PDF::loadView('nota.generate-pemesanan', $data);
 
-        return $pdf->download('itsolutionstuff.pdf');
+        return $pdf->download('laporan-pelepasan-kendaraan.pdf');
+    }
+
+    public function generatePengembalian($id)
+    {
+        $laporan = Laporan::where('id', $id)->with('pengguna')->first();
+        $pemesanan = PelepasanPemesanan::where('id', $laporan->relations_id)
+            ->with('kendaraan', 'pemesanan', 'pembayaran_pemesanan')
+            ->first();
+        $pengembalian = Pengembalian::where('id', $laporan->relations_id)
+            ->with('pelepasan_pemesanan')
+            ->first();
+        $booking = Pemesanan::where('id', $laporan->relations_id)
+            ->with('kendaraan', 'pelanggan')
+            ->first();
+
+        $data = [
+            'title' => 'Nusa Kendala Sewa Kendaraan',
+            'pemesanan' => $pemesanan,
+            'penambahan' => PenambahanSewa::where('pelepasan_pemesanans_id', $pemesanan->id)
+                ->first(),
+            'pengembalian' => $pengembalian,
+            'booking' => $booking,
+        ];
+
+        $pdf = PDF::loadView('nota.generate-transaksi', $data);
+
+        return $pdf->download('laporan-transaksi-pemesanan.pdf');
     }
 }

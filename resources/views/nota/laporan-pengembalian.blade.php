@@ -165,10 +165,11 @@
         <div class="row" style="margin-bottom: 32px">
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <h5 class="subtitle">Laporan Data Pengembalian Kendaraan</h5>
-                <button type="button" class="button-primary d-flex gap-2 align-items-center">
+                <a href="{{ route('laporan.pengembalian.print', $laporan->id) }}"
+                    class="button-primary d-flex gap-2 align-items-center">
                     <div class="export-icon"></div>
-                    Export Pemesanan
-                </button>
+                    Print Pemesanan
+                </a>
             </div>
         </div>
         <div class="row">

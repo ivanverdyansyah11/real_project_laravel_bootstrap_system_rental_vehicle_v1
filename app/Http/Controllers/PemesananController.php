@@ -79,6 +79,9 @@ class PemesananController extends Controller
 
         $validatedDataPembayaran = $request->validate([
             'foto_pembayaran' => 'required|image',
+            'total_harian' => 'required|string',
+            'total_mingguan' => 'required|string',
+            'total_bulanan' => 'required|string',
             'waktu_sewa' => 'required|string',
             'total_tarif_sewa' => 'required|string',
             'jenis_pembayaran' => 'required|string',
@@ -163,6 +166,9 @@ class PemesananController extends Controller
         ]);
 
         $pemesanan = $pemesanan->update([
+            'total_harian' => $validatedDataPembayaran['total_harian'],
+            'total_mingguan' => $validatedDataPembayaran['total_mingguan'],
+            'total_bulanan' => $validatedDataPembayaran['total_bulanan'],
             'tanggal_mulai' => $validatedData['tanggal_diambil'],
             'tanggal_akhir' => $validatedData['tanggal_kembali'],
             'status' => 'selesai booking',
