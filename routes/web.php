@@ -44,12 +44,6 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware(['auth', 'owner'])->group(function () {
-    // KENDARAAN DISEWA
-    Route::controller(PenambahanSewaController::class)->group(function () {
-        Route::get('/penambahan-sewa/tambah-sewa/{id}', 'create')->name('penambahan.rent');
-        Route::post('/penambahan-sewa/tambah-sewa/{id}', 'store')->name('penambahan.store');
-    });
-
     // KENDARAAN
     Route::controller(KendaraanController::class)->group(function () {
         Route::get('/kendaraan', 'index')->name('kendaraan');
@@ -200,6 +194,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/pemesanan/edit/{id}', 'edit')->name('pemesanan.edit');
         Route::post('/pemesanan/edit/{id}', 'update')->name('pemesanan.update');
         Route::post('/pemesanan/hapus/{id}', 'delete')->name('pemesanan.delete');
+    });
+
+    // KENDARAAN DISEWA
+    Route::controller(PenambahanSewaController::class)->group(function () {
+        Route::get('/penambahan-sewa/tambah-sewa/{id}', 'create')->name('penambahan.rent');
+        Route::post('/penambahan-sewa/tambah-sewa/{id}', 'store')->name('penambahan.store');
     });
 
     // PENGEMBALIAN
