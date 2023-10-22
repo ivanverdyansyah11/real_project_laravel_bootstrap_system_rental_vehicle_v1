@@ -73,7 +73,7 @@
                                     <div class="input-wrapper">
                                         <label for="total_tarif_sewa">Total Tarif Sewa</label>
                                         <input type="text" id="total_tarif_sewa" class="input" autocomplete="off"
-                                            value="{{ $pembayaran->total_tarif_sewa }}" disabled>
+                                            value="{{ $pembayaran->total_tarif_sewa }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
@@ -151,9 +151,9 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="total_bayar">Total Bayar</label>
-                                        <input type="number" id="total_bayar" class="input" autocomplete="off"
-                                            name="total_bayar" value="{{ old('total_bayar') }}">
+                                        <label for="total_bayar_saat_ini">Total Bayar</label>
+                                        <input type="number" id="total_bayar_saat_ini" class="input"
+                                            autocomplete="off" name="total_bayar" value="{{ old('total_bayar') }}">
                                         @error('total_bayar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -166,6 +166,16 @@
                                             class="input" autocomplete="off" value="{{ old('kilometer_kembali') }}"
                                             required>
                                         @error('kilometer_kembali')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="total_kembalian">Total Kembalian</label>
+                                        <input type="number" id="total_kembalian" class="input" autocomplete="off"
+                                            name="total_kembalian" value="{{ old('total_kembalian') }}" readonly>
+                                        @error('total_kembalian')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -296,7 +306,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6 row-button">
+                                <div class="col-12 row-button">
                                     <div class="input-wrapper">
                                         <label for="keterangan">Keterangan</label>
                                         <input type="text" id="keterangan" name="keterangan" class="input"
@@ -352,6 +362,26 @@
 
         $("#terlambat").select2({
             theme: "bootstrap-5",
+        });
+
+        const totalTarifSewa = document.querySelector('#total_tarif_sewa');
+        const totalBayar = document.querySelector('#total_bayar');
+        const totalBayarSaatIni = document.querySelector('#total_bayar_saat_ini');
+
+        totalBayarSaatIni.addEventListener('change', function() {
+            let totalTarifSewaValue = parseInt(totalTarifSewa.value)
+            let totalBayarValue = parseInt(totalBayar.value)
+            let totalBayarSaatIniValue = parseInt(totalBayarSaatIni.value) + totalBayarValue
+
+            let totalKembalianValue;
+
+            if (totalTarifSewaValue < totalBayarSaatIniValue) {
+                totalKembalianValue = totalBayarSaatIniValue - totalTarifSewaValue;
+            } else {
+                totalKembalianValue = 0;
+            }
+
+            document.getElementById('total_kembalian').value = totalKembalianValue;
         });
 
         const tagCreateTransaction = document.querySelector('.tag-create-transaction');

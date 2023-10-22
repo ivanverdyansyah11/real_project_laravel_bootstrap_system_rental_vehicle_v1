@@ -72,6 +72,7 @@ class PengembalianController extends Controller
             'foto_pembayaran' => 'required|image',
             'jenis_pembayaran' => 'required|string',
             'total_bayar' => 'nullable|string',
+            'total_kembalian' => 'nullable|string',
             'metode_bayar' => 'nullable|string',
             'tanggal_kembali' => 'required|date',
             'kilometer_kembali' => 'required|string',

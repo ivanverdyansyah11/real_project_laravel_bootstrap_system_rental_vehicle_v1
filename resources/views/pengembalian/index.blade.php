@@ -38,7 +38,8 @@
         <div class="row table-default">
             <div class="col-12 table-row table-header">
                 <div class="row table-data gap-4">
-                    <div class="col data-header">Nama</div>
+                    <div class="col data-header">Kode</div>
+                    <div class="col d-none d-lg-inline-block data-header">Nama</div>
                     <div class="col d-none d-lg-inline-block data-header">Kendaraan</div>
                     <div class="col d-none d-lg-inline-block data-header">Tanggal Mulai</div>
                     <div class="col d-none d-lg-inline-block data-header">Tanggal Akhir</div>
@@ -56,6 +57,9 @@
                     <div class="col-12 table-row table-border">
                         <div class="row table-data gap-4 align-items-center">
                             <div class="col data-value data-length">
+                                {{ $pemesanan->pemesanan->kode_pemesanan }}
+                            </div>
+                            <div class="col data-value data-length data-length-none">
                                 {{ $pemesanan->pemesanan->pelanggan ? $pemesanan->pemesanan->pelanggan->nama : 'Belum memilih pelanggan' }}
                             </div>
                             <div class="col data-value data-length data-length-none">

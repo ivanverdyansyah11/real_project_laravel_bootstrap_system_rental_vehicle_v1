@@ -108,6 +108,13 @@
                     </td>
                 </tr>
                 <tr>
+                    <td style="border:1px solid black; padding: 5px; width: 200px;">Total Kembalian</td>
+                    <td style="border:1px solid black; padding: 5px;">:</td>
+                    <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">
+                        {{ $pemesanan->pembayaran_pemesanan->total_kembalian ? 'Rp. ' . $pemesanan->pembayaran_pemesanan->total_kembalian : '-' }}
+                    </td>
+                </tr>
+                <tr>
                     <td style="border:1px solid black; padding: 5px; width: 200px;">Keterangan Lainnya</td>
                     <td style="border:1px solid black; padding: 5px;">:</td>
                     <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">

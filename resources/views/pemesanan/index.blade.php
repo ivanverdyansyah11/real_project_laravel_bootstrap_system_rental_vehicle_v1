@@ -55,11 +55,12 @@
         <div class="row table-default">
             <div class="col-12 table-row table-header">
                 <div class="row table-data gap-4">
-                    <div class="col data-header">Nama</div>
+                    <div class="col data-header">Kode</div>
+                    <div class="col d-none d-lg-inline-block data-header">Nama</div>
                     <div class="col d-none d-lg-inline-block data-header">Kendaraan</div>
                     <div class="col d-none d-lg-inline-block data-header">Tanggal Mulai</div>
                     <div class="col d-none d-lg-inline-block data-header">Tanggal Akhir</div>
-                    <div class="col d-none d-lg-inline-block data-header">Status Kendaraan</div>
+                    <div class="col d-none d-lg-inline-block data-header">Status</div>
                     <div class="col-3 col-xl-2 data-header"></div>
                 </div>
             </div>
@@ -74,6 +75,8 @@
                     <div class="col-12 table-row table-border">
                         <div class="row table-data gap-4 align-items-center">
                             <div class="col data-value data-length">
+                                {{ $booking->kode_pemesanan }}</div>
+                            <div class="col data-value data-length data-length-none">
                                 {{ $booking->pelanggan ? $booking->pelanggan->nama : 'Belum memilih pelanggan' }}</div>
                             <div class="col data-value data-length data-length-none">
                                 {{ $booking->kendaraan ? $booking->kendaraan->nomor_plat : 'Belum memilih kendaraan' }}
@@ -111,8 +114,8 @@
                                         </a>
                                     @endif
                                     @if (
-                                        $booking->kendaraan->status == 'dipesan' ||
-                                            ($booking->kendaraan->status == 'booking' && $booking->status == 'booking'))
+                                        ($booking->kendaraan->status == 'dipesan' && $booking->status == 'booking') ||
+                                            $booking->kendaraan->status == 'booking')
                                         <button type="button"
                                             class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
                                             data-bs-toggle="modal" data-bs-target="#hapusBookingModal"

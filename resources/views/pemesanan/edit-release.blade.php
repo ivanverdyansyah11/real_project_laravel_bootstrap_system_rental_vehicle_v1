@@ -18,6 +18,11 @@
         <div class="row" style="margin-bottom: 32px">
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <h5 class="subtitle">Edit Pemesanan Kendaraan</h5>
+                <a href="{{ route('laporan.pemesanan.print', $laporan->id) }}"
+                    class="button-primary d-flex gap-2 align-items-center">
+                    <div class="export-icon"></div>
+                    Print Pelepasan
+                </a>
             </div>
         </div>
         <div class="row">
@@ -257,23 +262,23 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="sopirs_id">Penyewaan Sopir</label>
-                                        @if ($pemesanan->sopir)
-                                            <input type="text" id="sopirs_id" class="input" autocomplete="off"
-                                                value="{{ $pemesanan->sopir->nama }}" readonly>
-                                        @else
-                                            <input type="text" id="sopirs_id" class="input" autocomplete="off"
-                                                value="Tidak Memilih Sopir" readonly>
-                                        @endif
+                                        <label for="total_bayar">Total Bayar</label>
+                                        <input type="number" id="total_bayar" class="input" autocomplete="off"
+                                            name="total_bayar"
+                                            value="{{ $pelepasan_pemesanan->pembayaran_pemesanan->total_bayar ? $pelepasan_pemesanan->pembayaran_pemesanan->total_bayar : '' }}">
+                                        @error('total_bayar')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="total_bayar">Total Bayar</label>
-                                        <input type="number" id="total_bayar" class="input" autocomplete="off"
-                                            name="total_bayar"
-                                            value="{{ $pelepasan_pemesanan->pembayaran_pemesanan->total_bayar }}">
-                                        @error('total_bayar')
+                                        <label for="total_kembalian">Total Kembalian</label>
+                                        <input type="number" id="total_kembalian" class="input" autocomplete="off"
+                                            name="total_kembalian"
+                                            value="{{ $pelepasan_pemesanan->pembayaran_pemesanan->total_kembalian }}"
+                                            readonly>
+                                        @error('total_kembalian')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -352,7 +357,19 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12 row-button">
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="sopirs_id">Penyewaan Sopir</label>
+                                        @if ($pemesanan->sopir)
+                                            <input type="text" id="sopirs_id" class="input" autocomplete="off"
+                                                value="{{ $pemesanan->sopir->nama }}" readonly>
+                                        @else
+                                            <input type="text" id="sopirs_id" class="input" autocomplete="off"
+                                                value="Tidak Memilih Sopir" readonly>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6 row-button">
                                     <div class="input-wrapper">
                                         <label for="keterangan">Keterangan</label>
                                         <input type="text" id="keterangan" class="input" autocomplete="off"
@@ -403,6 +420,24 @@
 
         $("#metode_bayar").select2({
             theme: "bootstrap-5",
+        });
+
+        const totalTarifSewa = document.querySelector('#total_tarif_sewa');
+        const totalBayar = document.querySelector('#total_bayar');
+
+        totalBayar.addEventListener('change', function() {
+
+            let totalTarifSewaValue = parseInt(totalTarifSewa.value)
+            let totalBayarValue = parseInt(totalBayar.value)
+            let totalKembalianValue;
+
+            if (totalTarifSewaValue < totalBayarValue) {
+                totalKembalianValue = totalBayarValue - totalTarifSewaValue;
+            } else {
+                totalKembalianValue = 0;
+            }
+
+            document.getElementById('total_kembalian').value = totalKembalianValue;
         });
 
         const tagCreateDocument = document.querySelector('.tag-create-document');
