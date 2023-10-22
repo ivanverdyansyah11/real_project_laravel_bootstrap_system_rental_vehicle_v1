@@ -80,14 +80,15 @@
                             </div>
                             <div class="col data-value data-length data-length-none">{{ $booking->tanggal_mulai }}</div>
                             <div class="col data-value data-length data-length-none">{{ $booking->tanggal_akhir }}</div>
-                            <div
-                                class="col data-value data-length data-length-none {{ $booking->kendaraan->status == 'dipesan' || $booking->kendaraan->status == 'servis' ? 'status-false' : 'status-true' }}">
-                                @if ($booking->kendaraan->status == 'dipesan')
-                                    Sudah Dipesan
-                                @elseif($booking->kendaraan->status == 'servis')
-                                    Diservis
+                            <div class="col data-value data-length data-length-none">
+                                @if ($booking->kendaraan->status == 'dipesan' && $booking->status == 'selesai booking')
+                                    <p class="status-true">Sedang Dipesan</p>
+                                @elseif ($booking->kendaraan->status == 'servis')
+                                    <p class="status-false">Diservis</p>
+                                @elseif($booking->kendaraan->status == 'booking')
+                                    <p class="status-true">Ready</p>
                                 @else
-                                    Ready
+                                    <p class="status-false">Sudah Dipesan</p>
                                 @endif
                             </div>
                             <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
@@ -98,16 +99,27 @@
                                             <div class="approve-icon"></div>
                                         </a>
                                     @endif
-                                    <a href="{{ route('booking.update', $booking->id) }}"
-                                        class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
-                                        <div class="edit-icon"></div>
-                                    </a>
-                                    <button type="button"
-                                        class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
-                                        data-bs-toggle="modal" data-bs-target="#hapusBookingModal"
-                                        data-id="{{ $booking->id }}">
-                                        <div class="delete-icon"></div>
-                                    </button>
+                                    @if ($booking->kendaraan->status == 'dipesan' && $booking->status == 'selesai booking')
+                                        <a href="{{ route('pemesanan.edit', $booking->id) }}"
+                                            class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
+                                            <div class="edit-icon"></div>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('booking.update', $booking->id) }}"
+                                            class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
+                                            <div class="edit-icon"></div>
+                                        </a>
+                                    @endif
+                                    @if (
+                                        $booking->kendaraan->status == 'dipesan' ||
+                                            ($booking->kendaraan->status == 'booking' && $booking->status == 'booking'))
+                                        <button type="button"
+                                            class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
+                                            data-bs-toggle="modal" data-bs-target="#hapusBookingModal"
+                                            data-id="{{ $booking->id }}">
+                                            <div class="delete-icon"></div>
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         </div>

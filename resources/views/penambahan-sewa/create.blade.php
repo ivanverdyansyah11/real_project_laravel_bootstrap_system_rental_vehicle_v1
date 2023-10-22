@@ -22,7 +22,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <form class="form d-inline-block w-100" action="{{ route('penambahan.store', $pemesanan->kendaraan->id) }}"
+                <form class="form d-inline-block w-100" action="{{ route('penambahan.store', $pemesanan->id) }}"
                     method="POST">
                     @csrf
                     <div class="row">
@@ -63,8 +63,11 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="jumlah_hari">Jumlah Hari</label>
-                                        <input type="number" id="jumlah_hari" class="input" autocomplete="off"
-                                            name="jumlah_hari" value="{{ old('jumlah_hari') }}" required>
+                                        <select name="jumlah_hari" id="jumlah_hari" class="input" required>
+                                            <option value="">Pilih jumlah hari</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                        </select>
                                     </div>
                                     @error('jumlah_hari')
                                         <p class="caption-error mt-2">{{ $message }}</p>

@@ -61,7 +61,7 @@
                     <td style="border:1px solid black; padding: 5px; width: 200px;">Lama Sewa</td>
                     <td style="border:1px solid black; padding: 5px;">:</td>
                     <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">
-                        {{ $penambahan ? $pemesanan->pembayaran_pemesanan->waktu_sewa + $penambahan->jumlah_hari : $pemesanan->pembayaran_pemesanan->waktu_sewa }}
+                        {{ $pemesanan->pembayaran_pemesanan->waktu_sewa }}
                         hari
                     </td>
                 </tr>
@@ -69,14 +69,14 @@
                     <td style="border:1px solid black; padding: 5px; width: 200px;">Tanggal Diambil</td>
                     <td style="border:1px solid black; padding: 5px;">:</td>
                     <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">
-                        {{ $pemesanan->tanggal_diambil }}
+                        {{ $pemesanan->pemesanan->tanggal_mulai }}
                     </td>
                 </tr>
                 <tr>
                     <td style="border:1px solid black; padding: 5px; width: 200px;">Tanggal Kembali</td>
                     <td style="border:1px solid black; padding: 5px;">:</td>
                     <td style="border:1px solid black; padding: 5px; width: 410px; text-align: end;">
-                        {{ $pemesanan->tanggal_kembali }}
+                        {{ $pemesanan->pemesanan->tanggal_akhir_awal ? $pemesanan->pemesanan->tanggal_akhir_awal : $pemesanan->pemesanan->tanggal_akhir }}
                     </td>
                 </tr>
                 <tr>

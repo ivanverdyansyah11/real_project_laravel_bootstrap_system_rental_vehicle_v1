@@ -16,7 +16,7 @@ class PenambahanSewaController extends Controller
     {
         return view('penambahan-sewa.create', [
             'title' => 'Kendaraan Disewa',
-            'pemesanan' => PelepasanPemesanan::where('kendaraans_id', $id)->with('kendaraan')->latest()->first(),
+            'pemesanan' => PelepasanPemesanan::where('id', $id)->with('kendaraan')->latest()->first(),
         ]);
     }
 
@@ -28,31 +28,25 @@ class PenambahanSewaController extends Controller
             'keterangan' => 'nullable|string'
         ]);
 
-        $pelepasanPemesanan = PelepasanPemesanan::where('kendaraans_id', $id)->with('kendaraan', 'pemesanan')->latest()->first();
-        $pembayaran = PembayaranPemesanan::where('kendaraans_id', $id)->latest()->first();
+        $pelepasanPemesanan = PelepasanPemesanan::where('id', $id)->with('kendaraan', 'pemesanan')->latest()->first();
+        $pembayaran = PembayaranPemesanan::where('pelepasan_pemesanans_id', $id)->latest()->first();
 
         $validatedData['pelepasan_pemesanans_id'] = $pelepasanPemesanan->id;
-        $validatedData['kendaraans_id'] = $id;
-
-        $tanggal_kembali = Carbon::parse($pelepasanPemesanan->tanggal_kembali);
-        $jumlah_hari = (int)$validatedData['jumlah_hari'];
-        $tanggal_kembali->addDays($jumlah_hari);
+        $validatedData['kendaraans_id'] = $pelepasanPemesanan->kendaraan->id;
 
         $tanggal_akhir = Carbon::parse($pelepasanPemesanan->pemesanan->tanggal_akhir);
+        $jumlah_hari = (int)$validatedData['jumlah_hari'];
         $tanggal_akhir->addDays($jumlah_hari);
 
-        $pelepasanPemesanan = PelepasanPemesanan::where('kendaraans_id', $id)->latest()->first()->update([
-            'tanggal_kembali' => $tanggal_kembali,
-        ]);
-
-        $pemesanan = PelepasanPemesanan::where('kendaraans_id', $id)->with('kendaraan', 'pemesanan')->latest()->first()->pemesanan->update([
-            'tanggal_akhir' => $tanggal_akhir,
+        $pemesanan = PelepasanPemesanan::where('id', $id)->with('kendaraan', 'pemesanan')->latest()->first()->pemesanan->update([
+            'tanggal_akhir' => $pelepasanPemesanan->pemesanan->tanggal_akhir,
+            'tanggal_akhir_awal' => $tanggal_akhir,
         ]);
 
         $waktu_sewa = $pembayaran->waktu_sewa + (int)$validatedData['jumlah_hari'];
         $total_tarif_sewa = $pembayaran->total_tarif_sewa + (int)$validatedData['total_biaya'];
 
-        $pembayaran = PembayaranPemesanan::where('kendaraans_id', $id)->latest()->first()->update([
+        $pembayaran = PembayaranPemesanan::where('pelepasan_pemesanans_id', $id)->latest()->first()->update([
             'waktu_sewa' => $waktu_sewa,
             'total_tarif_sewa' => $total_tarif_sewa,
         ]);

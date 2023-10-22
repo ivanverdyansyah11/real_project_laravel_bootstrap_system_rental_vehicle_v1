@@ -205,7 +205,8 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label>Tanggal Kembali</label>
-                                    <input type="date" class="input" value="{{ $pengembalian->tanggal_kembali }}"
+                                    <input type="date" class="input"
+                                        value="{{ $pengembalian->pelepasan_pemesanan->pemesanan->tanggal_akhir_awal ? $pengembalian->pelepasan_pemesanan->pemesanan->tanggal_akhir_awal : $pengembalian->pelepasan_pemesanan->pemesanan->tanggal_akhir }}"
                                         readonly>
                                 </div>
                             </div>
@@ -247,14 +248,14 @@
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
-                                    <label for="kilometer_kembali">Kilometer Kembali</label>
+                                    <label for="kilometer_kembali">Kilometer Kembali (Km)</label>
                                     <input type="number" id="kilometer_kembali" class="input"
                                         value="{{ $pengembalian->kilometer_kembali }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
-                                    <label for="bensin_kembali">Bensin Kembali</label>
+                                    <label for="bensin_kembali">Bensin Kembali (Liter)</label>
                                     <input type="number" id="bensin_kembali" class="input"
                                         value="{{ $pengembalian->bensin_kembali }}" readonly>
                                 </div>
@@ -270,7 +271,7 @@
                                 <div class="input-wrapper">
                                     <label for="terlambat">Terlambat (Max 3 Jam)</label>
                                     <input type="number" id="terlambat" class="input"
-                                        value="{{ $pengembalian->terlambat }}" readonly>
+                                        value="{{ $pengembalian->terlambat ? $pengembalian->terlambat : '-' }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
@@ -305,14 +306,16 @@
                                 <div class="input-wrapper">
                                     <label for="biaya_tambahan">Biaya Tambahan</label>
                                     <input type="number" id="biaya_tambahan" class="input"
-                                        value="{{ $pengembalian->biaya_tambahan }}" readonly>
+                                        value="{{ $pengembalian->biaya_tambahan ? $pengembalian->biaya_tambahan : '-' }}"
+                                        readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="keterangan">Keterangan</label>
                                     <input type="text" id="keterangan" class="input"
-                                        value="{{ $pengembalian->keterangan }}" readonly>
+                                        value="{{ $pengembalian->keterangan ? $pengembalian->keterangan : '-' }}"
+                                        readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">

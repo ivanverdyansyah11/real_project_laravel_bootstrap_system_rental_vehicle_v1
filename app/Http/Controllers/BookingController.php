@@ -211,6 +211,19 @@ class BookingController extends Controller
 
     function bookingAction(Request $request)
     {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $kodePemesanan = '';
+
+        $kendaraan = Kendaraan::where('id', $request->kendaraans_id)->first();
+        $initialKendaraan = explode(' ', $kendaraan->nomor_plat);
+
+        for ($i = 0; $i <= 10; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $kodePemesanan .= $characters[$index];
+        }
+
+        $kodePemesanan = $initialKendaraan[0] . '-' . $kodePemesanan;
+
         $pelangganCheck = Pemesanan::where('pelanggans_id', $request->pelanggans_id)
             ->where('kendaraans_id', $request->kendaraans_id)
             ->first();
@@ -274,6 +287,7 @@ class BookingController extends Controller
             'tanggal_akhir' => 'required|date',
         ]);
 
+        $validatedData['kode_pemesanan'] = $kodePemesanan;
         $validatedData['status'] = 'booking';
 
         if ($validatedData['sopirs_id'] === '-') {

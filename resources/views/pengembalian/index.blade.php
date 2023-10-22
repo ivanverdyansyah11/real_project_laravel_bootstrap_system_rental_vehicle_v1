@@ -17,49 +17,61 @@
         </div>
         <div class="row mb-4">
             <div class="col-12 d-flex flex-column flex-md-row justify-content-between items-md-center">
-                <form class="form-search d-inline-block" method="POST" action="{{ route('pengembalian.search') }}">
+                <form class="form-search d-flex gap-3 flex-column flex-md-row" method="POST"
+                    action="{{ route('pengembalian.search') }}">
                     @csrf
-                    <div class="wrapper-search">
-                        <input type="text" class="input-search" placeholder=" " name="search">
-                        <label class="d-flex align-items-center">
-                            <img src="{{ asset('assets/img/button/search.svg') }}" alt="Searcing Icon"
-                                class="img-fluid search-icon">
-                            <p>Cari kendaraan..</p>
-                        </label>
+                    <div class="wrapper-searching position-relative">
+                        <p class="mb-2">Tanggal mulai</p>
+                        <input type="date" class="input" name="tanggal_mulai" required
+                            @if (isset($tanggal_mulai)) value="{{ $tanggal_mulai }}" @endif>
                     </div>
+                    <div class="wrapper-searching position-relative">
+                        <p class="mb-2">Tanggal berakhir</p>
+                        <input type="date" class="input" name="tanggal_akhir" required
+                            @if (isset($tanggal_akhir)) value="{{ $tanggal_akhir }}" @endif>
+                    </div>
+                    <button type="submit" class="button-searching-tanggal position-absolute" style="top: -100px;">
+                    </button>
                 </form>
             </div>
         </div>
-        <div class="row">
-            @if ($kendaraans->count() == 0)
-                <div class="col-12 text-center mt-5">
-                    <p style="font-size: 0.913rem;">Tidak Ada Data Kendaraan Dipesan!</p>
+        <div class="row table-default">
+            <div class="col-12 table-row table-header">
+                <div class="row table-data gap-4">
+                    <div class="col data-header">Nama</div>
+                    <div class="col d-none d-lg-inline-block data-header">Kendaraan</div>
+                    <div class="col d-none d-lg-inline-block data-header">Tanggal Mulai</div>
+                    <div class="col d-none d-lg-inline-block data-header">Tanggal Akhir</div>
+                    <div class="col-3 col-xl-2 data-header"></div>
+                </div>
+            </div>
+            @if ($pemesanans->count() == 0)
+                <div class="col-12 table-row table-border">
+                    <div class="row table-data gap-4 align-items-center">
+                        <div class="col data-value data-length">Tidak Ada Data Kendaraan Dipesan!</div>
+                    </div>
                 </div>
             @else
-                @foreach ($kendaraans as $kendaraan)
-                    <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                        <div class="card-product">
-                            <div class="wrapper-img d-flex justify-content-center align-items-center">
-                                <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
-                                    alt="Car Thumbnail Image" class="img-fluid product-img">
+                @foreach ($pemesanans as $pemesanan)
+                    <div class="col-12 table-row table-border">
+                        <div class="row table-data gap-4 align-items-center">
+                            <div class="col data-value data-length">
+                                {{ $pemesanan->pemesanan->pelanggan ? $pemesanan->pemesanan->pelanggan->nama : 'Belum memilih pelanggan' }}
                             </div>
-                            <div class="product-content">
-                                <p class="product-name">{{ $kendaraan->nomor_plat }}</p>
-                                <div class="wrapper-other d-flex align-items-center justify-content-between mb-0 mb-md-3">
-                                    <div class="wrapper-tahun d-flex align-items-center">
-                                        <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
-                                            class="img-fluid kendaraan-icon">
-                                        <p class="product-year">{{ $kendaraan->tahun_pembuatan }}</p>
-                                    </div>
-                                    <h6 class="product-price">Rp. {{ $kendaraan->tarif_sewa_hari }}</h6>
-                                </div>
-                                <div class="wrapper-button d-none d-md-flex flex-column">
-                                    <a href="{{ route('pengembalian.restoration', $kendaraan->id) }}"
-                                        class="button-primary w-100">Pengembalian</a>
-                                    @if (auth()->user()->role == 'admin')
-                                        <a href="{{ route('penambahan.rent', $kendaraan->id) }}"
-                                            class="button-primary-blur w-100">Penambahan Sewa</a>
-                                    @endif
+                            <div class="col data-value data-length data-length-none">
+                                {{ $pemesanan->kendaraan ? $pemesanan->kendaraan->nomor_plat : 'Belum memilih kendaraan' }}
+                            </div>
+                            <div class="col data-value data-length data-length-none">
+                                {{ $pemesanan->pemesanan->tanggal_mulai }}</div>
+                            <div class="col data-value data-length data-length-none">
+                                {{ $pemesanan->pemesanan->tanggal_akhir_awal ? $pemesanan->pemesanan->tanggal_akhir_awal : $pemesanan->pemesanan->tanggal_akhir }}
+                            </div>
+                            <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
+                                <div class="wrapper-action d-flex">
+                                    <a href="{{ route('pengembalian.detail', $pemesanan->id) }}"
+                                        class="button-action button-approve d-flex justify-content-center align-items-center">
+                                        <div class="approve-icon"></div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +80,7 @@
             @endif
         </div>
         <div class="col-12 d-flex justify-content-end mt-4">
-            {{ $kendaraans->links() }}
+            {{ $pemesanans->links() }}
         </div>
     </div>
 @endsection

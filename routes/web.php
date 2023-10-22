@@ -197,6 +197,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/pemesanan/{id}', 'searchBooking')->name('pemesanan.search.booking');
         Route::get('/pemesanan/release/{id}', 'release')->name('pemesanan.release');
         Route::post('/pemesanan/release/{id}', 'releaseAction')->name('pemesanan.release.action');
+        Route::get('/pemesanan/edit/{id}', 'edit')->name('pemesanan.edit');
+        Route::post('/pemesanan/edit/{id}', 'update')->name('pemesanan.update');
         Route::post('/pemesanan/hapus/{id}', 'delete')->name('pemesanan.delete');
     });
 
@@ -204,6 +206,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(PengembalianController::class)->group(function () {
         Route::get('/pengembalian', 'index')->name('pengembalian');
         Route::post('/pengembalian/cari', 'search')->name('pengembalian.search');
+        Route::get('/pengembalian/detail/kendaraan/{id}', 'detail')->name('pengembalian.detail');
         Route::get('/pengembalian/kendaraan/{id}', 'restoration')->name('pengembalian.restoration');
         Route::post('/pengembalian/kendaraan/{id}', 'restorationAction')->name('pengembalian.restoration.action');
     });

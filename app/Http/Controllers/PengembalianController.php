@@ -8,6 +8,7 @@ use App\Models\Laporan;
 use App\Models\Pelanggan;
 use App\Models\PelepasanPemesanan;
 use App\Models\PembayaranPemesanan;
+use App\Models\Pemesanan;
 use App\Models\Pengembalian;
 use App\Models\Sopir;
 use Illuminate\Http\Request;
@@ -18,27 +19,33 @@ class PengembalianController extends Controller
     {
         return view('pengembalian.index', [
             'title' => 'Pengembalian',
-            'kendaraans' => Kendaraan::where('status', 'dipesan')->with('jenis_kendaraan', 'brand_kendaraan')->paginate(6),
+            'pemesanans' => PelepasanPemesanan::whereHas('kendaraan', function ($query) {
+                $query->where('status', 'dipesan');
+            })->with('pemesanan', 'kendaraan')->paginate(6),
         ]);
     }
 
     public function search(Request $request)
     {
-        $kendaraans = Kendaraan::where('status', 'dipesan')
-            ->where('nomor_plat', 'like', '%' . $request->search . '%')
-            ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa_hari', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa_minggu', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa_bulan', 'like', '%' . $request->search . '%')
-            ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
-            ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
-            ->orWhere('warna', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')->paginate(6);
+        $pemesanans = PelepasanPemesanan::whereHas('pemesanan', function ($query) use ($request) {
+            $query->where('tanggal_mulai', '>=', $request->tanggal_mulai)->where('tanggal_akhir', '<=', $request->tanggal_akhir);
+        })->paginate(6);
 
         return view('pengembalian.index', [
+            'title' => 'Pemesanan',
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_akhir' => $request->tanggal_akhir,
+            'pemesanans' => $pemesanans,
+        ]);
+    }
+
+    public function detail($id)
+    {
+        $pemesanan = PelepasanPemesanan::where('id', $id)->with('pemesanan', 'kendaraan')->first();
+
+        return view('pengembalian.detail', [
             'title' => 'Pengembalian',
-            'kendaraans' => $kendaraans,
+            'pemesanan' => $pemesanan,
         ]);
     }
 
@@ -46,8 +53,8 @@ class PengembalianController extends Controller
     {
         return view('pengembalian.restoration', [
             'title' => 'Pengembalian',
-            'pemesanan' => PelepasanPemesanan::where('kendaraans_id', $id)->with('kendaraan')->latest()->first(),
-            'pembayaran' => PembayaranPemesanan::where('kendaraans_id', $id)->latest()->first(),
+            'pemesanan' => PelepasanPemesanan::where('id', $id)->with('pemesanan', 'kendaraan')->latest()->first(),
+            'pembayaran' => PembayaranPemesanan::where('pelepasan_pemesanans_id', $id)->latest()->first(),
         ]);
     }
 
@@ -92,14 +99,6 @@ class PengembalianController extends Controller
             $validatedData['foto_pembayaran'] = $imageName;
         }
 
-        if (is_string($validatedData['kilometer_kembali'])) {
-            $validatedData['kilometer_kembali'] = (int)$validatedData['kilometer_kembali'];
-        }
-
-        if (is_string($validatedData['bensin_kembali'])) {
-            $validatedData['bensin_kembali'] = (int)$validatedData['bensin_kembali'];
-        }
-
         $kategori_kilometer = (int)$pemesanan->kendaraan->kilometer_kendaraan->jumlah;
         $kilometer_sebelumnya = (int)$pemesanan->kendaraan->kilometer;
         $kilometer_saat_ini = $validatedData['kilometer_kembali'];
@@ -134,7 +133,11 @@ class PengembalianController extends Controller
             'kategori_laporan' => 'pengembalian',
         ]);
 
-        if ($pengembalian && $kendaraan && $laporan) {
+        $pemesanan = Pemesanan::where('kendaraans_id', $id)->latest()->first()->update([
+            'status' => 'selesai',
+        ]);
+
+        if ($pengembalian && $pemesanan && $kendaraan && $laporan) {
             return redirect(route('pengembalian'))->with('success', 'Berhasil Melakukan Pengembalian Kendaraan!');
         } else {
             return redirect(route('pengembalian'))->with('failed', 'Gagal Melakukan Pengembalian Kendaraan!');
