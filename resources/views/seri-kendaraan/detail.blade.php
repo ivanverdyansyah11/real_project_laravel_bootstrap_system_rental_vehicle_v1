@@ -34,15 +34,25 @@
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
                                 <label for="jenis_kendaraan_add">Jenis Kendaraan</label>
-                                <input type="text" id="jenis_kendaraan_add" class="input" autocomplete="off"
-                                    value="{{ $seri->jenis_kendaraan->nama }}" disabled>
+                                @if ($seri->jenis_kendaraan)
+                                    <input type="text" id="jenis_kendaraan_add" class="input" autocomplete="off"
+                                        value="{{ $seri->jenis_kendaraan->nama }}" disabled>
+                                @else
+                                    <input type="text" id="jenis_kendaraan_add" class="input" autocomplete="off"
+                                        value="Tidak memilih jenis kendaraan" disabled>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-6 row-button">
                             <div class="input-wrapper">
                                 <label for="brand_kendaraan_add">Brand Kendaraan</label>
-                                <input type="text" id="brand_kendaraan_add" class="input" autocomplete="off"
-                                    value="{{ $seri->brand_kendaraan->nama }}" disabled>
+                                @if ($seri->brand_kendaraan)
+                                    <input type="text" id="brand_kendaraan_add" class="input" autocomplete="off"
+                                        value="{{ $seri->brand_kendaraan->nama }}" disabled>
+                                @else
+                                    <input type="text" id="brand_kendaraan_add" class="input" autocomplete="off"
+                                        value="Tidak memilih brand kendaraan" disabled>
+                                @endif
                             </div>
                         </div>
                         <div class="col-12">

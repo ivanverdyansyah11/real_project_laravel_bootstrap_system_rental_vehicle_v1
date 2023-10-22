@@ -90,11 +90,18 @@
                                         value="{{ $pelanggan->data_ktp }}">
                                 </div>
                             </div>
-                            <div class="col-md-6 row-button">
+                            <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="data_kk">Data KK</label>
                                     <input type="text" id="data_kk" class="input" autocomplete="off" disabled
                                         value="{{ $pelanggan->data_kk }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 row-button">
+                                <div class="input-wrapper">
+                                    <label for="data_nomor_telepon">Data Nomor Telepon</label>
+                                    <input type="text" id="data_nomor_telepon" class="input" autocomplete="off"
+                                        disabled value="{{ $pelanggan->data_nomor_telepon }}">
                                 </div>
                             </div>
                             <div class="col-12">

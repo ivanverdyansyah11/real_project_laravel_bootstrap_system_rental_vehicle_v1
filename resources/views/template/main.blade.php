@@ -29,19 +29,15 @@
 
 <body>
 
-    @if (Request::is('laporan/nota*'))
-        @yield('content')
-    @else
-        <div class="container-fluid dashboard p-0 d-flex">
-            @include('components.sidebar')
+    <div class="container-fluid dashboard p-0 d-flex">
+        @include('components.sidebar')
 
-            <div class="content-dashboard w-100">
-                @include('components.topbar')
+        <div class="content-dashboard w-100">
+            @include('components.topbar')
 
-                @yield('content')
-            </div>
+            @yield('content')
         </div>
-    @endif
+    </div>
 
     {{-- SCRIPT JS --}}
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>

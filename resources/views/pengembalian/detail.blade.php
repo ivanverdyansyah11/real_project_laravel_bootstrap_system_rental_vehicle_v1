@@ -63,7 +63,8 @@
                         <div class="input-wrapper">
                             <label for="total_harian">Total Harian</label>
                             <input type="number" id="total_harian" class="input" autocomplete="off" name="total_harian"
-                                disabled value="{{ $pemesanan->total_harian != 0 ? $pemesanan->total_harian : '0' }}">
+                                disabled
+                                value="{{ $pemesanan->pemesanan->total_harian != 0 ? $pemesanan->pemesanan->total_harian : '0' }}">
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
@@ -71,36 +72,38 @@
                             <label for="total_mingguan">Total Mingguan</label>
                             <input type="number" id="total_mingguan" class="input" autocomplete="off" disabled
                                 name="total_mingguan"
-                                value="{{ $pemesanan->total_mingguan != 0 ? $pemesanan->total_mingguan : '0' }}">
+                                value="{{ $pemesanan->pemesanan->total_mingguan != 0 ? $pemesanan->pemesanan->total_mingguan : '0' }}">
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="input-wrapper">
                             <label for="total_bulanan">Total Bulanan</label>
                             <input type="number" id="total_bulanan" class="input" autocomplete="off" name="total_bulanan"
-                                disabled value="{{ $pemesanan->total_bulanan != 0 ? $pemesanan->total_bulanan : '0' }}">
+                                disabled
+                                value="{{ $pemesanan->pemesanan->total_bulanan != 0 ? $pemesanan->pemesanan->total_bulanan : '0' }}">
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
                             <label for="tanggal_mulai">Tanggal Diambil</label>
                             <input type="date" id="tanggal_mulai" class="input" autocomplete="off"
-                                value="{{ $pemesanan->tanggal_mulai }}" disabled>
+                                value="{{ $pemesanan->pemesanan->tanggal_mulai }}" disabled>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
                             <label for="tanggal_akhir">Tanggal Kembali</label>
                             <input type="date" id="tanggal_akhir" class="input" autocomplete="off"
-                                value="{{ $pemesanan->tanggal_akhir }}" disabled>
+                                value="{{ $pemesanan->pemesanan->tanggal_akhir_awal ? $pemesanan->pemesanan->tanggal_akhir_awal : $pemesanan->pemesanan->tanggal_akhir }}"
+                                disabled>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
                             <label for="pelanggans_id">Pelanggan</label>
-                            @if ($pemesanan->pelanggan)
+                            @if ($pemesanan->pemesanan->pelanggan)
                                 <input type="text" id="pelanggans_id" class="input" autocomplete="off"
-                                    value="{{ $pemesanan->pelanggan->nama }}" disabled>
+                                    value="{{ $pemesanan->pemesanan->pelanggan->nama }}" disabled>
                             @else
                                 <input type="text" id="pelanggans_id" class="input" autocomplete="off"
                                     value="Belum memilih pelanggan" disabled>
@@ -110,13 +113,13 @@
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
                             <label for="sopirs_id">Sopir</label>
-                            @if ($pemesanan->sopir)
-                                @if ($pemesanan->sopirs_id == null)
+                            @if ($pemesanan->pemesanan->sopir)
+                                @if ($pemesanan->pemesanan->sopirs_id == null)
                                     <input type="text" id="sopirs_id" class="input" autocomplete="off"
                                         value="Tidak memilih sopir" disabled>
                                 @else
                                     <input type="text" id="sopirs_id" class="input" autocomplete="off"
-                                        value="{{ $pemesanan->sopir->nama }}" disabled>
+                                        value="{{ $pemesanan->pemesanan->sopir->nama }}" disabled>
                                 @endif
                             @else
                                 <input type="text" id="sopirs_id" class="input" autocomplete="off"
@@ -174,10 +177,14 @@
                     </div>
                     <div class="col-12 d-none d-md-inline-block">
                         <div class="button-wrapper d-flex">
-                            <a href="{{ route('pemesanan.release', $pemesanan->id) }}" class="button-primary">Pesan
-                                Kendaraan</a>
-                            <a href="{{ route('pemesanan') }}" class="button-reverse">Batal
-                                Pesan</a>
+                            <a href="{{ route('pengembalian.restoration', $pemesanan->id) }}"
+                                class="button-primary">Kembalikan Kendaraan</a>
+                            @if (!\App\Models\PenambahanSewa::where('pelepasan_pemesanans_id', $pemesanan->id)->first())
+                                <a href="{{ route('penambahan.rent', $pemesanan->id) }}" class="button-primary">Tambah
+                                    Persewaan</a>
+                            @endif
+                            <a href="{{ route('pengembalian') }}" class="button-reverse">Batal
+                                Kembalikan</a>
                         </div>
                     </div>
                     <div class="col-12">

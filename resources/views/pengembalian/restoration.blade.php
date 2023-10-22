@@ -65,7 +65,8 @@
                                     <div class="input-wrapper">
                                         <label>Tanggal Kembali</label>
                                         <input type="date" class="input" autocomplete="off"
-                                            value="{{ $pemesanan->tanggal_kembali }}" disabled>
+                                            value="{{ $pemesanan->pemesanan->tanggal_akhir_awal ? $pemesanan->pemesanan->tanggal_akhir_awal : $pemesanan->pemesanan->tanggal_akhir }}"
+                                            disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
@@ -160,7 +161,7 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="kilometer_kembali">Kilometer Kembali</label>
+                                        <label for="kilometer_kembali">Kilometer Kembali (Km)</label>
                                         <input type="number" id="kilometer_kembali" name="kilometer_kembali"
                                             class="input" autocomplete="off" value="{{ old('kilometer_kembali') }}"
                                             required>
@@ -171,7 +172,7 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="bensin_kembali">Bensin Kembali</label>
+                                        <label for="bensin_kembali">Bensin Kembali (Liter)</label>
                                         <input type="number" id="bensin_kembali" name="bensin_kembali" class="input"
                                             autocomplete="off" value="{{ old('bensin_kembali') }}" required>
                                         @error('bensin_kembali')
@@ -197,9 +198,16 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="terlambat">Terlambat (Max 3 Jam)</label>
-                                        <input type="number" id="terlambat" name="terlambat" class="input"
-                                            autocomplete="off" value="{{ old('terlambat') }}">
+                                        <label for="terlambat">Terlambat</label>
+                                        <select name="terlambat" id="terlambat" class="input">
+                                            <option value="">Pilih keterlambatan jam</option>
+                                            <option value="1" {{ old('1') == '1' ? 'selected' : '' }}>
+                                                1</option>
+                                            <option value="2" {{ old('2') == '2' ? 'selected' : '' }}>
+                                                2</option>
+                                            <option value="3" {{ old('3') == '3' ? 'selected' : '' }}>
+                                                3</option>
+                                        </select>
                                         @error('terlambat')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -339,6 +347,10 @@
         });
 
         $("#ketepatan_waktu").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#terlambat").select2({
             theme: "bootstrap-5",
         });
 

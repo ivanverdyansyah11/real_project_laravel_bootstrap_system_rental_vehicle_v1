@@ -62,29 +62,49 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="jenis">Jenis Kendaraan</label>
-                                        <input type="text" id="jenis" class="input" autocomplete="off"
-                                            value="{{ $kendaraan->jenis_kendaraan->nama }}" disabled>
+                                        @if ($kendaraan->jenis_kendaraan)
+                                            <input type="text" id="jenis" class="input" autocomplete="off"
+                                                value="{{ $kendaraan->jenis_kendaraan->nama }}" disabled>
+                                        @else
+                                            <input type="text" id="jenis" class="input" autocomplete="off"
+                                                value="Belum memilih jenis kendaraan" disabled>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="brand">Brand Kendaraan</label>
-                                        <input type="text" id="brand" class="input" autocomplete="off"
-                                            value="{{ $kendaraan->brand_kendaraan->nama }}" disabled>
+                                        @if ($kendaraan->brand_kendaraan)
+                                            <input type="text" id="brand" class="input" autocomplete="off"
+                                                value="{{ $kendaraan->brand_kendaraan->nama }}" disabled>
+                                        @else
+                                            <input type="text" id="brand" class="input" autocomplete="off"
+                                                value="Belum memilih brand kendaraan" disabled>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="seri">Nomor Seri</label>
-                                        <input type="text" id="seri" class="input" autocomplete="off"
-                                            value="{{ $kendaraan->seri_kendaraan->nomor_seri }}" disabled>
+                                        @if ($kendaraan->seri_kendaraan)
+                                            <input type="text" id="seri" class="input" autocomplete="off"
+                                                value="{{ $kendaraan->seri_kendaraan->nomor_seri }}" disabled>
+                                        @else
+                                            <input type="text" id="seri" class="input" autocomplete="off"
+                                                value="Belum memilih seri kendaraan" disabled>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="kilometer">Kategori Kilometer</label>
-                                        <input type="text" id="kilometer" class="input" autocomplete="off"
-                                            value="{{ $kendaraan->kilometer_kendaraan->jumlah }}" disabled>
+                                        @if ($kendaraan->kilometer_kendaraan)
+                                            <input type="text" id="kilometer" class="input" autocomplete="off"
+                                                value="{{ $kendaraan->kilometer_kendaraan->jumlah }}" disabled>
+                                        @else
+                                            <input type="text" id="kilometer" class="input" autocomplete="off"
+                                                value="Belum memilih kilometer kendaraan" disabled>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">

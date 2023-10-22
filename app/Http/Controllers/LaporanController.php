@@ -13,6 +13,8 @@ use App\Models\Pengembalian;
 use App\Models\Servis;
 use App\Models\Sopir;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class LaporanController extends Controller
 {
@@ -166,7 +168,7 @@ class LaporanController extends Controller
         }
     }
 
-    public function nota($id)
+    public function detailLaporan($id)
     {
         $laporan = Laporan::where('id', $id)->with('pengguna')->first();
 
@@ -225,5 +227,172 @@ class LaporanController extends Controller
                 'pajak' => Pajak::where('id', $laporan->relations_id)->with('kendaraan')->first(),
             ]);
         }
+    }
+
+    public function updatePemesanan($id, Request $request)
+    {
+        if (is_null($request->foto_dokumen) && is_null($request->foto_kendaraan) && is_null($request->foto_pelanggan) && is_null($request->foto_nota) && is_null($request->foto_nota_ttd)) {
+            return redirect(route('laporan.pemesanan.detail', $id))->with('failed', 'Silahkan input data dengan benar!');
+        }
+
+        $laporan = Laporan::where('id', $id)->first();
+        $pelepasan = PelepasanPemesanan::where('id', $laporan->relations_id)->first();
+
+        $validatedData = $request->validate([
+            'foto_dokumen' => 'nullable|image',
+            'foto_kendaraan' => 'nullable|image',
+            'foto_pelanggan' => 'nullable|image',
+            'foto_nota' => 'nullable|image',
+            'foto_nota_ttd' => 'nullable|image',
+        ]);
+
+        if ($request->file('foto_dokumen')) {
+            $path = "assets/img/pemesanan-dokumen-images/" . $pelepasan->foto_dokumen;
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $image = $request->file('foto_dokumen');
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
+            $image->move(public_path('assets/img/pemesanan-dokumen-images/'), $imageName);
+            $validatedData['foto_dokumen'] = $imageName;
+        } else {
+            if (is_null($pelepasan->foto_dokumen)) {
+                $validatedData['foto_dokumen'] = null;
+            } else {
+                $validatedData['foto_dokumen'] = $pelepasan->foto_dokumen;
+            }
+        }
+
+        if ($request->file('foto_kendaraan')) {
+            $path = "assets/img/pemesanan-kendaraan-images/" . $pelepasan->foto_kendaraan;
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $image = $request->file('foto_kendaraan');
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
+            $image->move(public_path('assets/img/pemesanan-kendaraan-images/'), $imageName);
+            $validatedData['foto_kendaraan'] = $imageName;
+        } else {
+            if (is_null($pelepasan->foto_kendaraan)) {
+                $validatedData['foto_kendaraan'] = null;
+            } else {
+                $validatedData['foto_kendaraan'] = $pelepasan->foto_kendaraan;
+            }
+        }
+
+        if ($request->file('foto_pelanggan')) {
+            $path = "assets/img/pemesanan-pelanggan-images/" . $pelepasan->foto_pelanggan;
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $image = $request->file('foto_pelanggan');
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
+            $image->move(public_path('assets/img/pemesanan-pelanggan-images/'), $imageName);
+            $validatedData['foto_pelanggan'] = $imageName;
+        } else {
+            if (is_null($pelepasan->foto_pelanggan)) {
+                $validatedData['foto_pelanggan'] = null;
+            } else {
+                $validatedData['foto_pelanggan'] = $pelepasan->foto_pelanggan;
+            }
+        }
+
+        if ($request->file('foto_nota')) {
+            $path = "assets/img/nota-images/" . $pelepasan->foto_nota;
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $image = $request->file('foto_nota');
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
+            $image->move(public_path('assets/img/nota-images/'), $imageName);
+            $validatedData['foto_nota'] = $imageName;
+        } else {
+            if (is_null($pelepasan->foto_nota)) {
+                $validatedData['foto_nota'] = null;
+            } else {
+                $validatedData['foto_nota'] = $pelepasan->foto_nota;
+            }
+        }
+
+        if ($request->file('foto_nota_ttd')) {
+            $path = "assets/img/nota-ttd-images/" . $pelepasan->foto_nota_ttd;
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $image = $request->file('foto_nota_ttd');
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
+            $image->move(public_path('assets/img/nota-ttd-images/'), $imageName);
+            $validatedData['foto_nota_ttd'] = $imageName;
+        } else {
+            if (is_null($pelepasan->foto_nota_ttd)) {
+                $validatedData['foto_nota_ttd'] = null;
+            } else {
+                $validatedData['foto_nota_ttd'] = $pelepasan->foto_nota_ttd;
+            }
+        }
+
+        $pelepasan = PelepasanPemesanan::where('id', $laporan->relations_id)->first()->update($validatedData);
+
+        if ($pelepasan) {
+            return redirect(route('laporan.pemesanan.detail', $id))->with('success', 'Berhasil Update Data Laporan Pemesanan!');
+        } else {
+            return redirect(route('laporan.pemesanan.detail', $id))->with('failed', 'Gagal Update Data Laporan Pemesanan!');
+        }
+    }
+
+    public function generatePemesanan($id)
+    {
+        $laporan = Laporan::where('id', $id)->with('pengguna')->first();
+        $pemesanan = PelepasanPemesanan::where('id', $laporan->relations_id)
+            ->with('kendaraan', 'pemesanan', 'pembayaran_pemesanan')
+            ->first();
+
+        $data = [
+            'title' => 'Nusa Kendala Sewa Kendaraan',
+            'pemesanan' => $pemesanan,
+            'penambahan' => PenambahanSewa::where('pelepasan_pemesanans_id', $pemesanan->id)
+                ->first(),
+        ];
+
+        $pdf = PDF::loadView('nota.generate-pemesanan', $data);
+
+        return $pdf->download('laporan-pelepasan-kendaraan.pdf');
+    }
+
+    public function generatePengembalian($id)
+    {
+        $laporan = Laporan::where('id', $id)->with('pengguna')->first();
+        $pemesanan = PelepasanPemesanan::where('id', $laporan->relations_id)
+            ->with('kendaraan', 'pemesanan', 'pembayaran_pemesanan')
+            ->first();
+        $pengembalian = Pengembalian::where('id', $laporan->relations_id)
+            ->with('pelepasan_pemesanan')
+            ->first();
+        $booking = Pemesanan::where('id', $laporan->relations_id)
+            ->with('kendaraan', 'pelanggan')
+            ->first();
+
+        $data = [
+            'title' => 'Nusa Kendala Sewa Kendaraan',
+            'pemesanan' => $pemesanan,
+            'penambahan' => PenambahanSewa::where('pelepasan_pemesanans_id', $pemesanan->id)
+                ->first(),
+            'pengembalian' => $pengembalian,
+            'booking' => $booking,
+        ];
+
+        $pdf = PDF::loadView('nota.generate-transaksi', $data);
+
+        return $pdf->download('laporan-transaksi-pemesanan.pdf');
     }
 }

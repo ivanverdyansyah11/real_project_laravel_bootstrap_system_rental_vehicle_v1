@@ -13,6 +13,7 @@ use App\Models\PembayaranPemesanan;
 use App\Models\Pemesanan;
 use App\Models\Sopir;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 
 class PemesananController extends Controller
 {
@@ -20,7 +21,7 @@ class PemesananController extends Controller
     {
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
-            'bookings' => Pemesanan::where('status', 'booking')->paginate(6),
+            'bookings' => Pemesanan::where('status', '!=', 'selesai')->orderBy('tanggal_mulai', 'ASC')->paginate(6),
         ]);
     }
 
@@ -28,13 +29,13 @@ class PemesananController extends Controller
     {
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
-            'bookings' => Pemesanan::where('status', 'booking')->where('kendaraans_id', $id)->paginate(6),
+            'bookings' => Pemesanan::where('status', '!=', 'selesai')->where('kendaraans_id', $id)->orderBy('tanggal_mulai', 'ASC')->paginate(6),
         ]);
     }
 
     public function search(Request $request)
     {
-        $bookings = Pemesanan::where('tanggal_mulai', '>=', $request->tanggal_mulai)->where('tanggal_akhir', '<=', $request->tanggal_akhir)->paginate(6);
+        $bookings = Pemesanan::where('status', '!=', 'selesai')->where('tanggal_mulai', '>=', $request->tanggal_mulai)->where('tanggal_akhir', '<=', $request->tanggal_akhir)->orderBy('tanggal_mulai', 'ASC')->paginate(6);
 
         return view('pemesanan.index', [
             'title' => 'Pemesanan',
@@ -46,10 +47,24 @@ class PemesananController extends Controller
 
     public function release($id)
     {
+        $pemesanan = Pemesanan::where('id', $id)->first();
+
+        $tanggalMulai = Carbon::parse($pemesanan->tanggal_mulai);
+        $tanggalAkhir = Carbon::parse($pemesanan->tanggal_akhir);
+        $waktuSewa = $tanggalMulai->diffInDays($tanggalAkhir);
+
+        $totalHarian = (int)$pemesanan->total_harian * (int)$pemesanan->kendaraan->tarif_sewa_hari;
+        $totalMingguan = (int)$pemesanan->total_mingguan * (int)$pemesanan->kendaraan->tarif_sewa_minggu;
+        $totalBulanan = (int)$pemesanan->total_bulanan * (int)$pemesanan->kendaraan->tarif_sewa_bulan;
+
+        $totalTarifSewa = $totalHarian + $totalMingguan + $totalBulanan;
+
         return view('pemesanan.release', [
             'title' => 'Pemesanan',
-            'pemesanan' => Pemesanan::where('id', $id)->first(),
+            'pemesanan' => $pemesanan,
             'sopirs' => Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
+            'waktu_sewa' => $waktuSewa,
+            'total_tarif_sewa' => $totalTarifSewa,
         ]);
     }
 
@@ -61,14 +76,13 @@ class PemesananController extends Controller
             return redirect(route('pemesanan.release', $id))->with('failed', 'Isi Form Input Pelepasan & Pembayaran Kendaraan Terlebih Dahulu!');
         }
 
+        if ($request->kondisi_kendaraan == 'rusak berat') {
+            return redirect(route('pemesanan'))->with('failed', 'Kondisi Pada Kendaraan Ini Sedang Rusak Berat Tidak Dapat Digunakan!');
+        }
+
         $validatedData = $request->validate([
-            'foto_dokumen' => 'required|image',
-            'foto_kendaraan' => 'required|image',
-            'foto_pelanggan' => 'required|image',
             'kilometer_keluar' => 'required|string',
             'bensin_keluar' => 'required|string',
-            'tanggal_diambil' => 'required|date',
-            'tanggal_kembali' => 'required|date',
             'sarung_jok' => 'required|string',
             'karpet' => 'required|string',
             'kondisi_kendaraan' => 'required|string',
@@ -85,56 +99,15 @@ class PemesananController extends Controller
             'keterangan' => 'nullable|string',
         ]);
 
-        if (is_string($validatedData['kilometer_keluar'])) {
-            $validatedData['kilometer_keluar'] = (int)$validatedData['kilometer_keluar'];
-        }
-
-        if (is_string($validatedData['bensin_keluar'])) {
-            $validatedData['bensin_keluar'] = (int)$validatedData['bensin_keluar'];
-        }
-
-        $pelanggan = Pelanggan::where('id', $pemesanan->pelanggans_id)->first()->update([
-            'status' => 'tidak ada',
-        ]);
-
         $validatedData['pemesanans_id'] = $pemesanan->id;
         $validatedData['kendaraans_id'] = $pemesanan->kendaraans_id;
 
-
-        if (!empty($validatedData['foto_dokumen'])) {
-            $image = $request->file('foto_dokumen');
-            $imageName = $validatedData['tanggal_diambil'] . '-foto' . '.' . $image->getClientOriginalExtension();;
-            $image->move(public_path('assets/img/pemesanan-dokumen-images/'), $imageName);
-            $validatedData['foto_dokumen'] = $imageName;
-        }
-
-        if (!empty($validatedData['foto_kendaraan'])) {
-            $image = $request->file('foto_kendaraan');
-            $imageName = $pemesanan->kendaraan->nama_kendaraan . '-foto' . '.' . $image->getClientOriginalExtension();;
-            $image->move(public_path('assets/img/pemesanan-kendaraan-images/'), $imageName);
-            $validatedData['foto_kendaraan'] = $imageName;
-        }
-
-        if (!empty($validatedData['foto_pelanggan'])) {
-            $image = $request->file('foto_pelanggan');
-            $imageName = $pemesanan->pelanggan->nama . '-foto' . '.' . $image->getClientOriginalExtension();;
-            $image->move(public_path('assets/img/pemesanan-pelanggan-images/'), $imageName);
-            $validatedData['foto_pelanggan'] = $imageName;
-        }
-
         $validatedDataPembayaran['kendaraans_id'] = $pemesanan->kendaraans_id;
 
-        $pelepasanPemesananID = PelepasanPemesanan::latest()->first();
-        if ($pelepasanPemesananID) {
-            $validatedDataPembayaran['pelepasan_pemesanans_id'] = $pelepasanPemesananID->id + 1;
-        } else {
-            $validatedDataPembayaran['pelepasan_pemesanans_id'] = 1;
-        }
-
-        if ($request->sopirs_id == "-") {
+        if (!$pemesanan->sopirs_id) {
             $validatedDataPembayaran['sopirs_id'] = null;
         } else {
-            $validatedDataPembayaran['sopirs_id'] = $request->sopirs_id;
+            $validatedDataPembayaran['sopirs_id'] = $pemesanan->sopirs_id;
             Sopir::where('id', $validatedDataPembayaran['sopirs_id'])->first()->update([
                 'status' => 'tidak ada',
             ]);
@@ -144,14 +117,18 @@ class PemesananController extends Controller
             $validatedDataPembayaran['metode_bayar'] = null;
         }
 
-        if (!empty($validatedData['foto_pembayaran'])) {
+        if (!empty($validatedDataPembayaran['foto_pembayaran'])) {
             $image = $request->file('foto_pembayaran');
-            $imageName = $pemesanan->pelanggan->nama . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/pembayaran-pemesanan-images/'), $imageName);
-            $validatedData['foto_pembayaran'] = $imageName;
+            $validatedDataPembayaran['foto_pembayaran'] = $imageName;
         }
 
         $pelepasanPemesanan = PelepasanPemesanan::create($validatedData);
+        $pelepasanPemesananID = PelepasanPemesanan::latest()->first();
+
+        $validatedDataPembayaran['pelepasan_pemesanans_id'] = $pelepasanPemesananID->id;
+
         $pembayaranPemesanan = PembayaranPemesanan::create($validatedDataPembayaran);
         $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first()->update([
             'kilometer_saat_ini' => $validatedData['kilometer_keluar'],
@@ -168,10 +145,136 @@ class PemesananController extends Controller
             'status' => 'selesai booking',
         ]);
 
-        if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan && $pelanggan && $laporan && $pemesanan) {
+        if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan && $laporan && $pemesanan) {
             return redirect(route('pemesanan'))->with('success', 'Berhasil Melakukan Pelepasan Kendaraan!');
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Melakukan Pelepasan Kendaraan!');
+        }
+    }
+
+    public function edit($id)
+    {
+        return view('pemesanan.edit-release', [
+            'title' => 'Pemesanan',
+            'pemesanan' => Pemesanan::where('id', $id)->first(),
+            'pelepasan_pemesanan' => PelepasanPemesanan::where('pemesanans_id', $id)->with('pembayaran_pemesanan')->first(),
+        ]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $pemesanan = Pemesanan::where('id', $id)->with('pelanggan', 'kendaraan')->first();
+        $pelepasan_pemesanan = PelepasanPemesanan::where('pemesanans_id', $id)->with('pembayaran_pemesanan')->first();
+        $pembayaran_pemesanan = PembayaranPemesanan::where('pelepasan_pemesanans_id', $pelepasan_pemesanan->id)->first();
+
+        $validatedData = $request->validate([
+            'foto_dokumen' => 'nullable|image',
+            'foto_kendaraan' => 'nullable|image',
+            'foto_pelanggan' => 'nullable|image',
+            'kilometer_keluar' => 'required|string',
+            'bensin_keluar' => 'required|string',
+            'sarung_jok' => 'required|string',
+            'karpet' => 'required|string',
+            'kondisi_kendaraan' => 'required|string',
+            'ban_serep' => 'required|string',
+        ]);
+
+        $validatedDataPembayaran = $request->validate([
+            'waktu_sewa' => 'required|string',
+            'total_tarif_sewa' => 'required|string',
+            'jenis_pembayaran' => 'required|string',
+            'total_bayar' => 'nullable|string',
+            'metode_bayar' => 'nullable|string',
+            'keterangan' => 'nullable|string',
+        ]);
+
+        if ($request->file('foto_dokumen')) {
+            $path = "assets/img/pemesanan-dokumen-images/$pelepasan_pemesanan->foto_dokumen";
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $image = $request->file('foto_dokumen');
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
+            $image->move(public_path('assets/img/pemesanan-dokumen-images/'), $imageName);
+            $validatedData['foto_dokumen'] = $imageName;
+        } else {
+            if ($pelepasan_pemesanan->foto_dokumen) {
+                $validatedData['foto_dokumen'] = $pelepasan_pemesanan->foto_dokumen;
+            } else {
+                $validatedData['foto_dokumen'] = null;
+            }
+        }
+
+        if ($request->file('foto_kendaraan')) {
+            $path = "assets/img/pemesanan-kendaraan-images/$pelepasan_pemesanan->foto_kendaraan";
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $image = $request->file('foto_kendaraan');
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
+            $image->move(public_path('assets/img/pemesanan-kendaraan-images/'), $imageName);
+            $validatedData['foto_kendaraan'] = $imageName;
+        } else {
+            if ($pelepasan_pemesanan->foto_kendaraan) {
+                $validatedData['foto_kendaraan'] = $pelepasan_pemesanan->foto_kendaraan;
+            } else {
+                $validatedData['foto_kendaraan'] = null;
+            }
+        }
+
+        if ($request->file('foto_pelanggan')) {
+            $path = "assets/img/pemesanan-pelanggan-images/$pelepasan_pemesanan->foto_pelanggan";
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $image = $request->file('foto_pelanggan');
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
+            $image->move(public_path('assets/img/pemesanan-pelanggan-images/'), $imageName);
+            $validatedData['foto_pelanggan'] = $imageName;
+        } else {
+            if ($pelepasan_pemesanan->foto_pelanggan) {
+                $validatedData['foto_pelanggan'] = $pelepasan_pemesanan->foto_pelanggan;
+            } else {
+                $validatedData['foto_pelanggan'] = null;
+            }
+        }
+
+        if ($request->metode_bayar == "-") {
+            $validatedDataPembayaran['metode_bayar'] = null;
+        }
+
+        if ($request->file('foto_pembayaran')) {
+            $path = "assets/img/pembayaran-pemesanan-images/$pembayaran_pemesanan->foto_pembayaran";
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $image = $request->file('foto_pembayaran');
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
+            $image->move(public_path('assets/img/pembayaran-pemesanan-images/'), $imageName);
+            $validatedDataPembayaran['foto_pembayaran'] = $imageName;
+        } else {
+            $validatedDataPembayaran['foto_pembayaran'] = $pembayaran_pemesanan->foto_pembayaran;
+        }
+
+        $pembayaran_pemesanan = PembayaranPemesanan::where('pelepasan_pemesanans_id', $pelepasan_pemesanan->id)->first()->update($validatedDataPembayaran);
+        $pelepasan_pemesanan = $pelepasan_pemesanan->update($validatedData);
+
+        $kendaraan = $pemesanan->kendaraan->update([
+            'kilometer_saat_ini' => $validatedData['kilometer_keluar'],
+        ]);
+
+        if ($pelepasan_pemesanan && $pembayaran_pemesanan && $kendaraan) {
+            return redirect(route('pemesanan'))->with('success', 'Berhasil Edit Pelepasan Kendaraan!');
+        } else {
+            return redirect(route('pemesanan'))->with('failed', 'Gagal Edit Pelepasan Kendaraan!');
         }
     }
 }

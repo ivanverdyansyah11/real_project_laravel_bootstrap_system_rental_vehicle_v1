@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BrandKendaraanController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GenerateController;
 use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KategoriKilometerKendaraanController;
 use App\Http\Controllers\KendaraanController;
@@ -43,12 +44,6 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware(['auth', 'owner'])->group(function () {
-    // KENDARAAN DISEWA
-    Route::controller(PenambahanSewaController::class)->group(function () {
-        Route::get('/penambahan-sewa/tambah-sewa/{id}', 'create')->name('penambahan.rent');
-        Route::post('/penambahan-sewa/tambah-sewa/{id}', 'store')->name('penambahan.store');
-    });
-
     // KENDARAAN
     Route::controller(KendaraanController::class)->group(function () {
         Route::get('/kendaraan', 'index')->name('kendaraan');
@@ -174,7 +169,13 @@ Route::middleware('auth')->group(function () {
     // BOOKING
     Route::controller(BookingController::class)->group(function () {
         Route::post('/booking/check', 'check')->name('booking.check');
-        Route::get('/booking/kendaraan-seri/{idSeri}', 'getKendaraanBySeri');
+        Route::get('/booking/get-pelanggan', 'getPelanggan');
+        Route::get('/booking/check-pelanggan/{pelanggans_id}', 'checkPelanggan');
+        Route::get('/booking/check-kendaraan/{tanggal_mulai}/{tanggal_akhir}', 'checkKendaraan');
+        Route::get('/booking/check-sopir/{tanggal_mulai}/{tanggal_akhir}', 'checkSopir');
+        Route::get('/booking/check-seri/{idSeri}/{tanggal_mulai}/{tanggal_akhir}', 'checkSeriKendaraan');
+        Route::get('/booking/get-jenis', 'getJenisKendaraan');
+        Route::get('/booking/get-brand', 'getBrandKendaraan');
         Route::get('/booking/detail/{id}', 'detail')->name('booking.detail');
         Route::get('/booking/tambah/', 'booking')->name('booking.create');
         Route::post('/booking/tambah/', 'bookingAction')->name('booking.create.action');
@@ -190,13 +191,22 @@ Route::middleware('auth')->group(function () {
         Route::get('/pemesanan/{id}', 'searchBooking')->name('pemesanan.search.booking');
         Route::get('/pemesanan/release/{id}', 'release')->name('pemesanan.release');
         Route::post('/pemesanan/release/{id}', 'releaseAction')->name('pemesanan.release.action');
+        Route::get('/pemesanan/edit/{id}', 'edit')->name('pemesanan.edit');
+        Route::post('/pemesanan/edit/{id}', 'update')->name('pemesanan.update');
         Route::post('/pemesanan/hapus/{id}', 'delete')->name('pemesanan.delete');
+    });
+
+    // KENDARAAN DISEWA
+    Route::controller(PenambahanSewaController::class)->group(function () {
+        Route::get('/penambahan-sewa/tambah-sewa/{id}', 'create')->name('penambahan.rent');
+        Route::post('/penambahan-sewa/tambah-sewa/{id}', 'store')->name('penambahan.store');
     });
 
     // PENGEMBALIAN
     Route::controller(PengembalianController::class)->group(function () {
         Route::get('/pengembalian', 'index')->name('pengembalian');
         Route::post('/pengembalian/cari', 'search')->name('pengembalian.search');
+        Route::get('/pengembalian/detail/kendaraan/{id}', 'detail')->name('pengembalian.detail');
         Route::get('/pengembalian/kendaraan/{id}', 'restoration')->name('pengembalian.restoration');
         Route::post('/pengembalian/kendaraan/{id}', 'restorationAction')->name('pengembalian.restoration.action');
     });
@@ -204,15 +214,18 @@ Route::middleware('auth')->group(function () {
     // LAPORAN
     Route::controller(LaporanController::class)->group(function () {
         Route::get('/laporan', 'index')->name('laporan');
-        Route::get('/laporan/1', 'laporanPelanggan')->name('laporan.pelanggan');
-        Route::get('/laporan/2', 'laporanSopir')->name('laporan.sopir');
-        Route::get('/laporan/3', 'laporanKendaraan')->name('laporan.kendaraan');
-        Route::get('/laporan/4', 'laporanBooking')->name('laporan.booking');
-        Route::get('/laporan/5', 'laporanPemesanan')->name('laporan.pemesanan');
-        Route::get('/laporan/6', 'laporanPengembalian')->name('laporan.pengembalian');
-        Route::get('/laporan/7', 'laporanPenambahan')->name('laporan.penambahan');
-        Route::get('/laporan/8', 'laporanServis')->name('laporan.servis');
-        Route::get('/laporan/9', 'laporanPajak')->name('laporan.pajak');
-        Route::get('/laporan/nota/{id}', 'nota')->name('laporan.nota');
+        Route::get('/laporan/pelanggan', 'laporanPelanggan')->name('laporan.pelanggan');
+        Route::get('/laporan/sopir', 'laporanSopir')->name('laporan.sopir');
+        Route::get('/laporan/kendaraan', 'laporanKendaraan')->name('laporan.kendaraan');
+        Route::get('/laporan/booking', 'laporanBooking')->name('laporan.booking');
+        Route::get('/laporan/pemesanan', 'laporanPemesanan')->name('laporan.pemesanan');
+        Route::post('/laporan/pemesanan/{id}', 'updatePemesanan')->name('laporan.pemesanan.update');
+        Route::get('/laporan/pengembalian', 'laporanPengembalian')->name('laporan.pengembalian');
+        Route::get('/laporan/penambahan', 'laporanPenambahan')->name('laporan.penambahan');
+        Route::get('/laporan/servis', 'laporanServis')->name('laporan.servis');
+        Route::get('/laporan/pajak', 'laporanPajak')->name('laporan.pajak');
+        Route::get('/laporan/pemesanan/{id}', 'detailLaporan')->name('laporan.pemesanan.detail');
+        Route::get('/laporan/pemesanan/{id}/print', 'generatePemesanan')->name('laporan.pemesanan.print');
+        Route::get('/laporan/pengembalian/{id}/print', 'generatePengembalian')->name('laporan.pengembalian.print');
     });
 });

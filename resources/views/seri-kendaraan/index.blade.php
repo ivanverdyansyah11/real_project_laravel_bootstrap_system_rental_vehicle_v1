@@ -66,9 +66,11 @@
                     <div class="col-12 table-row table-border">
                         <div class="row table-data gap-4 align-items-center">
                             <div class="col data-value data-length">{{ $seri->nomor_seri }}</div>
-                            <div class="col data-value data-length data-length-none">{{ $seri->jenis_kendaraan->nama }}
+                            <div class="col data-value data-length data-length-none">
+                                {{ $seri->jenis_kendaraan ? $seri->jenis_kendaraan->nama : 'Belum memilih jenis kendaraan' }}
                             </div>
-                            <div class="col data-value data-length data-length-none">{{ $seri->brand_kendaraan->nama }}
+                            <div class="col data-value data-length data-length-none">
+                                {{ $seri->brand_kendaraan ? $seri->brand_kendaraan->nama : 'Belum memilih brand kendaraan' }}
                             </div>
                             <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
                                 <div class="wrapper-action d-flex">

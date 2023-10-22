@@ -22,14 +22,14 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <form class="form d-inline-block w-100" action="{{ route('penambahan.store', $pemesanan->kendaraan->id) }}"
+                <form class="form d-inline-block w-100" action="{{ route('penambahan.store', $pemesanan->id) }}"
                     method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-md-6 mb-5">
                             <div class="input-wrapper">
                                 <div class="wrapper d-flex gap-3 align-items-end">
-                                    <img src="{{ asset('assets/img/kendaraan-images/' . $pemesanan->kendaraan->foto_kendaraan) }}"
+                                    <img src="{{ $pemesanan->kendaraan ? asset('assets/img/kendaraan-images/' . $pemesanan->kendaraan->foto_kendaraan) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-image" alt="Kendaraan Image" width="80">
                                 </div>
                             </div>
@@ -39,22 +39,35 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="nomor_plat">Nomor Plat</label>
-                                        <input type="text" id="nomor_plat" class="input" autocomplete="off" disabled
-                                            value="{{ $pemesanan->kendaraan->nomor_plat }}">
+                                        @if ($pemesanan->kendaraan)
+                                            <input type="text" id="nomor_plat" class="input" autocomplete="off" disabled
+                                                value="{{ $pemesanan->kendaraan->nomor_plat }}">
+                                        @else
+                                            <input type="text" id="nomor_plat" class="input" autocomplete="off" disabled
+                                                value="Belum memilih kendaraan">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="tarifSewa">Tarif Sewa</label>
-                                        <input type="text" id="tarifSewa" class="input" autocomplete="off" disabled
-                                            value="{{ $pemesanan->kendaraan->tarif_sewa_hari }}">
+                                        @if ($pemesanan->kendaraan)
+                                            <input type="text" id="tarifSewa" class="input" autocomplete="off" disabled
+                                                value="{{ $pemesanan->kendaraan->tarif_sewa_hari }}">
+                                        @else
+                                            <input type="text" id="tarifSewa" class="input" autocomplete="off" disabled
+                                                value="Belum memilih kendaraan">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="jumlah_hari">Jumlah Hari</label>
-                                        <input type="number" id="jumlah_hari" class="input" autocomplete="off"
-                                            name="jumlah_hari" value="{{ old('jumlah_hari') }}" required>
+                                        <select name="jumlah_hari" id="jumlah_hari" class="input" required>
+                                            <option value="">Pilih jumlah hari</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                        </select>
                                     </div>
                                     @error('jumlah_hari')
                                         <p class="caption-error mt-2">{{ $message }}</p>

@@ -6,6 +6,7 @@ use App\Models\KelengkapanSopir;
 use App\Models\Laporan;
 use App\Models\Sopir;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class SopirController extends Controller
 {
@@ -72,14 +73,14 @@ class SopirController extends Controller
 
         if (!empty($validatedData['foto_ktp'])) {
             $image = $request->file('foto_ktp');
-            $imageName = $validatedData['nik'] . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/ktp-images/'), $imageName);
             $validatedData['foto_ktp'] = $imageName;
         }
 
         if (!empty($validatedData['foto_sim'])) {
             $image = $request->file('foto_sim');
-            $imageName = $validatedData['nik'] . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/sim-images/'), $imageName);
             $validatedData['foto_sim'] = $imageName;
         }
@@ -146,13 +147,14 @@ class SopirController extends Controller
         }
 
         if ($request->file('foto_ktp')) {
-            if (file_exists(public_path('assets/img/ktp-images/') . $sopir->foto_ktp) && $sopir->foto_ktp) {
-                $oldImagePath = public_path('assets/img/ktp-images/') . $sopir->foto_ktp;
-                unlink($oldImagePath);
+            $path = "assets/img/ktp-images/$sopir->foto_ktp";
+
+            if (File::exists($path)) {
+                File::delete($path);
             }
 
             $image = $request->file('foto_ktp');
-            $imageName = $validatedData['nik'] . '-foto' . '.' . $image->getClientOriginalExtension();
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/ktp-images/'), $imageName);
             $validatedData['foto_ktp'] = $imageName;
         } else {
@@ -160,13 +162,14 @@ class SopirController extends Controller
         }
 
         if ($request->file('foto_sim')) {
-            if (file_exists(public_path('assets/img/ktp-images/') . $sopir->foto_sim) && $sopir->foto_sim) {
-                $oldImagePath = public_path('assets/img/sim-images/') . $sopir->foto_sim;
-                unlink($oldImagePath);
+            $path = "assets/img/sim-images/$sopir->foto_sim";
+
+            if (File::exists($path)) {
+                File::delete($path);
             }
 
             $image = $request->file('foto_sim');
-            $imageName = $validatedData['nik'] . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/sim-images/'), $imageName);
             $validatedData['foto_sim'] = $imageName;
         } else {
@@ -204,14 +207,16 @@ class SopirController extends Controller
     {
         $sopir = Sopir::where('id', $id)->first();
 
-        if (file_exists(public_path('assets/img/ktp-images/') . $sopir->foto_ktp) && $sopir->foto_ktp) {
-            $imagePath = public_path('assets/img/ktp-images/') . $sopir->foto_ktp;
-            unlink($imagePath);
+        $pathKTP = "assets/img/ktp-images/$sopir->foto_ktp";
+
+        if (File::exists($pathKTP)) {
+            File::delete($pathKTP);
         }
 
-        if (file_exists(public_path('assets/img/ktp-images/') . $sopir->foto_sim) && $sopir->foto_sim) {
-            $imagePath = public_path('assets/img/sim-images/') . $sopir->foto_sim;
-            unlink($imagePath);
+        $pathSIM = "assets/img/sim-images/$sopir->foto_sim";
+
+        if (File::exists($pathSIM)) {
+            File::delete($pathSIM);
         }
 
         $sopir = $sopir->delete();

@@ -10,6 +10,7 @@ use App\Models\Laporan;
 use App\Models\Pelanggan;
 use App\Models\SeriKendaraan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class KendaraanController extends Controller
 {
@@ -124,7 +125,7 @@ class KendaraanController extends Controller
 
         if (!empty($validatedData['foto_kendaraan'])) {
             $image = $request->file('foto_kendaraan');
-            $imageName = $validatedData['stnk_nama'] . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/kendaraan-images/'), $imageName);
             $validatedData['foto_kendaraan'] = $imageName;
         }
@@ -186,13 +187,14 @@ class KendaraanController extends Controller
         $validatedData['kilometer_saat_ini'] = $request->kilometer;
 
         if ($request->file('foto_kendaraan')) {
-            if (file_exists(public_path('assets/img/kendaraan-images/') . $kendaraan->foto_kendaraan) && $kendaraan->foto_kendaraan) {
-                $oldImagePath = public_path('assets/img/kendaraan-images/') . $kendaraan->foto_kendaraan;
-                unlink($oldImagePath);
+            $path = "assets/img/kendaraan-images/$kendaraan->foto_kendaraan";
+
+            if (File::exists($path)) {
+                File::delete($path);
             }
 
             $image = $request->file('foto_kendaraan');
-            $imageName = $validatedData['stnk_nama'] . '-foto' . '.' . $image->getClientOriginalExtension();;
+            $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
             $image->move(public_path('assets/img/kendaraan-images/'), $imageName);
             $validatedData['foto_kendaraan'] = $imageName;
         } else {
@@ -215,9 +217,10 @@ class KendaraanController extends Controller
         $laporan = Laporan::where('relations_id', $kendaraan->id)->first();
         $laporan = $laporan->delete();
 
-        if (file_exists(public_path('assets/img/kendaraan-images/') . $kendaraan->foto_kendaraan) && $kendaraan->foto_kendaraan) {
-            $imagePath = public_path('assets/img/kendaraan-images/') . $kendaraan->foto_kendaraan;
-            unlink($imagePath);
+        $path = "assets/img/kendaraan-images/$kendaraan->foto_kendaraan";
+
+        if (File::exists($path)) {
+            File::delete($path);
         }
 
         $kendaraan = $kendaraan->delete();
