@@ -95,6 +95,7 @@ class PemesananController extends Controller
             'total_tarif_sewa' => 'required|string',
             'jenis_pembayaran' => 'required|string',
             'total_bayar' => 'nullable|string',
+            'total_kembalian' => 'nullable|string',
             'metode_bayar' => 'nullable|string',
             'keterangan' => 'nullable|string',
         ]);
@@ -156,6 +157,7 @@ class PemesananController extends Controller
     {
         return view('pemesanan.edit-release', [
             'title' => 'Pemesanan',
+            'laporan' => Laporan::where('relations_id', $id)->where('kategori_laporan', 'pemesanan')->with('pengguna')->first(),
             'pemesanan' => Pemesanan::where('id', $id)->first(),
             'pelepasan_pemesanan' => PelepasanPemesanan::where('pemesanans_id', $id)->with('pembayaran_pemesanan')->first(),
         ]);
@@ -184,6 +186,7 @@ class PemesananController extends Controller
             'total_tarif_sewa' => 'required|string',
             'jenis_pembayaran' => 'required|string',
             'total_bayar' => 'nullable|string',
+            'total_kembalian' => 'nullable|string',
             'metode_bayar' => 'nullable|string',
             'keterangan' => 'nullable|string',
         ]);

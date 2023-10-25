@@ -340,22 +340,20 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="sopirs_id">Penyewaan Sopir</label>
-                                        @if ($pemesanan->sopir)
-                                            <input type="text" id="sopirs_id" class="input" autocomplete="off"
-                                                value="{{ $pemesanan->sopir->nama }}" readonly>
-                                        @else
-                                            <input type="text" id="sopirs_id" class="input" autocomplete="off"
-                                                value="Tidak Memilih Sopir" readonly>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
                                         <label for="total_bayar">Total Bayar</label>
                                         <input type="number" id="total_bayar" class="input" autocomplete="off"
                                             name="total_bayar" value="{{ old('total_bayar') }}">
                                         @error('total_bayar')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="total_kembalian">Total Kembalian</label>
+                                        <input type="text" id="total_kembalian" class="input" autocomplete="off"
+                                            name="total_kembalian" value="{{ old('total_kembalian') }}" readonly>
+                                        @error('total_kembalian')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -424,7 +422,19 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12 row-button">
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="sopirs_id">Penyewaan Sopir</label>
+                                        @if ($pemesanan->sopir)
+                                            <input type="text" id="sopirs_id" class="input" autocomplete="off"
+                                                value="{{ $pemesanan->sopir->nama }}" readonly>
+                                        @else
+                                            <input type="text" id="sopirs_id" class="input" autocomplete="off"
+                                                value="Tidak Memilih Sopir" readonly>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6 row-button">
                                     <div class="input-wrapper">
                                         <label for="keterangan">Keterangan</label>
                                         <input type="text" id="keterangan" class="input" autocomplete="off"
@@ -474,6 +484,24 @@
 
         $("#metode_bayar").select2({
             theme: "bootstrap-5",
+        });
+
+        const totalTarifSewa = document.querySelector('#total_tarif_sewa');
+        const totalBayar = document.querySelector('#total_bayar');
+
+        totalBayar.addEventListener('change', function() {
+
+            let totalTarifSewaValue = parseInt(totalTarifSewa.value)
+            let totalBayarValue = parseInt(totalBayar.value)
+            let totalKembalianValue;
+
+            if (totalTarifSewaValue < totalBayarValue) {
+                totalKembalianValue = totalBayarValue - totalTarifSewaValue;
+            } else {
+                totalKembalianValue = 0;
+            }
+
+            document.getElementById('total_kembalian').value = totalKembalianValue;
         });
 
         const tagCreateTransaction = document.querySelector('.tag-create-transaction');

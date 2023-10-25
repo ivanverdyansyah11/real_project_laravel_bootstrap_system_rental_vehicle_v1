@@ -22,6 +22,7 @@ class CreateAuthsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+        
     }
 
     /**

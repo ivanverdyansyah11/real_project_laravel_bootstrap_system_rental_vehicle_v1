@@ -217,7 +217,7 @@ class BookingController extends Controller
         $kendaraan = Kendaraan::where('id', $request->kendaraans_id)->first();
         $initialKendaraan = explode(' ', $kendaraan->nomor_plat);
 
-        for ($i = 0; $i <= 10; $i++) {
+        for ($i = 0; $i <= 8; $i++) {
             $index = rand(0, strlen($characters) - 1);
             $kodePemesanan .= $characters[$index];
         }
