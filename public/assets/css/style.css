@@ -924,7 +924,6 @@ body {
 .card-product .product-name {
     -webkit-line-clamp: 1;
     overflow: hidden;
-    margin-bottom: 8px;
     display: -webkit-box !important;
     -webkit-box-orient: vertical;
     margin-bottom: var(--rounded-sx) !important;
@@ -939,7 +938,7 @@ body {
     height: 16px;
 }
 
-.card-product .wrapper-tahun .product-year {
+.card-product .product-year {
     color: rgba(var(--dark-color), 0.52);
     font-size: 0.875rem;
 }

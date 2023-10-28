@@ -24,17 +24,25 @@ class KendaraanController extends Controller
 
     public function search(Request $request)
     {
-        $kendaraans = Kendaraan::where('nomor_plat', 'like', '%' . $request->search . '%')
-            ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa_hari', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa_minggu', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa_bulan', 'like', '%' . $request->search . '%')
-            ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
-            ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
-            ->orWhere('warna', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')
-            ->paginate(6);
+        $keyword = $request->search;
+
+        $kendaraans = Kendaraan::where('nomor_plat', 'like', '%' . $keyword . '%')
+            ->orWhere('kilometer_saat_ini', 'like', '%' . $keyword . '%')
+            ->orWhere('tarif_sewa_hari', 'like', '%' . $keyword . '%')
+            ->orWhere('tarif_sewa_minggu', 'like', '%' . $keyword . '%')
+            ->orWhere('tarif_sewa_bulan', 'like', '%' . $keyword . '%')
+            ->orWhere('tahun_pembuatan', 'like', '%' . $keyword . '%')
+            ->orWhere('tanggal_pembelian', 'like', '%' . $keyword . '%')
+            ->orWhere('warna', 'like', '%' . $keyword . '%')
+            ->orWhere('nomor_rangka', 'like', '%' . $keyword . '%')
+            ->orWhere('nomor_mesin', 'like', '%' . $keyword . '%')
+            ->orWhereHas('jenis_kendaraan', function ($query) use ($keyword) {
+                $query->where('nama', 'like', '%' . $keyword . '%');
+            })->orWhereHas('brand_kendaraan', function ($query) use ($keyword) {
+                $query->where('nama', 'like', '%' . $keyword . '%');
+            })->orWhereHas('seri_kendaraan', function ($query) use ($keyword) {
+                $query->where('nomor_seri', 'like', '%' . $keyword . '%');
+            })->paginate(6);
 
         return view('kendaraan.index', [
             'title' => 'Kendaraan',
