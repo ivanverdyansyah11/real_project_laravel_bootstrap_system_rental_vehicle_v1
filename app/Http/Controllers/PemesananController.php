@@ -109,9 +109,9 @@ class PemesananController extends Controller
             $validatedDataPembayaran['sopirs_id'] = null;
         } else {
             $validatedDataPembayaran['sopirs_id'] = $pemesanan->sopirs_id;
-            Sopir::where('id', $validatedDataPembayaran['sopirs_id'])->first()->update([
-                'status' => 'tidak ada',
-            ]);
+            // Sopir::where('id', $validatedDataPembayaran['sopirs_id'])->first()->update([
+            //     'status' => 'tidak ada',
+            // ]);
         }
 
         if ($request->metode_bayar == "-") {

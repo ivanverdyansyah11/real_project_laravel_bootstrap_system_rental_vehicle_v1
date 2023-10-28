@@ -153,7 +153,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6 row-button">
+                            <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="data_nomor_telepon">Data Nomor Telepon</label>
                                     <select name="data_nomor_telepon" class="input" id="data_nomor_telepon" required>
@@ -167,6 +167,20 @@
                                             Benar</option>
                                     </select>
                                     @error('data_nomor_telepon')
+                                        <p class="caption-error mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 row-button">
+                                <div class="input-wrapper">
+                                    <label for="status">Status</label>
+                                    <select name="status" class="input" id="status" required>
+                                        <option value="ada" {{ $sopir->status == 'ada' ? 'selected' : '' }}>
+                                            Aktif</option>
+                                        <option value="tidak ada" {{ $sopir->status == 'tidak ada' ? 'selected' : '' }}>
+                                            Tidak Aktif</option>
+                                    </select>
+                                    @error('status')
                                         <p class="caption-error mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -195,6 +209,10 @@
         });
 
         $("#data_nomor_telepon").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#status").select2({
             theme: "bootstrap-5",
         });
 

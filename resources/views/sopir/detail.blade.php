@@ -97,11 +97,18 @@
                                         value="{{ $sopir->data_sim }}">
                                 </div>
                             </div>
-                            <div class="col-md-6 row-button">
+                            <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="data_nomor_telepon">Data Nomor Telepon</label>
                                     <input type="text" id="data_nomor_telepon" class="input" autocomplete="off"
                                         disabled value="{{ $sopir->data_nomor_telepon }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 row-button">
+                                <div class="input-wrapper">
+                                    <label for="status">Status</label>
+                                    <input type="text" id="status" class="input" autocomplete="off" disabled
+                                        value="{{ $sopir->status == 'ada' ? 'Aktif' : 'Tidak Aktif' }}">
                                 </div>
                             </div>
                             <div class="col-12">
