@@ -138,7 +138,7 @@ class PemesananController extends Controller
         $pembayaranPemesanan = PembayaranPemesanan::create($validatedDataPembayaran);
         $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first()->update([
             'kilometer_saat_ini' => $validatedData['kilometer_keluar'],
-            // 'status' => 'dipesan',
+            'status' => 'dipesan',
         ]);
 
         $laporan = Laporan::create([
@@ -160,19 +160,22 @@ class PemesananController extends Controller
 
     public function edit($id)
     {
-        return Laporan::where('relations_id', $id)->where('kategori_laporan', 'pemesanan')->with('pengguna')->first();
+        $pelepasanPemesanan = PelepasanPemesanan::where('pemesanans_id', $id)->with('pembayaran_pemesanan')->first();
 
         return view('pemesanan.edit-release', [
             'title' => 'Pemesanan',
-            'laporan' => Laporan::where('relations_id', $id)->where('kategori_laporan', 'pemesanan')->with('pengguna')->first(),
+            'laporan' => Laporan::where('relations_id', $pelepasanPemesanan->id)->where('kategori_laporan', 'pemesanan')->with('pengguna')->first(),
             'pemesanan' => Pemesanan::where('id', $id)->first(),
-            'pelepasan_pemesanan' => PelepasanPemesanan::where('pemesanans_id', $id)->with('pembayaran_pemesanan')->first(),
+            'pelepasan_pemesanan' => $pelepasanPemesanan,
         ]);
     }
 
     public function update($id, Request $request)
     {
-        $pemesanan = Pemesanan::where('id', $id)->with('pelanggan', 'kendaraan')->first();
+        if (is_null($request->foto_dokumen) && is_null($request->foto_kendaraan) && is_null($request->foto_pelanggan) && is_null($request->foto_pembayaran)) {
+            return redirect(route('pemesanan.edit', $id))->with('failed', 'Silahkan input data dengan benar!');
+        }
+
         $pelepasan_pemesanan = PelepasanPemesanan::where('pemesanans_id', $id)->with('pembayaran_pemesanan')->first();
         $pembayaran_pemesanan = PembayaranPemesanan::where('pelepasan_pemesanans_id', $pelepasan_pemesanan->id)->first();
 
@@ -180,22 +183,23 @@ class PemesananController extends Controller
             'foto_dokumen' => 'nullable|image',
             'foto_kendaraan' => 'nullable|image',
             'foto_pelanggan' => 'nullable|image',
-            'kilometer_keluar' => 'required|string',
-            'bensin_keluar' => 'required|string',
-            'sarung_jok' => 'required|string',
-            'karpet' => 'required|string',
-            'kondisi_kendaraan' => 'required|string',
-            'ban_serep' => 'required|string',
+            // 'kilometer_keluar' => 'required|string',
+            // 'bensin_keluar' => 'required|string',
+            // 'sarung_jok' => 'required|string',
+            // 'karpet' => 'required|string',
+            // 'kondisi_kendaraan' => 'required|string',
+            // 'ban_serep' => 'required|string',
         ]);
 
         $validatedDataPembayaran = $request->validate([
-            'waktu_sewa' => 'required|string',
-            'total_tarif_sewa' => 'required|string',
-            'jenis_pembayaran' => 'required|string',
-            'total_bayar' => 'nullable|string',
-            'total_kembalian' => 'nullable|string',
-            'metode_bayar' => 'nullable|string',
-            'keterangan' => 'nullable|string',
+            'foto_pembayaran' => 'nullable|image',
+            // 'waktu_sewa' => 'required|string',
+            // 'total_tarif_sewa' => 'required|string',
+            // 'jenis_pembayaran' => 'required|string',
+            // 'total_bayar' => 'nullable|string',
+            // 'total_kembalian' => 'nullable|string',
+            // 'metode_bayar' => 'nullable|string',
+            // 'keterangan' => 'nullable|string',
         ]);
 
         if ($request->file('foto_dokumen')) {
@@ -255,10 +259,6 @@ class PemesananController extends Controller
             }
         }
 
-        if ($request->metode_bayar == "-") {
-            $validatedDataPembayaran['metode_bayar'] = null;
-        }
-
         if ($request->file('foto_pembayaran')) {
             $path = "assets/img/pembayaran-pemesanan-images/$pembayaran_pemesanan->foto_pembayaran";
 
@@ -277,11 +277,7 @@ class PemesananController extends Controller
         $pembayaran_pemesanan = PembayaranPemesanan::where('pelepasan_pemesanans_id', $pelepasan_pemesanan->id)->first()->update($validatedDataPembayaran);
         $pelepasan_pemesanan = $pelepasan_pemesanan->update($validatedData);
 
-        $kendaraan = $pemesanan->kendaraan->update([
-            'kilometer_saat_ini' => $validatedData['kilometer_keluar'],
-        ]);
-
-        if ($pelepasan_pemesanan && $pembayaran_pemesanan && $kendaraan) {
+        if ($pelepasan_pemesanan && $pembayaran_pemesanan) {
             return redirect(route('pemesanan'))->with('success', 'Berhasil Edit Pelepasan Kendaraan!');
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Edit Pelepasan Kendaraan!');
