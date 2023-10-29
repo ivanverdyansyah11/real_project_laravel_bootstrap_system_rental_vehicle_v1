@@ -976,6 +976,19 @@ body {
     z-index: -9999;
 }
 
+.modal-other.modal-big {
+    width: 300px;
+    padding: 24px;
+    border-radius: var(--rounded-lg);
+    border: var(--border-style);
+    background-color: rgba(var(--light-color), 1);
+    position: absolute;
+    top: 32px;
+    right: 0;
+    opacity: 0;
+    z-index: -9999;
+}
+
 .modal-other.active {
     top: 52px;
     opacity: 1;

@@ -446,7 +446,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="button-wrapper d-flex">
-                                        <button type="submit" class="button-primary">Simpan Pembayaran</button>
+                                        <button type="submit" class="button-primary">Pemesanan Kendaraan</button>
                                         <a href="{{ route('pemesanan') }}" class="button-reverse">Batal
                                             Pemesanan</a>
                                     </div>
