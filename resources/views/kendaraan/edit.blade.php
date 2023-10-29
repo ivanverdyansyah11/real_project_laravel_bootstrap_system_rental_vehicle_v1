@@ -237,12 +237,30 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6 row-button">
+                                <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="nomor_mesin">Nomor Mesin</label>
                                         <input type="text" required id="nomor_mesin" class="input"
                                             autocomplete="off" value="{{ $kendaraan->nomor_mesin }}" name="nomor_mesin">
                                         @error('nomor_mesin')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 row-button">
+                                    <div class="input-wrapper">
+                                        <label for="status">Status</label>
+                                        <select required id="status" class="input text-capitalize" name="status">
+                                            <option value="ready" {{ $kendaraan->status == 'ready' ? 'selected' : '' }}>
+                                                ready</option>
+                                            <option value="booking"
+                                                {{ $kendaraan->status == 'booking' ? 'selected' : '' }}>booking</option>
+                                            <option value="dipesan"
+                                                {{ $kendaraan->status == 'dipesan' ? 'selected' : '' }}>dipesan</option>
+                                            <option value="servis" {{ $kendaraan->status == 'servis' ? 'selected' : '' }}>
+                                                servis</option>
+                                        </select>
+                                        @error('status')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -264,6 +282,10 @@
 
     <script>
         $("#kilometerData").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#status").select2({
             theme: "bootstrap-5",
         });
 

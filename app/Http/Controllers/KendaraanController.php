@@ -226,6 +226,7 @@ class KendaraanController extends Controller
             'warna' => 'required|string|max:255',
             'nomor_rangka' => 'required|string|max:255',
             'nomor_mesin' => 'required|string|max:255',
+            'status' => 'required|string',
         ]);
 
         $validatedData['jenis_kendaraans_id'] = $jenis_kendaraans_id;

@@ -130,10 +130,15 @@ class PemesananController extends Controller
 
         $validatedDataPembayaran['pelepasan_pemesanans_id'] = $pelepasanPemesananID->id;
 
+
+        if ($validatedDataPembayaran['total_tarif_sewa'] < $validatedDataPembayaran['total_bayar']) {
+            $validatedDataPembayaran['total_bayar'] = $validatedDataPembayaran['total_bayar'] - $validatedDataPembayaran['total_kembalian'];
+        }
+
         $pembayaranPemesanan = PembayaranPemesanan::create($validatedDataPembayaran);
         $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first()->update([
             'kilometer_saat_ini' => $validatedData['kilometer_keluar'],
-            'status' => 'dipesan',
+            // 'status' => 'dipesan',
         ]);
 
         $laporan = Laporan::create([
@@ -155,6 +160,8 @@ class PemesananController extends Controller
 
     public function edit($id)
     {
+        return Laporan::where('relations_id', $id)->where('kategori_laporan', 'pemesanan')->with('pengguna')->first();
+
         return view('pemesanan.edit-release', [
             'title' => 'Pemesanan',
             'laporan' => Laporan::where('relations_id', $id)->where('kategori_laporan', 'pemesanan')->with('pengguna')->first(),
