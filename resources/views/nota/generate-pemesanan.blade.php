@@ -60,13 +60,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="padding: 3px; width: 300px;">Tarif Mobil</td>
-                    <td style="padding: 3px; width: 10px;">:</td>
-                    <td style="padding: 3px; width: 300px; text-align: end;">
-                        {{ $pemesanan->kendaraan ? 'Rp. ' . $pemesanan->kendaraan->tarif_sewa_hari : '-' }}
-                    </td>
-                </tr>
-                <tr>
                     <td style="padding: 3px; width: 300px;">Waktu Sewa</td>
                     <td style="padding: 3px; width: 10px;">:</td>
                     <td style="padding: 3px; width: 300px; text-align: end;">
@@ -78,7 +71,7 @@
                     <td style="padding: 3px; width: 300px;">Total</td>
                     <td style="padding: 3px; width: 10px;">:</td>
                     <td style="padding: 3px; width: 300px; text-align: end;">
-                        {{ $pemesanan->pembayaran_pemesanan ? 'Rp. ' . $pemesanan->pembayaran_pemesanan->total_tarif_sewa : '-' }}
+                        {{ $pemesanan->pembayaran_pemesanan ? 'Rp. ' . $pemesanan->pembayaran_pemesanan->total_tarif_sewa : 'Rp. 0' }}
                     </td>
                 </tr>
             </tbody>
