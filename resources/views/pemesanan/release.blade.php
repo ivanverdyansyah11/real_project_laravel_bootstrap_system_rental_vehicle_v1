@@ -490,7 +490,6 @@
         const totalBayar = document.querySelector('#total_bayar');
 
         totalBayar.addEventListener('change', function() {
-
             let totalTarifSewaValue = parseInt(totalTarifSewa.value)
             let totalBayarValue = parseInt(totalBayar.value)
             let totalKembalianValue;

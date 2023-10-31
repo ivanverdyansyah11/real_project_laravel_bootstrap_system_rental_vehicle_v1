@@ -116,6 +116,50 @@ class BookingController extends Controller
 
     function checkKendaraan($tanggalMulai, $tanggalAkhir)
     {
+        // $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
+        // $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
+
+        // $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking', 'dipesan'])
+        //     ->pluck('id')
+        //     ->toArray();
+
+        // $kendaraanSelected = Pemesanan::where('tanggal_mulai', '<=', $tanggalMulai)
+        //     ->where('tanggal_akhir', '>=', $tanggalAkhir)
+        //     ->pluck('kendaraans_id')
+        //     ->toArray();
+
+        // if (!$kendaraanSelected) {
+        //     $kendaraanSelected = Pemesanan::whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
+        //         ->pluck('kendaraans_id')
+        //         ->toArray();
+
+        //     if (!$kendaraanSelected) {
+        //         $kendaraanSelected = Pemesanan::whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
+        //             ->pluck('kendaraans_id')
+        //             ->toArray();
+        //     }
+        // }
+
+        // return response()->json([$kendaraan, $kendaraanSelected]);
+
+        // if ($kendaraanSelected) {
+        //     if (count($kendaraan) === count($kendaraanSelected)) {
+        //         if ($kendaraan === $kendaraanSelected) {
+        //             $result = array_diff($kendaraan, $kendaraanSelected);
+        //         } else {
+        //             $result = $kendaraanSelected;
+        //         }
+        //     } else {
+        //         $result = array_diff($kendaraan, $kendaraanSelected);
+        //     }
+        // } else {
+        //     $result = $kendaraan;
+        // }
+
+        // $kendaraanResult = Kendaraan::whereIn('id', $result)->get();
+
+        // return response()->json($kendaraanResult);
+
         $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
         $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
 
@@ -123,18 +167,21 @@ class BookingController extends Controller
             ->pluck('id')
             ->toArray();
 
-        $kendaraanSelected = Pemesanan::where('tanggal_mulai', '<=', $tanggalMulai)
+        $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+            ->where('tanggal_mulai', '<=', $tanggalMulai)
             ->where('tanggal_akhir', '>=', $tanggalAkhir)
             ->pluck('kendaraans_id')
             ->toArray();
 
         if (!$kendaraanSelected) {
-            $kendaraanSelected = Pemesanan::whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
+            $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                ->whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
                 ->pluck('kendaraans_id')
                 ->toArray();
 
             if (!$kendaraanSelected) {
-                $kendaraanSelected = Pemesanan::whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
+                $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                    ->whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
                     ->pluck('kendaraans_id')
                     ->toArray();
             }
@@ -153,6 +200,56 @@ class BookingController extends Controller
 
     function checkSopir($tanggalMulai, $tanggalAkhir)
     {
+        // $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
+        // $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
+
+        // $sopir = Sopir::where('status', 'ada')
+        //     ->where('kelengkapan_ktp', 'lengkap')
+        //     ->where('kelengkapan_sim', 'lengkap')
+        //     ->where('kelengkapan_nomor_telepon', 'lengkap')
+        //     ->pluck('id')
+        //     ->toArray();
+
+        // $sopirSelected = Pemesanan::where('tanggal_mulai', '<=', $tanggalMulai)
+        //     ->where('tanggal_akhir', '>=', $tanggalAkhir)
+        //     ->pluck('sopirs_id')
+        //     ->toArray();
+
+        // if (!$sopirSelected) {
+        //     $sopirSelected = Pemesanan::whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
+        //         ->pluck('sopirs_id')
+        //         ->toArray();
+
+        //     if (!$sopirSelected) {
+        //         $sopirSelected = Pemesanan::whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
+        //             ->pluck('sopirs_id')
+        //             ->toArray();
+        //     }
+        // }
+
+        // if ($sopirSelected) {
+        //     if (count($sopir) === count($sopirSelected)) {
+        //         if ($sopir === $sopirSelected) {
+        //             $result = array_diff($sopir, $sopirSelected);
+        //         } else {
+        //             $result = $sopirSelected;
+        //         }
+        //     } else {
+        //         $result = array_diff($sopir, $sopirSelected);
+        //     }
+        // } else {
+        //     $result = $sopir;
+        // }
+
+        // $sopirResult = Sopir::whereIn('id', $result)
+        //     ->where('status', 'ada')
+        //     ->where('kelengkapan_ktp', 'lengkap')
+        //     ->where('kelengkapan_sim', 'lengkap')
+        //     ->where('kelengkapan_nomor_telepon', 'lengkap')
+        //     ->get();
+
+        // return response()->json($sopirResult);
+
         $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
         $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
 
@@ -163,18 +260,21 @@ class BookingController extends Controller
             ->pluck('id')
             ->toArray();
 
-        $sopirSelected = Pemesanan::where('tanggal_mulai', '<=', $tanggalMulai)
+        $sopirSelected = Pemesanan::whereNotIn('status', ['selesai'])
+            ->where('tanggal_mulai', '<=', $tanggalMulai)
             ->where('tanggal_akhir', '>=', $tanggalAkhir)
             ->pluck('sopirs_id')
             ->toArray();
 
         if (!$sopirSelected) {
-            $sopirSelected = Pemesanan::whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
+            $sopirSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                ->whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
                 ->pluck('sopirs_id')
                 ->toArray();
 
             if (!$sopirSelected) {
-                $sopirSelected = Pemesanan::whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
+                $sopirSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                    ->whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
                     ->pluck('sopirs_id')
                     ->toArray();
             }

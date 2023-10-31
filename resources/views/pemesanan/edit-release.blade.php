@@ -202,6 +202,7 @@
                                     <div class="input-wrapper">
                                         <label for="total_bayar">Total Bayar</label>
                                         <input type="number" id="total_bayar" class="input" autocomplete="off"
+                                            readonly
                                             value="{{ $pelepasan_pemesanan->pembayaran_pemesanan->total_bayar ? $pelepasan_pemesanan->pembayaran_pemesanan->total_bayar : '' }}">
                                     </div>
                                 </div>

@@ -41,11 +41,11 @@ class PengembalianController extends Controller
 
     public function detail($id)
     {
-        $pemesanan = PelepasanPemesanan::where('id', $id)->with('pemesanan', 'kendaraan')->first();
+        $pelepasan_pemesanan = PelepasanPemesanan::where('id', $id)->with('pemesanan', 'kendaraan')->first();
 
         return view('pengembalian.detail', [
             'title' => 'Pengembalian',
-            'pemesanan' => $pemesanan,
+            'pelepasan_pemesanan' => $pelepasan_pemesanan,
         ]);
     }
 
