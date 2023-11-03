@@ -32,8 +32,8 @@
                                     <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-ktp" alt="KTP Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-ktp" name="foto_ktp"
-                                            style="opacity: 0;">
+                                        <input type="file" accept=".png,.jpg,.jpeg" id="image"
+                                            class="input-create-ktp" name="foto_ktp" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-ktp">Pilih Foto
                                             KTP</button>
                                     </div>
@@ -49,8 +49,8 @@
                                     <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-kk" alt="KK Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-kk" name="foto_kk"
-                                            style="opacity: 0;">
+                                        <input type="file" accept=".png,.jpg,.jpeg" id="image"
+                                            class="input-create-kk" name="foto_kk" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-kk">Pilih Foto
                                             KK</button>
                                     </div>
