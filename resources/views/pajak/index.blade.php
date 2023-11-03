@@ -44,11 +44,18 @@
                                     alt="Car Thumbnail Image" class="img-fluid product-img">
                             </div>
                             <div class="product-content">
-                                <p class="product-name">{{ $kendaraan->nomor_plat }}</p>
-                                <div class="wrapper-other d-flex align-items-center justify-content-between mb-0 mb-md-3">
+                                <div class="wrapper d-flex align-items-center justify-content-between">
+                                    <p class="product-name">
+                                        {{ $kendaraan->brand_kendaraan->nama . ', ' . $kendaraan->nomor_plat }}</p>
+                                    <h6 class="product-price mb-0">Rp. {{ $kendaraan->tarif_sewa_hari }}</h6>
+                                </div>
+                                <div class="wrapper-other d-flex align-items-center justify-content-between mt-1">
                                     <div class="wrapper-tahun d-flex align-items-center">
-                                        <p class="product-year">No. Seri: {{ $kendaraan->seri_kendaraan->nomor_seri }}</p>
+                                        <img src="{{ asset('assets/img/button/kendaraan.svg') }}" alt="Kendaraan Icon"
+                                            class="img-fluid kendaraan-icon">
+                                        <p class="product-year">{{ $kendaraan->jenis_kendaraan->nama }}</p>
                                     </div>
+                                    <h6 class="product-year mb-0">{{ $kendaraan->seri_kendaraan->nomor_seri }}</h6>
                                 </div>
                                 <div class="wrapper-button d-none d-md-flex">
                                     <a href="{{ route('pajak.transaction', $kendaraan->id) }}"

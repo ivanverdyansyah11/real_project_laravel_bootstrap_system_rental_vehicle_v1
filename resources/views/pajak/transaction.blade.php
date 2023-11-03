@@ -115,7 +115,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="tanggal_bayar">Tanggal Bayar</label>
                                 <input type="date" id="tanggal_bayar" class="input" autocomplete="off"
@@ -125,12 +125,22 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6 row-button">
+                        <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="jumlah_bayar">Jumlah Bayar</label>
                                 <input type="number" id="jumlah_bayar" class="input" autocomplete="off"
                                     name="jumlah_bayar" value="{{ old('jumlah_bayar') }}" required>
                                 @error('jumlah_bayar')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4 row-button">
+                            <div class="input-wrapper">
+                                <label for="finance">Staff Finance</label>
+                                <input type="text" id="finance" class="input" autocomplete="off" name="finance"
+                                    value="{{ old('finance') }}" required>
+                                @error('finance')
                                     <p class="caption-error mt-2">{{ $message }}</p>
                                 @enderror
                             </div>

@@ -54,15 +54,36 @@ class BookingController extends Controller
         return response()->json($brand);
     }
 
-    function checkPelanggan($pelanggans_id)
+    function checkSeriKendaraan($idSeri, $tanggalMulai, $tanggalAkhir)
     {
-        $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking', 'dipesan'])
+        $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
+        $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
+
+        $kendaraan = Kendaraan::where('seri_kendaraans_id', $idSeri)
+            ->whereIn('status', ['ready', 'booking', 'dipesan'])
+            ->with('jenis_kendaraan', 'brand_kendaraan', 'seri_kendaraan')
             ->pluck('id')
             ->toArray();
 
-        $kendaraanSelected = Pemesanan::where('pelanggans_id', $pelanggans_id)
+        $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+            ->where('tanggal_mulai', '<=', $tanggalMulai)
+            ->where('tanggal_akhir', '>=', $tanggalAkhir)
             ->pluck('kendaraans_id')
             ->toArray();
+
+        if (!$kendaraanSelected) {
+            $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                ->whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
+                ->pluck('kendaraans_id')
+                ->toArray();
+
+            if (!$kendaraanSelected) {
+                $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                    ->whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
+                    ->pluck('kendaraans_id')
+                    ->toArray();
+            }
+        }
 
         if ($kendaraanSelected) {
             $result = array_diff($kendaraan, $kendaraanSelected);
@@ -75,8 +96,10 @@ class BookingController extends Controller
         return response()->json($kendaraanResult);
     }
 
-    function checkSeriKendaraan($idSeri, $tanggalMulai, $tanggalAkhir)
+    function checkSeriKendaraanEdit($id, $idSeri, $tanggalMulai, $tanggalAkhir)
     {
+        $pemesanan = Pemesanan::where('id', $id)->with('kendaraan', 'pelanggan', 'sopir')->first();
+
         $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
         $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
 
@@ -84,6 +107,58 @@ class BookingController extends Controller
             ->whereIn('status', ['ready', 'booking', 'dipesan'])
             ->with('jenis_kendaraan', 'brand_kendaraan', 'seri_kendaraan')
             ->pluck('id')
+            ->toArray();
+
+        $kendaraanPelangganSelected = Pemesanan::where('pelanggans_id', $pemesanan->pelanggans_id)
+            ->whereNotIn('id', [$id])
+            ->pluck('kendaraans_id')
+            ->toArray();
+
+        $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+            ->whereNotIn('id', [$id])
+            ->where('tanggal_mulai', '<=', $tanggalMulai)
+            ->where('tanggal_akhir', '>=', $tanggalAkhir)
+            ->pluck('kendaraans_id')
+            ->toArray();
+
+        if (!$kendaraanSelected) {
+            $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                ->whereNotIn('id', [$id])
+                ->whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
+                ->pluck('kendaraans_id')
+                ->toArray();
+
+            if (!$kendaraanSelected) {
+                $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                    ->whereNotIn('id', [$id])
+                    ->whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
+                    ->pluck('kendaraans_id')
+                    ->toArray();
+            }
+        }
+
+        $kendaraanSelected = array_merge($kendaraanPelangganSelected, $kendaraanSelected);
+        $kendaraanSelected = array_unique($kendaraanSelected);
+
+        if ($kendaraanSelected) {
+            $result = array_diff($kendaraan, $kendaraanSelected);
+        } else {
+            $result = $kendaraan;
+        }
+
+        $kendaraanResult = Kendaraan::whereIn('id', $result)->get();
+
+        return response()->json($kendaraanResult);
+    }
+
+    function checkPelanggan($pelanggans_id, $tanggalMulai, $tanggalAkhir)
+    {
+        $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking', 'dipesan'])
+            ->pluck('id')
+            ->toArray();
+
+        $kendaraanPelangganSelected = Pemesanan::where('pelanggans_id', $pelanggans_id)
+            ->pluck('kendaraans_id')
             ->toArray();
 
         $kendaraanSelected = Pemesanan::where('tanggal_mulai', '<=', $tanggalMulai)
@@ -103,6 +178,9 @@ class BookingController extends Controller
             }
         }
 
+        $kendaraanSelected = array_merge($kendaraanPelangganSelected, $kendaraanSelected);
+        $kendaraanSelected = array_unique($kendaraanSelected);
+
         if ($kendaraanSelected) {
             $result = array_diff($kendaraan, $kendaraanSelected);
         } else {
@@ -116,50 +194,6 @@ class BookingController extends Controller
 
     function checkKendaraan($tanggalMulai, $tanggalAkhir)
     {
-        // $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
-        // $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
-
-        // $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking', 'dipesan'])
-        //     ->pluck('id')
-        //     ->toArray();
-
-        // $kendaraanSelected = Pemesanan::where('tanggal_mulai', '<=', $tanggalMulai)
-        //     ->where('tanggal_akhir', '>=', $tanggalAkhir)
-        //     ->pluck('kendaraans_id')
-        //     ->toArray();
-
-        // if (!$kendaraanSelected) {
-        //     $kendaraanSelected = Pemesanan::whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
-        //         ->pluck('kendaraans_id')
-        //         ->toArray();
-
-        //     if (!$kendaraanSelected) {
-        //         $kendaraanSelected = Pemesanan::whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
-        //             ->pluck('kendaraans_id')
-        //             ->toArray();
-        //     }
-        // }
-
-        // return response()->json([$kendaraan, $kendaraanSelected]);
-
-        // if ($kendaraanSelected) {
-        //     if (count($kendaraan) === count($kendaraanSelected)) {
-        //         if ($kendaraan === $kendaraanSelected) {
-        //             $result = array_diff($kendaraan, $kendaraanSelected);
-        //         } else {
-        //             $result = $kendaraanSelected;
-        //         }
-        //     } else {
-        //         $result = array_diff($kendaraan, $kendaraanSelected);
-        //     }
-        // } else {
-        //     $result = $kendaraan;
-        // }
-
-        // $kendaraanResult = Kendaraan::whereIn('id', $result)->get();
-
-        // return response()->json($kendaraanResult);
-
         $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
         $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
 
@@ -198,58 +232,62 @@ class BookingController extends Controller
         return response()->json($kendaraanResult);
     }
 
+    function checkKendaraanEdit($id, $tanggalMulai, $tanggalAkhir)
+    {
+        $pemesanan = Pemesanan::where('id', $id)->with('kendaraan', 'pelanggan', 'sopir')->first();
+
+        $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
+        $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
+
+        $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking', 'dipesan'])
+            ->pluck('id')
+            ->toArray();
+
+
+        $kendaraanPelangganSelected = Pemesanan::where('pelanggans_id', $pemesanan->pelanggans_id)
+            ->whereNotIn('id', [$id])
+            ->pluck('kendaraans_id')
+            ->toArray();
+
+        $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+            ->whereNotIn('id', [$id])
+            ->where('tanggal_mulai', '<=', $tanggalMulai)
+            ->where('tanggal_akhir', '>=', $tanggalAkhir)
+            ->pluck('kendaraans_id')
+            ->toArray();
+
+        if (!$kendaraanSelected) {
+            $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                ->whereNotIn('id', [$id])
+                ->whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
+                ->pluck('kendaraans_id')
+                ->toArray();
+
+            if (!$kendaraanSelected) {
+                $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                    ->whereNotIn('id', [$id])
+                    ->whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
+                    ->pluck('kendaraans_id')
+                    ->toArray();
+            }
+        }
+
+        $kendaraanSelected = array_merge($kendaraanPelangganSelected, $kendaraanSelected);
+        $kendaraanSelected = array_unique($kendaraanSelected);
+
+        if ($kendaraanSelected) {
+            $result = array_diff($kendaraan, $kendaraanSelected);
+        } else {
+            $result = $kendaraan;
+        }
+
+        $kendaraanResult = Kendaraan::whereIn('id', $result)->get();
+
+        return response()->json($kendaraanResult);
+    }
+
     function checkSopir($tanggalMulai, $tanggalAkhir)
     {
-        // $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
-        // $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
-
-        // $sopir = Sopir::where('status', 'ada')
-        //     ->where('kelengkapan_ktp', 'lengkap')
-        //     ->where('kelengkapan_sim', 'lengkap')
-        //     ->where('kelengkapan_nomor_telepon', 'lengkap')
-        //     ->pluck('id')
-        //     ->toArray();
-
-        // $sopirSelected = Pemesanan::where('tanggal_mulai', '<=', $tanggalMulai)
-        //     ->where('tanggal_akhir', '>=', $tanggalAkhir)
-        //     ->pluck('sopirs_id')
-        //     ->toArray();
-
-        // if (!$sopirSelected) {
-        //     $sopirSelected = Pemesanan::whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
-        //         ->pluck('sopirs_id')
-        //         ->toArray();
-
-        //     if (!$sopirSelected) {
-        //         $sopirSelected = Pemesanan::whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
-        //             ->pluck('sopirs_id')
-        //             ->toArray();
-        //     }
-        // }
-
-        // if ($sopirSelected) {
-        //     if (count($sopir) === count($sopirSelected)) {
-        //         if ($sopir === $sopirSelected) {
-        //             $result = array_diff($sopir, $sopirSelected);
-        //         } else {
-        //             $result = $sopirSelected;
-        //         }
-        //     } else {
-        //         $result = array_diff($sopir, $sopirSelected);
-        //     }
-        // } else {
-        //     $result = $sopir;
-        // }
-
-        // $sopirResult = Sopir::whereIn('id', $result)
-        //     ->where('status', 'ada')
-        //     ->where('kelengkapan_ktp', 'lengkap')
-        //     ->where('kelengkapan_sim', 'lengkap')
-        //     ->where('kelengkapan_nomor_telepon', 'lengkap')
-        //     ->get();
-
-        // return response()->json($sopirResult);
-
         $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
         $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
 
@@ -274,6 +312,57 @@ class BookingController extends Controller
 
             if (!$sopirSelected) {
                 $sopirSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                    ->whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
+                    ->pluck('sopirs_id')
+                    ->toArray();
+            }
+        }
+
+        if ($sopirSelected) {
+            $result = array_diff($sopir, $sopirSelected);
+        } else {
+            $result = $sopir;
+        }
+
+        $sopirResult = Sopir::whereIn('id', $result)
+            ->where('status', 'ada')
+            ->where('kelengkapan_ktp', 'lengkap')
+            ->where('kelengkapan_sim', 'lengkap')
+            ->where('kelengkapan_nomor_telepon', 'lengkap')
+            ->get();
+
+        return response()->json($sopirResult);
+    }
+
+    function checkSopirEdit($id, $tanggalMulai, $tanggalAkhir)
+    {
+        $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
+        $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
+
+        $sopir = Sopir::where('status', 'ada')
+            ->where('kelengkapan_ktp', 'lengkap')
+            ->where('kelengkapan_sim', 'lengkap')
+            ->where('kelengkapan_nomor_telepon', 'lengkap')
+            ->pluck('id')
+            ->toArray();
+
+        $sopirSelected = Pemesanan::whereNotIn('status', ['selesai'])
+            ->whereNotIn('id', [$id])
+            ->where('tanggal_mulai', '<=', $tanggalMulai)
+            ->where('tanggal_akhir', '>=', $tanggalAkhir)
+            ->pluck('sopirs_id')
+            ->toArray();
+
+        if (!$sopirSelected) {
+            $sopirSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                ->whereNotIn('id', [$id])
+                ->whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
+                ->pluck('sopirs_id')
+                ->toArray();
+
+            if (!$sopirSelected) {
+                $sopirSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                    ->whereNotIn('id', [$id])
                     ->whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
                     ->pluck('sopirs_id')
                     ->toArray();
@@ -324,7 +413,8 @@ class BookingController extends Controller
 
         $kodePemesanan = $initialKendaraan[0] . '-' . $kodePemesanan;
 
-        $pelangganCheck = Pemesanan::where('pelanggans_id', $request->pelanggans_id)
+        $pelangganCheck = Pemesanan::whereNotIn('status', ['selesai'])
+            ->where('pelanggans_id', $request->pelanggans_id)
             ->where('kendaraans_id', $request->kendaraans_id)
             ->first();
 
@@ -332,35 +422,41 @@ class BookingController extends Controller
             return redirect(route('booking.create'))->with('failed', 'Pelanggan ' . $pelangganCheck->pelanggan->nama . ' Sudah Booking Kendaraan ' . $pelangganCheck->kendaraan->nomor_plat . '!');
         }
 
-        $sopirCheck = Pemesanan::where('sopirs_id', $request->sopirs_id)
+        $sopirCheck = Pemesanan::whereNotIn('status', ['selesai'])
+            ->where('sopirs_id', $request->sopirs_id)
             ->whereDate('tanggal_mulai', '<=', $request->tanggal_mulai)
             ->whereDate('tanggal_akhir', '>=', $request->tanggal_akhir)
             ->first();
 
         if (!$sopirCheck) {
-            $sopirCheck = Pemesanan::where('sopirs_id', $request->sopirs_id)
+            $sopirCheck = Pemesanan::whereNotIn('status', ['selesai'])
+                ->where('sopirs_id', $request->sopirs_id)
                 ->whereBetween('tanggal_mulai', [$request->tanggal_mulai, $request->tanggal_akhir])
                 ->first();
 
             if (!$sopirCheck) {
-                $sopirCheck = Pemesanan::where('sopirs_id', $request->sopirs_id)
+                $sopirCheck = Pemesanan::whereNotIn('status', ['selesai'])
+                    ->where('sopirs_id', $request->sopirs_id)
                     ->whereBetween('tanggal_akhir', [$request->tanggal_mulai, $request->tanggal_akhir])
                     ->first();
             }
         }
 
-        $kendaraanCheck = Pemesanan::where('kendaraans_id', $request->kendaraans_id)
+        $kendaraanCheck = Pemesanan::whereNotIn('status', ['selesai'])
+            ->where('kendaraans_id', $request->kendaraans_id)
             ->whereDate('tanggal_mulai', '<=', $request->tanggal_mulai)
             ->whereDate('tanggal_akhir', '>=', $request->tanggal_akhir)
             ->first();
 
         if (!$kendaraanCheck) {
-            $kendaraanCheck = Pemesanan::where('kendaraans_id', $request->kendaraans_id)
+            $kendaraanCheck = Pemesanan::whereNotIn('status', ['selesai'])
+                ->where('kendaraans_id', $request->kendaraans_id)
                 ->whereBetween('tanggal_mulai', [$request->tanggal_mulai, $request->tanggal_akhir])
                 ->first();
 
             if (!$kendaraanCheck) {
-                $kendaraanCheck = Pemesanan::where('kendaraans_id', $request->kendaraans_id)
+                $kendaraanCheck = Pemesanan::whereNotIn('status', ['selesai'])
+                    ->where('kendaraans_id', $request->kendaraans_id)
                     ->whereBetween('tanggal_akhir', [$request->tanggal_mulai, $request->tanggal_akhir])
                     ->first();
             }
@@ -433,130 +529,216 @@ class BookingController extends Controller
         ]);
     }
 
-    // public function edit($id)
-    // {
-    //     $pemesanan = Pemesanan::where('id', $id)->with('kendaraan', 'pelanggan', 'sopir')->first();
+    public function edit($id)
+    {
+        $pemesanan = Pemesanan::where('id', $id)->with('kendaraan', 'pelanggan', 'sopir')->first();
 
-    //     return view('pemesanan.edit', [
-    //         'title' => 'Booking',
-    //         'pemesanan' => $pemesanan,
-    //         'kendaraans' => Kendaraan::whereIn('status', ['ready', 'booking', 'dipesan'])->get(),
-    //         'jenises' => JenisKendaraan::all(),
-    //         'brands' => BrandKendaraan::all(),
-    //         'series' => SeriKendaraan::all(),
-    //         'pelanggans' => Pelanggan::where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
-    //         'sopirs' => Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
-    //     ]);
-    // }
+        $tanggalMulai = Carbon::parse($pemesanan->tanggal_mulai)->format('Y-m-d');
+        $tanggalAkhir = Carbon::parse($pemesanan->tanggal_akhir)->format('Y-m-d');
 
-    // function update($id, Request $request)
-    // {
-    //     $pelangganCheck = Pemesanan::whereNotIn('id', [$id])
-    //         ->where('pelanggans_id', $request->pelanggans_id)
-    //         ->where('kendaraans_id', $request->kendaraans_id)
-    //         ->first();
+        $sopir = Sopir::where('status', 'ada')
+            ->where('kelengkapan_ktp', 'lengkap')
+            ->where('kelengkapan_sim', 'lengkap')
+            ->where('kelengkapan_nomor_telepon', 'lengkap')
+            ->pluck('id')
+            ->toArray();
 
-    //     if ($pelangganCheck) {
-    //         return redirect(route('booking.edit', $id))->with('failed', 'Pelanggan ' . $pelangganCheck->pelanggan->nama . ' Sudah Booking Kendaraan ' . $pelangganCheck->kendaraan->nomor_plat . '!');
-    //     }
+        $sopirSelected = Pemesanan::whereNotIn('status', ['selesai'])
+            ->whereNotIn('id', [$id])
+            ->where('tanggal_mulai', '<=', $tanggalMulai)
+            ->where('tanggal_akhir', '>=', $tanggalAkhir)
+            ->pluck('sopirs_id')
+            ->toArray();
 
-    //     $sopirCheck = Pemesanan::whereNotIn('id', [$id])
-    //         ->where('sopirs_id', $request->sopirs_id)
-    //         ->whereDate('tanggal_mulai', '<=', $request->tanggal_mulai)
-    //         ->whereDate('tanggal_akhir', '>=', $request->tanggal_akhir)
-    //         ->first();
+        if (!$sopirSelected) {
+            $sopirSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                ->whereNotIn('id', [$id])
+                ->whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
+                ->pluck('sopirs_id')
+                ->toArray();
 
-    //     if (!$sopirCheck) {
-    //         $sopirCheck = Pemesanan::whereNotIn('id', [$id])
-    //             ->where('sopirs_id', $request->sopirs_id)
-    //             ->whereBetween('tanggal_mulai', [$request->tanggal_mulai, $request->tanggal_akhir])
-    //             ->first();
+            if (!$sopirSelected) {
+                $sopirSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                    ->whereNotIn('id', [$id])
+                    ->whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
+                    ->pluck('sopirs_id')
+                    ->toArray();
+            }
+        }
 
-    //         if (!$sopirCheck) {
-    //             $sopirCheck = Pemesanan::whereNotIn('id', [$id])
-    //                 ->where('sopirs_id', $request->sopirs_id)
-    //                 ->whereBetween('tanggal_akhir', [$request->tanggal_mulai, $request->tanggal_akhir])
-    //                 ->first();
-    //         }
-    //     }
+        if ($sopirSelected) {
+            $result = array_diff($sopir, $sopirSelected);
+        } else {
+            $result = $sopir;
+        }
 
-    //     $kendaraanCheck = Pemesanan::whereNotIn('id', [$id])
-    //         ->where('kendaraans_id', $request->kendaraans_id)
-    //         ->whereDate('tanggal_mulai', '<=', $request->tanggal_mulai)
-    //         ->whereDate('tanggal_akhir', '>=', $request->tanggal_akhir)
-    //         ->first();
+        $sopirResult = Sopir::whereIn('id', $result)
+            ->where('status', 'ada')
+            ->where('kelengkapan_ktp', 'lengkap')
+            ->where('kelengkapan_sim', 'lengkap')
+            ->where('kelengkapan_nomor_telepon', 'lengkap')
+            ->get();
 
-    //     if (!$kendaraanCheck) {
-    //         $kendaraanCheck = Pemesanan::whereNotIn('id', [$id])
-    //             ->where('kendaraans_id', $request->kendaraans_id)
-    //             ->whereBetween('tanggal_mulai', [$request->tanggal_mulai, $request->tanggal_akhir])
-    //             ->first();
+        $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking', 'dipesan'])
+            ->pluck('id')
+            ->toArray();
 
-    //         if (!$kendaraanCheck) {
-    //             $kendaraanCheck = Pemesanan::whereNotIn('id', [$id])
-    //                 ->where('kendaraans_id', $request->kendaraans_id)
-    //                 ->whereBetween('tanggal_akhir', [$request->tanggal_mulai, $request->tanggal_akhir])
-    //                 ->first();
-    //         }
-    //     }
+        $kendaraanPelangganSelected = Pemesanan::where('pelanggans_id', $pemesanan->pelanggans_id)
+            ->whereNotIn('id', [$id])
+            ->pluck('kendaraans_id')
+            ->toArray();
 
-    //     if ($sopirCheck) {
-    //         return redirect(route('booking.edit', $id))->with('failed', 'Sopir ' . $sopirCheck->sopir->nama . ' Sudah Booking Pada Tanggal Ini!');
-    //     } else if ($kendaraanCheck) {
-    //         return redirect(route('booking.edit', $id))->with('failed', 'Kendaraan ' . $kendaraanCheck->kendaraan->nomor_plat . ' Sudah Booking Pada Tanggal Ini!');
-    //     }
+        $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+            ->whereNotIn('id', [$id])
+            ->where('tanggal_mulai', '<=', $tanggalMulai)
+            ->where('tanggal_akhir', '>=', $tanggalAkhir)
+            ->pluck('kendaraans_id')
+            ->toArray();
+
+        if (!$kendaraanSelected) {
+            $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                ->whereNotIn('id', [$id])
+                ->whereBetween('tanggal_mulai', [$tanggalMulai, $tanggalAkhir])
+                ->pluck('kendaraans_id')
+                ->toArray();
+
+            if (!$kendaraanSelected) {
+                $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
+                    ->whereNotIn('id', [$id])
+                    ->whereBetween('tanggal_akhir', [$tanggalMulai, $tanggalAkhir])
+                    ->pluck('kendaraans_id')
+                    ->toArray();
+            }
+        }
+
+        $kendaraanSelected = array_merge($kendaraanPelangganSelected, $kendaraanSelected);
+        $kendaraanSelected = array_unique($kendaraanSelected);
+
+        if ($kendaraanSelected) {
+            $result = array_diff($kendaraan, $kendaraanSelected);
+        } else {
+            $result = $kendaraan;
+        }
+
+        $kendaraanResult = Kendaraan::whereIn('id', $result)->get();
+
+        return view('pemesanan.edit', [
+            'title' => 'Booking',
+            'pemesanan' => $pemesanan,
+            'kendaraans' => $kendaraanResult,
+            'jenises' => JenisKendaraan::all(),
+            'brands' => BrandKendaraan::all(),
+            'series' => SeriKendaraan::all(),
+            'pelanggans' => Pelanggan::where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->get(),
+            'sopirs' => $sopirResult,
+        ]);
+    }
+
+    function update($id, Request $request)
+    {
+        $pelangganCheck = Pemesanan::whereNotIn('id', [$id])
+            ->where('pelanggans_id', $request->pelanggans_id)
+            ->where('kendaraans_id', $request->kendaraans_id)
+            ->first();
+
+        if ($pelangganCheck) {
+            return redirect(route('booking.edit', $id))->with('failed', 'Pelanggan ' . $pelangganCheck->pelanggan->nama . ' Sudah Booking Kendaraan ' . $pelangganCheck->kendaraan->nomor_plat . '!');
+        }
+
+        $sopirCheck = Pemesanan::whereNotIn('id', [$id])
+            ->where('sopirs_id', $request->sopirs_id)
+            ->whereDate('tanggal_mulai', '<=', $request->tanggal_mulai)
+            ->whereDate('tanggal_akhir', '>=', $request->tanggal_akhir)
+            ->first();
+
+        if (!$sopirCheck) {
+            $sopirCheck = Pemesanan::whereNotIn('id', [$id])
+                ->where('sopirs_id', $request->sopirs_id)
+                ->whereBetween('tanggal_mulai', [$request->tanggal_mulai, $request->tanggal_akhir])
+                ->first();
+
+            if (!$sopirCheck) {
+                $sopirCheck = Pemesanan::whereNotIn('id', [$id])
+                    ->where('sopirs_id', $request->sopirs_id)
+                    ->whereBetween('tanggal_akhir', [$request->tanggal_mulai, $request->tanggal_akhir])
+                    ->first();
+            }
+        }
+
+        $kendaraanCheck = Pemesanan::whereNotIn('id', [$id])
+            ->where('kendaraans_id', $request->kendaraans_id)
+            ->whereDate('tanggal_mulai', '<=', $request->tanggal_mulai)
+            ->whereDate('tanggal_akhir', '>=', $request->tanggal_akhir)
+            ->first();
+
+        if (!$kendaraanCheck) {
+            $kendaraanCheck = Pemesanan::whereNotIn('id', [$id])
+                ->where('kendaraans_id', $request->kendaraans_id)
+                ->whereBetween('tanggal_mulai', [$request->tanggal_mulai, $request->tanggal_akhir])
+                ->first();
+
+            if (!$kendaraanCheck) {
+                $kendaraanCheck = Pemesanan::whereNotIn('id', [$id])
+                    ->where('kendaraans_id', $request->kendaraans_id)
+                    ->whereBetween('tanggal_akhir', [$request->tanggal_mulai, $request->tanggal_akhir])
+                    ->first();
+            }
+        }
+
+        if ($sopirCheck) {
+            return redirect(route('booking.edit', $id))->with('failed', 'Sopir ' . $sopirCheck->sopir->nama . ' Sudah Booking Pada Tanggal Ini!');
+        } else if ($kendaraanCheck) {
+            return redirect(route('booking.edit', $id))->with('failed', 'Kendaraan ' . $kendaraanCheck->kendaraan->nomor_plat . ' Sudah Booking Pada Tanggal Ini!');
+        }
 
 
-    //     $pemesanan = Pemesanan::where('id', $id)->first();
+        $pemesanan = Pemesanan::where('id', $id)->first();
 
-    //     // return $pemesanan;
+        $kendaraan = Pemesanan::where('kendaraans_id', $pemesanan->kendaraans_id)->where('status', 'booking')->count();
+        if ($kendaraan == 1) {
+            Kendaraan::where('id', $pemesanan->kendaraans_id)->first()->update([
+                'status' => 'ready',
+            ]);
+        }
 
-    //     $kendaraan = Pemesanan::where('kendaraans_id', $pemesanan->kendaraans_id)->where('status', 'booking')->count();
-    //     if ($kendaraan == 1) {
-    //         Kendaraan::where('id', $pemesanan->kendaraans_id)->first()->update([
-    //             'status' => 'ready',
-    //         ]);
-    //     }
+        $validatedData = $request->validate([
+            'pelanggans_id' => 'required|string',
+            'kendaraans_id' => 'required|string',
+            'sopirs_id' => 'nullable|string',
+            'total_harian' => 'required|string',
+            'total_mingguan' => 'required|string',
+            'total_bulanan' => 'required|string',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_akhir' => 'required|date',
+        ]);
 
-    //     $validatedData = $request->validate([
-    //         'pelanggans_id' => 'required|string',
-    //         'kendaraans_id' => 'required|string',
-    //         'sopirs_id' => 'nullable|string',
-    //         'total_harian' => 'required|string',
-    //         'total_mingguan' => 'required|string',
-    //         'total_bulanan' => 'required|string',
-    //         'tanggal_mulai' => 'required|date',
-    //         'tanggal_akhir' => 'required|date',
-    //     ]);
+        $validatedData['status'] = 'booking';
 
-    //     $validatedData['status'] = 'booking';
+        if ($validatedData['sopirs_id'] === '-') {
+            $validatedData['sopirs_id'] = null;
+        } else {
+            $validatedData['sopirs_id'] = (int)$validatedData['sopirs_id'];
+        }
 
-    //     if ($validatedData['sopirs_id'] === '-') {
-    //         $validatedData['sopirs_id'] = null;
-    //     } else {
-    //         $validatedData['sopirs_id'] = (int)$validatedData['sopirs_id'];
-    //     }
+        if (is_string($validatedData['pelanggans_id'])) {
+            $validatedData['pelanggans_id'] = (int)$validatedData['pelanggans_id'];
+        }
 
-    //     if (is_string($validatedData['pelanggans_id'])) {
-    //         $validatedData['pelanggans_id'] = (int)$validatedData['pelanggans_id'];
-    //     }
+        if (is_string($validatedData['kendaraans_id'])) {
+            $validatedData['kendaraans_id'] = (int)$validatedData['kendaraans_id'];
+        }
 
-    //     if (is_string($validatedData['kendaraans_id'])) {
-    //         $validatedData['kendaraans_id'] = (int)$validatedData['kendaraans_id'];
-    //     }
+        $pemesanan = $pemesanan->update($validatedData);
+        $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first()->update([
+            'status' => 'booking',
+        ]);
 
-    //     return $validatedData;
-    //     $pemesanan = $pemesanan->update($validatedData);
-    //     $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first()->update([
-    //         'status' => 'booking',
-    //     ]);
-
-    //     if ($pemesanan && $kendaraan) {
-    //         return redirect(route('pemesanan'))->with('success', 'Berhasil Booking Kendaraan!');
-    //     } else {
-    //         return redirect(route('pemesanan'))->with('failed', 'Gagal Booking Kendaraan!');
-    //     }
-    // }
+        if ($pemesanan && $kendaraan) {
+            return redirect(route('pemesanan'))->with('success', 'Berhasil Booking Kendaraan!');
+        } else {
+            return redirect(route('pemesanan'))->with('failed', 'Gagal Booking Kendaraan!');
+        }
+    }
 
     public function delete($id)
     {

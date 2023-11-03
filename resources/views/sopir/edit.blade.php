@@ -32,8 +32,8 @@
                                     <img src="{{ $sopir->foto_ktp ? asset('assets/img/ktp-images/' . $sopir->foto_ktp) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-edit-ktp" alt="KTP Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-edit-ktp" name="foto_ktp"
-                                            style="opacity: 0;">
+                                        <input type="file" accept=".png,.jpg,.jpeg" id="image" class="input-edit-ktp"
+                                            name="foto_ktp" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-edit-ktp">Pilih Foto
                                             KTP</button>
                                     </div>
@@ -49,8 +49,8 @@
                                     <img src="{{ $sopir->foto_sim ? asset('assets/img/sim-images/' . $sopir->foto_sim) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-edit-sim" alt="SIM Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-edit-sim" name="foto_sim"
-                                            style="opacity: 0;">
+                                        <input type="file" accept=".png,.jpg,.jpeg" id="image" class="input-edit-sim"
+                                            name="foto_sim" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-edit-sim">Pilih Foto
                                             SIM</button>
                                     </div>
