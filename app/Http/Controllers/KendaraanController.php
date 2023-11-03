@@ -19,27 +19,73 @@ class KendaraanController extends Controller
         return view('kendaraan.index', [
             'title' => 'Kendaraan',
             'kendaraans' => Kendaraan::with('jenis_kendaraan', 'brand_kendaraan')->paginate(6),
+            'jenises' => JenisKendaraan::get(),
+            'brands' => BrandKendaraan::get(),
+            'series' => SeriKendaraan::get(),
         ]);
     }
 
     public function search(Request $request)
     {
-        $kendaraans = Kendaraan::where('nomor_plat', 'like', '%' . $request->search . '%')
-            ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa_hari', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa_minggu', 'like', '%' . $request->search . '%')
-            ->orWhere('tarif_sewa_bulan', 'like', '%' . $request->search . '%')
-            ->orWhere('tahun_pembuatan', 'like', '%' . $request->search . '%')
-            ->orWhere('tanggal_pembelian', 'like', '%' . $request->search . '%')
-            ->orWhere('warna', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_rangka', 'like', '%' . $request->search . '%')
-            ->orWhere('nomor_mesin', 'like', '%' . $request->search . '%')
-            ->paginate(6);
+        $kendaraans = Kendaraan::query();
+
+        // return $request;
+
+        // if ($request->search != null) {
+        // }
+        // $kendaraans = $kendaraans->when($request->search != null, function ($query) use ($request) {
+        //     $query->where('nomor_plat', 'like', '%' . $request->search . '%')
+        //         ->orWhere('kilometer_saat_ini', 'like', '%' . $request->search . '%')
+        //         ->orWhere('tarif_sewa_hari', $request->search)
+        //         ->orWhere('tarif_sewa_minggu', $request->search)
+        //         ->orWhere('tarif_sewa_bulan', $request->search)
+        //         ->orWhere('tahun_pembuatan', $request->search)
+        //         ->orWhere('tanggal_pembelian', $request->search)
+        //         ->orWhere('warna', $request->search)
+        //         ->orWhere('nomor_rangka', $request->search)
+        //         ->orWhere('nomor_mesin', $request->search);
+        // ->whereRelation('jenis_kendaraan', 'nama', 'like', '%' . $request->search . '%')
+        // ->whereRelation('brand_kendaraan', 'nama', 'like', '%' . $request->search . '%')
+        // ->whereRelation('seri_kendaraan', 'nomor_seri', 'like', '%' . $request->search . '%');
+        // })
+        // ->when($request->jenis_kendaraans_id != null, function ($query) use ($request) {
+        //     $query->where('jenis_kendaraans_id', $request->jenis_kendaraans_id);
+        // })
+        // ;
+
+        // if ($request->jenis_kendaraans_id != null) {
+        //     $kendaraans = $kendaraans->where();
+        // }
+
+        $kendaraans = $kendaraans->when($request->search != null, function ($query) use ($request) {
+            $query->where('nomor_plat', 'like', '%' . $request->search . '%')
+                ->orWhere(function ($query) use ($request) {
+                    $query->where('kilometer_saat_ini', 'like', '%' . $request->search . '%')
+                        ->where('tarif_sewa_hari', [$request->search])
+                        ->where('tarif_sewa_minggu', [$request->search])
+                        ->where('tarif_sewa_bulan', [$request->search])
+                        ->where('tahun_pembuatan', [$request->search])
+                        ->where('tanggal_pembelian', [$request->search])
+                        ->where('warna', '%' . $request->search . '%')
+                        ->where('nomor_rangka', '%' . $request->search . '%')
+                        ->where('nomor_mesin', '%' . $request->search . '%');
+                });
+        })->when($request->jenis_kendaraans_id != null, function ($q) use ($request) {
+            $q->where('jenis_kendaraans_id', $request->jenis_kendaraans_id);
+        })->when($request->brand_kendaraans_id != null, function ($q) use ($request) {
+            $q->where('brand_kendaraans_id', $request->brand_kendaraans_id);
+        })->when($request->seri_kendaraans_id != null, function ($q) use ($request) {
+            $q->where('seri_kendaraans_id', $request->seri_kendaraans_id);
+        });
+
+        $kendaraans = $kendaraans->paginate(6);
 
         return view('kendaraan.index', [
             'title' => 'Kendaraan',
             'kendaraans' => $kendaraans,
-            'pelanggans' => Pelanggan::all(),
+            'jenises' => JenisKendaraan::get(),
+            'brands' => BrandKendaraan::get(),
+            'series' => SeriKendaraan::get(),
         ]);
     }
 
@@ -180,6 +226,7 @@ class KendaraanController extends Controller
             'warna' => 'required|string|max:255',
             'nomor_rangka' => 'required|string|max:255',
             'nomor_mesin' => 'required|string|max:255',
+            'status' => 'required|string',
         ]);
 
         $validatedData['jenis_kendaraans_id'] = $jenis_kendaraans_id;

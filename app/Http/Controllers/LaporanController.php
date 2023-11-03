@@ -359,6 +359,7 @@ class LaporanController extends Controller
 
         $data = [
             'title' => 'Nusa Kendala Sewa Kendaraan',
+            'laporan' => $laporan,
             'pemesanan' => $pemesanan,
             'penambahan' => PenambahanSewa::where('pelepasan_pemesanans_id', $pemesanan->id)
                 ->first(),
@@ -384,6 +385,7 @@ class LaporanController extends Controller
 
         $data = [
             'title' => 'Nusa Kendala Sewa Kendaraan',
+            'laporan' => $laporan,
             'pemesanan' => $pemesanan,
             'penambahan' => PenambahanSewa::where('pelepasan_pemesanans_id', $pemesanan->id)
                 ->first(),

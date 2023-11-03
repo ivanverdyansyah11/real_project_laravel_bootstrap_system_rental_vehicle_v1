@@ -309,6 +309,7 @@
                     }
                 }
             });
+
             $.ajax({
                 type: 'get',
                 url: '/booking/get-jenis',

@@ -163,11 +163,18 @@
                                             disabled value="{{ $kendaraan->nomor_rangka }}">
                                     </div>
                                 </div>
-                                <div class="col-md-6 row-button">
+                                <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="nomor_mesin">Nomor Mesin</label>
                                         <input type="text" id="nomor_mesin" class="input" autocomplete="off"
                                             disabled value="{{ $kendaraan->nomor_mesin }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 row-button">
+                                    <div class="input-wrapper">
+                                        <label for="status">Status</label>
+                                        <input type="text" id="status" class="input text-capitalize"
+                                            autocomplete="off" disabled value="{{ $kendaraan->status }}">
                                     </div>
                                 </div>
                                 <div class="col-12">

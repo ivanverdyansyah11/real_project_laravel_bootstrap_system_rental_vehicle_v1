@@ -140,6 +140,7 @@ class SopirController extends Controller
             'data_ktp' => 'required|string',
             'data_sim' => 'required|string',
             'data_nomor_telepon' => 'required|string',
+            'status' => 'required|string',
         ]);
 
         if ($validatedData['data_ktp'] == '' || $validatedData['data_sim'] == '') {

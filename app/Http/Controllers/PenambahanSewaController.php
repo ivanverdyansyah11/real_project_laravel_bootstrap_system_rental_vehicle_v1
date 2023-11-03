@@ -49,6 +49,7 @@ class PenambahanSewaController extends Controller
         $pembayaran = PembayaranPemesanan::where('pelepasan_pemesanans_id', $id)->latest()->first()->update([
             'waktu_sewa' => $waktu_sewa,
             'total_tarif_sewa' => $total_tarif_sewa,
+            'jenis_pembayaran' => 'dp',
         ]);
 
         $penambahan = PenambahanSewa::create($validatedData);

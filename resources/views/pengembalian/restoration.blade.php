@@ -47,180 +47,25 @@
                         </div>
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="jenis_pembayaran_sebelumnya">Jenis Pembayaran Sebelumnya</label>
-                                        <input type="text" id="jenis_pembayaran_sebelumnya" class="input"
-                                            autocomplete="off" value="{{ $pembayaran->jenis_pembayaran }}" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
+                                <div class="col-md-4 mb-4">
                                     <div class="input-wrapper">
                                         <label for="total_bayar">Total Bayar Sebelumnya</label>
                                         <input type="text" id="total_bayar" class="input" autocomplete="off"
                                             value="{{ $pembayaran->total_bayar ?: '0' }}" disabled>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label>Tanggal Kembali</label>
-                                        <input type="date" class="input" autocomplete="off"
-                                            value="{{ $pemesanan->pemesanan->tanggal_akhir_awal ? $pemesanan->pemesanan->tanggal_akhir_awal : $pemesanan->pemesanan->tanggal_akhir }}"
-                                            disabled>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
+                                <div class="col-md-4 mb-4">
                                     <div class="input-wrapper">
                                         <label for="total_tarif_sewa">Total Tarif Sewa</label>
                                         <input type="text" id="total_tarif_sewa" class="input" autocomplete="off"
                                             value="{{ $pembayaran->total_tarif_sewa }}" readonly>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-4">
+                                <div class="col-md-4 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="jenis_pembayaran">Jenis Pembayaran</label>
-                                        <select id="jenis_pembayaran" class="input" name="jenis_pembayaran"
-                                            value="{{ old('jenis_pembayaran') }}" required>
-                                            <option value="">Pilih jenis pembayaran</option>
-                                            <option value="lunas"
-                                                {{ old('jenis_pembayaran') == 'lunas' ? 'selected' : '' }}>Lunas
-                                            </option>
-                                            <option value="dp" {{ old('jenis_pembayaran') == 'dp' ? 'selected' : '' }}>
-                                                DP
-                                            </option>
-                                            <option value="belum bayar"
-                                                {{ old('jenis_pembayaran') == 'belum bayar' ? 'selected' : '' }}>Belum
-                                                Bayar</option>
-                                        </select>
-                                        @error('jenis_pembayaran')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="metode_bayar">Metode Pembayaran</label>
-                                        <select id="metode_bayar" class="input" name="metode_bayar">
-                                            <option value="-">Pilih metode pembayaran</option>
-                                            <option value="transfer bank"
-                                                {{ old('metode_bayar') == 'transfer bank' ? 'selected' : '' }}>Transfer
-                                                Bank
-                                            </option>
-                                            <option value="internet banking"
-                                                {{ old('metode_bayar') == 'internet banking' ? 'selected' : '' }}>Internet
-                                                Banking
-                                                (E-Banking)</option>
-                                            <option value="mobile banking"
-                                                {{ old('metode_bayar') == 'mobile banking' ? 'selected' : '' }}>Mobile
-                                                Banking
-                                            </option>
-                                            <option value="virtual account"
-                                                {{ old('metode_bayar') == 'virtual account' ? 'selected' : '' }}>Virtual
-                                                Account
-                                                (VA)
-                                            </option>
-                                            <option value="online credit card"
-                                                {{ old('metode_bayar') == 'online credit card' ? 'selected' : '' }}>Online
-                                                Credit
-                                                Card
-                                            </option>
-                                            <option value="rekening bersama"
-                                                {{ old('metode_bayar') == 'rekening bersama' ? 'selected' : '' }}>Rekening
-                                                Bersama
-                                                (Rekber)</option>
-                                            <option value="payPal" {{ old('metode_bayar') == 'payPal' ? 'selected' : '' }}>
-                                                PayPal</option>
-                                            <option value="e-money"
-                                                {{ old('metode_bayar') == 'e-money' ? 'selected' : '' }}>
-                                                e-Money</option>
-                                        </select>
-                                        @error('metode_bayar')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="tanggal_kembali">Pengembalian Tanggal</label>
-                                        <input type="date" id="tanggal_kembali" name="tanggal_kembali" class="input"
-                                            autocomplete="off" value="{{ old('tanggal_kembali') }}" required>
-                                        @error('tanggal_kembali')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="total_bayar_saat_ini">Total Bayar</label>
-                                        <input type="number" id="total_bayar_saat_ini" class="input"
-                                            autocomplete="off" name="total_bayar" value="{{ old('total_bayar') }}">
-                                        @error('total_bayar')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="kilometer_kembali">Kilometer Kembali (Km)</label>
-                                        <input type="number" id="kilometer_kembali" name="kilometer_kembali"
-                                            class="input" autocomplete="off" value="{{ old('kilometer_kembali') }}"
-                                            required>
-                                        @error('kilometer_kembali')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="total_kembalian">Total Kembalian</label>
-                                        <input type="number" id="total_kembalian" class="input" autocomplete="off"
-                                            name="total_kembalian" value="{{ old('total_kembalian') }}" readonly>
-                                        @error('total_kembalian')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="bensin_kembali">Bensin Kembali (Liter)</label>
-                                        <input type="number" id="bensin_kembali" name="bensin_kembali" class="input"
-                                            autocomplete="off" value="{{ old('bensin_kembali') }}" required>
-                                        @error('bensin_kembali')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="ketepatan_waktu">Ketepatan Waktu</label>
-                                        <select id="ketepatan_waktu" name="ketepatan_waktu" class="input" required>
-                                            <option value="">Pilih ketepatan pengembalian</option>
-                                            <option value="tepat"
-                                                {{ old('ketepatan_waktu') == 'tepat' ? 'selected' : '' }}>Tepat</option>
-                                            <option value="tidak tepat"
-                                                {{ old('ketepatan_waktu') == 'tidak tepat' ? 'selected' : '' }}>Tidak Tepat
-                                            </option>
-                                        </select>
-                                        @error('ketepatan_waktu')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="input-wrapper">
-                                        <label for="terlambat">Terlambat</label>
-                                        <select name="terlambat" id="terlambat" class="input">
-                                            <option value="">Pilih keterlambatan jam</option>
-                                            <option value="1" {{ old('1') == '1' ? 'selected' : '' }}>
-                                                1</option>
-                                            <option value="2" {{ old('2') == '2' ? 'selected' : '' }}>
-                                                2</option>
-                                            <option value="3" {{ old('3') == '3' ? 'selected' : '' }}>
-                                                3</option>
-                                        </select>
-                                        @error('terlambat')
-                                            <p class="caption-error mt-2">{{ $message }}</p>
-                                        @enderror
+                                        <label for="total_bayar_sisa">Total Bayar Sisa</label>
+                                        <input type="text" id="total_bayar_sisa" class="input" autocomplete="off"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
@@ -243,13 +88,13 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="karpet">Karpet</label>
-                                        <select id="karpet" class="input" name="karpet"
-                                            value="{{ old('karpet') }}" required>
+                                        <select id="karpet" class="input" name="karpet" value="{{ old('karpet') }}"
+                                            required>
                                             <option value="">Pilih kelengkapan karpet</option>
                                             <option value="ada" {{ old('karpet') == 'ada' ? 'selected' : '' }}>Ada
                                             </option>
-                                            <option value="tidak ada"
-                                                {{ old('karpet') == 'tidak ada' ? 'selected' : '' }}>Tidak Ada</option>
+                                            <option value="tidak ada" {{ old('karpet') == 'tidak ada' ? 'selected' : '' }}>
+                                                Tidak Ada</option>
                                             <option value="kosong" {{ old('karpet') == 'kosong' ? 'selected' : '' }}>
                                                 Kosong</option>
                                         </select>
@@ -298,10 +143,161 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
+                                        <label for="kilometer_kembali">Kilometer Kembali (Km)</label>
+                                        <input type="number" id="kilometer_kembali" name="kilometer_kembali"
+                                            class="input" autocomplete="off" value="{{ old('kilometer_kembali') }}"
+                                            required>
+                                        @error('kilometer_kembali')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="bensin_kembali">Bensin Kembali (Liter)</label>
+                                        <input type="number" id="bensin_kembali" name="bensin_kembali" class="input"
+                                            autocomplete="off" value="{{ old('bensin_kembali') }}" required>
+                                        @error('bensin_kembali')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="ketepatan_waktu">Ketepatan Waktu</label>
+                                        <select id="ketepatan_waktu" name="ketepatan_waktu" class="input" required>
+                                            <option value="">Pilih ketepatan pengembalian</option>
+                                            <option value="tepat"
+                                                {{ old('ketepatan_waktu') == 'tepat' ? 'selected' : '' }}>Tepat</option>
+                                            <option value="tidak tepat"
+                                                {{ old('ketepatan_waktu') == 'tidak tepat' ? 'selected' : '' }}>Tidak Tepat
+                                            </option>
+                                        </select>
+                                        @error('ketepatan_waktu')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="terlambat">Terlambat</label>
+                                        <select name="terlambat" id="terlambat" class="input">
+                                            <option value="">Pilih keterlambatan jam</option>
+                                            <option value="1" {{ old('1') == '1' ? 'selected' : '' }}>
+                                                1</option>
+                                            <option value="2" {{ old('2') == '2' ? 'selected' : '' }}>
+                                                2</option>
+                                            <option value="3" {{ old('3') == '3' ? 'selected' : '' }}>
+                                                3</option>
+                                        </select>
+                                        @error('terlambat')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="input-wrapper">
                                         <label for="biaya_tambahan">Biaya Tambahan</label>
                                         <input type="number" id="biaya_tambahan" name="biaya_tambahan" class="input"
-                                            autocomplete="off" value="{{ old('biaya_tambahan') }}">
+                                            autocomplete="off" value="0">
                                         @error('biaya_tambahan')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="tanggal_kembali">Pengembalian Tanggal</label>
+                                        <input type="date" id="tanggal_kembali" name="tanggal_kembali" class="input"
+                                            autocomplete="off" value="{{ old('tanggal_kembali') }}" required>
+                                        @error('tanggal_kembali')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="total_bayar_saat_ini">Total Bayar</label>
+                                        <input type="number" id="total_bayar_saat_ini" class="input"
+                                            autocomplete="off" name="total_bayar" value="0" required>
+                                        @error('total_bayar')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="total_kembalian">Total Kembalian</label>
+                                        <input type="hidden" id="total_kembalian_dulu"
+                                            value="{{ $pembayaran->total_kembalian }}">
+                                        <input type="number" id="total_kembalian" class="input" autocomplete="off"
+                                            name="total_kembalian" value="0" readonly required>
+                                        @error('total_kembalian')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="jenis_pembayaran">Jenis Pembayaran</label>
+                                        <select id="jenis_pembayaran" class="input" name="jenis_pembayaran"
+                                            value="{{ old('jenis_pembayaran') }}" required>
+                                            <option value="">Pilih jenis pembayaran</option>
+                                            <option value="lunas"
+                                                {{ old('jenis_pembayaran') == 'lunas' ? 'selected' : '' }}>Lunas
+                                            </option>
+                                            <option value="dp"
+                                                {{ old('jenis_pembayaran') == 'dp' ? 'selected' : '' }}>
+                                                DP
+                                            </option>
+                                            <option value="belum bayar"
+                                                {{ old('jenis_pembayaran') == 'belum bayar' ? 'selected' : '' }}>Belum
+                                                Bayar</option>
+                                        </select>
+                                        @error('jenis_pembayaran')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="metode_bayar">Metode Pembayaran</label>
+                                        <select id="metode_bayar" class="input" name="metode_bayar">
+                                            <option value="-">Pilih metode pembayaran</option>
+                                            <option value="transfer bank"
+                                                {{ old('metode_bayar') == 'transfer bank' ? 'selected' : '' }}>Transfer
+                                                Bank
+                                            </option>
+                                            <option value="internet banking"
+                                                {{ old('metode_bayar') == 'internet banking' ? 'selected' : '' }}>Internet
+                                                Banking
+                                                (E-Banking)</option>
+                                            <option value="mobile banking"
+                                                {{ old('metode_bayar') == 'mobile banking' ? 'selected' : '' }}>Mobile
+                                                Banking
+                                            </option>
+                                            <option value="virtual account"
+                                                {{ old('metode_bayar') == 'virtual account' ? 'selected' : '' }}>Virtual
+                                                Account
+                                                (VA)
+                                            </option>
+                                            <option value="online credit card"
+                                                {{ old('metode_bayar') == 'online credit card' ? 'selected' : '' }}>Online
+                                                Credit
+                                                Card
+                                            </option>
+                                            <option value="rekening bersama"
+                                                {{ old('metode_bayar') == 'rekening bersama' ? 'selected' : '' }}>Rekening
+                                                Bersama
+                                                (Rekber)</option>
+                                            <option value="payPal"
+                                                {{ old('metode_bayar') == 'payPal' ? 'selected' : '' }}>
+                                                PayPal</option>
+                                            <option value="e-money"
+                                                {{ old('metode_bayar') == 'e-money' ? 'selected' : '' }}>
+                                                e-Money</option>
+                                        </select>
+                                        @error('metode_bayar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -356,32 +352,49 @@
             theme: "bootstrap-5",
         });
 
-        $("#ketepatan_waktu").select2({
-            theme: "bootstrap-5",
-        });
-
-        $("#terlambat").select2({
-            theme: "bootstrap-5",
-        });
-
+        const totalBayarSisa = document.querySelector('#total_bayar_sisa');
         const totalTarifSewa = document.querySelector('#total_tarif_sewa');
         const totalBayar = document.querySelector('#total_bayar');
         const totalBayarSaatIni = document.querySelector('#total_bayar_saat_ini');
+        const totalKembalian = document.querySelector('#total_kembalian');
+        const totalKembalianDulu = document.querySelector('#total_kembalian_dulu');
+        const biayaTambahan = document.querySelector('#biaya_tambahan');
+
+        if (parseInt(totalBayar.value) < parseInt(totalTarifSewa.value)) {
+            let totalBayarValue = parseInt(totalBayar.value)
+            let totalTarifSewaValue = parseInt(totalTarifSewa.value)
+
+            totalBayarSisaValue = totalTarifSewaValue - totalBayarValue
+
+            totalBayarSisa.value = totalBayarSisaValue
+        } else {
+            totalBayarSisa.value = 0
+        }
 
         totalBayarSaatIni.addEventListener('change', function() {
+            const biayaTambahan = document.querySelector('#biaya_tambahan');
+            let totalBayarSaatIniValue = parseInt(totalBayarSaatIni.value)
             let totalTarifSewaValue = parseInt(totalTarifSewa.value)
+            let biayaTambahanValue = parseInt(biayaTambahan.value)
             let totalBayarValue = parseInt(totalBayar.value)
-            let totalBayarSaatIniValue = parseInt(totalBayarSaatIni.value) + totalBayarValue
 
             let totalKembalianValue;
+            let totalBayarSisaValue = totalTarifSewaValue - totalBayarValue
 
-            if (totalTarifSewaValue < totalBayarSaatIniValue) {
-                totalKembalianValue = totalBayarSaatIniValue - totalTarifSewaValue;
+            let totalKeseluruhan = totalBayarSisaValue + biayaTambahanValue
+
+            if (totalKeseluruhan < totalBayarSaatIniValue) {
+                totalKembalianValue = totalBayarSaatIniValue - totalKeseluruhan;
             } else {
                 totalKembalianValue = 0;
             }
 
-            document.getElementById('total_kembalian').value = totalKembalianValue;
+            totalKembalian.value = totalKembalianValue;
+        });
+
+        biayaTambahan.addEventListener('change', function() {
+            totalBayarSaatIni.value = 0;
+            totalKembalian.value = 0;
         });
 
         const tagCreateTransaction = document.querySelector('.tag-create-transaction');

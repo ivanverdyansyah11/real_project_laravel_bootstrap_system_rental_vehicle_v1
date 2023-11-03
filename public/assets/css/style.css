@@ -924,7 +924,6 @@ body {
 .card-product .product-name {
     -webkit-line-clamp: 1;
     overflow: hidden;
-    margin-bottom: 8px;
     display: -webkit-box !important;
     -webkit-box-orient: vertical;
     margin-bottom: var(--rounded-sx) !important;
@@ -939,7 +938,7 @@ body {
     height: 16px;
 }
 
-.card-product .wrapper-tahun .product-year {
+.card-product .product-year {
     color: rgba(var(--dark-color), 0.52);
     font-size: 0.875rem;
 }
@@ -970,6 +969,19 @@ body {
     border: var(--border-style);
     background-color: rgba(var(--light-color), 1);
     gap: 4px;
+    position: absolute;
+    top: 32px;
+    right: 0;
+    opacity: 0;
+    z-index: -9999;
+}
+
+.modal-other.modal-big {
+    width: 300px;
+    padding: 24px;
+    border-radius: var(--rounded-lg);
+    border: var(--border-style);
+    background-color: rgba(var(--light-color), 1);
     position: absolute;
     top: 32px;
     right: 0;

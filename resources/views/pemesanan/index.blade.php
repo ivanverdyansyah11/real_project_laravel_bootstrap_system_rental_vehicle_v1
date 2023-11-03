@@ -107,11 +107,11 @@
                                             class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
                                             <div class="edit-icon"></div>
                                         </a>
-                                    @else
-                                        <a href="{{ route('booking.update', $booking->id) }}"
+                                        {{-- @else --}}
+                                        {{-- <a href="{{ route('booking.update', $booking->id) }}"
                                             class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
                                             <div class="edit-icon"></div>
-                                        </a>
+                                        </a> --}}
                                     @endif
                                     @if (
                                         ($booking->kendaraan->status == 'dipesan' && $booking->status == 'booking') ||
