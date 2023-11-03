@@ -32,8 +32,8 @@
                                     <img src="{{ asset('assets/img/kendaraan-images/' . $kendaraan->foto_kendaraan) }}"
                                         class="img-fluid tag-edit-image" alt="Kendaraan Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-edit-image" name="foto_kendaraan"
-                                            style="opacity: 0;">
+                                        <input type="file" accept=".png,.jpg,.jpeg" id="image"
+                                            class="input-edit-image" name="foto_kendaraan" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-edit-image">Pilih Foto
                                             Kendaraan</button>
                                     </div>

@@ -32,8 +32,8 @@
                                     <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-image" alt="Kendaraan Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-image"
-                                            name="foto_kendaraan" style="opacity: 0;" required>
+                                        <input type="file" accept=".png,.jpg,.jpeg" id="image"
+                                            class="input-create-image" name="foto_kendaraan" style="opacity: 0;" required>
                                         <button type="button" class="button-reverse button-create">Pilih Foto
                                             Kendaraan</button>
                                     </div>
