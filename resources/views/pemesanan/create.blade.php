@@ -232,7 +232,6 @@
                 type: 'get',
                 url: '/kendaraan/getSeriKendaraan/' + idJenis + '/' + idBrand,
                 success: function(data) {
-                    console.log(idJenis, idBrand);
                     if (data.length == 0) {
                         $('#seri_kendaraans_id').append(
                             `<option value="0">Data nomor seri tidak ditemukan!</option>`
@@ -280,6 +279,8 @@
 
         $("#pelanggans_id").change(function() {
             let pelanggans_id = $(this).val();
+            let tanggal_mulai = $("#tanggal_mulai").val();
+            let tanggal_akhir = $("#tanggal_akhir").val();
             $('#kendaraans_id option').remove();
             $('#seri_kendaraans_id option').remove();
             $('#jenis_kendaraan option').remove();
@@ -291,7 +292,8 @@
 
             $.ajax({
                 type: 'get',
-                url: '/booking/check-pelanggan/' + pelanggans_id,
+                url: '/booking/check-pelanggan/' + pelanggans_id + '/' + tanggal_mulai + '/' +
+                    tanggal_akhir,
                 success: function(data) {
                     if (data.length == 0) {
                         $('#kendaraans_id').append(
@@ -324,6 +326,7 @@
                     });
                 }
             });
+
             $.ajax({
                 type: 'get',
                 url: '/booking/get-brand',

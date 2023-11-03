@@ -25,6 +25,7 @@
                 <form class="form d-inline-block w-100" action="{{ route('booking.update', $pemesanan->id) }}"
                     method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" id="pemesanans_id" value="{{ $pemesanan->id }}">
                     <div class="row">
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
@@ -269,7 +270,6 @@
                 type: 'get',
                 url: '/kendaraan/getSeriKendaraan/' + idJenis + '/' + idBrand,
                 success: function(data) {
-                    console.log(idJenis, idBrand);
                     if (data.length == 0) {
                         $('#seri_kendaraans_id').append(
                             `<option value="0">Data nomor seri tidak ditemukan!</option>`
@@ -296,7 +296,6 @@
                 type: 'get',
                 url: '/kendaraan/getSeriKendaraan/' + idJenis + '/' + idBrand,
                 success: function(data) {
-                    console.log(idJenis, idBrand);
                     if (data.length == 0) {
                         $('#seri_kendaraans_id').append(
                             `<option value="0">Data nomor seri tidak ditemukan!</option>`
@@ -317,10 +316,14 @@
 
         $("#seri_kendaraans_id").change(function() {
             let idSeri = $(this).val();
+            let pemesanans_id = $("#pemesanans_id").val();
+            let tanggal_mulai = $("#tanggal_mulai").val();
+            let tanggal_akhir = $("#tanggal_akhir").val();
             $('#kendaraans_id option').remove();
             $.ajax({
                 type: 'get',
-                url: '/booking/kendaraan-seri/' + idSeri,
+                url: '/booking/check-seri-edit/' + pemesanans_id + '/' + idSeri + '/' + tanggal_mulai +
+                    '/' + tanggal_akhir,
                 success: function(data) {
                     if (data.length == 0) {
                         $('#kendaraans_id').append(
@@ -491,6 +494,95 @@
             let tanggalMulaiSewa = moment(tanggalDiambilValue);
             let tanggalKembaliSewa = moment(inputTanggalKembali.value);
             let totalWaktuSewa = tanggalKembaliSewa.diff(tanggalMulaiSewa, 'days');
+        });
+
+        $("#tanggal_mulai").change(function() {
+            let tanggal_mulai = $(this).val();
+            let tanggal_akhir = $("#tanggal_akhir").val();
+            let pemesanans_id = $("#pemesanans_id").val();
+            $('#sopirs_id option').remove();
+            $('#kendaraans_id option').remove();
+            $('#seri_kendaraans_id option').remove();
+            $('#jenis_kendaraan option').remove();
+            $('#brand_kendaraan option').remove();
+
+            $.ajax({
+                type: 'get',
+                url: '/booking/get-jenis',
+                success: function(data) {
+                    $('#jenis_kendaraan').append(
+                        `<option value="0">Pilih jenis kendaraan!</option>`
+                    );
+                    data.forEach(jenis => {
+                        $('#jenis_kendaraan').append(
+                            `<option value="${jenis.id}">${jenis.nama}</option>`
+                        );
+                    });
+                }
+            });
+
+            $.ajax({
+                type: 'get',
+                url: '/booking/get-brand',
+                success: function(data) {
+                    $('#brand_kendaraan').append(
+                        `<option value="0">Pilih brand kendaraan!</option>`
+                    );
+                    data.forEach(brand => {
+                        $('#brand_kendaraan').append(
+                            `<option value="${brand.id}">${brand.nama}</option>`
+                        );
+                    });
+                }
+            });
+
+            $('#seri_kendaraans_id').append(
+                `<option value="0">Pilih jenis & brand kendaraan dahulu!</option>`
+            );
+
+            $.ajax({
+                type: 'get',
+                url: '/booking/check-kendaraan-edit/' + pemesanans_id + '/' + tanggal_mulai + '/' +
+                    tanggal_akhir,
+                success: function(data) {
+                    if (data.length == 0) {
+                        $('#kendaraans_id').append(
+                            `<option value="">Data kendaraan tidak ditemukan!</option>`
+                        );
+                    } else {
+                        $('#kendaraans_id').append(
+                            `<option value="">Pilih kendaraan!</option>`
+                        );
+                        data.forEach(kendaraan => {
+                            $('#kendaraans_id').append(
+                                `<option value="${kendaraan.id}">${kendaraan.nomor_plat}</option>`
+                            );
+                        });
+                    }
+                }
+            });
+
+            $.ajax({
+                type: 'get',
+                url: '/booking/check-sopir-edit/' + pemesanans_id + '/' + tanggal_mulai + '/' +
+                    tanggal_akhir,
+                success: function(data) {
+                    if (data.length == 0) {
+                        $('#sopirs_id').append(
+                            `<option value="">Data sopir tidak ditemukan!</option>`
+                        );
+                    } else {
+                        $('#sopirs_id').append(
+                            `<option value="">Pilih sopir!</option>`
+                        );
+                        data.forEach(sopir => {
+                            $('#sopirs_id').append(
+                                `<option value="${sopir.id}">${sopir.nama}</option>`
+                            );
+                        });
+                    }
+                }
+            });
         });
     </script>
 @endsection
