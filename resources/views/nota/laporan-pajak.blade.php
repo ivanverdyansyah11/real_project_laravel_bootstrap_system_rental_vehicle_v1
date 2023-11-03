@@ -88,14 +88,21 @@
                                 value="{{ $pajak->jumlah_bayar }}" readonly>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-4">
+                    <div class="col-md-4 mb-4">
+                        <div class="input-wrapper">
+                            <label for="finance">Staff Finance</label>
+                            <input type="text" id="finance" class="input" autocomplete="off" readonly
+                                value="{{ $pajak->finance }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
                         <div class="input-wrapper">
                             <label for="penggunas_id">Pengguna Menambahkan</label>
                             <input type="text" id="penggunas_id" class="input" autocomplete="off" readonly
                                 value="{{ $laporan->pengguna->nama_lengkap }}">
                         </div>
                     </div>
-                    <div class="col-md-6 row-button">
+                    <div class="col-md-4 row-button">
                         <div class="input-wrapper">
                             <label for="tanggal_dibuat">Tanggal & Jam Dibuat</label>
                             <input type="text" id="tanggal_dibuat" class="input" autocomplete="off" readonly

@@ -255,8 +255,6 @@
                                                 ready</option>
                                             <option value="booking"
                                                 {{ $kendaraan->status == 'booking' ? 'selected' : '' }}>booking</option>
-                                            <option value="dipesan"
-                                                {{ $kendaraan->status == 'dipesan' ? 'selected' : '' }}>dipesan</option>
                                             <option value="servis" {{ $kendaraan->status == 'servis' ? 'selected' : '' }}>
                                                 servis</option>
                                         </select>

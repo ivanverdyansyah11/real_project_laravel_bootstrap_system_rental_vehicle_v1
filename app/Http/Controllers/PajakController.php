@@ -52,6 +52,7 @@ class PajakController extends Controller
             'tanggal_bayar' => 'required|date',
             'metode_bayar' => 'required|string',
             'jumlah_bayar' => 'required|string',
+            'finance' => 'required|string',
         ]);
 
         $validatedData['kendaraans_id'] = $id;
