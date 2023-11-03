@@ -728,8 +728,6 @@ class BookingController extends Controller
             $validatedData['kendaraans_id'] = (int)$validatedData['kendaraans_id'];
         }
 
-        return $validatedData;
-
         $pemesanan = $pemesanan->update($validatedData);
         $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first()->update([
             'status' => 'booking',
