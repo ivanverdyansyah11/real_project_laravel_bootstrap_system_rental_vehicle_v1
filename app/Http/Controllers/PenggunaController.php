@@ -37,46 +37,60 @@ class PenggunaController extends Controller
 
     function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nama_lengkap' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'password' => 'required|min:3|max:255',
-        ]);
-
-        $validatedData['role'] = 'staff';
-
-        $pengguna = Auth::create($validatedData);
-
-        if ($pengguna) {
-            return redirect(route('pengguna'))->with('success', 'Berhasil Tambah Pengguna!');
-        } else {
+        try {
+            $validatedData = $request->validate([
+                'nama_lengkap' => 'required|string|max:255',
+                'email' => 'required|email:dns|max:255',
+                'password' => 'required|min:3|max:255',
+            ]);
+    
+            $validatedData['role'] = 'staff';
+    
+            $pengguna = Auth::create($validatedData);
+    
+            if ($pengguna) {
+                return redirect(route('pengguna'))->with('success', 'Berhasil Tambah Pengguna!');
+            } else {
+                return redirect(route('pengguna'))->with('failed', 'Gagal Tambah Pengguna!');
+            }
+        } catch (\Exception $e) {
+            logger($e->getMessage());
             return redirect(route('pengguna'))->with('failed', 'Gagal Tambah Pengguna!');
         }
     }
 
     function update($id, Request $request)
     {
-        $validatedData = $request->validate([
-            'nama_lengkap' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-        ]);
-
-        $pengguna = Auth::where('id', $id)->first()->update($validatedData);
-
-        if ($pengguna) {
-            return redirect(route('pengguna'))->with('success', 'Berhasil Update Pengguna!');
-        } else {
+        try {
+            $validatedData = $request->validate([
+                'nama_lengkap' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+            ]);
+    
+            $pengguna = Auth::where('id', $id)->first()->update($validatedData);
+    
+            if ($pengguna) {
+                return redirect(route('pengguna'))->with('success', 'Berhasil Update Pengguna!');
+            } else {
+                return redirect(route('pengguna'))->with('failed', 'Gagal Update Pengguna!');
+            }
+        } catch (\Exception $e) {
+            logger($e->getMessage());
             return redirect(route('pengguna'))->with('failed', 'Gagal Update Pengguna!');
         }
     }
 
     function delete($id)
     {
-        $pengguna = Auth::where('id', $id)->first()->delete();
-
-        if ($pengguna) {
-            return redirect(route('pengguna'))->with('success', 'Berhasil Hapus Pengguna!');
-        } else {
+        try {
+            $pengguna = Auth::where('id', $id)->first()->delete();
+            if ($pengguna) {
+                return redirect(route('pengguna'))->with('success', 'Berhasil Hapus Pengguna!');
+            } else {
+                return redirect(route('pengguna'))->with('failed', 'Gagal Hapus Pengguna!');
+            }
+        } catch (\Exception $e) {
+            logger($e->getMessage());
             return redirect(route('pengguna'))->with('failed', 'Gagal Hapus Pengguna!');
         }
     }
