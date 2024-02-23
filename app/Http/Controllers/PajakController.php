@@ -47,26 +47,31 @@ class PajakController extends Controller
 
     public function transactionAction($id, Request $request)
     {
-        $validatedData = $request->validate([
-            'jenis_pajak' => 'required|string',
-            'tanggal_bayar' => 'required|date',
-            'metode_bayar' => 'required|string',
-            'jumlah_bayar' => 'required|string',
-            'finance' => 'required|string',
-        ]);
-
-        $validatedData['kendaraans_id'] = $id;
-        $pajak = Pajak::create($validatedData);
-        $pajakID = Pajak::latest()->first();
-        $laporan = Laporan::create([
-            'penggunas_id' => auth()->user()->id,
-            'relations_id' => $pajakID->id,
-            'kategori_laporan' => 'pajak',
-        ]);
-
-        if ($pajak && $laporan) {
-            return redirect(route('pajak'))->with('success', 'Berhasil Tambah Bayar Pajak Kendaraan!');
-        } else {
+        try {
+            $validatedData = $request->validate([
+                'jenis_pajak' => 'required|string',
+                'tanggal_bayar' => 'required|date',
+                'metode_bayar' => 'required|string',
+                'jumlah_bayar' => 'required|string',
+                'finance' => 'required|string',
+            ]);
+    
+            $validatedData['kendaraans_id'] = $id;
+            $pajak = Pajak::create($validatedData);
+            $pajakID = Pajak::latest()->first();
+            $laporan = Laporan::create([
+                'penggunas_id' => auth()->user()->id,
+                'relations_id' => $pajakID->id,
+                'kategori_laporan' => 'pajak',
+            ]);
+    
+            if ($pajak && $laporan) {
+                return redirect(route('pajak'))->with('success', 'Berhasil Tambah Bayar Pajak Kendaraan!');
+            } else {
+                return redirect(route('pajak'))->with('failed', 'Gagal Tambah Bayar Pajak Kendaraan!');
+            }
+        } catch (\Exception $e) {
+            logger($e->getMessage());
             return redirect(route('pajak'))->with('failed', 'Gagal Tambah Bayar Pajak Kendaraan!');
         }
     }
