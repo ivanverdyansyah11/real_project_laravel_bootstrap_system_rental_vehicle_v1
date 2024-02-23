@@ -1010,6 +1010,7 @@ body {
 .input-wrapper .caption-error {
     font-size: 0.813rem;
     color: rgba(var(--red-color), 1);
+    text-transform: capitalize;
 }
 
 .card-product .status-true,
