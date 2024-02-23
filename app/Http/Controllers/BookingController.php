@@ -17,16 +17,21 @@ class BookingController extends Controller
 {
     function check()
     {
-        $pelanggan = Pelanggan::where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count();
-        $sopir = Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count();
-        $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking', 'dipesan'])->count();
-
-        if ($pelanggan == 0) {
-            return redirect(route('pemesanan'))->with('failed', 'Tidak Menemukan Pelanggan yang Ready, Tambahkan Pelanggan Baru!');
-        } elseif ($sopir == 0) {
-            return redirect(route('pemesanan'))->with('failed', 'Tidak Menemukan Sopir yang Ready, Tambahkan Sopir Baru!');
-        } elseif ($kendaraan == 0) {
-            return redirect(route('pemesanan'))->with('failed', 'Tidak Menemukan Kendaraan yang Ready atau Booking, Tambahkan Kendaraan Baru!');
+        try {
+            $pelanggan = Pelanggan::where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count();
+            $sopir = Sopir::where('status', 'ada')->where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_sim', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count();
+            $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking', 'dipesan'])->count();
+    
+            if ($pelanggan == 0) {
+                return redirect(route('pemesanan'))->with('failed', 'Tidak Menemukan Pelanggan yang Ready, Tambahkan Pelanggan Baru!');
+            } elseif ($sopir == 0) {
+                return redirect(route('pemesanan'))->with('failed', 'Tidak Menemukan Sopir yang Ready, Tambahkan Sopir Baru!');
+            } elseif ($kendaraan == 0) {
+                return redirect(route('pemesanan'))->with('failed', 'Tidak Menemukan Kendaraan yang Ready atau Booking, Tambahkan Kendaraan Baru!');
+            }
+        } catch (\Exception $e) {
+            logger($e->getMessage());
+            return redirect(route('pemesanan'))->with('failed', 'Gagal Booking Kendaraan!');
         }
     }
 
@@ -36,21 +41,18 @@ class BookingController extends Controller
             ->where('kelengkapan_kk', 'lengkap')
             ->where('kelengkapan_nomor_telepon', 'lengkap')
             ->get();
-
         return response()->json($pelanggan);
     }
 
     function getJenisKendaraan()
     {
         $jenis = JenisKendaraan::all();
-
         return response()->json($jenis);
     }
 
     function getBrandKendaraan()
     {
         $brand = BrandKendaraan::all();
-
         return response()->json($brand);
     }
 
@@ -90,30 +92,24 @@ class BookingController extends Controller
         } else {
             $result = $kendaraan;
         }
-
         $kendaraanResult = Kendaraan::whereIn('id', $result)->get();
-
         return response()->json($kendaraanResult);
     }
 
     function checkSeriKendaraanEdit($id, $idSeri, $tanggalMulai, $tanggalAkhir)
     {
         $pemesanan = Pemesanan::where('id', $id)->with('kendaraan', 'pelanggan', 'sopir')->first();
-
         $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
         $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
-
         $kendaraan = Kendaraan::where('seri_kendaraans_id', $idSeri)
             ->whereIn('status', ['ready', 'booking', 'dipesan'])
             ->with('jenis_kendaraan', 'brand_kendaraan', 'seri_kendaraan')
             ->pluck('id')
             ->toArray();
-
         $kendaraanPelangganSelected = Pemesanan::where('pelanggans_id', $pemesanan->pelanggans_id)
             ->whereNotIn('id', [$id])
             ->pluck('kendaraans_id')
             ->toArray();
-
         $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
             ->whereNotIn('id', [$id])
             ->where('tanggal_mulai', '<=', $tanggalMulai)
@@ -145,9 +141,7 @@ class BookingController extends Controller
         } else {
             $result = $kendaraan;
         }
-
         $kendaraanResult = Kendaraan::whereIn('id', $result)->get();
-
         return response()->json($kendaraanResult);
     }
 
@@ -156,11 +150,9 @@ class BookingController extends Controller
         $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking', 'dipesan'])
             ->pluck('id')
             ->toArray();
-
         $kendaraanPelangganSelected = Pemesanan::where('pelanggans_id', $pelanggans_id)
             ->pluck('kendaraans_id')
             ->toArray();
-
         $kendaraanSelected = Pemesanan::where('tanggal_mulai', '<=', $tanggalMulai)
             ->where('tanggal_akhir', '>=', $tanggalAkhir)
             ->pluck('kendaraans_id')
@@ -196,11 +188,9 @@ class BookingController extends Controller
     {
         $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
         $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
-
         $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking', 'dipesan'])
             ->pluck('id')
             ->toArray();
-
         $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
             ->where('tanggal_mulai', '<=', $tanggalMulai)
             ->where('tanggal_akhir', '>=', $tanggalAkhir)
@@ -228,27 +218,21 @@ class BookingController extends Controller
         }
 
         $kendaraanResult = Kendaraan::whereIn('id', $result)->get();
-
         return response()->json($kendaraanResult);
     }
 
     function checkKendaraanEdit($id, $tanggalMulai, $tanggalAkhir)
     {
         $pemesanan = Pemesanan::where('id', $id)->with('kendaraan', 'pelanggan', 'sopir')->first();
-
         $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
         $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
-
         $kendaraan = Kendaraan::whereIn('status', ['ready', 'booking', 'dipesan'])
             ->pluck('id')
             ->toArray();
-
-
         $kendaraanPelangganSelected = Pemesanan::where('pelanggans_id', $pemesanan->pelanggans_id)
             ->whereNotIn('id', [$id])
             ->pluck('kendaraans_id')
             ->toArray();
-
         $kendaraanSelected = Pemesanan::whereNotIn('status', ['selesai'])
             ->whereNotIn('id', [$id])
             ->where('tanggal_mulai', '<=', $tanggalMulai)
@@ -282,7 +266,6 @@ class BookingController extends Controller
         }
 
         $kendaraanResult = Kendaraan::whereIn('id', $result)->get();
-
         return response()->json($kendaraanResult);
     }
 
@@ -290,7 +273,6 @@ class BookingController extends Controller
     {
         $tanggalMulai = Carbon::parse($tanggalMulai)->format('Y-m-d');
         $tanggalAkhir = Carbon::parse($tanggalAkhir)->format('Y-m-d');
-
         $sopir = Sopir::where('status', 'ada')
             ->where('kelengkapan_ktp', 'lengkap')
             ->where('kelengkapan_sim', 'lengkap')
@@ -400,9 +382,9 @@ class BookingController extends Controller
 
     function bookingAction(Request $request)
     {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        try {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $kodePemesanan = '';
-
         $kendaraan = Kendaraan::where('id', $request->kendaraans_id)->first();
         $initialKendaraan = explode(' ', $kendaraan->nomor_plat);
 
@@ -517,6 +499,10 @@ class BookingController extends Controller
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Booking Kendaraan!');
         }
+    } catch (\Exception $e) {
+            logger($e->getMessage());
+            return redirect(route('pemesanan'))->with('failed', 'Gagal Booking Kendaraan!');
+        }
     }
 
     public function detail($id)
@@ -532,7 +518,6 @@ class BookingController extends Controller
     public function edit($id)
     {
         $pemesanan = Pemesanan::where('id', $id)->with('kendaraan', 'pelanggan', 'sopir')->first();
-
         $tanggalMulai = Carbon::parse($pemesanan->tanggal_mulai)->format('Y-m-d');
         $tanggalAkhir = Carbon::parse($pemesanan->tanggal_akhir)->format('Y-m-d');
 
@@ -636,7 +621,8 @@ class BookingController extends Controller
 
     function update($id, Request $request)
     {
-        $pelangganCheck = Pemesanan::whereNotIn('id', [$id])
+        try {
+            $pelangganCheck = Pemesanan::whereNotIn('id', [$id])
             ->where('pelanggans_id', $request->pelanggans_id)
             ->where('kendaraans_id', $request->kendaraans_id)
             ->first();
@@ -738,28 +724,33 @@ class BookingController extends Controller
         } else {
             return redirect(route('pemesanan'))->with('failed', 'Gagal Booking Kendaraan!');
         }
+    } catch (\Exception $e) {
+            logger($e->getMessage());
+            return redirect(route('pemesanan'))->with('failed', 'Gagal Booking Kendaraan!');
+        }
     }
 
     public function delete($id)
     {
-        $pemesanan = Pemesanan::where('id', $id)->first();
-        $pemesananCount = Pemesanan::where('kendaraans_id', $pemesanan->kendaraans_id)->count();
+        try {
+            $pemesanan = Pemesanan::where('id', $id)->first();
+            $pemesananCount = Pemesanan::where('kendaraans_id', $pemesanan->kendaraans_id)->count();
+            $laporan = Laporan::where('relations_id', $pemesanan->id)->where('kategori_laporan', 'booking')->first();
+            $laporan = $laporan->delete();
 
-        $laporan = Laporan::where('relations_id', $pemesanan->id)->where('kategori_laporan', 'booking')->first();
-        $laporan = $laporan->delete();
-
-        if ($pemesananCount == 1) {
-            Kendaraan::where('id', $pemesanan->kendaraans_id)->first()->update([
-                'status' => 'ready',
-            ]);
-        }
-
-        $pemesanan = $pemesanan->delete();
-
-
-        if ($pemesanan && $laporan) {
-            return redirect(route('pemesanan'))->with('success', 'Berhasil Hapus Booking Kendaraan!');
-        } else {
+            if ($pemesananCount == 1) {
+                Kendaraan::where('id', $pemesanan->kendaraans_id)->first()->update([
+                    'status' => 'ready',
+                ]);
+            }
+            $pemesanan = $pemesanan->delete();
+            if ($pemesanan && $laporan) {
+                return redirect(route('pemesanan'))->with('success', 'Berhasil Hapus Booking Kendaraan!');
+            } else {
+                return redirect(route('pemesanan'))->with('failed', 'Gagal Hapus Booking Kendaraan!');
+            }
+        } catch (\Exception $e) {
+            logger($e->getMessage());
             return redirect(route('pemesanan'))->with('failed', 'Gagal Hapus Booking Kendaraan!');
         }
     }
