@@ -69,21 +69,26 @@ class SeriKendaraanController extends Controller
 
     function store(Request $request)
     {
-        if ($request->jenis_kendaraans_id == '' || $request->brand_kendaraans_id == '') {
-            return redirect(route('seriKendaraan.create'))->with('failed', 'Isi Form Input Jenis Kendaraan dan Brand Kendaraan Terlebih Dahulu!');
-        }
-
-        $validatedData = $request->validate([
-            'nomor_seri' => 'required|string',
-            'jenis_kendaraans_id' => 'required|string',
-            'brand_kendaraans_id' => 'required|string',
-        ]);
-
-        $seri = SeriKendaraan::create($validatedData);
-
-        if ($seri) {
-            return redirect(route('seriKendaraan'))->with('success', 'Berhasil Tambah Seri Kendaraan!');
-        } else {
+        try {
+            if ($request->jenis_kendaraans_id == '' || $request->brand_kendaraans_id == '') {
+                return redirect(route('seriKendaraan.create'))->with('failed', 'Isi Form Input Jenis Kendaraan dan Brand Kendaraan Terlebih Dahulu!');
+            }
+    
+            $validatedData = $request->validate([
+                'nomor_seri' => 'required|string',
+                'jenis_kendaraans_id' => 'required|string',
+                'brand_kendaraans_id' => 'required|string',
+            ]);
+    
+            $seri = SeriKendaraan::create($validatedData);
+    
+            if ($seri) {
+                return redirect(route('seriKendaraan'))->with('success', 'Berhasil Tambah Seri Kendaraan!');
+            } else {
+                return redirect(route('seriKendaraan'))->with('failed', 'Gagal Tambah Seri Kendaraan!');
+            }
+        } catch (\Exception $e) {
+            logger($e->getMessage());
             return redirect(route('seriKendaraan'))->with('failed', 'Gagal Tambah Seri Kendaraan!');
         }
     }
@@ -100,40 +105,49 @@ class SeriKendaraanController extends Controller
 
     function update($id, Request $request)
     {
-        if ($request->jenis_kendaraans_id == '' || $request->brand_kendaraans_id == '') {
-            return redirect(route('seriKendaraan.edit', $id))->with('failed', 'Isi Form Input Jenis Kendaraan dan Brand Kendaraan Terlebih Dahulu!');
-        }
-
-        $validatedData = $request->validate([
-            'jenis_kendaraans_id' => 'required|string',
-            'brand_kendaraans_id' => 'required|string',
-            'nomor_seri' => 'required|string',
-        ]);
-
-        if (is_string($validatedData['jenis_kendaraans_id'])) {
-            $validatedData['jenis_kendaraans_id'] = (int)$validatedData['jenis_kendaraans_id'];
-        }
-
-        if (is_string($validatedData['brand_kendaraans_id'])) {
-            $validatedData['brand_kendaraans_id'] = (int)$validatedData['brand_kendaraans_id'];
-        }
-
-        $seri = SeriKendaraan::where('id', $id)->first()->update($validatedData);
-
-        if ($seri) {
-            return redirect(route('seriKendaraan'))->with('success', 'Berhasil Update Seri Kendaraan!');
-        } else {
+        try {
+            if ($request->jenis_kendaraans_id == '' || $request->brand_kendaraans_id == '') {
+                return redirect(route('seriKendaraan.edit', $id))->with('failed', 'Isi Form Input Jenis Kendaraan dan Brand Kendaraan Terlebih Dahulu!');
+            }
+    
+            $validatedData = $request->validate([
+                'jenis_kendaraans_id' => 'required|string',
+                'brand_kendaraans_id' => 'required|string',
+                'nomor_seri' => 'required|string',
+            ]);
+    
+            if (is_string($validatedData['jenis_kendaraans_id'])) {
+                $validatedData['jenis_kendaraans_id'] = (int)$validatedData['jenis_kendaraans_id'];
+            }
+    
+            if (is_string($validatedData['brand_kendaraans_id'])) {
+                $validatedData['brand_kendaraans_id'] = (int)$validatedData['brand_kendaraans_id'];
+            }
+    
+            $seri = SeriKendaraan::where('id', $id)->first()->update($validatedData);
+    
+            if ($seri) {
+                return redirect(route('seriKendaraan'))->with('success', 'Berhasil Update Seri Kendaraan!');
+            } else {
+                return redirect(route('seriKendaraan'))->with('failed', 'Gagal Update Seri Kendaraan!');
+            }
+        } catch (\Exception $e) {
+            logger($e->getMessage());
             return redirect(route('seriKendaraan'))->with('failed', 'Gagal Update Seri Kendaraan!');
         }
     }
 
     function delete($id)
     {
-        $seri = SeriKendaraan::where('id', $id)->first()->delete();
-
-        if ($seri) {
-            return redirect(route('seriKendaraan'))->with('success', 'Berhasil Hapus Seri Kendaraan!');
-        } else {
+        try {
+            $seri = SeriKendaraan::where('id', $id)->first()->delete();
+            if ($seri) {
+                return redirect(route('seriKendaraan'))->with('success', 'Berhasil Hapus Seri Kendaraan!');
+            } else {
+                return redirect(route('seriKendaraan'))->with('failed', 'Gagal Hapus Seri Kendaraan!');
+            }
+        } catch (\Exception $e) {
+            logger($e->getMessage());
             return redirect(route('seriKendaraan'))->with('failed', 'Gagal Hapus Seri Kendaraan!');
         }
     }
