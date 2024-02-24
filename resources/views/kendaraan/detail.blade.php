@@ -111,7 +111,7 @@
                                     <div class="input-wrapper">
                                         <label for="kilometer_sebelum_servis">Kilometer Sebelum Servis</label>
                                         <input type="text" id="kilometer_sebelum_servis" class="input" autocomplete="off" disabled
-                                            value="{{ $kendaraan->servis($kendaraan->id)->kilometer_sebelum }}">
+                                            value="{{ $kendaraan->servis($kendaraan->id) ? $kendaraan->servis($kendaraan->id)->kilometer_sebelum : $kendaraan->kilometer_saat_ini }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
