@@ -342,13 +342,8 @@ class LaporanController extends Controller
                 }
             }
     
-            $pelepasan = PelepasanPemesanan::where('id', $laporan->relations_id)->first()->update($validatedData);
-    
-            if ($pelepasan) {
-                return redirect(route('laporan.pemesanan.detail', $id))->with('success', 'Berhasil Update Data Laporan Pemesanan!');
-            } else {
-                return redirect(route('laporan.pemesanan.detail', $id))->with('failed', 'Gagal Update Data Laporan Pemesanan!');
-            }
+            PelepasanPemesanan::where('id', $laporan->relations_id)->first()->update($validatedData);
+            return redirect(route('laporan.pemesanan.detail', $id))->with('success', 'Berhasil Update Data Laporan Pemesanan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('laporan.pemesanan.detail', $id))->with('failed', 'Gagal Update Data Laporan Pemesanan!');
