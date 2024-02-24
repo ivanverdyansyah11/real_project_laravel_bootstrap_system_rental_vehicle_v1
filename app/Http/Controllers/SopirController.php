@@ -65,33 +65,27 @@ class SopirController extends Controller
                 'data_sim' => 'required|string',
                 'data_nomor_telepon' => 'required|string',
             ]);
-    
             if ($validatedData['data_ktp'] == '' || $validatedData['data_sim'] == '') {
                 return redirect(route('sopir.create'))->with('failed', 'Isi Form Input Kelengkapan KTP & SIM Terlebih Dahulu!');
             }
-    
             $validatedData['status'] = "ada";
-    
             if (!empty($validatedData['foto_ktp'])) {
                 $image = $request->file('foto_ktp');
                 $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
                 $image->move(public_path('assets/img/ktp-images/'), $imageName);
                 $validatedData['foto_ktp'] = $imageName;
             }
-    
             if (!empty($validatedData['foto_sim'])) {
                 $image = $request->file('foto_sim');
                 $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
                 $image->move(public_path('assets/img/sim-images/'), $imageName);
                 $validatedData['foto_sim'] = $imageName;
             }
-    
             if ($request->foto_ktp && $validatedData['nomor_ktp'] !== null) {
                 $validatedData['kelengkapan_ktp'] = 'lengkap';
             } else {
                 $validatedData['kelengkapan_ktp'] = 'belum lengkap';
             }
-    
             if ($request->foto_sim && $validatedData['nomor_sim'] !== null) {
                 $validatedData['kelengkapan_sim'] = 'lengkap';
             } else {
@@ -103,21 +97,14 @@ class SopirController extends Controller
             } else {
                 $validatedData['kelengkapan_nomor_telepon'] = 'belum lengkap';
             }
-    
-            $sopir = Sopir::create($validatedData);
+            Sopir::create($validatedData);
             $sopirID = Sopir::where('nik', $validatedData['nik'])->first();
-    
-            $laporan = Laporan::create([
+            Laporan::create([
                 'penggunas_id' => auth()->user()->id,
                 'relations_id' => $sopirID->id,
                 'kategori_laporan' => 'sopir',
             ]);
-    
-            if ($sopir && $laporan) {
-                return redirect(route('sopir'))->with('success', 'Berhasil Tambah Sopir!');
-            } else {
-                return redirect(route('sopir'))->with('failed', 'Gagal Tambah Sopir!');
-            }
+            return redirect(route('sopir'))->with('success', 'Berhasil Tambah Sopir!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('sopir'))->with('failed', 'Gagal Tambah Sopir!');
@@ -201,13 +188,8 @@ class SopirController extends Controller
                 $validatedData['kelengkapan_nomor_telepon'] = 'belum lengkap';
             }
 
-            $sopir = Sopir::where('id', $id)->first()->update($validatedData);
-
-            if ($sopir) {
-                return redirect(route('sopir'))->with('success', 'Berhasil Edit Sopir!');
-            } else {
-                return redirect(route('sopir'))->with('failed', 'Gagal Edit Sopir!');
-            }
+            Sopir::where('id', $id)->first()->update($validatedData);
+            return redirect(route('sopir'))->with('success', 'Berhasil Edit Sopir!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('sopir'))->with('failed', 'Gagal Edit Sopir!');
@@ -226,12 +208,8 @@ class SopirController extends Controller
             if (File::exists($pathSIM)) {
                 File::delete($pathSIM);
             }
-            $sopir = $sopir->delete();
-            if ($sopir) {
-                return redirect(route('sopir'))->with('success', 'Berhasil Hapus Sopir!');
-            } else {
-                return redirect(route('sopir'))->with('failed', 'Gagal Hapus Sopir!');
-            }
+            $sopir->delete();
+            return redirect(route('sopir'))->with('success', 'Berhasil Hapus Sopir!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('sopir'))->with('failed', 'Gagal Hapus Sopir!');
