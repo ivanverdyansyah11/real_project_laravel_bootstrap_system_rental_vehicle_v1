@@ -82,16 +82,16 @@ Route::middleware(['auth', 'owner'])->group(function () {
 
     // SERI KENDARAAN
     Route::controller(SeriKendaraanController::class)->group(function () {
-        Route::get('/seri-kendaraan', 'index')->name('seriKendaraan');
-        Route::post('/seri-kendaraan/cari', 'search')->name('seriKendaraan.search');
-        Route::post('/seri-kendaraan/check', 'check')->name('seriKendaraan.check');
-        Route::get('/seri-kendaraan/detail/{id}', 'detail')->name('seriKendaraan.detail');
+        Route::get('/tipe-kendaraan', 'index')->name('tipeKendaraan');
+        Route::post('/tipe-kendaraan/cari', 'search')->name('tipeKendaraan.search');
+        Route::post('/tipe-kendaraan/check', 'check')->name('tipeKendaraan.check');
+        Route::get('/tipe-kendaraan/detail/{id}', 'detail')->name('tipeKendaraan.detail');
 
-        Route::get('/seri-kendaraan/tambah', 'create')->name('seriKendaraan.create');
-        Route::post('/seri-kendaraan/tambah', 'store')->name('seriKendaraan.store');
-        Route::get('/seri-kendaraan/edit/{id}', 'edit')->name('seriKendaraan.edit');
-        Route::post('/seri-kendaraan/edit/{id}', 'update')->name('seriKendaraan.update');
-        Route::post('/seri-kendaraan/hapus/{id}', 'delete')->name('seriKendaraan.delete');
+        Route::get('/tipe-kendaraan/tambah', 'create')->name('tipeKendaraan.create');
+        Route::post('/tipe-kendaraan/tambah', 'store')->name('tipeKendaraan.store');
+        Route::get('/tipe-kendaraan/edit/{id}', 'edit')->name('tipeKendaraan.edit');
+        Route::post('/tipe-kendaraan/edit/{id}', 'update')->name('tipeKendaraan.update');
+        Route::post('/tipe-kendaraan/hapus/{id}', 'delete')->name('tipeKendaraan.delete');
     });
 
     // KATEGORI KILOMETER KENDARAAN
