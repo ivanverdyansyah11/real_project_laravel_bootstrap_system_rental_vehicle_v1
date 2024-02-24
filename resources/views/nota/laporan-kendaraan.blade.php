@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="seri">Nomor Seri</label>
+                                        <label for="seri">Tipe Kendaraan</label>
                                         <input type="text" id="seri" class="input" autocomplete="off"
                                             value="{{ $kendaraan->seri_kendaraan->nomor_seri }}" readonly>
                                     </div>
@@ -88,21 +88,21 @@
                                     <div class="input-wrapper">
                                         <label for="tarif_sewa_hari">Tarif Sewa Harian</label>
                                         <input type="text" id="tarif_sewa_hari" class="input" autocomplete="off"
-                                            readonly value="{{ $kendaraan->tarif_sewa_hari }}">
+                                            readonly value="Rp. {{ number_format($kendaraan->tarif_sewa_hari, 2, ",", ".") }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="tarif_sewa_minggu">Tarif Sewa Mingguan</label>
                                         <input type="text" id="tarif_sewa_minggu" class="input" autocomplete="off"
-                                            readonly value="{{ $kendaraan->tarif_sewa_minggu }}">
+                                            readonly value="Rp. {{ number_format($kendaraan->tarif_sewa_minggu, 2, ",", ".") }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="tarif_sewa_bulan">Tarif Sewa Bulanan</label>
                                         <input type="text" id="tarif_sewa_bulan" class="input" autocomplete="off"
-                                            readonly value="{{ $kendaraan->tarif_sewa_bulan }}">
+                                            readonly value="Rp. {{ number_format($kendaraan->tarif_sewa_bulan, 2, ",", ".") }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
