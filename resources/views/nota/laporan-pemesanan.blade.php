@@ -37,7 +37,7 @@
                                     <img src="{{ $pemesanan->foto_nota ? asset('assets/img/nota-images/' . $pemesanan->foto_nota) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-nota" alt="Nota Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-nota" name="foto_nota"
+                                        <input {{ $pemesanan->foto_nota ? '' : 'required' }} type="file" id="image" class="input-create-nota" name="foto_nota"
                                             style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-nota">Pilih Foto
                                             Nota</button>
@@ -55,7 +55,7 @@
                                     <img src="{{ $pemesanan->foto_nota_ttd ? asset('assets/img/nota-ttd-images/' . $pemesanan->foto_nota_ttd) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-nota-ttd" alt="Nota Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-nota-ttd"
+                                        <input {{ $pemesanan->foto_nota_ttd ? '' : 'required' }} type="file" id="image" class="input-create-nota-ttd"
                                             name="foto_nota_ttd" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-nota-ttd">Pilih Foto
                                             Nota TTD</button>
@@ -73,7 +73,7 @@
                                     <img src="{{ $pemesanan->foto_dokumen ? asset('assets/img/pemesanan-dokumen-images/' . $pemesanan->foto_dokumen) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-document" alt="Dokumen Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-document"
+                                        <input {{ $pemesanan->foto_dokumen ? '' : 'required' }} type="file" id="image" class="input-create-document"
                                             name="foto_dokumen" value="{{ old('foto_dokumen') }}" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-document">Pilih Foto
                                             Dokumen</button>
@@ -91,7 +91,7 @@
                                     <img src="{{ $pemesanan->foto_kendaraan ? asset('assets/img/pemesanan-kendaraan-images/' . $pemesanan->foto_kendaraan) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-vehicle" alt="Kendaraan Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-vehicle"
+                                        <input {{ $pemesanan->foto_kendaraan ? '' : 'required' }} type="file" id="image" class="input-create-vehicle"
                                             name="foto_kendaraan" value="{{ old('foto_kendaraan') }}" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-vehicle">Pilih Foto
                                             Kendaraan</button>
@@ -109,7 +109,7 @@
                                     <img src="{{ $pemesanan->foto_pelanggan ? asset('assets/img/pemesanan-pelanggan-images/' . $pemesanan->foto_pelanggan) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-customer" alt="Pelanggan Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-customer"
+                                        <input {{ $pemesanan->foto_pelanggan ? '' : 'required' }} type="file" id="image" class="input-create-customer"
                                             name="foto_pelanggan" value="{{ old('foto_pelanggan') }}"
                                             style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-customer">Pilih Foto
