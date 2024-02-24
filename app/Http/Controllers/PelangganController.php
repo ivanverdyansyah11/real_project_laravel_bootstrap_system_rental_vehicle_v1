@@ -101,21 +101,14 @@ class PelangganController extends Controller
             } else {
                 $validatedData['kelengkapan_nomor_telepon'] = 'belum lengkap';
             }
-    
-            $pelanggan = Pelanggan::create($validatedData);
+            Pelanggan::create($validatedData);
             $pelangganID = Pelanggan::where('nik', $validatedData['nik'])->first();
-    
-            $laporan = Laporan::create([
+            Laporan::create([
                 'penggunas_id' => auth()->user()->id,
                 'relations_id' => $pelangganID->id,
                 'kategori_laporan' => 'pelanggan',
             ]);
-    
-            if ($pelanggan && $laporan) {
-                return redirect(route('pelanggan'))->with('success', 'Berhasil Tambah Pelanggan!');
-            } else {
-                return redirect(route('pelanggan'))->with('failed', 'Gagal Tambah Pelanggan!');
-            }
+            return redirect(route('pelanggan'))->with('success', 'Berhasil Tambah Pelanggan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('pelanggan'))->with('failed', 'Gagal Tambah Pelanggan!');
@@ -197,14 +190,8 @@ class PelangganController extends Controller
             } else {
                 $validatedData['kelengkapan_nomor_telepon'] = 'belum lengkap';
             }
-
             $pelanggan = Pelanggan::where('id', $id)->first()->update($validatedData);
-
-            if ($pelanggan) {
-                return redirect(route('pelanggan'))->with('success', 'Berhasil Edit Pelanggan!');
-            } else {
-                return redirect(route('pelanggan'))->with('failed', 'Gagal Edit Pelanggan!');
-            }
+            return redirect(route('pelanggan'))->with('success', 'Berhasil Edit Pelanggan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('pelanggan'))->with('failed', 'Gagal Edit Pelanggan!');
@@ -223,12 +210,8 @@ class PelangganController extends Controller
             if (File::exists($pathKK)) {
                 File::delete($pathKK);
             }
-            $pelanggan = $pelanggan->delete();
-            if ($pelanggan) {
-                return redirect(route('pelanggan'))->with('success', 'Berhasil Hapus Pelanggan!');
-            } else {
-                return redirect(route('pelanggan'))->with('failed', 'Gagal Hapus Pelanggan!');
-            }
+            $pelanggan->delete();
+            return redirect(route('pelanggan'))->with('success', 'Berhasil Hapus Pelanggan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('pelanggan'))->with('failed', 'Gagal Hapus Pelanggan!');
