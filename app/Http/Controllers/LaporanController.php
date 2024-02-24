@@ -231,11 +231,7 @@ class LaporanController extends Controller
 
     public function updatePemesanan($id, Request $request)
     {
-        try {
-            if (is_null($request->foto_dokumen) && is_null($request->foto_kendaraan) && is_null($request->foto_pelanggan) && is_null($request->foto_nota) && is_null($request->foto_nota_ttd)) {
-                return redirect(route('laporan.pemesanan.detail', $id))->with('failed', 'Silahkan input data dengan benar!');
-            }
-    
+        try {    
             $laporan = Laporan::where('id', $id)->first();
             $pelepasan = PelepasanPemesanan::where('id', $laporan->relations_id)->first();
     
@@ -393,7 +389,6 @@ class LaporanController extends Controller
         ];
 
         $pdf = PDF::loadView('nota.generate-transaksi', $data);
-
         return $pdf->download('laporan-transaksi-pemesanan.pdf');
     }
 }
