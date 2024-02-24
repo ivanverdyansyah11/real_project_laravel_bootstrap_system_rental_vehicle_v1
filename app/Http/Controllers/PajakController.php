@@ -57,19 +57,14 @@ class PajakController extends Controller
             ]);
     
             $validatedData['kendaraans_id'] = $id;
-            $pajak = Pajak::create($validatedData);
+            Pajak::create($validatedData);
             $pajakID = Pajak::latest()->first();
-            $laporan = Laporan::create([
+            Laporan::create([
                 'penggunas_id' => auth()->user()->id,
                 'relations_id' => $pajakID->id,
                 'kategori_laporan' => 'pajak',
             ]);
-    
-            if ($pajak && $laporan) {
-                return redirect(route('pajak'))->with('success', 'Berhasil Tambah Bayar Pajak Kendaraan!');
-            } else {
-                return redirect(route('pajak'))->with('failed', 'Gagal Tambah Bayar Pajak Kendaraan!');
-            }
+            return redirect(route('pajak'))->with('success', 'Berhasil Tambah Bayar Pajak Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('pajak'))->with('failed', 'Gagal Tambah Bayar Pajak Kendaraan!');
