@@ -39,7 +39,7 @@ class PenambahanSewaController extends Controller
             $jumlah_hari = (int)$validatedData['jumlah_hari'];
             $tanggal_akhir->addDays($jumlah_hari);
     
-            $pemesanan = PelepasanPemesanan::where('id', $id)->with('kendaraan', 'pemesanan')->latest()->first()->pemesanan->update([
+            PelepasanPemesanan::where('id', $id)->with('kendaraan', 'pemesanan')->latest()->first()->pemesanan->update([
                 'tanggal_akhir' => $pelepasanPemesanan->pemesanan->tanggal_akhir,
                 'tanggal_akhir_awal' => $tanggal_akhir,
             ]);
@@ -47,26 +47,21 @@ class PenambahanSewaController extends Controller
             $waktu_sewa = $pembayaran->waktu_sewa + (int)$validatedData['jumlah_hari'];
             $total_tarif_sewa = $pembayaran->total_tarif_sewa + (int)$validatedData['total_biaya'];
     
-            $pembayaran = PembayaranPemesanan::where('pelepasan_pemesanans_id', $id)->latest()->first()->update([
+            PembayaranPemesanan::where('pelepasan_pemesanans_id', $id)->latest()->first()->update([
                 'waktu_sewa' => $waktu_sewa,
                 'total_tarif_sewa' => $total_tarif_sewa,
                 'jenis_pembayaran' => 'dp',
             ]);
     
-            $penambahan = PenambahanSewa::create($validatedData);
+            PenambahanSewa::create($validatedData);
             $penambahanID = PenambahanSewa::latest()->first();
     
-            $laporan = Laporan::create([
+            Laporan::create([
                 'penggunas_id' => auth()->user()->id,
                 'relations_id' => $penambahanID->id,
                 'kategori_laporan' => 'penambahan',
             ]);
-    
-            if ($penambahan && $pelepasanPemesanan && $pemesanan && $pembayaran && $laporan) {
-                return redirect(route('pengembalian'))->with('success', 'Berhasil Melakukan Penambahan Hari Sewa Kendaraan!');
-            } else {
-                return redirect(route('pengembalian'))->with('failed', 'Gagal Melakukan Penambahan Hari Sewa Kendaraan!');
-            }
+            return redirect(route('pengembalian'))->with('success', 'Berhasil Melakukan Penambahan Hari Sewa Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('pengembalian'))->with('failed', 'Gagal Melakukan Penambahan Hari Sewa Kendaraan!');
