@@ -17,18 +17,18 @@
         </div>
         <div class="row" style="margin-bottom: 32px">
             <div class="col-12 d-flex justify-content-between align-items-center">
-                <h5 class="subtitle">Edit Seri Kendaraan</h5>
+                <h5 class="subtitle">Edit Tipe Kendaraan</h5>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
                 <form class="form d-inline-block w-100" method="POST"
-                    action="{{ route('seriKendaraan.update', $seri->id) }}">
+                    action="{{ route('tipeKendaraan.update', $seri->id) }}">
                     @csrf
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="nomor">Seri Kendaraan</label>
+                                <label for="nomor">Tipe Kendaraan</label>
                                 <input type="text" id="nomor" class="input" required autocomplete="off"
                                     name="nomor_seri" value="{{ $seri->nomor_seri }}">
                                 @error('nomor_seri')
@@ -85,7 +85,7 @@
                         <div class="col-12">
                             <div class="button-wrapper d-flex">
                                 <button type="submit" class="button-primary">Simpan Perubahan</button>
-                                <a href="{{ route('seriKendaraan') }}" class="button-reverse">Batal
+                                <a href="{{ route('tipeKendaraan') }}" class="button-reverse">Batal
                                     Edit</a>
                             </div>
                         </div>
