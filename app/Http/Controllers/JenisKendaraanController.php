@@ -37,12 +37,8 @@ class JenisKendaraanController extends Controller
             $validatedData = $request->validate([
                 'nama' => 'required|string|max:255',
             ]);
-            $jenis = JenisKendaraan::create($validatedData);
-            if ($jenis) {
-                return redirect(route('jenisKendaraan'))->with('success', 'Berhasil Tambah Jenis Kendaraan!');
-            } else {
-                return redirect(route('jenisKendaraan'))->with('failed', 'Gagal Tambah Jenis Kendaraan!');
-            }
+            JenisKendaraan::create($validatedData);
+            return redirect(route('jenisKendaraan'))->with('success', 'Berhasil Tambah Jenis Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('jenisKendaraan'))->with('failed', 'Gagal Tambah Jenis Kendaraan!');
@@ -55,12 +51,8 @@ class JenisKendaraanController extends Controller
             $validatedData = $request->validate([
                 'nama' => 'required|string|max:255',
             ]);
-            $jenis = JenisKendaraan::where('id', $id)->first()->update($validatedData);
-            if ($jenis) {
-                return redirect(route('jenisKendaraan'))->with('success', 'Berhasil Update Jenis Kendaraan!');
-            } else {
-                return redirect(route('jenisKendaraan'))->with('failed', 'Gagal Update Jenis Kendaraan!');
-            }
+            JenisKendaraan::where('id', $id)->first()->update($validatedData);
+            return redirect(route('jenisKendaraan'))->with('success', 'Berhasil Update Jenis Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('jenisKendaraan'))->with('failed', 'Gagal Update Jenis Kendaraan!');
@@ -70,12 +62,8 @@ class JenisKendaraanController extends Controller
     function delete($id)
     {
         try {
-            $jenis = JenisKendaraan::where('id', $id)->first()->delete();
-            if ($jenis) {
-                return redirect(route('jenisKendaraan'))->with('success', 'Berhasil Hapus Jenis Kendaraan!');
-            } else {
-                return redirect(route('jenisKendaraan'))->with('failed', 'Gagal Hapus Jenis Kendaraan!');
-            }
+            JenisKendaraan::where('id', $id)->first()->delete();
+            return redirect(route('jenisKendaraan'))->with('success', 'Berhasil Hapus Jenis Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('jenisKendaraan'))->with('failed', 'Gagal Hapus Jenis Kendaraan!');
