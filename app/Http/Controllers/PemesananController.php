@@ -112,34 +112,26 @@ class PemesananController extends Controller
                 $image->move(public_path('assets/img/pembayaran-pemesanan-images/'), $imageName);
                 $validatedDataPembayaran['foto_pembayaran'] = $imageName;
             }
-
-            $pelepasanPemesanan = PelepasanPemesanan::create($validatedData);
+            PelepasanPemesanan::create($validatedData);
             $pelepasanPemesananID = PelepasanPemesanan::latest()->first();
             $validatedDataPembayaran['pelepasan_pemesanans_id'] = $pelepasanPemesananID->id;
             if ($validatedDataPembayaran['total_tarif_sewa'] < $validatedDataPembayaran['total_bayar']) {
                 $validatedDataPembayaran['total_bayar'] = $validatedDataPembayaran['total_bayar'] - $validatedDataPembayaran['total_kembalian'];
             }
-            $pembayaranPemesanan = PembayaranPemesanan::create($validatedDataPembayaran);
-            $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first()->update([
+            PembayaranPemesanan::create($validatedDataPembayaran);
+            Kendaraan::where('id', $validatedData['kendaraans_id'])->first()->update([
                 'kilometer_saat_ini' => $validatedData['kilometer_keluar'],
                 'status' => 'dipesan',
             ]);
-
-            $laporan = Laporan::create([
+            Laporan::create([
                 'penggunas_id' => auth()->user()->id,
                 'relations_id' => $validatedDataPembayaran['pelepasan_pemesanans_id'],
                 'kategori_laporan' => 'pemesanan',
             ]);
-
-            $pemesanan = $pemesanan->update([
+            $pemesanan->update([
                 'status' => 'selesai booking',
             ]);
-
-            if ($pelepasanPemesanan && $pembayaranPemesanan && $kendaraan && $laporan && $pemesanan) {
-                return redirect(route('pemesanan'))->with('success', 'Berhasil Melakukan Pelepasan Kendaraan!');
-            } else {
-                return redirect(route('pemesanan'))->with('failed', 'Gagal Melakukan Pelepasan Kendaraan!');
-            }
+            return redirect(route('pemesanan'))->with('success', 'Berhasil Melakukan Pelepasan Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('pemesanan'))->with('failed', 'Gagal Melakukan Pelepasan Kendaraan!');
@@ -160,9 +152,6 @@ class PemesananController extends Controller
     public function update($id, Request $request)
     {
         try {
-            if (is_null($request->foto_dokumen) && is_null($request->foto_kendaraan) && is_null($request->foto_pelanggan) && is_null($request->foto_pembayaran)) {
-                return redirect(route('pemesanan.edit', $id))->with('failed', 'Silahkan input data dengan benar!');
-            }
             $pelepasan_pemesanan = PelepasanPemesanan::where('pemesanans_id', $id)->with('pembayaran_pemesanan')->first();
             $pembayaran_pemesanan = PembayaranPemesanan::where('pelepasan_pemesanans_id', $pelepasan_pemesanan->id)->first();
             $validatedData = $request->validate([
@@ -245,14 +234,10 @@ class PemesananController extends Controller
                 $validatedDataPembayaran['foto_pembayaran'] = $pembayaran_pemesanan->foto_pembayaran;
             }
     
-            $pembayaran_pemesanan = PembayaranPemesanan::where('pelepasan_pemesanans_id', $pelepasan_pemesanan->id)->first()->update($validatedDataPembayaran);
-            $pelepasan_pemesanan = $pelepasan_pemesanan->update($validatedData);
+            PembayaranPemesanan::where('pelepasan_pemesanans_id', $pelepasan_pemesanan->id)->first()->update($validatedDataPembayaran);
+            $pelepasan_pemesanan->update($validatedData);
     
-            if ($pelepasan_pemesanan && $pembayaran_pemesanan) {
-                return redirect(route('pemesanan'))->with('success', 'Berhasil Edit Pelepasan Kendaraan!');
-            } else {
-                return redirect(route('pemesanan'))->with('failed', 'Gagal Edit Pelepasan Kendaraan!');
-            }
+            return redirect(route('pemesanan'))->with('success', 'Berhasil Edit Pelepasan Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('pemesanan'))->with('failed', 'Gagal Edit Pelepasan Kendaraan!');
