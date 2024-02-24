@@ -37,12 +37,8 @@ class BrandKendaraanController extends Controller
             $validatedData = $request->validate([
                 'nama' => 'required|string|max:255',
             ]);
-            $brand = BrandKendaraan::create($validatedData);
-            if ($brand) {
-                return redirect(route('brandKendaraan'))->with('success', 'Berhasil Tambah Brand Kendaraan!');
-            } else {
-                return redirect(route('brandKendaraan'))->with('failed', 'Gagal Tambah Brand Kendaraan!');
-            }
+            BrandKendaraan::create($validatedData);
+            return redirect(route('brandKendaraan'))->with('success', 'Berhasil Tambah Brand Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('brandKendaraan'))->with('failed', 'Gagal Tambah Brand Kendaraan!');
@@ -55,12 +51,8 @@ class BrandKendaraanController extends Controller
             $validatedData = $request->validate([
                 'nama' => 'required|string|max:255',
             ]);
-            $brand = BrandKendaraan::where('id', $id)->first()->update($validatedData);
-            if ($brand) {
-                return redirect(route('brandKendaraan'))->with('success', 'Berhasil Update Brand Kendaraan!');
-            } else {
-                return redirect(route('brandKendaraan'))->with('failed', 'Gagal Update Brand Kendaraan!');
-            }
+            BrandKendaraan::where('id', $id)->first()->update($validatedData);
+            return redirect(route('brandKendaraan'))->with('success', 'Berhasil Update Brand Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('brandKendaraan'))->with('failed', 'Gagal Update Brand Kendaraan!');
@@ -70,12 +62,8 @@ class BrandKendaraanController extends Controller
     function delete($id)
     {
         try {
-            $brand = BrandKendaraan::where('id', $id)->first()->delete();
-            if ($brand) {
-                return redirect(route('brandKendaraan'))->with('success', 'Berhasil Hapus Brand Kendaraan!');
-            } else {
-                return redirect(route('brandKendaraan'))->with('failed', 'Gagal Hapus Brand Kendaraan!');
-            }
+            BrandKendaraan::where('id', $id)->first()->delete();
+            return redirect(route('brandKendaraan'))->with('success', 'Berhasil Hapus Brand Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('brandKendaraan'))->with('failed', 'Gagal Hapus Brand Kendaraan!');
