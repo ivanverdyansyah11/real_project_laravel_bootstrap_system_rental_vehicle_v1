@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
-                                <label for="nomor_seri">Nomor Seri</label>
+                                <label for="nomor_seri">Tipe Kendaraan</label>
                                 <input type="text" id="nomor_seri" class="input" autocomplete="off"
                                     value="{{ $kendaraan->seri_kendaraan->nomor_seri }}" disabled>
                             </div>
