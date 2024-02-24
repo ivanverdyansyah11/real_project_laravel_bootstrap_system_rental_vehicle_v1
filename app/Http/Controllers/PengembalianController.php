@@ -99,7 +99,7 @@ class PengembalianController extends Controller
             $kilometer_sebelumnya = (int)$pemesanan->kendaraan->kilometer;
             $kilometer_saat_ini = $validatedData['kilometer_kembali'];
             $total_kilometer = $kilometer_saat_ini - $kilometer_sebelumnya;
-            $kendaraan = Kendaraan::where('id', $id)->first()->update([
+            Kendaraan::where('id', $id)->first()->update([
                 'kilometer_saat_ini' => $validatedData['kilometer_kembali'],
             ]);
 
@@ -119,24 +119,19 @@ class PengembalianController extends Controller
                 ]);
             }
 
-            $pengembalian = Pengembalian::create($validatedData);
+            Pengembalian::create($validatedData);
             $pengembalianID = Pengembalian::latest()->first();
 
-            $laporan = Laporan::create([
+            Laporan::create([
                 'penggunas_id' => auth()->user()->id,
                 'relations_id' => $pengembalianID->id,
                 'kategori_laporan' => 'pengembalian',
             ]);
 
-            $pemesanan = Pemesanan::where('kendaraans_id', $id)->latest()->first()->update([
+            Pemesanan::where('kendaraans_id', $id)->latest()->first()->update([
                 'status' => 'selesai',
             ]);
-
-            if ($pengembalian && $pemesanan && $kendaraan && $laporan) {
-                return redirect(route('pengembalian'))->with('success', 'Berhasil Melakukan Pengembalian Kendaraan!');
-            } else {
-                return redirect(route('pengembalian'))->with('failed', 'Gagal Melakukan Pengembalian Kendaraan!');
-            }
+            return redirect(route('pengembalian'))->with('success', 'Berhasil Melakukan Pengembalian Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('pengembalian'))->with('failed', 'Gagal Melakukan Pengembalian Kendaraan!');
