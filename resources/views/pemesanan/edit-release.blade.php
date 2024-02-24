@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="bensin_keluar">Bensin Keluar (Liter)</label>
+                                        <label for="bensin_keluar">Bensin Keluar (Strip Bar)</label>
                                         <input type="number" id="bensin_keluar" class="input" autocomplete="off"
                                             readonly value="{{ $pelepasan_pemesanan->bensin_keluar }}">
                                     </div>
@@ -252,8 +252,7 @@
                                 <div class="col-12">
                                     <div class="button-wrapper d-flex">
                                         <button type="submit" class="button-primary">Simpan Pembayaran</button>
-                                        <a href="{{ route('pemesanan') }}" class="button-reverse">Batal
-                                            Pemesanan</a>
+                                        <a href="{{ route('pemesanan') }}" class="button-reverse">Batal Edit</a>
                                     </div>
                                 </div>
                             </div>
