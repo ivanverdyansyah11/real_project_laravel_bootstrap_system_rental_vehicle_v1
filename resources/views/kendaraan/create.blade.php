@@ -89,10 +89,10 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="seri_kendaraans_id">Nomor Seri</label>
+                                        <label for="seri_kendaraans_id">Tipe Kendaraan</label>
                                         <select required id="seri_kendaraans_id" class="input" name="seri_kendaraans_id"
                                             data-target="#seri_kendaraans_id">
-                                            <option value="">Pilih nomor seri kendaraan</option>
+                                            <option value="">Pilih tipe kendaraan</option>
                                             @foreach ($series as $seri)
                                                 <option value="{{ $seri->id }}"
                                                     {{ old('seri_kendaraans_id') == $seri->id ? 'selected' : '' }}>
