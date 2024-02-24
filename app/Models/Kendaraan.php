@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Servis;
 
 class Kendaraan extends Model
-{
-    use SoftDeletes;
+{   use SoftDeletes;
     protected $guarded = [];
 
     public function jenis_kendaraan()
@@ -33,5 +33,10 @@ class Kendaraan extends Model
     public function pelepasan_pemesanan()
     {
         return $this->belongsTo(PelepasanPemesanan::class, 'id');
+    }
+
+    public function servis(int $kendaraans_id)
+    {
+        return Servis::where('kendaraans_id', $kendaraans_id)->latest()->first();
     }
 }
