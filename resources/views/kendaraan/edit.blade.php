@@ -50,6 +50,9 @@
                                         <label for="stnk_nama">STNK Atas Nama</label>
                                         <input type="text" required id="stnk_nama" class="input" autocomplete="off"
                                             value="{{ $kendaraan->stnk_nama }}" name="stnk_nama">
+                                        @error('stnk_nama')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
@@ -57,6 +60,9 @@
                                         <label for="nomor_plat">Nomor Plat</label>
                                         <input type="text" required id="nomor_plat" class="input" autocomplete="off"
                                             value="{{ $kendaraan->nomor_plat }}" name="nomor_plat">
+                                        @error('nomor_plat')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
@@ -101,7 +107,7 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="seri_kendaraans_id">Nomor Seri</label>
+                                        <label for="seri_kendaraans_id">Tipe Kendaraan</label>
                                         <select required id="seri_kendaraans_id" class="input" name="seri_kendaraans_id">
                                             @if ($kendaraan->seri_kendaraan)
                                                 @foreach ($series as $seri)
@@ -111,7 +117,7 @@
                                                     </option>
                                                 @endforeach
                                             @else
-                                                <option value="0">Pilih seri kendaraan</option>
+                                                <option value="0">Pilih tipe kendaraan</option>
                                                 @foreach ($series as $seri)
                                                     <option value="{{ $seri->id }}">
                                                         {{ $seri->nomor_seri }}
