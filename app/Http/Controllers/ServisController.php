@@ -66,25 +66,20 @@ class ServisController extends Controller
     
             $validatedData['kendaraans_id'] = $id;
     
-            $kendaraan = Kendaraan::where('id', $id)->first()->update([
+            Kendaraan::where('id', $id)->first()->update([
                 'kilometer' => $validatedData['kilometer_setelah'],
                 'kilometer_saat_ini' => $validatedData['kilometer_setelah'],
                 'status' => 'ready',
             ]);
     
-            $servis = Servis::create($validatedData);
+            Servis::create($validatedData);
             $servisID = Servis::latest()->first();
-            $laporan = Laporan::create([
+            Laporan::create([
                 'penggunas_id' => auth()->user()->id,
                 'relations_id' => $servisID->id,
                 'kategori_laporan' => 'servis',
             ]);
-    
-            if ($servis && $kendaraan && $laporan) {
-                return redirect(route('servis'))->with('success', 'Berhasil Melakukan Servis Kendaraan!');
-            } else {
-                return redirect(route('servis'))->with('failed', 'Gagal Melakukan Servis Kendaraan!');
-            }
+            return redirect(route('servis'))->with('success', 'Berhasil Melakukan Servis Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('servis'))->with('failed', 'Gagal Melakukan Servis Kendaraan!');
