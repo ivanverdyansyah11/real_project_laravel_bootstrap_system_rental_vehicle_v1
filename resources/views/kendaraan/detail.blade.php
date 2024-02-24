@@ -109,7 +109,14 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="kilometer">Kilometer</label>
+                                        <label for="kilometer_sebelum_servis">Kilometer Sebelum Servis</label>
+                                        <input type="text" id="kilometer_sebelum_servis" class="input" autocomplete="off" disabled
+                                            value="{{ $kendaraan->servis($kendaraan->id)->kilometer_sebelum }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="kilometer">Kilometer Saat Ini</label>
                                         <input type="text" id="kilometer" class="input" autocomplete="off" disabled
                                             value="{{ $kendaraan->kilometer_saat_ini }}">
                                     </div>
@@ -170,7 +177,7 @@
                                             disabled value="{{ $kendaraan->nomor_mesin }}">
                                     </div>
                                 </div>
-                                <div class="col-md-6 row-button">
+                                <div class="col-12 row-button">
                                     <div class="input-wrapper">
                                         <label for="status">Status</label>
                                         <input type="text" id="status" class="input text-capitalize"
