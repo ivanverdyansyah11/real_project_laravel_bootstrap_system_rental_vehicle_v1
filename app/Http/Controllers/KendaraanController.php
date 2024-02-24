@@ -103,7 +103,7 @@ class KendaraanController extends Controller
         $series = SeriKendaraan::count();
 
         if ($series == 0) {
-            return redirect(route('kendaraan'))->with('failed', 'Tambahkan Nomor Seri Kendaraan Terlebih Dahulu!');
+            return redirect(route('kendaraan'))->with('failed', 'Tambahkan Tipe Kendaraan Terlebih Dahulu!');
         }
     }
 
@@ -111,7 +111,7 @@ class KendaraanController extends Controller
     {
         try {
             if ($request->seri_kendaraans_id == '' || $request->kategori_kilometer_kendaraans_id == '') {
-                return redirect(route('kendaraan.create'))->with('failed', 'Isi Form Input Seri Kendaraan dan Kategori Kilometer Kendaraan Terlebih Dahulu!');
+                return redirect(route('kendaraan.create'))->with('failed', 'Isi Form Input Tipe Kendaraan dan Kategori Kilometer Kendaraan Terlebih Dahulu!');
             }
     
             $seri = SeriKendaraan::where('id', $request->seri_kendaraans_id)->first();
@@ -147,20 +147,16 @@ class KendaraanController extends Controller
                 $validatedData['foto_kendaraan'] = $imageName;
             }
     
-            $kendaraan = Kendaraan::create($validatedData);
+            Kendaraan::create($validatedData);
             $kendaraanID = Kendaraan::latest()->first();
     
-            $laporan = Laporan::create([
+            Laporan::create([
                 'penggunas_id' => auth()->user()->id,
                 'relations_id' => $kendaraanID->id,
                 'kategori_laporan' => 'kendaraan',
             ]);
     
-            if ($kendaraan && $laporan) {
-                return redirect(route('kendaraan'))->with('success', 'Berhasil Tambah Kendaraan!');
-            } else {
-                return redirect(route('kendaraan'))->with('failed', 'Gagal Tambah Kendaraan!');
-            }
+            return redirect(route('kendaraan'))->with('success', 'Berhasil Tambah Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('kendaraan'))->with('failed', 'Gagal Tambah Kendaraan!');
@@ -223,13 +219,8 @@ class KendaraanController extends Controller
                 $validatedData['foto_kendaraan'] = $kendaraan->foto_kendaraan;
             }
 
-            $kendaraan = Kendaraan::where('id', $id)->first()->update($validatedData);
-
-            if ($kendaraan) {
-                return redirect(route('kendaraan'))->with('success', 'Berhasil Edit Kendaraan!');
-            } else {
-                return redirect(route('kendaraan'))->with('failed', 'Gagal Edit Kendaraan!');
-            }
+            Kendaraan::where('id', $id)->first()->update($validatedData);
+            return redirect(route('kendaraan'))->with('success', 'Berhasil Edit Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('kendaraan'))->with('failed', 'Gagal Edit Kendaraan!');
@@ -241,17 +232,13 @@ class KendaraanController extends Controller
         try {
             $kendaraan = Kendaraan::where('id', $id)->first();
             $laporan = Laporan::where('relations_id', $kendaraan->id)->first();
-            $laporan = $laporan->delete();
+            $laporan->delete();
             $path = "assets/img/kendaraan-images/$kendaraan->foto_kendaraan";
             if (File::exists($path)) {
                 File::delete($path);
             }
-            $kendaraan = $kendaraan->delete();
-            if ($kendaraan && $laporan) {
-                return redirect(route('kendaraan'))->with('success', 'Berhasil Hapus Kendaraan!');
-            } else {
-                return redirect(route('kendaraan'))->with('failed', 'Gagal Hapus Kendaraan!');
-            }
+            $kendaraan->delete();
+            return redirect(route('kendaraan'))->with('success', 'Berhasil Hapus Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('kendaraan'))->with('failed', 'Gagal Hapus Kendaraan!');
