@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
-                            <label for="nomor_seri">Nomor Seri</label>
+                            <label for="nomor_seri">Tipe Kendaraan</label>
                             <input type="text" id="nomor_seri" class="input" autocomplete="off"
                                 value="{{ $pajak->kendaraan->seri_kendaraan->nomor_seri }}" readonly>
                         </div>
@@ -84,8 +84,8 @@
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
                             <label for="jumlah_bayar">Jumlah Bayar</label>
-                            <input type="number" id="jumlah_bayar" class="input" autocomplete="off" name="jumlah_bayar"
-                                value="{{ $pajak->jumlah_bayar }}" readonly>
+                            <input type="text" id="jumlah_bayar" class="input" autocomplete="off" name="jumlah_bayar"
+                                value="Rp. {{ number_format($pajak->jumlah_bayar, 2, ",", ".") }}" readonly>
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
