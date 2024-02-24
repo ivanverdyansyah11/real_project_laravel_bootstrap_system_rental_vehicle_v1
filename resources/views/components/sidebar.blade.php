@@ -35,7 +35,7 @@
                         </div>
                     </a>
                     <a href="{{ route('kendaraan') }}"
-                        class="menu-link d-flex flex-column {{ Request::is('kendaraan*') || Request::is('jenis-kendaraan*') || Request::is('brand-kendaraan*') || Request::is('seri-kendaraan*') || Request::is('kilometer-kendaraan*') ? 'active' : '' }}">
+                        class="menu-link d-flex flex-column {{ Request::is('kendaraan*') || Request::is('jenis-kendaraan*') || Request::is('brand-kendaraan*') || Request::is('tipe-kendaraan*') || Request::is('kilometer-kendaraan*') ? 'active' : '' }}">
                         <div class="link-item d-flex align-items-center">
                             <div class="icon-sidebar-wrapper">
                                 <div class="sidebar-icon kendaraan-icon"></div>
@@ -44,13 +44,13 @@
                         </div>
                     </a>
                     <div
-                        class="menu-link d-flex flex-column {{ Request::is('kendaraan*') || Request::is('jenis-kendaraan*') || Request::is('brand-kendaraan*') || Request::is('seri-kendaraan*') || Request::is('kilometer-kendaraan*') ? 'active' : 'd-none' }}">
+                        class="menu-link d-flex flex-column {{ Request::is('kendaraan*') || Request::is('jenis-kendaraan*') || Request::is('brand-kendaraan*') || Request::is('tipe-kendaraan*') || Request::is('kilometer-kendaraan*') ? 'active' : 'd-none' }}">
                         <a href="{{ route('jenisKendaraan') }}"
                             class="link-child {{ Request::is('jenis-kendaraan*') ? 'active' : '' }}">Jenis</a>
                         <a href="{{ route('brandKendaraan') }}"
                             class="link-child {{ Request::is('brand-kendaraan*') ? 'active' : '' }}">Brand</a>
-                        <a href="{{ route('seriKendaraan') }}"
-                            class="link-child {{ Request::is('seri-kendaraan*') ? 'active' : '' }}">Seri</a>
+                        <a href="{{ route('tipeKendaraan') }}"
+                            class="link-child {{ Request::is('tipe-kendaraan*') ? 'active' : '' }}">Tipe</a>
                         <a href="{{ route('kilometerKendaraan') }}"
                             class="link-child {{ Request::is('kilometer-kendaraan*') ? 'active' : '' }}">Kilometer</a>
                     </div>
