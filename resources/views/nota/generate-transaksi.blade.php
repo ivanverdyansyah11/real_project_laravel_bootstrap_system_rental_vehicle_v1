@@ -70,14 +70,14 @@
                     <td style="padding: 3px; width: 300px;">Biaya Tambahan</td>
                     <td style="padding: 3px; width: 10px;">:</td>
                     <td style="padding: 3px; width: 300px; text-align: end;">
-                        {{ $pengembalian->biaya_tambahan ? 'Rp. ' . $pengembalian->biaya_tambahan : 'Rp. 0' }}
+                        Rp. {{ $pengembalian->biaya_tambahan ? number_format($pengembalian->biaya_tambahan, 2, ",", ".") : '0' }}
                     </td>
                 </tr>
                 <tr>
                     <td style="padding: 3px; width: 300px;">Total Tarif Sewa</td>
                     <td style="padding: 3px; width: 10px;">:</td>
                     <td style="padding: 3px; width: 300px; text-align: end;">
-                        {{ $pemesanan->pembayaran_pemesanan ? 'Rp. ' . $pemesanan->pembayaran_pemesanan->total_tarif_sewa : 'Rp. 0' }}
+                        Rp.  {{ $pemesanan->pembayaran_pemesanan ? number_format($pemesanan->pembayaran_pemesanan->total_tarif_sewa, 2, ",", ".") : '0' }}
                     </td>
                 </tr>
             </tbody>
