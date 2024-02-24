@@ -17,17 +17,17 @@
         </div>
         <div class="row" style="margin-bottom: 32px">
             <div class="col-12 d-flex justify-content-between align-items-center">
-                <h5 class="subtitle">Tambah Seri Kendaraan</h5>
+                <h5 class="subtitle">Tambah Tipe Kendaraan</h5>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <form class="form d-inline-block w-100" method="POST" action="{{ route('seriKendaraan.store') }}">
+                <form class="form d-inline-block w-100" method="POST" action="{{ route('tipeKendaraan.store') }}">
                     @csrf
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="nomor">Seri Kendaraan</label>
+                                <label for="nomor">Tipe Kendaraan</label>
                                 <input type="text" id="nomor" class="input" required autocomplete="off"
                                     name="nomor_seri" value="{{ old('nomor_seri') }}">
                                 @error('nomor_seri')
@@ -70,8 +70,8 @@
                         </div>
                         <div class="col-12">
                             <div class="button-wrapper d-flex">
-                                <button type="submit" class="button-primary">Tambah Seri Kendaraan</button>
-                                <a href="{{ route('seriKendaraan') }}" class="button-reverse">Batal
+                                <button type="submit" class="button-primary">Tambah Tipe Kendaraan</button>
+                                <a href="{{ route('tipeKendaraan') }}" class="button-reverse">Batal
                                     Tambah</a>
                             </div>
                         </div>
