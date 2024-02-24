@@ -637,7 +637,7 @@ body {
 
 .input-wrapper .input {
     position: relative;
-    padding: 20px;
+    padding: 20px !important;
     border-radius: var(--rounded-md);
     border: var(--border-style);
     outline: none;
