@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="input-wrapper">
                                     <select id="seri_kendaraans_id" class="input" name="seri_kendaraans_id">
-                                        <option value="">Filter nomor seri kendaraan</option>
+                                        <option value="">Filter tipe kendaraan</option>
                                         @foreach ($series as $seri)
                                             <option value="{{ $seri->id }}">
                                                 {{ $seri->nomor_seri }}</option>
