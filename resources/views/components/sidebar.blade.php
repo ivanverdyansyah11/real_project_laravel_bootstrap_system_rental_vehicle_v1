@@ -2,7 +2,7 @@
     <div class="sidebar-scroll d-flex flex-column justify-content-between">
         <div class="d-flex flex-column align-items-center w-100">
             <a href="">
-                <img src="{{ asset('assets/img/brand/brand-logo.svg') }}" class="img-fluid brand-logo" alt="Brand Logo"
+                <img src="{{ asset('assets/img/brand/BTC.png') }}" class="img-fluid brand-logo" alt="Brand Logo"
                     draggable="false">
             </a>
             <div class="link-wrapper d-flex flex-column w-100">

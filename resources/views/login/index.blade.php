@@ -29,7 +29,7 @@
                             {{ session('failed') }}
                         </div>
                     @endif
-                    <img src="{{ asset('assets/img/brand/brand-text.svg') }}" alt="Brand Nusa Kendala Logo Teks"
+                    <img src="{{ asset('assets/img/brand/BTC.png') }}" alt="Brand Nusa Kendala Logo Teks"
                         class="img-fluid login-brand" draggable="false">
                     <form class="form d-inline-block w-100" method="POST" action="{{ route('login.action') }}">
                         @csrf

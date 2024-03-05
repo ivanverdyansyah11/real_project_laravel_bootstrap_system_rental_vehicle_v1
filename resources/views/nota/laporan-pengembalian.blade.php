@@ -5,7 +5,7 @@
         <div class="col-md-9 col-lg-7 col-xl-6">
             <div class="nota-paper mx-3 mx-md-0">
                 <div class="wrapper d-flex justify-content-between align-items-end">
-                    <img src="{{ asset('assets/img/brand/brand-text.svg') }}" alt="Brand Nusa Kendala Logo Teks"
+                    <img src="{{ asset('assets/img/brand/BTC.png') }}" alt="Brand Nusa Kendala Logo Teks"
                         class="img-fluid login-brand d-none d-md-inline-block" draggable="false" width="240">
                     <p class="paragraph">Petugas: {{ $laporan->pengguna->nama_lengkap }}</p>
                 </div>

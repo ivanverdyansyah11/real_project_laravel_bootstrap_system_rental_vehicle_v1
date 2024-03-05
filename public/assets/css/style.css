@@ -19,7 +19,7 @@
 }
 
 :root {
-    --primary-color: 226, 92, 39;
+    --primary-color: 60, 187, 239;
     --light-color: 255, 255, 255;
     --dark-color: 48, 48, 48;
     --red-color: 213, 80, 81;
@@ -91,7 +91,7 @@ body {
 
 .login .login-brand {
     width: 260px;
-    margin-bottom: 48px;
+    /* margin-bottom: 48px; */
 }
 /* END LOGIN PAGE */
 
@@ -124,8 +124,8 @@ body {
 }
 
 .sidebar .brand-logo {
-    width: 82px;
-    margin-bottom: 46px;
+    width: 120px;
+    margin-bottom: 24px;
 }
 
 .sidebar .link-wrapper {
