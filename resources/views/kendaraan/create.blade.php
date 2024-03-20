@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="kilometer">Kilometer</label>
+                                        <label for="kilometer">Kilometer Saat Ini (km)</label>
                                         <input type="number" required id="kilometer" class="input" autocomplete="off"
                                             name="kilometer" value="{{ old('kilometer') }}">
                                         @error('kilometer')
@@ -207,12 +207,46 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6 row-button">
+                                <div class="col-md-6">
                                     <div class="input-wrapper">
                                         <label for="nomor_mesin">Nomor Mesin</label>
                                         <input type="text" required id="nomor_mesin" class="input"
                                             autocomplete="off" name="nomor_mesin" value="{{ old('nomor_mesin') }}">
                                         @error('nomor_mesin')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="terakhir_bayar_samsat">Batas Pajak Samsat Kendaraan</label>
+                                        <input type="date" id="terakhir_bayar_samsat" class="input"
+                                            autocomplete="off" required name="terakhir_samsat"
+                                            value="{{ old('terakhir_samsat') }}">
+                                        @error('terakhir_samsat')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="terakhir_bayar_angsuran">Batas Pajak Angsuran Kendaraan</label>
+                                        <input type="date" id="terakhir_bayar_angsuran" class="input"
+                                            autocomplete="off" required name="terakhir_angsuran"
+                                            value="{{ old('terakhir_angsuran') }}">
+                                        @error('terakhir_angsuran')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="terakhir_ganti_nomor_polisi">Terakhir Pajak Ganti Nomor Polisi
+                                            Kendaraan</label>
+                                        <input type="date" id="terakhir_ganti_nomor_polisi" class="input"
+                                            autocomplete="off" required name="terakhir_ganti_nomor_polisi"
+                                            value="{{ old('terakhir_ganti_nomor_polisi') }}">
+                                        @error('terakhir_ganti_nomor_polisi')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
