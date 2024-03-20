@@ -1,6 +1,13 @@
 @extends('template.main')
 
 @section('content')
+    @php
+        use Carbon\Carbon;
+        $terakhir_samsat = Carbon::parse($kendaraan->terakhir_samsat);
+        $terakhir_angsuran = Carbon::parse($kendaraan->terakhir_angsuran);
+        $terakhir_ganti_nomor_polisi = Carbon::parse($kendaraan->terakhir_ganti_nomor_polisi);
+    @endphp
+
     <div class="content">
         <div class="row">
             <div class="col-12">
@@ -11,6 +18,18 @@
                 @elseif(session()->has('failed'))
                     <div class="alert alert-danger mb-4" role="alert">
                         {{ session('failed') }}
+                    </div>
+                @elseif($terakhir_samsat->isPast())
+                    <div class="alert alert-danger mb-4" role="alert">
+                        Waktu pembayaran pajak samsat sudah lewat untuk kendaraan ini
+                    </div>
+                @elseif($terakhir_angsuran->isPast())
+                    <div class="alert alert-danger mb-4" role="alert">
+                        Waktu pembayaran pajak angsuran sudah lewat untuk kendaraan ini
+                    </div>
+                @elseif($terakhir_ganti_nomor_polisi->isPast())
+                    <div class="alert alert-danger mb-4" role="alert">
+                        Waktu pembayaran pajak ganti nomor polisi sudah lewat untuk kendaraan ini
                     </div>
                 @endif
             </div>
@@ -110,7 +129,8 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="kilometer_sebelum_servis">Kilometer Sebelum Servis</label>
-                                        <input type="text" id="kilometer_sebelum_servis" class="input" autocomplete="off" disabled
+                                        <input type="text" id="kilometer_sebelum_servis" class="input"
+                                            autocomplete="off" disabled
                                             value="{{ $kendaraan->servis($kendaraan->id) ? $kendaraan->servis($kendaraan->id)->kilometer_sebelum : $kendaraan->kilometer_saat_ini }}">
                                     </div>
                                 </div>
@@ -175,6 +195,36 @@
                                         <label for="nomor_mesin">Nomor Mesin</label>
                                         <input type="text" id="nomor_mesin" class="input" autocomplete="off"
                                             disabled value="{{ $kendaraan->nomor_mesin }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="pendatapatan">Pendapatan Kendaraan</label>
+                                        <input type="text" id="pendatapatan" class="input" autocomplete="off"
+                                            disabled value="{{ $pendapatan_kendaraan }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="terakhir_bayar_samsat">Batas Pajak Samsat Kendaraan</label>
+                                        <input type="text" id="terakhir_bayar_samsat" class="input"
+                                            autocomplete="off" disabled value="{{ $kendaraan->terakhir_samsat }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="terakhir_bayar_angsuran">Batas Pajak Angsuran Kendaraan</label>
+                                        <input type="text" id="terakhir_bayar_angsuran" class="input"
+                                            autocomplete="off" disabled value="{{ $kendaraan->terakhir_angsuran }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="terakhir_ganti_nomor_polisi">Terakhir Pajak Ganti Nomor Polisi
+                                            Kendaraan</label>
+                                        <input type="text" id="terakhir_ganti_nomor_polisi" class="input"
+                                            autocomplete="off" disabled
+                                            value="{{ $kendaraan->terakhir_ganti_nomor_polisi }}">
                                     </div>
                                 </div>
                                 <div class="col-12 row-button">
