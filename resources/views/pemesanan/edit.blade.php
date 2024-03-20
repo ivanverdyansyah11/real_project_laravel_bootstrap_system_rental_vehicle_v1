@@ -38,7 +38,8 @@
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="waktu_sewa_minggu">Total Mingguan</label>
-                                <input min="0" type="number" id="waktu_sewa_minggu" class="input" autocomplete="off"
+                                <input min="0" type="number" id="waktu_sewa_minggu" class="input"
+                                    autocomplete="off"
                                     value="{{ $pemesanan->total_mingguan != 0 ? $pemesanan->total_mingguan : '0' }}"
                                     name="total_mingguan" required>
                             </div>
@@ -226,7 +227,7 @@
                         <div class="col-12">
                             <div class="button-wrapper d-flex">
                                 <button type="submit" class="button-primary">Simpan Perubahan</button>
-                                <a href="{{ route('pemesanan') }}" class="button-reverse">Batal Edit</a>
+                                <a href="{{ route('pemesanan') }}" class="button-reverse">Kembali</a>
                             </div>
                         </div>
                     </div>
