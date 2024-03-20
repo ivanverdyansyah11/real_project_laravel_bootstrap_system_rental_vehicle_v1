@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Kendaraan;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class KendaraanSeeder extends Seeder
@@ -32,6 +33,9 @@ class KendaraanSeeder extends Seeder
             'warna' => 'Kuning',
             'nomor_rangka' => '63456457457',
             'nomor_mesin' => '23453254657',
+            'terakhir_samsat' => Carbon::now()->subDay(),
+            'terakhir_angsuran' => Carbon::now()->subDay(),
+            'terakhir_ganti_nomor_polisi' => Carbon::now()->subDay(),
             'status' => 'ready',
         ]);
 
@@ -53,6 +57,9 @@ class KendaraanSeeder extends Seeder
             'warna' => 'Merah',
             'nomor_rangka' => '345646577',
             'nomor_mesin' => '235234354657',
+            'terakhir_samsat' => Carbon::now()->subDay(),
+            'terakhir_angsuran' => Carbon::now()->subDay(),
+            'terakhir_ganti_nomor_polisi' => Carbon::now()->subDay(),
             'status' => 'ready',
         ]);
 
@@ -74,6 +81,9 @@ class KendaraanSeeder extends Seeder
             'warna' => 'Kuning',
             'nomor_rangka' => '3456456575687',
             'nomor_mesin' => '234234345456',
+            'terakhir_samsat' => Carbon::now()->subDay(),
+            'terakhir_angsuran' => Carbon::now()->subDay(),
+            'terakhir_ganti_nomor_polisi' => Carbon::now()->subDay(),
             'status' => 'ready',
         ]);
 
@@ -95,6 +105,9 @@ class KendaraanSeeder extends Seeder
             'warna' => 'Merah',
             'nomor_rangka' => '674567687684',
             'nomor_mesin' => '98785454657',
+            'terakhir_samsat' => Carbon::now()->subDay(),
+            'terakhir_angsuran' => Carbon::now()->subDay(),
+            'terakhir_ganti_nomor_polisi' => Carbon::now()->subDay(),
             'status' => 'ready',
         ]);
     }
