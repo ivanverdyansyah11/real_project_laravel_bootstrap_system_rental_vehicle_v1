@@ -1,6 +1,12 @@
 @extends('template.main')
 
 @section('content')
+    @php
+        use Carbon\Carbon;
+        $terakhir_samsat = Carbon::parse($kendaraan->terakhir_samsat);
+        $terakhir_angsuran = Carbon::parse($kendaraan->terakhir_angsuran);
+        $terakhir_ganti_nomor_polisi = Carbon::parse($kendaraan->terakhir_ganti_nomor_polisi);
+    @endphp
     <div class="content">
         <div class="row">
             <div class="col-12">
@@ -11,6 +17,18 @@
                 @elseif(session()->has('failed'))
                     <div class="alert alert-danger mb-4" role="alert">
                         {{ session('failed') }}
+                    </div>
+                @elseif($terakhir_samsat->isPast())
+                    <div class="alert alert-danger mb-4" role="alert">
+                        Waktu pembayaran pajak samsat sudah lewat untuk kendaraan ini
+                    </div>
+                @elseif($terakhir_angsuran->isPast())
+                    <div class="alert alert-danger mb-4" role="alert">
+                        Waktu pembayaran pajak angsuran sudah lewat untuk kendaraan ini
+                    </div>
+                @elseif($terakhir_ganti_nomor_polisi->isPast())
+                    <div class="alert alert-danger mb-4" role="alert">
+                        Waktu pembayaran pajak ganti nomor polisi sudah lewat untuk kendaraan ini
                     </div>
                 @endif
             </div>
@@ -57,9 +75,23 @@
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="input-wrapper">
-                                <label for="brand">Brand Kendaraan</label>
+                                <label for="brand">Jatuh Tempo Pajak Samsat</label>
                                 <input type="text" id="brand" class="input" autocomplete="off"
-                                    value="{{ $kendaraan->brand_kendaraan->nama }}" disabled>
+                                    value="{{ $kendaraan->terakhir_samsat }}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="input-wrapper">
+                                <label for="brand">Jatuh Tempo Pajak Angsuran</label>
+                                <input type="text" id="brand" class="input" autocomplete="off"
+                                    value="{{ $kendaraan->terakhir_angsuran }}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="input-wrapper">
+                                <label for="brand">Jatuh Tempo Pajak Ganti Nomor Polisi</label>
+                                <input type="text" id="brand" class="input" autocomplete="off"
+                                    value="{{ $kendaraan->terakhir_ganti_nomor_polisi }}" disabled>
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
@@ -115,6 +147,27 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-12 mb-4">
+                            <div class="input-wrapper">
+                                <label for="lama_pajak">Jumlah Tahun Pajak</label>
+                                <select id="lama_pajak" class="input" name="lama_pajak" required>
+                                    <option value="">Pilih jumlah tahun pajak</option>
+                                    <option value="1" {{ old('1') == '1' ? 'selected' : '' }}>1</option>
+                                    <option value="2" {{ old('2') == '2' ? 'selected' : '' }}>2</option>
+                                    <option value="3" {{ old('3') == '3' ? 'selected' : '' }}>3</option>
+                                    <option value="4" {{ old('4') == '4' ? 'selected' : '' }}>4</option>
+                                    <option value="5" {{ old('5') == '5' ? 'selected' : '' }}>5</option>
+                                    <option value="6" {{ old('6') == '6' ? 'selected' : '' }}>6</option>
+                                    <option value="7" {{ old('7') == '7' ? 'selected' : '' }}>7</option>
+                                    <option value="8" {{ old('8') == '8' ? 'selected' : '' }}>8</option>
+                                    <option value="9" {{ old('9') == '9' ? 'selected' : '' }}>9</option>
+                                    <option value="10" {{ old('10') == '10' ? 'selected' : '' }}>10</option>
+                                </select>
+                                @error('metode_bayar')
+                                    <p class="caption-error mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="tanggal_bayar">Tanggal Bayar</label>
@@ -163,6 +216,10 @@
         });
 
         $("#metode_bayar").select2({
+            theme: "bootstrap-5",
+        });
+
+        $("#lama_pajak").select2({
             theme: "bootstrap-5",
         });
     </script>
