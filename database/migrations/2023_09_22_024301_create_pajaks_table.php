@@ -18,6 +18,7 @@ class CreatePajaksTable extends Migration
             $table->bigInteger('kendaraans_id')->index();
             $table->enum('jenis_pajak', ['samsat', 'angsuran', 'ganti nomor polisi']);
             $table->date('tanggal_bayar');
+            $table->integer('lama_pajak');
             $table->enum('metode_bayar', ['transfer bank', 'internet banking', 'mobile banking', 'virtual account', 'online credit card', 'rekening bersama', 'payPal', 'e-money']);
             $table->string('jumlah_bayar');
             $table->timestamps();
