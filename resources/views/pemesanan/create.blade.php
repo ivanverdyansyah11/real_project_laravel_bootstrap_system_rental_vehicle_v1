@@ -72,11 +72,6 @@
                                 <label for="pelanggans_id">Pelanggan</label>
                                 <select id="pelanggans_id" class="input" name="pelanggans_id" required>
                                     <option value="">Pilih tanggal diambil dahulu</option>
-                                    {{-- @foreach ($pelanggans as $pelanggan)
-                                        <option value="{{ $pelanggan->id }}"
-                                            {{ old('pelanggans_id') == $pelanggan->id ? 'selected' : '' }}>
-                                            {{ $pelanggan->nama }}</option>
-                                    @endforeach --}}
                                 </select>
                                 @error('pelanggans_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>
@@ -91,11 +86,6 @@
                                         <option value="">Tidak ada sopir ready</option>
                                     @else
                                         <option value="">Pilih tanggal diambil dahulu</option>
-                                        {{-- @foreach ($sopirs as $sopir)
-                                            <option value="{{ $sopir->id }}"
-                                                {{ old('sopirs_id') == $sopir->id ? 'selected' : '' }}>
-                                                {{ $sopir->nama }}</option>
-                                        @endforeach --}}
                                     @endif
                                 </select>
                                 @error('sopirs_id')
@@ -108,10 +98,6 @@
                                 <label for="jenis_kendaraan">Jenis Kendaraan</label>
                                 <select id="jenis_kendaraan" class="input">
                                     <option value="0">Pilih tanggal diambil dahulu</option>
-                                    {{-- @foreach ($jenises as $jenis)
-                                        <option value="{{ $jenis->id }}">{{ $jenis->nama }}
-                                        </option>
-                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -120,10 +106,6 @@
                                 <label for="brand_kendaraan">Brand Kendaraan</label>
                                 <select id="brand_kendaraan" class="input">
                                     <option value="0">Pilih tanggal diambil dahulu</option>
-                                    {{-- @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->nama }}
-                                        </option>
-                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -144,9 +126,6 @@
                                 <label for="kendaraans_id">Kendaraan</label>
                                 <select id="kendaraans_id" class="input" name="kendaraans_id" required>
                                     <option value="">Pilih tanggal diambil dahulu</option>
-                                    {{-- @foreach ($kendaraans as $kendaraan)
-                                        <option value="{{ $kendaraan->id }}">{{ $kendaraan->nomor_plat }}</option>
-                                    @endforeach --}}
                                 </select>
                                 @error('kendaraans_id')
                                     <p class="caption-error mt-2">{{ $message }}</p>
@@ -156,8 +135,7 @@
                         <div class="col-12">
                             <div class="button-wrapper d-flex">
                                 <button type="submit" class="button-primary">Booking Kendaraan</button>
-                                <a href="{{ route('pemesanan') }}" class="button-reverse">Batal
-                                    Booking</a>
+                                <a href="{{ route('pemesanan') }}" class="button-reverse">Kembali</a>
                             </div>
                         </div>
                     </div>

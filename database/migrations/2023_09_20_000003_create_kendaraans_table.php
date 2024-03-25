@@ -32,6 +32,9 @@ class CreateKendaraansTable extends Migration
             $table->string('warna');
             $table->string('nomor_rangka');
             $table->string('nomor_mesin');
+            $table->date('terakhir_samsat');
+            $table->date('terakhir_angsuran');
+            $table->date('terakhir_ganti_nomor_polisi');
             $table->enum('status', ['ready', 'booking', 'dipesan', 'servis']);
             $table->timestamps();
             $table->softDeletes();

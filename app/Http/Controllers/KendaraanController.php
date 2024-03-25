@@ -8,6 +8,9 @@ use App\Models\KategoriKilometerKendaraan;
 use App\Models\Kendaraan;
 use App\Models\Laporan;
 use App\Models\Pelanggan;
+use App\Models\PembayaranPemesanan;
+use App\Models\Pemesanan;
+use App\Models\Pengembalian;
 use App\Models\SeriKendaraan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -73,11 +76,16 @@ class KendaraanController extends Controller
 
     public function detail($id)
     {
+        $pendapatan_kendaraan = PembayaranPemesanan::where('kendaraans_id', $id)->sum('total_tarif_sewa');
+        $biaya_tambahan = Pengembalian::whereHas('pelepasan_pemesanan', function ($query) use ($id) {
+            $query->where('kendaraans_id', $id);
+        })->sum('biaya_tambahan');
         return view('kendaraan.detail', [
             'title' => 'Kendaraan',
             'kendaraan' => Kendaraan::where('id', $id)->with('jenis_kendaraan')->first(),
             'series' => SeriKendaraan::all(),
             'kilometers' => KategoriKilometerKendaraan::all(),
+            'pendapatan_kendaraan' => $pendapatan_kendaraan + $biaya_tambahan,
         ]);
     }
 
@@ -113,11 +121,11 @@ class KendaraanController extends Controller
             if ($request->seri_kendaraans_id == '' || $request->kategori_kilometer_kendaraans_id == '') {
                 return redirect(route('kendaraan.create'))->with('failed', 'Isi Form Input Tipe Kendaraan dan Kategori Kilometer Kendaraan Terlebih Dahulu!');
             }
-    
+
             $seri = SeriKendaraan::where('id', $request->seri_kendaraans_id)->first();
             $jenis_kendaraans_id = $seri->jenis_kendaraans_id;
             $brand_kendaraans_id = $seri->brand_kendaraans_id;
-    
+
             $validatedData = $request->validate([
                 'seri_kendaraans_id' => 'required|string',
                 'kategori_kilometer_kendaraans_id' => 'required|string',
@@ -133,29 +141,32 @@ class KendaraanController extends Controller
                 'warna' => 'required|string|max:255',
                 'nomor_rangka' => 'required|string|max:255',
                 'nomor_mesin' => 'required|string|max:255',
+                'terakhir_samsat' => 'required|date',
+                'terakhir_angsuran' => 'required|date',
+                'terakhir_ganti_nomor_polisi' => 'required|date',
             ]);
-    
+
             $validatedData['jenis_kendaraans_id'] = $jenis_kendaraans_id;
             $validatedData['brand_kendaraans_id'] = $brand_kendaraans_id;
             $validatedData['status'] = 'ready';
             $validatedData['kilometer_saat_ini'] = $validatedData['kilometer'];
-    
+
             if (!empty($validatedData['foto_kendaraan'])) {
                 $image = $request->file('foto_kendaraan');
                 $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
                 $image->move(public_path('assets/img/kendaraan-images/'), $imageName);
                 $validatedData['foto_kendaraan'] = $imageName;
             }
-    
+
             Kendaraan::create($validatedData);
             $kendaraanID = Kendaraan::latest()->first();
-    
+
             Laporan::create([
                 'penggunas_id' => auth()->user()->id,
                 'relations_id' => $kendaraanID->id,
                 'kategori_laporan' => 'kendaraan',
             ]);
-    
+
             return redirect(route('kendaraan'))->with('success', 'Berhasil Tambah Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());

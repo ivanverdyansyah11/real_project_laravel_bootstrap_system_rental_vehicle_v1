@@ -180,8 +180,9 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="waktu_sewa">Waktu Sewa (Hari)</label>
-                                        <input min="0" type="number" id="waktu_sewa" class="input" autocomplete="off"
-                                            name="waktu_sewa" value="{{ $waktu_sewa }}" required readonly>
+                                        <input min="0" type="number" id="waktu_sewa" class="input"
+                                            autocomplete="off" name="waktu_sewa" value="{{ $waktu_sewa }}" required
+                                            readonly>
                                         @error('waktu_sewa')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -306,8 +307,7 @@
                                 <div class="col-12">
                                     <div class="button-wrapper d-flex">
                                         <button type="submit" class="button-primary">Pemesanan Kendaraan</button>
-                                        <a href="{{ route('pemesanan') }}" class="button-reverse">Batal
-                                            Pemesanan</a>
+                                        <a href="{{ route('pemesanan') }}" class="button-reverse">Kembali</a>
                                     </div>
                                 </div>
                             </div>

@@ -6,6 +6,7 @@ use App\Models\Kendaraan;
 use App\Models\Laporan;
 use App\Models\Pajak;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PajakController extends Controller
 {
@@ -51,12 +52,21 @@ class PajakController extends Controller
             $validatedData = $request->validate([
                 'jenis_pajak' => 'required|string',
                 'tanggal_bayar' => 'required|date',
+                'lama_pajak' => 'required|string',
                 'metode_bayar' => 'required|string',
                 'jumlah_bayar' => 'required|string',
                 'finance' => 'required|string',
             ]);
-    
+
             $validatedData['kendaraans_id'] = $id;
+            $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first();
+            if ($validatedData['jenis_pajak'] == 'samsat') {
+                $kendaraan->update(['terakhir_samsat' => Carbon::parse($kendaraan->terakhir_samsat)->addYears($validatedData['lama_pajak'])]);
+            } elseif ($validatedData['jenis_pajak'] == 'angsuran') {
+                $kendaraan->update(['terakhir_angsuran' => Carbon::parse($kendaraan->terakhir_angsuran)->addYears($validatedData['lama_pajak'])]);
+            } elseif ($validatedData['jenis_pajak'] == 'ganti nomor polisi') {
+                $kendaraan->update(['terakhir_ganti_nomor_polisi' => Carbon::parse($kendaraan->terakhir_ganti_nomor_polisi)->addYears($validatedData['lama_pajak'])]);
+            }
             Pajak::create($validatedData);
             $pajakID = Pajak::latest()->first();
             Laporan::create([

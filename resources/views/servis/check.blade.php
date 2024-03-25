@@ -171,8 +171,7 @@
                                 <div class="col-12">
                                     <div class="button-wrapper d-flex">
                                         <button type="submit" class="button-primary">Servis Kendaraan</button>
-                                        <a href="{{ route('servis') }}" class="button-reverse">Batal
-                                            Servis</a>
+                                        <a href="{{ route('servis') }}" class="button-reverse">Kembali</a>
                                     </div>
                                 </div>
                             </div>

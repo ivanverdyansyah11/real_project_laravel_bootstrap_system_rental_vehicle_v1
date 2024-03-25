@@ -315,8 +315,7 @@
                                 <div class="col-12">
                                     <div class="button-wrapper d-flex">
                                         <button type="submit" class="button-primary">Simpan Pengembalian</button>
-                                        <a href="{{ route('pengembalian') }}" class="button-reverse">Batal
-                                            Pengembalian</a>
+                                        <a href="{{ route('pengembalian') }}" class="button-reverse">Kembali</a>
                                     </div>
                                 </div>
                             </div>
