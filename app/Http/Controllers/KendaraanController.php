@@ -7,6 +7,7 @@ use App\Models\JenisKendaraan;
 use App\Models\KategoriKilometerKendaraan;
 use App\Models\Kendaraan;
 use App\Models\Laporan;
+use App\Models\Pajak;
 use App\Models\Pelanggan;
 use App\Models\PembayaranPemesanan;
 use App\Models\Pemesanan;
@@ -86,6 +87,40 @@ class KendaraanController extends Controller
             'series' => SeriKendaraan::all(),
             'kilometers' => KategoriKilometerKendaraan::all(),
             'pendapatan_kendaraan' => $pendapatan_kendaraan + $biaya_tambahan,
+        ]);
+    }
+
+    public function historyTax(int $id)
+    {
+        return view('kendaraan.riwayat_pajak.index', [
+            'title' => 'Riwayat Bayar Pajak Kendaraan',
+            'kendaraan' => Kendaraan::where('id', $id)->first(),
+            'pajaks' => Pajak::where('kendaraans_id', $id)->with('kendaraan')->paginate(6),
+        ]);
+    }
+
+    public function detailHistoryTax(int $id)
+    {
+        return view('kendaraan.riwayat_pajak.detail', [
+            'title' => 'Detail Riwayat Bayar Pajak Kendaraan',
+            'pajak' => Pajak::where('id', $id)->with('kendaraan')->first(),
+        ]);
+    }
+
+    public function historyReservation(int $id)
+    {
+        return view('kendaraan.riwayat_pemesanan.index', [
+            'title' => 'Riwayat Pemesanan Kendaraan',
+            'kendaraan' => Kendaraan::where('id', $id)->first(),
+            'pemesanans' => Pemesanan::where('kendaraans_id', $id)->with(['kendaraan', 'pelanggan'])->paginate(6),
+        ]);
+    }
+
+    public function detailHistoryReservation(int $id)
+    {
+        return view('kendaraan.riwayat_pemesanan.detail', [
+            'title' => 'Detail Riwayat Pemesanan Kendaraan',
+            'pemesanan' => Pemesanan::where('id', $id)->with(['kendaraan', 'pelanggan', 'sopir'])->first(),
         ]);
     }
 
