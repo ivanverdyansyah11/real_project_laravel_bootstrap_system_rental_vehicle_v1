@@ -6,7 +6,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="alert alert-success alert-dashboard mb-4" role="alert">
-                        <a href="{{ route('pengembalian') }}" class="link-alert d-inline-block">Lihat Kendaraan Disewa</a>
+                        <span class="link-alert">Lihat</span>
+                        <a href="{{ route('pengembalian') }}" class="link-alert d-inline-block">Kendaraan disewa</a>
+                        <span class="link-alert">dan</span>
+                        <a href="{{ route('pajak.updateTax') }}" class="link-alert d-inline-block">Kendaraan yang belum bayar
+                            pajak</a>
                     </div>
                 </div>
             </div>
