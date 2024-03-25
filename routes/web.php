@@ -52,12 +52,16 @@ Route::middleware(['auth', 'owner'])->group(function () {
         Route::get('/kendaraan/detail/{id}', 'detail')->name('kendaraan.detail');
         Route::get('/kendaraan/getSeriKendaraan/{id}/{idBrand}', 'getSeriKendaraanByJenisBrand')->name('kendaraan.getSeriKendaraan');
         Route::post('/kendaraan/check', 'check')->name('kendaraan.check');
-
         Route::get('/kendaraan/tambah', 'create')->name('kendaraan.create');
         Route::post('/kendaraan/tambah', 'store')->name('kendaraan.store');
         Route::get('/kendaraan/edit/{id}', 'edit')->name('kendaraan.edit');
         Route::post('/kendaraan/edit/{id}', 'update')->name('kendaraan.update');
         Route::post('/kendaraan/hapus/{id}', 'delete')->name('kendaraan.delete');
+
+        Route::get('/kendaraan/{id}/riwayat-pajak', 'historyTax')->name('kendaraan.historyTax');
+        Route::get('/kendaraan/{id}/riwayat-pajak/detail', 'detailHistoryTax')->name('kendaraan.detailHistoryTax');
+        Route::get('/kendaraan/{id}/riwayat-pemesanan', 'historyReservation')->name('kendaraan.historyReservation');
+        Route::get('/kendaraan/{id}/riwayat-pemesanan/detail', 'detailHistoryReservation')->name('kendaraan.detailHistoryReservation');
     });
 
     // JENIS KENDARAAN
@@ -142,6 +146,7 @@ Route::middleware(['auth', 'owner'])->group(function () {
         Route::post('/pajak/cari', 'search')->name('pajak.search');
         Route::get('/pajak/transaksi/{id}', 'transaction')->name('pajak.transaction');
         Route::post('/pajak/transaksi/{id}', 'transactionAction')->name('pajak.transaction.action');
+        Route::get('/kendaraan-belum-perbarui-pajak', 'updateTax')->name('pajak.updateTax');
     });
 });
 
