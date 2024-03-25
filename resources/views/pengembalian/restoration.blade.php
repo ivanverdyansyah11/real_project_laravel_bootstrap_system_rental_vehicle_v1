@@ -154,7 +154,7 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="bensin_kembali">Bensin Kembali (Liter)</label>
+                                        <label for="bensin_kembali">Bensin Kembali (Strip Bar)</label>
                                         <input type="number" id="bensin_kembali" name="bensin_kembali" class="input"
                                             autocomplete="off" value="{{ old('bensin_kembali') }}" required>
                                         @error('bensin_kembali')

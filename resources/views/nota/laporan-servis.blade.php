@@ -72,8 +72,8 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="total_bayar">Total Bayar</label>
-                                    <input type="number" id="total_bayar" class="input" autocomplete="off"
-                                        name="total_bayar" value="{{ $servis->total_bayar }}" readonly>
+                                    <input type="text" id="total_bayar" class="input" autocomplete="off"
+                                        name="total_bayar" value="R. {{ number_format($servis->total_bayar, 2, ",", ".") }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">

@@ -26,60 +26,6 @@
                     method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        {{-- <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
-                            <div class="input-wrapper">
-                                <div class="wrapper d-flex gap-3 align-items-end">
-                                    <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
-                                        class="img-fluid tag-create-document" alt="Dokumen Image" width="80">
-                                    <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-document"
-                                            name="foto_dokumen" value="{{ old('foto_dokumen') }}" style="opacity: 0;"
-                                            required>
-                                        <button type="button" class="button-reverse button-create-document">Pilih Foto
-                                            Dokumen</button>
-                                    </div>
-                                </div>
-                                @error('foto_dokumen')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
-                            <div class="input-wrapper">
-                                <div class="wrapper d-flex gap-3 align-items-end">
-                                    <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
-                                        class="img-fluid tag-create-vehicle" alt="Kendaraan Image" width="80">
-                                    <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-vehicle"
-                                            name="foto_kendaraan" value="{{ old('foto_kendaraan') }}" style="opacity: 0;"
-                                            required>
-                                        <button type="button" class="button-reverse button-create-vehicle">Pilih Foto
-                                            Kendaraan</button>
-                                    </div>
-                                </div>
-                                @error('foto_kendaraan')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
-                            <div class="input-wrapper">
-                                <div class="wrapper d-flex gap-3 align-items-end">
-                                    <img src="{{ asset('assets/img/default/image-notfound.svg') }}"
-                                        class="img-fluid tag-create-customer" alt="Pelanggan Image" width="80">
-                                    <div class="wrapper-image w-100">
-                                        <input type="file" id="image" class="input-create-customer"
-                                            name="foto_pelanggan" value="{{ old('foto_pelanggan') }}" style="opacity: 0;"
-                                            required>
-                                        <button type="button" class="button-reverse button-create-customer">Pilih Foto
-                                            Pelanggan</button>
-                                    </div>
-                                </div>
-                                @error('foto_pelanggan')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div> --}}
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-md-6 mb-4">
@@ -118,7 +64,7 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="bensin_keluar">Bensin Keluar (Liter)</label>
+                                        <label for="bensin_keluar">Bensin Keluar (Strip Bar)</label>
                                         <input type="number" id="bensin_keluar" class="input" autocomplete="off"
                                             name="bensin_keluar" value="{{ old('bensin_keluar') }}" required>
                                         @error('bensin_keluar')
@@ -202,93 +148,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="row mb-4 mt-2">
-                        <div class="input-wrapper">
-                            <div class="input-line position-relative mb-2">
-                                <div class="line"></div>
-                                <p>Menentukan Pelepasan Kendaraan</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tarif_sewa_hari">Tarif Sewa Kendaran Harian</label>
-                                @if ($pemesanan->kendaraan)
-                                    <input type="text" id="tarif_sewa_hari" class="input" autocomplete="off"
-                                        value="{{ $pemesanan->kendaraan->tarif_sewa_hari }}" disabled>
-                                @else
-                                    <input type="text" id="tarif_sewa_hari" class="input" autocomplete="off"
-                                        value="Belum memilih kendaraan" disabled>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tarif_sewa_minggu">Tarif Sewa Kendaran Mingguan</label>
-                                @if ($pemesanan->kendaraan)
-                                    <input type="text" id="tarif_sewa_minggu" class="input" autocomplete="off"
-                                        value="{{ $pemesanan->kendaraan->tarif_sewa_minggu }}" disabled>
-                                @else
-                                    <input type="text" id="tarif_sewa_minggu" class="input" autocomplete="off"
-                                        value="Belum memilih kendaraan" disabled>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tarif_sewa_bulan">Tarif Sewa Kendaran Bulanan</label>
-                                @if ($pemesanan->kendaraan)
-                                    <input type="text" id="tarif_sewa_bulan" class="input" autocomplete="off"
-                                        value="{{ $pemesanan->kendaraan->tarif_sewa_bulan }}" disabled>
-                                @else
-                                    <input type="text" id="tarif_sewa_bulan" class="input" autocomplete="off"
-                                        value="Belum memilih kendaraan" disabled>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="input-wrapper">
-                                <label for="waktu_sewa_hari">Total Harian</label>
-                                <input type="number" id="waktu_sewa_hari" class="input" autocomplete="off"
-                                    value="{{ $pemesanan->total_harian }}" name="total_harian" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="input-wrapper">
-                                <label for="waktu_sewa_minggu">Total Mingguan</label>
-                                <input type="number" id="waktu_sewa_minggu" class="input" autocomplete="off"
-                                    value="{{ $pemesanan->total_mingguan }}" name="total_mingguan" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="input-wrapper">
-                                <label for="waktu_sewa_bulan">Total Bulanan</label>
-                                <input type="number" id="waktu_sewa_bulan" class="input" autocomplete="off"
-                                    value="{{ $pemesanan->total_bulanan }}" name="total_bulanan" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tanggal_diambil">Tanggal Diambil</label>
-                                <input type="date" id="tanggal_diambil" class="input" autocomplete="off"
-                                    name="tanggal_diambil" required value="{{ $pemesanan->tanggal_mulai }}">
-                                @error('tanggal_diambil')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="input-wrapper">
-                                <label for="tanggal_kembali">Tanggal Kembali</label>
-                                <input type="date" id="tanggal_kembali" class="input" autocomplete="off"
-                                    name="tanggal_kembali" required readonly value="{{ $pemesanan->tanggal_akhir }}">
-                                @error('tanggal_kembali')
-                                    <p class="caption-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                    </div> --}}
                     <div class="row mb-4 mt-2">
                         <div class="input-wrapper">
                             <div class="input-line position-relative mb-2">
@@ -321,7 +180,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="waktu_sewa">Waktu Sewa (Hari)</label>
-                                        <input type="number" id="waktu_sewa" class="input" autocomplete="off"
+                                        <input min="0" type="number" id="waktu_sewa" class="input" autocomplete="off"
                                             name="waktu_sewa" value="{{ $waktu_sewa }}" required readonly>
                                         @error('waktu_sewa')
                                             <p class="caption-error mt-2">{{ $message }}</p>

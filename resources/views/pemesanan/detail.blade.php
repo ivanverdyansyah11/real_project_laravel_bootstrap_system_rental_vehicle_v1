@@ -62,14 +62,14 @@
                     <div class="col-md-4 mb-4">
                         <div class="input-wrapper">
                             <label for="total_harian">Total Harian</label>
-                            <input type="number" id="total_harian" class="input" autocomplete="off" name="total_harian"
+                            <input min="0" type="number" id="total_harian" class="input" autocomplete="off" name="total_harian"
                                 disabled value="{{ $pemesanan->total_harian != 0 ? $pemesanan->total_harian : '0' }}">
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="input-wrapper">
                             <label for="total_mingguan">Total Mingguan</label>
-                            <input type="number" id="total_mingguan" class="input" autocomplete="off" disabled
+                            <input min="0" type="number" id="total_mingguan" class="input" autocomplete="off" disabled
                                 name="total_mingguan"
                                 value="{{ $pemesanan->total_mingguan != 0 ? $pemesanan->total_mingguan : '0' }}">
                         </div>
@@ -77,7 +77,7 @@
                     <div class="col-md-4 mb-4">
                         <div class="input-wrapper">
                             <label for="total_bulanan">Total Bulanan</label>
-                            <input type="number" id="total_bulanan" class="input" autocomplete="off" name="total_bulanan"
+                            <input min="0" type="number" id="total_bulanan" class="input" autocomplete="off" name="total_bulanan"
                                 disabled value="{{ $pemesanan->total_bulanan != 0 ? $pemesanan->total_bulanan : '0' }}">
                         </div>
                     </div>
@@ -150,13 +150,13 @@
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
-                            <label for="seri">Seri Kendaraan</label>
+                            <label for="seri">Tipe Kendaraan</label>
                             @if ($pemesanan->kendaraan->seri_kendaraan)
                                 <input type="text" id="seri" class="input" autocomplete="off" disabled
                                     value="{{ $pemesanan->kendaraan->seri_kendaraan->nomor_seri }}">
                             @else
                                 <input type="text" id="seri" class="input" autocomplete="off" disabled
-                                    value="Belum memilih seri kendaraan">
+                                    value="Belum memilih tipe kendaraan">
                             @endif
                         </div>
                     </div>

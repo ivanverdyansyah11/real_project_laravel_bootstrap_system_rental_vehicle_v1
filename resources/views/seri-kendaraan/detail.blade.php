@@ -17,7 +17,7 @@
         </div>
         <div class="row" style="margin-bottom: 32px">
             <div class="col-12 d-flex justify-content-between align-items-center">
-                <h5 class="subtitle">Detail Seri Kendaraan</h5>
+                <h5 class="subtitle">Detail Tipe Kendaraan</h5>
             </div>
         </div>
         <div class="row">
@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="input-wrapper">
-                                <label for="nomor">Seri Kendaraan</label>
+                                <label for="nomor">Tipe Kendaraan</label>
                                 <input type="text" id="nomor" class="input" autocomplete="off"
                                     value="{{ $seri->nomor_seri }}" disabled>
                             </div>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-12">
                             <div class="button-wrapper d-flex">
-                                <a href="{{ route('seriKendaraan') }}" class="button-reverse">Kembali ke Halaman</a>
+                                <a href="{{ route('tipeKendaraan') }}" class="button-reverse">Kembali ke Halaman</a>
                             </div>
                         </div>
                     </div>

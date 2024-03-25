@@ -94,7 +94,7 @@
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="input-wrapper">
-                            <label for="seri">Seri Kendaraan</label>
+                            <label for="seri">Tipe Kendaraan</label>
                             <input type="text" id="seri" class="input" autocomplete="off" readonly
                                 value="{{ $booking->kendaraan->seri_kendaraan->nomor_seri }}">
                         </div>

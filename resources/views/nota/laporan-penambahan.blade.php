@@ -45,7 +45,7 @@
                                 <div class="input-wrapper">
                                     <label for="tarifSewa">Tarif Sewa</label>
                                     <input type="text" id="tarifSewa" class="input" autocomplete="off" readonly
-                                        value="{{ $penambahan->pelepasan_pemesanan->kendaraan->tarif_sewa_hari }}">
+                                        value="Rp. {{ number_format($penambahan->pelepasan_pemesanan->kendaraan->tarif_sewa_hari, 2, ",", ".") }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
@@ -58,8 +58,8 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="total_biaya">Total Biaya</label>
-                                    <input type="number" id="total_biaya" class="input"
-                                        value="{{ $penambahan->total_biaya }}" readonly>
+                                    <input type="text" id="total_biaya" class="input"
+                                        value="Rp. {{ number_format($penambahan->total_biaya, 2, ",", ".") }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">

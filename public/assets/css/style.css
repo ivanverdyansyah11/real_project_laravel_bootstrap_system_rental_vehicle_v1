@@ -637,7 +637,7 @@ body {
 
 .input-wrapper .input {
     position: relative;
-    padding: 20px;
+    padding: 20px !important;
     border-radius: var(--rounded-md);
     border: var(--border-style);
     outline: none;
@@ -1010,6 +1010,7 @@ body {
 .input-wrapper .caption-error {
     font-size: 0.813rem;
     color: rgba(var(--red-color), 1);
+    text-transform: capitalize;
 }
 
 .card-product .status-true,
