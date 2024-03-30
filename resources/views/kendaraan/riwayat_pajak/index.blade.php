@@ -43,8 +43,17 @@
         <div class="col-12 d-flex justify-content-end mt-4">
             {{ $pajaks->links() }}
         </div>
+        @php
+            use Carbon\Carbon;
+            $terakhir_samsat = Carbon::parse($kendaraan->terakhir_samsat);
+            $terakhir_angsuran = Carbon::parse($kendaraan->terakhir_angsuran);
+            $terakhir_ganti_nomor_polisi = Carbon::parse($kendaraan->terakhir_ganti_nomor_polisi);
+        @endphp
         <div class="col-12">
             <div class="button-wrapper d-flex">
+                @if ($terakhir_samsat->isPast() || $terakhir_angsuran->isPast() || $terakhir_ganti_nomor_polisi->isPast())
+                    <a href="{{ route('pajak.transaction', $kendaraan->id) }}" class="button-primary">Bayar Pajak</a>
+                @endif
                 <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="button-reverse">Kembali ke
                     Halaman Detail</a>
             </div>
