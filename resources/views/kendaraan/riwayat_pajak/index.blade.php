@@ -12,7 +12,7 @@
                     <div class="col-3 col-xl-2 data-header"></div>
                 </div>
             </div>
-            @if ($pajaks->count() == 0)
+            @if (count($pajaks) == 0)
                 <div class="col-12 table-row table-border">
                     <div class="row table-data gap-4 align-items-center">
                         <div class="col data-value data-length">Tidak Ada Data Bayar Pajak Kendaraan!</div>
@@ -45,7 +45,8 @@
         </div>
         <div class="col-12">
             <div class="button-wrapper d-flex">
-                <a href="{{ route('kendaraan.detail', $pajak->kendaraan->id) }}" class="button-reverse">Kembali ke
+                <a href="{{ route('pajak.transaction', $kendaraan->id) }}" class="button-primary">Bayar Pajak</a>
+                <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="button-reverse">Kembali ke
                     Halaman Detail</a>
             </div>
         </div>
