@@ -46,7 +46,7 @@
         </div>
         <div class="col-12">
             <div class="button-wrapper d-flex">
-                <a href="{{ route('kendaraan.detail', $pemesanan->kendaraan->id) }}" class="button-reverse">Kembali ke
+                <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="button-reverse">Kembali ke
                     Halaman Detail</a>
             </div>
         </div>
