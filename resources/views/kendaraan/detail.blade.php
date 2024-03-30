@@ -235,8 +235,15 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="button-wrapper d-flex">
+                                    <div class="button-wrapper d-flex justify-content-between ">
                                         <a href="{{ route('kendaraan') }}" class="button-reverse">Kembali ke Halaman</a>
+                                        <div class="wrapper d-flex gap-2">
+                                            <a href="{{ route('kendaraan.historyTax', $kendaraan->id) }}"
+                                                class="button-primary">Riwayat
+                                                Pajak</a>
+                                            <a href="{{ route('kendaraan.historyReservation', $kendaraan->id) }}"
+                                                class="button-primary">Riwayat Pemesanan</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

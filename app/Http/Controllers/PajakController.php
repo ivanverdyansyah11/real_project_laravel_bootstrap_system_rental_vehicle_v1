@@ -38,6 +38,21 @@ class PajakController extends Controller
         ]);
     }
 
+    public function updateTax()
+    {
+        return view('dashboard.kendaraan_perbarui_pajak.index', [
+            'title' => 'Kendaraan Belum Perbarui Pajak',
+            'kendaraans' => Kendaraan::where(function ($query) {
+                $query->where('terakhir_samsat', '>', Carbon::now()->subDays(14))
+                    ->orWhere('terakhir_angsuran', '>', Carbon::now()->subDays(14))
+                    ->orWhere('terakhir_ganti_nomor_polisi', '>', Carbon::now()->subDays(14));
+            })->whereDate('terakhir_samsat', '>=', Carbon::now())
+                ->whereDate('terakhir_angsuran', '>=', Carbon::now())
+                ->whereDate('terakhir_ganti_nomor_polisi', '>=', Carbon::now())
+                ->paginate(6),
+        ]);
+    }
+
     public function transaction($id)
     {
         return view('pajak.transaction', [

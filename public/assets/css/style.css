@@ -497,7 +497,7 @@ body {
     text-decoration: none;
 }
 
-.alert.alert-success.alert-dashboard .link-alert:hover {
+.alert.alert-success.alert-dashboard a.link-alert:hover {
     text-decoration: underline;
 }
 /* END ALERT STYLE */
