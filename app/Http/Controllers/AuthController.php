@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -16,18 +17,21 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        try {
-            $credentials = $request->validate([
-                'email' => 'required|email|max:255',
-                'password' => 'required|string|min:3|max:255',
-            ]);
-    
-            if (Auth::attempt($credentials)) {
-                $request->session()->regenerate();
-                return redirect()->intended(route('dashboard'));
-            }
-        } catch (\Exception $e) {
-            logger($e->getMessage());
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:3|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('login'))->withErrors($validator)->withInput();
+        }
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended(route('dashboard'));
+        } else {
             return redirect(route('login'))->with('failed', "Email atau Password Tidak Ditemukan!");
         }
     }
