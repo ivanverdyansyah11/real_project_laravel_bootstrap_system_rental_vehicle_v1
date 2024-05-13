@@ -83,6 +83,7 @@ class PemesananController extends Controller
                 'karpet' => 'required|string',
                 'kondisi_kendaraan' => 'required|string',
                 'ban_serep' => 'required|string',
+                'waktu_diambil' => 'required',
             ]);
             $validatedDataPembayaran = $request->validate([
                 'foto_pembayaran' => 'required|image',
@@ -159,11 +160,11 @@ class PemesananController extends Controller
                 'foto_kendaraan' => 'nullable|image',
                 'foto_pelanggan' => 'nullable|image',
             ]);
-    
+
             $validatedDataPembayaran = $request->validate([
                 'foto_pembayaran' => 'nullable|image',
             ]);
-    
+
             if ($request->file('foto_dokumen')) {
                 $path = "assets/img/pemesanan-dokumen-images/$pelepasan_pemesanan->foto_dokumen";
                 if (File::exists($path)) {
@@ -180,14 +181,14 @@ class PemesananController extends Controller
                     $validatedData['foto_dokumen'] = null;
                 }
             }
-    
+
             if ($request->file('foto_kendaraan')) {
                 $path = "assets/img/pemesanan-kendaraan-images/$pelepasan_pemesanan->foto_kendaraan";
-    
+
                 if (File::exists($path)) {
                     File::delete($path);
                 }
-    
+
                 $image = $request->file('foto_kendaraan');
                 $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
                 $image->move(public_path('assets/img/pemesanan-kendaraan-images/'), $imageName);
@@ -199,14 +200,14 @@ class PemesananController extends Controller
                     $validatedData['foto_kendaraan'] = null;
                 }
             }
-    
+
             if ($request->file('foto_pelanggan')) {
                 $path = "assets/img/pemesanan-pelanggan-images/$pelepasan_pemesanan->foto_pelanggan";
-    
+
                 if (File::exists($path)) {
                     File::delete($path);
                 }
-    
+
                 $image = $request->file('foto_pelanggan');
                 $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
                 $image->move(public_path('assets/img/pemesanan-pelanggan-images/'), $imageName);
@@ -218,14 +219,14 @@ class PemesananController extends Controller
                     $validatedData['foto_pelanggan'] = null;
                 }
             }
-    
+
             if ($request->file('foto_pembayaran')) {
                 $path = "assets/img/pembayaran-pemesanan-images/$pembayaran_pemesanan->foto_pembayaran";
-    
+
                 if (File::exists($path)) {
                     File::delete($path);
                 }
-    
+
                 $image = $request->file('foto_pembayaran');
                 $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
                 $image->move(public_path('assets/img/pembayaran-pemesanan-images/'), $imageName);
@@ -233,10 +234,10 @@ class PemesananController extends Controller
             } else {
                 $validatedDataPembayaran['foto_pembayaran'] = $pembayaran_pemesanan->foto_pembayaran;
             }
-    
+
             PembayaranPemesanan::where('pelepasan_pemesanans_id', $pelepasan_pemesanan->id)->first()->update($validatedDataPembayaran);
             $pelepasan_pemesanan->update($validatedData);
-    
+
             return redirect(route('pemesanan'))->with('success', 'Berhasil Edit Pelepasan Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
