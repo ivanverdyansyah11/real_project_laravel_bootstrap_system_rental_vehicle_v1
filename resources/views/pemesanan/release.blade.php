@@ -177,7 +177,7 @@
                         </div>
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-md-6 mb-4">
+                                <div class="col-md-4 mb-4">
                                     <div class="input-wrapper">
                                         <label for="waktu_sewa">Waktu Sewa (Hari)</label>
                                         <input min="0" type="number" id="waktu_sewa" class="input"
@@ -188,12 +188,22 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-4">
+                                <div class="col-md-4 mb-4">
                                     <div class="input-wrapper">
                                         <label for="total_tarif_sewa">Total Tarif Sewa</label>
                                         <input type="number" id="total_tarif_sewa" class="input" autocomplete="off"
                                             name="total_tarif_sewa" value="{{ $total_tarif_sewa }}" required readonly>
                                         @error('total_tarif_sewa')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="waktu_diambil">Waktu Diambil</label>
+                                        <input type="time" id="waktu_diambil" class="input" autocomplete="off"
+                                            name="waktu_diambil" value="{{ old('waktu_diambil') }}" required>
+                                        @error('waktu_diambil')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
