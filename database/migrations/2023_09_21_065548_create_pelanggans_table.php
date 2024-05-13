@@ -25,8 +25,6 @@ class CreatePelanggansTable extends Migration
             $table->text('alamat');
             $table->enum('data_ktp', ['benar', 'salah']);
             $table->enum('data_kk', ['benar', 'salah']);
-            // $table->enum('data_nomor_telepon', ['benar', 'salah']);
-            // $table->enum('status', ['ada', 'tidak ada']);
             $table->enum('kelengkapan_ktp', ['lengkap', 'belum lengkap']);
             $table->enum('kelengkapan_kk', ['lengkap', 'belum lengkap']);
             $table->enum('kelengkapan_nomor_telepon', ['lengkap', 'belum lengkap']);
