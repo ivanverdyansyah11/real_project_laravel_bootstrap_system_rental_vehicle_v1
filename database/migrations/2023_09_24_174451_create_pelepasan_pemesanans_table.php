@@ -24,6 +24,7 @@ class CreatePelepasanPemesanansTable extends Migration
             $table->string('foto_nota_ttd')->nullable();
             $table->string('kilometer_keluar');
             $table->string('bensin_keluar');
+            $table->time('waktu_diambil');
             // $table->date('tanggal_diambil');
             // $table->date('tanggal_kembali');
             $table->enum('sarung_jok', ['ada', 'tidak ada', 'kosong']);
