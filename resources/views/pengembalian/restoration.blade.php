@@ -141,7 +141,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-4">
+                                <div class="col-md-4 mb-4">
                                     <div class="input-wrapper">
                                         <label for="kilometer_kembali">Kilometer Kembali (Km)</label>
                                         <input type="number" id="kilometer_kembali" name="kilometer_kembali"
@@ -152,12 +152,22 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-4">
+                                <div class="col-md-4 mb-4">
                                     <div class="input-wrapper">
                                         <label for="bensin_kembali">Bensin Kembali (Strip Bar)</label>
                                         <input type="number" id="bensin_kembali" name="bensin_kembali" class="input"
                                             autocomplete="off" value="{{ old('bensin_kembali') }}" required>
                                         @error('bensin_kembali')
+                                            <p class="caption-error mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="input-wrapper">
+                                        <label for="waktu_pengembalian">Waktu Pengembalian</label>
+                                        <input type="time" id="waktu_pengembalian" class="input" autocomplete="off"
+                                            name="waktu_pengembalian" value="{{ old('waktu_pengembalian') }}" required>
+                                        @error('waktu_pengembalian')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>

@@ -75,6 +75,7 @@ class PengembalianController extends Controller
                 'tanggal_kembali' => 'required|date',
                 'kilometer_kembali' => 'required|string',
                 'bensin_kembali' => 'required|string',
+                'waktu_pengembalian' => 'required',
                 'ketepatan_waktu' => 'required|string',
                 'terlambat' => 'nullable|string',
                 'sarung_jok' => 'required|string',
