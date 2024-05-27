@@ -12,6 +12,6 @@ class Pengembalian extends Model
 
     public function pelepasan_pemesanan()
     {
-        return $this->belongsTo(PelepasanPemesanan::class, 'pelepasan_pemesanans_id');
+        return $this->belongsTo(PelepasanPemesanan::class, 'pelepasan_pemesanans_id')->withTrashed();
     }
 }
