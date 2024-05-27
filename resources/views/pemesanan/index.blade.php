@@ -88,15 +88,13 @@
                                     <p class="status-true">Sedang Dipesan</p>
                                 @elseif ($booking->kendaraan->status == 'servis')
                                     <p class="status-false">Diservis</p>
-                                @elseif($booking->kendaraan->status == 'booking')
+                                @elseif($booking->kendaraan->status == 'booking' || $booking->kendaraan->status == 'ready')
                                     <p class="status-true">Ready</p>
-                                @else
-                                    <p class="status-false">Sudah Dipesan</p>
                                 @endif
                             </div>
                             <div class="col-3 col-xl-2 data-value d-flex justify-content-end">
                                 <div class="wrapper-action d-flex">
-                                    @if ($booking->kendaraan->status == 'booking')
+                                    @if ($booking->kendaraan->status == 'booking' || $booking->kendaraan->status == 'ready')
                                         <a href="{{ route('booking.detail', $booking->id) }}"
                                             class="button-action button-approve d-flex justify-content-center align-items-center">
                                             <div class="approve-icon"></div>
@@ -115,7 +113,7 @@
                                     @endif
                                     @if (
                                         ($booking->kendaraan->status == 'dipesan' && $booking->status == 'booking') ||
-                                            $booking->kendaraan->status == 'booking')
+                                            $booking->kendaraan->status == 'booking' || $booking->kendaraan->status == 'ready')
                                         <button type="button"
                                             class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
                                             data-bs-toggle="modal" data-bs-target="#hapusBookingModal"
