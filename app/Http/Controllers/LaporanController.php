@@ -22,12 +22,12 @@ class LaporanController extends Controller
     {
         if (auth()->user()->role == 'admin') {
             return view('laporan.index', [
-                'title' => 'Laporan',
+                'title' => 'History',
                 'laporans' => Laporan::orderBy('created_at', 'DESC')->paginate(6),
             ]);
         } elseif (auth()->user()->role == 'staff') {
             return view('laporan.index', [
-                'title' => 'Laporan',
+                'title' => 'History',
                 'laporans' => Laporan::where('penggunas_id', auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(6),
             ]);
         }
@@ -231,10 +231,10 @@ class LaporanController extends Controller
 
     public function updatePemesanan($id, Request $request)
     {
-        try {    
+        try {
             $laporan = Laporan::where('id', $id)->first();
             $pelepasan = PelepasanPemesanan::where('id', $laporan->relations_id)->first();
-    
+
             $validatedData = $request->validate([
                 'foto_dokumen' => 'nullable|image',
                 'foto_kendaraan' => 'nullable|image',
@@ -242,14 +242,14 @@ class LaporanController extends Controller
                 'foto_nota' => 'nullable|image',
                 'foto_nota_ttd' => 'nullable|image',
             ]);
-    
+
             if ($request->file('foto_dokumen')) {
                 $path = "assets/img/pemesanan-dokumen-images/" . $pelepasan->foto_dokumen;
-    
+
                 if (File::exists($path)) {
                     File::delete($path);
                 }
-    
+
                 $image = $request->file('foto_dokumen');
                 $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
                 $image->move(public_path('assets/img/pemesanan-dokumen-images/'), $imageName);
@@ -261,14 +261,14 @@ class LaporanController extends Controller
                     $validatedData['foto_dokumen'] = $pelepasan->foto_dokumen;
                 }
             }
-    
+
             if ($request->file('foto_kendaraan')) {
                 $path = "assets/img/pemesanan-kendaraan-images/" . $pelepasan->foto_kendaraan;
-    
+
                 if (File::exists($path)) {
                     File::delete($path);
                 }
-    
+
                 $image = $request->file('foto_kendaraan');
                 $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
                 $image->move(public_path('assets/img/pemesanan-kendaraan-images/'), $imageName);
@@ -280,14 +280,14 @@ class LaporanController extends Controller
                     $validatedData['foto_kendaraan'] = $pelepasan->foto_kendaraan;
                 }
             }
-    
+
             if ($request->file('foto_pelanggan')) {
                 $path = "assets/img/pemesanan-pelanggan-images/" . $pelepasan->foto_pelanggan;
-    
+
                 if (File::exists($path)) {
                     File::delete($path);
                 }
-    
+
                 $image = $request->file('foto_pelanggan');
                 $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
                 $image->move(public_path('assets/img/pemesanan-pelanggan-images/'), $imageName);
@@ -299,14 +299,14 @@ class LaporanController extends Controller
                     $validatedData['foto_pelanggan'] = $pelepasan->foto_pelanggan;
                 }
             }
-    
+
             if ($request->file('foto_nota')) {
                 $path = "assets/img/nota-images/" . $pelepasan->foto_nota;
-    
+
                 if (File::exists($path)) {
                     File::delete($path);
                 }
-    
+
                 $image = $request->file('foto_nota');
                 $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
                 $image->move(public_path('assets/img/nota-images/'), $imageName);
@@ -318,14 +318,14 @@ class LaporanController extends Controller
                     $validatedData['foto_nota'] = $pelepasan->foto_nota;
                 }
             }
-    
+
             if ($request->file('foto_nota_ttd')) {
                 $path = "assets/img/nota-ttd-images/" . $pelepasan->foto_nota_ttd;
-    
+
                 if (File::exists($path)) {
                     File::delete($path);
                 }
-    
+
                 $image = $request->file('foto_nota_ttd');
                 $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
                 $image->move(public_path('assets/img/nota-ttd-images/'), $imageName);
@@ -337,7 +337,7 @@ class LaporanController extends Controller
                     $validatedData['foto_nota_ttd'] = $pelepasan->foto_nota_ttd;
                 }
             }
-    
+
             PelepasanPemesanan::where('id', $laporan->relations_id)->first()->update($validatedData);
             return redirect(route('laporan.pemesanan.detail', $id))->with('success', 'Berhasil Update Data Laporan Pemesanan!');
         } catch (\Exception $e) {
