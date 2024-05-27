@@ -12,21 +12,21 @@ class Laporan extends Model
 
     public function pengguna()
     {
-        return $this->belongsTo(Auth::class, 'penggunas_id');
+        return $this->belongsTo(Auth::class, 'penggunas_id')->withTrashed();
     }
 
     public function pelanggan()
     {
-        return $this->belongsTo(Pelanggan::class, 'relations_id');
+        return $this->belongsTo(Pelanggan::class, 'relations_id')->withTrashed();
     }
 
     public function sopir()
     {
-        return $this->belongsTo(Sopir::class, 'relations_id');
+        return $this->belongsTo(Sopir::class, 'relations_id')->withTrashed();
     }
 
     public function kendaraan()
     {
-        return $this->belongsTo(Kendaraan::class, 'relations_id');
+        return $this->belongsTo(Kendaraan::class, 'relations_id')->withTrashed();
     }
 }
