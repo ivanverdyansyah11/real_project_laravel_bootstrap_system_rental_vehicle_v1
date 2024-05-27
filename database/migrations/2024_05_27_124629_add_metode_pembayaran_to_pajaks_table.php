@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class AddMetodePembayaranToPajaksTable extends Migration
@@ -13,9 +14,10 @@ class AddMetodePembayaranToPajaksTable extends Migration
      */
     public function up()
     {
-        Schema::table('pajaks', function (Blueprint $table) {
-            $table->enum('metode_bayar', ['cash', 'transfer bank', 'internet banking', 'mobile banking', 'virtual account', 'online credit card', 'rekening bersama', 'payPal', 'e-money']);
-        });
+        // Schema::table('pajaks', function (Blueprint $table) {
+        //     $table->enum('metode_bayar', ['cash', 'transfer bank', 'internet banking', 'mobile banking', 'virtual account', 'online credit card', 'rekening bersama', 'payPal', 'e-money']);
+        // });
+        DB::statement("ALTER TABLE `pajaks` MODIFY  `metode_bayar` ENUM('cash', 'transfer bank', 'internet banking', 'mobile banking') NULL");
     }
 
     /**
@@ -25,8 +27,9 @@ class AddMetodePembayaranToPajaksTable extends Migration
      */
     public function down()
     {
-        Schema::table('pajaks', function (Blueprint $table) {
-            //
-        });
+        // Schema::table('pajaks', function (Blueprint $table) {
+        //     //
+        // });
+        DB::statement("ALTER TABLE `pajaks` MODIFY  `metode_bayar` ENUM('transfer bank', 'internet banking', 'mobile banking') NULL");
     }
 }

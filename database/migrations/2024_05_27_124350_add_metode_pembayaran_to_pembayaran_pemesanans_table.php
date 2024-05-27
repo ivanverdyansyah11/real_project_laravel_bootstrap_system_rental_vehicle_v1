@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class AddMetodePembayaranToPembayaranPemesanansTable extends Migration
@@ -13,9 +14,10 @@ class AddMetodePembayaranToPembayaranPemesanansTable extends Migration
      */
     public function up()
     {
-        Schema::table('pembayaran_pemesanans', function (Blueprint $table) {
-            $table->enum('metode_bayar', ['cash', 'transfer bank', 'internet banking', 'mobile banking', 'virtual account', 'online credit card', 'rekening bersama', 'payPal', 'e-money'])->nullable();
-        });
+        // Schema::table('pembayaran_pemesanans', function (Blueprint $table) {
+        //     $table->enum('metode_bayar', ['cash', 'transfer bank', 'internet banking', 'mobile banking'])->change()->nullable();
+        // });
+        DB::statement("ALTER TABLE `pembayaran_pemesanans` MODIFY  `metode_bayar` ENUM('cash', 'transfer bank', 'internet banking', 'mobile banking') NULL");
     }
 
     /**
@@ -25,8 +27,9 @@ class AddMetodePembayaranToPembayaranPemesanansTable extends Migration
      */
     public function down()
     {
-        Schema::table('pembayaran_pemesanans', function (Blueprint $table) {
-            //
-        });
+        // Schema::table('pembayaran_pemesanans', function (Blueprint $table) {
+        //     // $table->enum('metode_bayar', ['transfer bank', 'internet banking', 'mobile banking'])->change()->nullable();
+        // });
+        DB::statement("ALTER TABLE `pembayaran_pemesanans` MODIFY  `metode_bayar` ENUM('transfer bank', 'internet banking', 'mobile banking') NULL");
     }
 }
