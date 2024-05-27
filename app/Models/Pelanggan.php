@@ -12,6 +12,6 @@ class Pelanggan extends Model
 
     public function pelepasan_pemesanan()
     {
-        return $this->belongsTo(PelepasanPemesanan::class, 'id');
+        return $this->belongsTo(PelepasanPemesanan::class, 'id')->withTrashed();
     }
 }
