@@ -14,10 +14,10 @@ class AddMetodePembayaranToPengembaliansTable extends Migration
      */
     public function up()
     {
-        // Schema::table('pengembalians', function (Blueprint $table) {
-        //     $table->enum('metode_bayar', ['cash', 'transfer bank', 'internet banking', 'mobile banking', 'virtual account', 'online credit card', 'rekening bersama', 'payPal', 'e-money'])->nullable();
-        // });
-        DB::statement("ALTER TABLE `pengembalians` MODIFY  `metode_bayar` ENUM('cash', 'transfer bank', 'internet banking', 'mobile banking') NULL");
+//         Schema::table('pengembalians', function (Blueprint $table) {
+//             $table->enum('metode_bayar', ['cash', 'transfer bank', 'internet banking', 'mobile banking', 'virtual account', 'online credit card', 'rekening bersama', 'payPal', 'e-money'])->nullable();
+//         });
+        DB::statement("ALTER TABLE `pengembalians` MODIFY  `metode_bayar` ENUM('cash', 'transfer bank', 'internet banking', 'mobile banking', 'virtual account', 'online credit card', 'rekening bersama', 'payPal', 'e-money') NULL");
     }
 
     /**
