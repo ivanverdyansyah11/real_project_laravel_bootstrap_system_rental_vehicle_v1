@@ -19,9 +19,7 @@ class CreatePengembaliansTable extends Migration
             $table->string('foto_pembayaran');
             $table->enum('jenis_pembayaran', ['lunas', 'dp', 'belum bayar']);
             $table->string('total_bayar')->nullable();
-            $table->enum('metode_bayar', ['transfer bank', 'internet banking', 'mobile banking', 'virtual account', 'online credit card', 'rekening bersama', 'payPal', 'e-money'])->nullable();
             $table->date('tanggal_kembali');
-            $table->time('waktu_pengembalian');
             $table->string('kilometer_kembali');
             $table->string('bensin_kembali');
             $table->string('ketepatan_waktu');
