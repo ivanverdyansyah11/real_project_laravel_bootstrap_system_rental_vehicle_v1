@@ -12,6 +12,6 @@ class JenisKendaraan extends Model
 
     public function seri_kendaraan()
     {
-        return $this->belongsTo(SeriKendaraan::class, 'id');
+        return $this->belongsTo(SeriKendaraan::class, 'id')->withTrashed();
     }
 }
