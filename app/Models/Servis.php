@@ -12,6 +12,6 @@ class Servis extends Model
 
     public function kendaraan()
     {
-        return $this->belongsTo(Kendaraan::class, 'kendaraans_id');
+        return $this->belongsTo(Kendaraan::class, 'kendaraans_id')->withTrashed();
     }
 }
