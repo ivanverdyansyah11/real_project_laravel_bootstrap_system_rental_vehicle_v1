@@ -12,16 +12,16 @@ class SeriKendaraan extends Model
 
     public function kendaraan()
     {
-        return $this->hasMany(Kendaraan::class, 'id');
+        return $this->hasMany(Kendaraan::class, 'id')->withTrashed();
     }
 
     public function jenis_kendaraan()
     {
-        return $this->belongsTo(JenisKendaraan::class, 'jenis_kendaraans_id');
+        return $this->belongsTo(JenisKendaraan::class, 'jenis_kendaraans_id')->withTrashed();
     }
 
     public function brand_kendaraan()
     {
-        return $this->belongsTo(BrandKendaraan::class, 'brand_kendaraans_id');
+        return $this->belongsTo(BrandKendaraan::class, 'brand_kendaraans_id')->withTrashed();
     }
 }
