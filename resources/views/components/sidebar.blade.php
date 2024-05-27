@@ -99,7 +99,7 @@
                         <div class="icon-sidebar-wrapper">
                             <div class="sidebar-icon laporan-icon"></div>
                         </div>
-                        <p>Laporan</p>
+                        <p>History</p>
                     </div>
                 </a>
                 <a href="{{ route('pengguna') }}"
