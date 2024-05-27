@@ -17,13 +17,13 @@
         </div>
         <div class="row mb-4">
             <div class="col-12 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 gap-md-0">
-                <h5 class="subtitle">Data Laporan</h5>
+                <h5 class="subtitle">Data History</h5>
                 <div class="wrapper position-relative" style="width: max-content;">
                     <button type="button"
                         class="button-other position-relative button-primary-blur d-flex align-items-center">
                         <img src="{{ asset('assets/img/button/filter.svg') }}" alt="Icon Filter"
                             class="img-fluid button-icon">
-                        Filter Kategori Laporan
+                        Filter Kategori History
                         <img src="{{ asset('assets/img/button/arrow-down-primary.svg') }}" alt="Icon Filter"
                             class="img-fluid button-icon" style="margin-left: 6px;">
                     </button>
