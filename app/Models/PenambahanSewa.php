@@ -12,11 +12,11 @@ class PenambahanSewa extends Model
 
     public function pelepasan_pemesanan()
     {
-        return $this->belongsTo(PelepasanPemesanan::class, 'pelepasan_pemesanans_id');
+        return $this->belongsTo(PelepasanPemesanan::class, 'pelepasan_pemesanans_id')->withTrashed();
     }
 
     public function kendaraan()
     {
-        return $this->belongsTo(Kendaraan::class, 'kendaraans_id');
+        return $this->belongsTo(Kendaraan::class, 'kendaraans_id')->withTrashed();
     }
 }
