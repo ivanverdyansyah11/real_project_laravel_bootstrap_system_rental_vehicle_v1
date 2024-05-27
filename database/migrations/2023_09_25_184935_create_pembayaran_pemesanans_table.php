@@ -23,7 +23,6 @@ class CreatePembayaranPemesanansTable extends Migration
             $table->enum('jenis_pembayaran', ['lunas', 'dp', 'belum bayar']);
             $table->string('total_tarif_sewa');
             $table->string('total_bayar')->nullable();
-            $table->enum('metode_bayar', ['transfer bank', 'internet banking', 'mobile banking', 'virtual account', 'online credit card', 'rekening bersama', 'payPal', 'e-money'])->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();

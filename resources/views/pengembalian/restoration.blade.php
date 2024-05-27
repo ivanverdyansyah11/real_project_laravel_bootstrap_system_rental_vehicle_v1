@@ -274,6 +274,9 @@
                                         <label for="metode_bayar">Metode Pembayaran</label>
                                         <select id="metode_bayar" class="input" name="metode_bayar">
                                             <option value="-">Pilih metode pembayaran</option>
+                                            <option value="cash" {{ old('metode_bayar') == 'cash' ? 'selected' : '' }}>
+                                                Cash
+                                            </option>
                                             <option value="transfer bank"
                                                 {{ old('metode_bayar') == 'transfer bank' ? 'selected' : '' }}>Transfer
                                                 Bank
