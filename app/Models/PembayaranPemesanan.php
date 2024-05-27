@@ -12,16 +12,16 @@ class PembayaranPemesanan extends Model
 
     public function kendaraans()
     {
-        return $this->hasMany(Kendaraan::class, 'kendaraans_id');
+        return $this->hasMany(Kendaraan::class, 'kendaraans_id')->withTrashed();
     }
 
     public function sopir()
     {
-        return $this->belongsTo(Sopir::class, 'sopirs_id');
+        return $this->belongsTo(Sopir::class, 'sopirs_id')->withTrashed();
     }
 
     public function pelepasan_pemesanan()
     {
-        return $this->belongsTo(PelepasanPemesanan::class, 'pelepasan_pemesanans_id');
+        return $this->belongsTo(PelepasanPemesanan::class, 'pelepasan_pemesanans_id')->withTrashed();
     }
 }
