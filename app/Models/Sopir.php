@@ -12,6 +12,6 @@ class Sopir extends Model
 
     public function pembayaran_pemesanan()
     {
-        return $this->belongsTo(PembayaranPemesanan::class, 'id');
+        return $this->belongsTo(PembayaranPemesanan::class, 'id')->withTrashed();
     }
 }
