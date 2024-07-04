@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col-12 d-flex justify-content-between align-items-center">
+            <div class="col-12 d-flex justify-content-between align-items-center gap-2">
                 <form class="form-search d-inline-block" method="POST" action="{{ route('kilometerKendaraan.search') }}">
                     @csrf
                     <div class="wrapper-search">
@@ -28,7 +28,7 @@
                         </label>
                     </div>
                 </form>
-                <button type="button" class="button-primary d-none d-md-flex align-items-center" data-bs-toggle="modal"
+                <button type="button" class="button-primary d-flex align-items-center" data-bs-toggle="modal"
                     data-bs-target="#tambahKilometerModal">
                     <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
                     Tambah
@@ -62,13 +62,13 @@
                                         <div class="detail-icon"></div>
                                     </button>
                                     <button type="button"
-                                        class="button-action button-edit d-none d-md-flex justify-content-center align-items-center"
+                                        class="button-action button-edit d-flex justify-content-center align-items-center"
                                         data-bs-toggle="modal" data-bs-target="#editKilometerModal"
                                         data-id="{{ $kilometer->id }}">
                                         <div class="edit-icon"></div>
                                     </button>
                                     <button type="button"
-                                        class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
+                                        class="button-action button-delete d-flex justify-content-center align-items-center"
                                         data-bs-toggle="modal" data-bs-target="#hapusKilometerModal"
                                         data-id="{{ $kilometer->id }}">
                                         <div class="delete-icon"></div>
