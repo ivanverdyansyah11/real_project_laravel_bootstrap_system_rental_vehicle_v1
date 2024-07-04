@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Auth;
-use App\Models\Pajak;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 
 class PenggunaController extends Controller
@@ -12,7 +13,7 @@ class PenggunaController extends Controller
     {
         return view('pengguna.index', [
             'title' => 'Pengguna',
-            'penggunas' => Auth::paginate(6),
+            'penggunas' => Auth::whereNotIn('role', ['admin'])->paginate(6),
         ]);
     }
 
@@ -43,6 +44,7 @@ class PenggunaController extends Controller
                 'email' => 'required|email:dns|max:255',
                 'password' => 'required|min:3|max:255',
             ]);
+            $validatedData['password'] = bcrypt($validatedData['password']);
             $validatedData['role'] = 'staff';
             Auth::create($validatedData);
             return redirect(route('pengguna'))->with('success', 'Berhasil Tambah Pengguna!');
@@ -55,11 +57,21 @@ class PenggunaController extends Controller
     function update($id, Request $request)
     {
         try {
+            $user = Auth::where('id', $id)->first();
             $validatedData = $request->validate([
                 'nama_lengkap' => 'required|string|max:255',
                 'email' => 'required|email|max:255',
+                'password_confirmation' => 'nullable|string|min:3|max:255',
+                'password' => 'nullable|string|min:3|max:255',
             ]);
-            Auth::where('id', $id)->first()->update($validatedData);
+            if ($validatedData["password_confirmation"] != null && $validatedData["password"] != null) {
+                if (!Hash::check($validatedData["password_confirmation"], $user->password)) {
+                    return redirect()->back()->with('failed', 'Password Tidak Sesuai!');
+                }
+                $validatedData['password'] = bcrypt($validatedData['password']);
+            }
+            Auth::where('id', $id)->first()->update(Arr::only($validatedData, ['nama_lengkap', 'email', 'password']));
+            return redirect(route('pengguna'))->with('success', 'Berhasil Update Pengguna!');
         } catch (\Exception $e) {
             logger($e->getMessage());
             return redirect(route('pengguna'))->with('failed', 'Gagal Update Pengguna!');
