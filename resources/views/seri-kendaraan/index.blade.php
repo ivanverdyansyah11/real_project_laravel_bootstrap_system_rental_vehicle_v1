@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col-12 d-flex justify-content-between align-items-center">
+            <div class="col-12 d-flex justify-content-between align-items-center gap-2">
                 <form class="form-search d-inline-block" method="POST" action="{{ route('tipeKendaraan.search') }}">
                     @csrf
                     <div class="wrapper-search">
@@ -31,15 +31,14 @@
                 @if ($jenises->count() == 0 || $brands->count() == 0)
                     <form action="{{ route('tipeKendaraan.check') }}" method="POST">
                         @csrf
-                        <button type="submit" class="button-primary d-none d-md-flex align-items-center">
+                        <button type="submit" class="button-primary d-flex align-items-center">
                             <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon"
                                 class="img-fluid button-icon">
                             Tambah
                         </button>
                     </form>
                 @else
-                    <a href="{{ route('tipeKendaraan.create') }}"
-                        class="button-primary d-none d-md-flex align-items-center">
+                    <a href="{{ route('tipeKendaraan.create') }}" class="button-primary d-flex align-items-center">
                         <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
                         Tambah
                     </a>
@@ -79,11 +78,11 @@
                                         <div class="detail-icon"></div>
                                     </a>
                                     <a href="{{ route('tipeKendaraan.edit', $seri->id) }}"
-                                        class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
+                                        class="button-action button-edit d-flex justify-content-center align-items-center">
                                         <div class="edit-icon"></div>
                                     </a>
                                     <button type="button"
-                                        class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
+                                        class="button-action button-delete d-flex justify-content-center align-items-center"
                                         data-bs-toggle="modal" data-bs-target="#hapusSeriModal"
                                         data-id="{{ $seri->id }}">
                                         <div class="delete-icon"></div>
