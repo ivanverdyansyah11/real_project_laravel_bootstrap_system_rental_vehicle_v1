@@ -4,7 +4,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BrandKendaraanController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\GenerateController;
 use App\Http\Controllers\JenisKendaraanController;
 use App\Http\Controllers\KategoriKilometerKendaraanController;
 use App\Http\Controllers\KendaraanController;
@@ -15,10 +14,10 @@ use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\PenambahanSewaController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SeriKendaraanController;
 use App\Http\Controllers\ServisController;
 use App\Http\Controllers\SopirController;
-use App\Models\PenambahanSewa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -159,6 +158,12 @@ Route::middleware('auth')->group(function () {
     // DASHBOARD
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
+    });
+
+    // PROFILE
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/profile', 'index')->name('profile');
+        Route::post('/profile/edit/{id}', 'update')->name('profile.update');
     });
 
     // PENGGUNA
