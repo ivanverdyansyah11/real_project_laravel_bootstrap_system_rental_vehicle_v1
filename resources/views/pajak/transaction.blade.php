@@ -117,8 +117,7 @@
                                 <label for="metode_bayar">Metode Pembayaran</label>
                                 <select id="metode_bayar" class="input" name="metode_bayar" required>
                                     <option value="">Pilih metode pembayaran</option>
-                                    <option value="cash"
-                                        {{ old('metode_bayar') == 'cash' ? 'selected' : '' }}>Cash
+                                    <option value="cash" {{ old('metode_bayar') == 'cash' ? 'selected' : '' }}>Cash
                                     </option>
                                     <option value="transfer bank"
                                         {{ old('metode_bayar') == 'transfer bank' ? 'selected' : '' }}>Transfer Bank
@@ -184,7 +183,7 @@
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="jumlah_bayar">Jumlah Bayar</label>
-                                <input type="number" id="jumlah_bayar" class="input" autocomplete="off"
+                                <input type="text" id="jumlah_bayar" class="input" autocomplete="off"
                                     name="jumlah_bayar" value="{{ old('jumlah_bayar') }}" required>
                                 @error('jumlah_bayar')
                                     <p class="caption-error mt-2">{{ $message }}</p>
@@ -225,5 +224,27 @@
         $("#lama_pajak").select2({
             theme: "bootstrap-5",
         });
+
+        let jumlahBayar = document.getElementById('jumlah_bayar');
+        jumlahBayar.value = formatRupiah(jumlahBayar.value, 'Rp. ');
+        jumlahBayar.addEventListener('keyup', function(e) {
+            jumlahBayar.value = formatRupiah(this.value, 'Rp. ');
+        });
+
+        function formatRupiah(angka, prefix) {
+            let number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
     </script>
 @endsection
