@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col-12 d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
+            <div class="col-12 d-flex flex-column flex-md-row justify-content-md-between align-items-md-center gap-2">
                 <form class="form-search d-flex gap-3 flex-column flex-md-row" method="POST"
                     action="{{ route('pemesanan.search') }}">
                     @csrf
@@ -36,7 +36,7 @@
                 @if (\App\Models\Pelanggan::where('kelengkapan_ktp', 'lengkap')->where('kelengkapan_kk', 'lengkap')->where('kelengkapan_nomor_telepon', 'lengkap')->count() == 0 || \App\Models\Kendaraan::whereIn('status', ['ready', 'booking'])->count() == 0)
                     <form action="{{ route('booking.check') }}" method="POST">
                         @csrf
-                        <button type="submit" class="button-primary d-none d-md-flex align-items-center"
+                        <button type="submit" class="button-primary d-flex align-items-center"
                             style="height: max-content;">
                             <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon"
                                 class="img-fluid button-icon">
@@ -44,7 +44,7 @@
                         </button>
                     </form>
                 @else
-                    <a href="{{ route('booking.create') }}" class="button-primary d-none d-md-flex align-items-center"
+                    <a href="{{ route('booking.create') }}" class="button-primary d-flex align-items-center"
                         style="height: max-content;">
                         <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon" class="img-fluid button-icon">
                         Booking
@@ -113,7 +113,8 @@
                                     @endif
                                     @if (
                                         ($booking->kendaraan->status == 'dipesan' && $booking->status == 'booking') ||
-                                            $booking->kendaraan->status == 'booking' || $booking->kendaraan->status == 'ready')
+                                            $booking->kendaraan->status == 'booking' ||
+                                            $booking->kendaraan->status == 'ready')
                                         <button type="button"
                                             class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
                                             data-bs-toggle="modal" data-bs-target="#hapusBookingModal"
