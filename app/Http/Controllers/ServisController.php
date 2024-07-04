@@ -51,7 +51,7 @@ class ServisController extends Controller
             if ($request->air_accu == '' || $request->air_waiper == '' || $request->ban == '' || $request->oli == '') {
                 return redirect(route('servis.check', $id))->with('failed', 'Isi Form Input Kelengkapan Kondisi Kendaraan Terlebih Dahulu!');
             }
-    
+
             $validatedData = $request->validate([
                 'tanggal_servis' => 'required|date',
                 'kilometer_sebelum' => 'required|string',
@@ -63,15 +63,17 @@ class ServisController extends Controller
                 'total_bayar' => 'nullable|string',
                 'keterangan' => 'nullable|string',
             ]);
-    
+
+            $validatedData['total_bayar'] = str_replace('Rp. ', '', $validatedData['total_bayar']);
+            $validatedData['total_bayar'] = (int) str_replace('.', '', $validatedData['total_bayar']);
             $validatedData['kendaraans_id'] = $id;
-    
+
             Kendaraan::where('id', $id)->first()->update([
                 'kilometer' => $validatedData['kilometer_setelah'],
                 'kilometer_saat_ini' => $validatedData['kilometer_setelah'],
                 'status' => 'ready',
             ]);
-    
+
             Servis::create($validatedData);
             $servisID = Servis::latest()->first();
             Laporan::create([
