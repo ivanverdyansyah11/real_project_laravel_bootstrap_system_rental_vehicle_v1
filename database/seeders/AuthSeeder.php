@@ -15,16 +15,23 @@ class AuthSeeder extends Seeder
     public function run()
     {
         Auth::create([
-            'nama_lengkap' => 'User 1',
-            'email' => 'user1@gmail.com',
-            'password' => bcrypt('user1'),
+            'nama_lengkap' => 'Admin 1',
+            'email' => 'admin1@gmail.com',
+            'password' => bcrypt('admin1'),
             'role' => 'admin',
         ]);
 
         Auth::create([
-            'nama_lengkap' => 'User 2',
-            'email' => 'user2@gmail.com',
-            'password' => bcrypt('user2'),
+            'nama_lengkap' => 'Admin 2',
+            'email' => 'admin2@gmail.com',
+            'password' => bcrypt('admin2'),
+            'role' => 'admin',
+        ]);
+
+        Auth::create([
+            'nama_lengkap' => 'Staff 1',
+            'email' => 'staff1@gmail.com',
+            'password' => bcrypt('staff1'),
             'role' => 'staff',
         ]);
     }
