@@ -169,7 +169,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="tarif_sewa_hari">Tarif Sewa Harian</label>
-                                        <input type="number" required id="tarif_sewa_hari" class="input"
+                                        <input type="text" required id="tarif_sewa_hari" class="input"
                                             autocomplete="off" value="{{ $kendaraan->tarif_sewa_hari }}"
                                             name="tarif_sewa_hari">
                                         @error('tarif_sewa_hari')
@@ -180,7 +180,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="tarif_sewa_minggu">Tarif Sewa Mingguan</label>
-                                        <input type="number" required id="tarif_sewa_minggu" class="input"
+                                        <input type="text" required id="tarif_sewa_minggu" class="input"
                                             autocomplete="off" value="{{ $kendaraan->tarif_sewa_minggu }}"
                                             name="tarif_sewa_minggu">
                                         @error('tarif_sewa_minggu')
@@ -191,7 +191,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="tarif_sewa_bulan">Tarif Sewa Bulanan</label>
-                                        <input type="number" required id="tarif_sewa_bulan" class="input"
+                                        <input type="text" required id="tarif_sewa_bulan" class="input"
                                             autocomplete="off" value="{{ $kendaraan->tarif_sewa_bulan }}"
                                             name="tarif_sewa_bulan">
                                         @error('tarif_sewa_bulan')
@@ -380,5 +380,39 @@
                 }
             });
         });
+
+        let tarifSewaHari = document.getElementById('tarif_sewa_hari')
+        tarifSewaHari.value = formatRupiah(tarifSewaHari.value, 'Rp. ');
+        tarifSewaHari.addEventListener('keyup', function(e) {
+            tarifSewaHari.value = formatRupiah(this.value, 'Rp. ');
+        });
+
+        let tarifSewaMinggu = document.getElementById('tarif_sewa_minggu')
+        tarifSewaMinggu.value = formatRupiah(tarifSewaMinggu.value, 'Rp. ');
+        tarifSewaMinggu.addEventListener('keyup', function(e) {
+            tarifSewaMinggu.value = formatRupiah(this.value, 'Rp. ');
+        });
+
+        let tarifSewaBulan = document.getElementById('tarif_sewa_bulan')
+        tarifSewaBulan.value = formatRupiah(tarifSewaBulan.value, 'Rp. ');
+        tarifSewaBulan.addEventListener('keyup', function(e) {
+            tarifSewaBulan.value = formatRupiah(this.value, 'Rp. ');
+        });
+
+        function formatRupiah(angka, prefix) {
+            let number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
     </script>
 @endsection
