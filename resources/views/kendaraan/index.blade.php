@@ -17,7 +17,8 @@
         </div>
         <div class="row mb-4">
             <div class="col-12">
-                <form class="d-flex flex-column flex-md-row justify-content-between align-items-md-center w-100"
+                <form
+                    class="d-flex flex-column flex-md-row justify-content-between align-items-md-center w-100 gap-2 gap-md-2"
                     method="POST" action="{{ route('kendaraan.search') }}">
                     @csrf
                     <div class="form-search d-inline-block">
@@ -72,15 +73,13 @@
                         </div>
 
                         @if (\App\Models\SeriKendaraan::count() == 0)
-                            <a href="{{ route('kendaraan.check') }}"
-                                class="button-primary d-none d-md-flex align-items-center">
+                            <a href="{{ route('kendaraan.check') }}" class="button-primary d-flex align-items-center">
                                 <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon"
                                     class="img-fluid button-icon">
                                 Tambah
                             </a>
                         @else
-                            <a href="{{ route('kendaraan.create') }}"
-                                class="button-primary d-none d-md-flex align-items-center">
+                            <a href="{{ route('kendaraan.create') }}" class="button-primary d-flex align-items-center">
                                 <img src="{{ asset('assets/img/button/add.svg') }}" alt="Tambah Icon"
                                     class="img-fluid button-icon">
                                 Tambah
