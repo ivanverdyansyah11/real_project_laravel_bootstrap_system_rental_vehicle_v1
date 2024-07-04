@@ -148,7 +148,7 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="total_tarif_sewa">Total Tarif Sewa</label>
-                                    <input type="number" id="total_tarif_sewa" class="input" autocomplete="off"
+                                    <input type="text" id="total_tarif_sewa" class="input" autocomplete="off"
                                         value="{{ $pelepasan_pemesanan->pembayaran_pemesanan->total_tarif_sewa }}"
                                         readonly>
                                 </div>
@@ -156,14 +156,14 @@
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="total_bayar">Total Bayar</label>
-                                    <input type="number" id="total_bayar" class="input" autocomplete="off" readonly
+                                    <input type="text" id="total_bayar" class="input" autocomplete="off" readonly
                                         value="{{ $pelepasan_pemesanan->pembayaran_pemesanan->total_bayar ? $pelepasan_pemesanan->pembayaran_pemesanan->total_bayar : '' }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
                                     <label for="total_kembalian">Total Kembalian</label>
-                                    <input type="number" id="total_kembalian" class="input" autocomplete="off"
+                                    <input type="text" id="total_kembalian" class="input" autocomplete="off"
                                         value="{{ $pelepasan_pemesanan->pembayaran_pemesanan->total_kembalian }}"
                                         readonly>
                                 </div>
@@ -227,4 +227,29 @@
             </div>
         </div>
     </div>
+
+    <script>
+        let totalTarifSewa = document.getElementById('total_tarif_sewa')
+        totalTarifSewa.value = formatRupiah(totalTarifSewa.value, 'Rp. ');
+        let totalBayar = document.getElementById('total_bayar')
+        totalBayar.value = formatRupiah(totalBayar.value, 'Rp. ');
+        let totalKembalian = document.getElementById('total_kembalian')
+        totalKembalian.value = formatRupiah(totalKembalian.value, 'Rp. ');
+
+        function formatRupiah(angka, prefix) {
+            let number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
+    </script>
 @endsection
