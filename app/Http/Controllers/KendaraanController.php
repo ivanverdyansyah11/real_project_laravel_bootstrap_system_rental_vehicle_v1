@@ -186,6 +186,13 @@ class KendaraanController extends Controller
             $validatedData['status'] = 'ready';
             $validatedData['kilometer_saat_ini'] = $validatedData['kilometer'];
 
+            $validatedData['tarif_sewa_hari'] = str_replace('Rp. ', '', $validatedData['tarif_sewa_hari']);
+            $validatedData['tarif_sewa_hari'] = (int) str_replace('.', '', $validatedData['tarif_sewa_hari']);
+            $validatedData['tarif_sewa_minggu'] = str_replace('Rp. ', '', $validatedData['tarif_sewa_minggu']);
+            $validatedData['tarif_sewa_minggu'] = (int) str_replace('.', '', $validatedData['tarif_sewa_minggu']);
+            $validatedData['tarif_sewa_bulan'] = str_replace('Rp. ', '', $validatedData['tarif_sewa_bulan']);
+            $validatedData['tarif_sewa_bulan'] = (int) str_replace('.', '', $validatedData['tarif_sewa_bulan']);
+
             if (!empty($validatedData['foto_kendaraan'])) {
                 $image = $request->file('foto_kendaraan');
                 $imageName = date("Ymdhis") . "_" . $image->getClientOriginalName();
@@ -249,6 +256,13 @@ class KendaraanController extends Controller
             $validatedData['jenis_kendaraans_id'] = $jenis_kendaraans_id;
             $validatedData['brand_kendaraans_id'] = $brand_kendaraans_id;
             $validatedData['kilometer_saat_ini'] = $request->kilometer;
+
+            $validatedData['tarif_sewa_hari'] = str_replace('Rp. ', '', $validatedData['tarif_sewa_hari']);
+            $validatedData['tarif_sewa_hari'] = (int) str_replace('.', '', $validatedData['tarif_sewa_hari']);
+            $validatedData['tarif_sewa_minggu'] = str_replace('Rp. ', '', $validatedData['tarif_sewa_minggu']);
+            $validatedData['tarif_sewa_minggu'] = (int) str_replace('.', '', $validatedData['tarif_sewa_minggu']);
+            $validatedData['tarif_sewa_bulan'] = str_replace('Rp. ', '', $validatedData['tarif_sewa_bulan']);
+            $validatedData['tarif_sewa_bulan'] = (int) str_replace('.', '', $validatedData['tarif_sewa_bulan']);
 
             if ($request->file('foto_kendaraan')) {
                 $path = "assets/img/kendaraan-images/$kendaraan->foto_kendaraan";
