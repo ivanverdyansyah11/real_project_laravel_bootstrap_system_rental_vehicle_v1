@@ -191,7 +191,7 @@
                                 <div class="col-md-4 mb-4">
                                     <div class="input-wrapper">
                                         <label for="total_tarif_sewa">Total Tarif Sewa</label>
-                                        <input type="number" id="total_tarif_sewa" class="input" autocomplete="off"
+                                        <input type="text" id="total_tarif_sewa" class="input" autocomplete="off"
                                             name="total_tarif_sewa" value="{{ $total_tarif_sewa }}" required readonly>
                                         @error('total_tarif_sewa')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -211,7 +211,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="total_bayar">Total Bayar</label>
-                                        <input type="number" id="total_bayar" class="input" autocomplete="off"
+                                        <input type="text" id="total_bayar" class="input" autocomplete="off"
                                             name="total_bayar" value="{{ old('total_bayar') }}">
                                         @error('total_bayar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -332,7 +332,6 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
     <script>
         $("#sarung_jok").select2({
             theme: "bootstrap-5",
@@ -358,21 +357,40 @@
             theme: "bootstrap-5",
         });
 
-        const totalTarifSewa = document.querySelector('#total_tarif_sewa');
-        const totalBayar = document.querySelector('#total_bayar');
+        let totalTarifSewa = document.querySelector('#total_tarif_sewa');
+        let totalBayar = document.querySelector('#total_bayar');
 
-        totalBayar.addEventListener('change', function() {
-            let totalTarifSewaValue = parseInt(totalTarifSewa.value)
-            let totalBayarValue = parseInt(totalBayar.value)
-            let totalKembalianValue;
+        totalBayar.addEventListener('keyup', function() {
+            let totalTarifSewaValue = $('#total_tarif_sewa').val().replace('Rp. ', '');
+            totalTarifSewaValue = parseInt(totalTarifSewaValue.replace(/\./g, ''));
+            let totalBayarValue = $('#total_bayar').val().replace('Rp. ', '');
+            totalBayarValue = parseInt(totalBayarValue.replace(/\./g, ''));
+
+            let totalKembalian;
 
             if (totalTarifSewaValue < totalBayarValue) {
-                totalKembalianValue = totalBayarValue - totalTarifSewaValue;
+                totalKembalian = totalBayarValue - totalTarifSewaValue;
             } else {
-                totalKembalianValue = 0;
+                totalKembalian = 0;
             }
 
-            document.getElementById('total_kembalian').value = totalKembalianValue;
+            document.getElementById('total_kembalian').value = formatRupiah(totalKembalian, 'Rp. ');
+
+            function formatRupiah(angka, prefix) {
+                angka = angka.toString();
+                let number_string = angka.replace(/[^,\d]/g, '').toString(),
+                    split = number_string.split(','),
+                    sisa = split[0].length % 3,
+                    rupiah = split[0].substr(0, sisa),
+                    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                if (ribuan) {
+                    separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+                rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                return prefix == undefined ? rupiah : (rupiah ? prefix + rupiah : '');
+            }
         });
 
         const tagCreateTransaction = document.querySelector('.tag-create-transaction');
@@ -386,5 +404,34 @@
         inputCreateTransaction.addEventListener('change', function() {
             tagCreateTransaction.src = URL.createObjectURL(inputCreateTransaction.files[0]);
         });
+
+        totalTarifSewa.value = formatRupiah(totalTarifSewa.value, 'Rp. ');
+
+        totalBayar.value = formatRupiah(totalBayar.value, 'Rp. ');
+        totalBayar.addEventListener('keyup', function(e) {
+            totalBayar.value = formatRupiah(this.value, 'Rp. ');
+        });
+
+        let totalKembalian = document.getElementById('total_kembalian')
+        totalKembalian.value = formatRupiah(totalKembalian.value, 'Rp. ');
+        totalKembalian.addEventListener('keyup', function(e) {
+            totalKembalian.value = formatRupiah(this.value, 'Rp. ');
+        });
+
+        function formatRupiah(angka, prefix) {
+            let number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
     </script>
 @endsection
