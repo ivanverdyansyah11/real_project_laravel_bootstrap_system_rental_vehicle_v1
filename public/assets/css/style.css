@@ -400,16 +400,16 @@ body {
 
 .topbar .popup-topbar {
     display: inline-block;
-    bottom: -106px;
+    bottom: -140px;
     right: 0;
-    width: 76%;
+    width: 200px;
     height: fit-content;
     z-index: -9999;
     opacity: 0;
 }
 
 .topbar .popup-topbar.active {
-    bottom: -126px;
+    bottom: -160px;
     z-index: 10;
     opacity: 1;
 }
@@ -987,6 +987,13 @@ body {
     right: 0;
     opacity: 0;
     z-index: -9999;
+}
+
+@media (max-width: 767.98px) {
+    .modal-other.modal-big {
+        right: 0;
+        left: 0;
+    }
 }
 
 .modal-other.active {
