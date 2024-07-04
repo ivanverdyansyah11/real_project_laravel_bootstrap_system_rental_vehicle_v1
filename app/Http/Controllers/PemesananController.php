@@ -95,6 +95,13 @@ class PemesananController extends Controller
                 'metode_bayar' => 'nullable|string',
                 'keterangan' => 'nullable|string',
             ]);
+            $validatedDataPembayaran['total_tarif_sewa'] = str_replace('Rp. ', '', $validatedDataPembayaran['total_tarif_sewa']);
+            $validatedDataPembayaran['total_tarif_sewa'] = (int) str_replace('.', '', $validatedDataPembayaran['total_tarif_sewa']);
+            $validatedDataPembayaran['total_bayar'] = str_replace('Rp. ', '', $validatedDataPembayaran['total_bayar']);
+            $validatedDataPembayaran['total_bayar'] = (int) str_replace('.', '', $validatedDataPembayaran['total_bayar']);
+            $validatedDataPembayaran['total_kembalian'] = str_replace('Rp. ', '', $validatedDataPembayaran['total_kembalian']);
+            $validatedDataPembayaran['total_kembalian'] = (int) str_replace('.', '', $validatedDataPembayaran['total_kembalian']);
+
             $validatedData['pemesanans_id'] = $pemesanan->id;
             $validatedData['kendaraans_id'] = $pemesanan->kendaraans_id;
             $validatedDataPembayaran['kendaraans_id'] = $pemesanan->kendaraans_id;
