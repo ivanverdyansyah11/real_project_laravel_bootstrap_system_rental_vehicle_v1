@@ -77,7 +77,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
                                         <label for="total_biaya">Total Biaya</label>
-                                        <input type="number" id="total_biaya" class="input" autocomplete="off"
+                                        <input type="text" id="total_biaya" class="input" autocomplete="off"
                                             name="total_biaya" value="{{ old('total_biaya') }}" required>
                                         @error('total_biaya')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -115,11 +115,48 @@
 
         jumlahHari.addEventListener('change', function() {
             const jumlahHariValue = parseInt(jumlahHari.value);
-            const tarifSewaValue = parseInt(tarifSewa.value);
 
-            const totalTarifWaktu = jumlahHariValue * tarifSewaValue;
+            let tarifSewaValue = $('#tarifSewa').val().replace('Rp. ', '');
+            tarifSewaValue = parseInt(tarifSewaValue.replace(/\./g, ''));
 
-            totalBiaya.value = totalTarifWaktu;
+            let totalTarifWaktu = parseInt(jumlahHariValue * tarifSewaValue);
+            console.log(totalTarifWaktu);
+
+            totalBiaya.value = formatRupiah(totalTarifWaktu, 'Rp. ');
+
+            function formatRupiah(angka, prefix) {
+                let number_string = angka.toString().replace(/[^,\d]/g, ''),
+                    split = number_string.split(','),
+                    sisa = split[0].length % 3,
+                    rupiah = split[0].substr(0, sisa),
+                    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                if (ribuan) {
+                    let separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+
+                rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+                return prefix === undefined ? rupiah : (rupiah ? prefix + rupiah : '');
+            }
         });
+
+        tarifSewa.value = formatRupiah(tarifSewa.value, 'Rp. ');
+
+        function formatRupiah(angka, prefix) {
+            let number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
     </script>
 @endsection
