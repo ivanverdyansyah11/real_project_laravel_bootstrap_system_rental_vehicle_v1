@@ -208,7 +208,7 @@
                                 <div class="col-md-4 mb-4">
                                     <div class="input-wrapper">
                                         <label for="biaya_tambahan">Biaya Tambahan</label>
-                                        <input type="number" id="biaya_tambahan" name="biaya_tambahan" class="input"
+                                        <input type="text" id="biaya_tambahan" name="biaya_tambahan" class="input"
                                             autocomplete="off" value="0">
                                         @error('biaya_tambahan')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -228,7 +228,7 @@
                                 <div class="col-md-4 mb-4">
                                     <div class="input-wrapper">
                                         <label for="total_bayar_saat_ini">Total Bayar</label>
-                                        <input type="number" id="total_bayar_saat_ini" class="input"
+                                        <input type="text" id="total_bayar_saat_ini" class="input"
                                             autocomplete="off" name="total_bayar" value="0" required>
                                         @error('total_bayar')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -240,7 +240,7 @@
                                         <label for="total_kembalian">Total Kembalian</label>
                                         <input type="hidden" id="total_kembalian_dulu"
                                             value="{{ $pembayaran->total_kembalian }}">
-                                        <input type="number" id="total_kembalian" class="input" autocomplete="off"
+                                        <input type="text" id="total_kembalian" class="input" autocomplete="off"
                                             name="total_kembalian" value="0" readonly required>
                                         @error('total_kembalian')
                                             <p class="caption-error mt-2">{{ $message }}</p>
@@ -375,20 +375,23 @@
         if (parseInt(totalBayar.value) < parseInt(totalTarifSewa.value)) {
             let totalBayarValue = parseInt(totalBayar.value)
             let totalTarifSewaValue = parseInt(totalTarifSewa.value)
-
             totalBayarSisaValue = totalTarifSewaValue - totalBayarValue
-
             totalBayarSisa.value = totalBayarSisaValue
         } else {
             totalBayarSisa.value = 0
         }
 
-        totalBayarSaatIni.addEventListener('change', function() {
+        totalBayarSaatIni.addEventListener('keyup', function() {
             const biayaTambahan = document.querySelector('#biaya_tambahan');
-            let totalBayarSaatIniValue = parseInt(totalBayarSaatIni.value)
-            let totalTarifSewaValue = parseInt(totalTarifSewa.value)
-            let biayaTambahanValue = parseInt(biayaTambahan.value)
-            let totalBayarValue = parseInt(totalBayar.value)
+            let totalTarifSewaValue = $('#total_tarif_sewa').val().replace('Rp. ', '');
+            totalTarifSewaValue = parseInt(totalTarifSewaValue.replace(/\./g, ''));
+            let totalBayarValue = $('#total_bayar').val().replace('Rp. ', '');
+            totalBayarValue = parseInt(totalBayarValue.replace(/\./g, ''));
+
+            let totalBayarSaatIniValue = $('#total_bayar_saat_ini').val().replace('Rp. ', '');
+            totalBayarSaatIniValue = parseInt(totalBayarSaatIniValue.replace(/\./g, ''));
+            let biayaTambahanValue = $('#biaya_tambahan').val().replace('Rp. ', '');
+            biayaTambahanValue = parseInt(biayaTambahanValue.replace(/\./g, ''));
 
             let totalKembalianValue;
             let totalBayarSisaValue = totalTarifSewaValue - totalBayarValue
@@ -401,7 +404,23 @@
                 totalKembalianValue = 0;
             }
 
-            totalKembalian.value = totalKembalianValue;
+            totalKembalian.value = formatRupiah(totalKembalianValue, 'Rp. ');
+
+            function formatRupiah(angka, prefix) {
+                angka = angka.toString();
+                let number_string = angka.replace(/[^,\d]/g, '').toString(),
+                    split = number_string.split(','),
+                    sisa = split[0].length % 3,
+                    rupiah = split[0].substr(0, sisa),
+                    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                if (ribuan) {
+                    separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+                rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                return prefix == undefined ? rupiah : (rupiah ? prefix + rupiah : '');
+            }
         });
 
         biayaTambahan.addEventListener('change', function() {
@@ -420,5 +439,31 @@
         inputCreateTransaction.addEventListener('change', function() {
             tagCreateTransaction.src = URL.createObjectURL(inputCreateTransaction.files[0]);
         });
+
+        totalBayar.value = formatRupiah(totalBayar.value, 'Rp. ');
+        totalTarifSewa.value = formatRupiah(totalTarifSewa.value, 'Rp. ');
+        totalBayarSisa.value = formatRupiah(totalBayarSisa.value, 'Rp. ');
+        biayaTambahan.addEventListener('keyup', function(e) {
+            biayaTambahan.value = formatRupiah(this.value, 'Rp. ');
+        });
+        totalBayarSaatIni.addEventListener('keyup', function(e) {
+            totalBayarSaatIni.value = formatRupiah(this.value, 'Rp. ');
+        });
+
+        function formatRupiah(angka, prefix) {
+            let number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
     </script>
 @endsection
