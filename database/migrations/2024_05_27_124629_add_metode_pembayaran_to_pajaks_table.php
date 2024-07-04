@@ -14,9 +14,9 @@ class AddMetodePembayaranToPajaksTable extends Migration
      */
     public function up()
     {
-//         Schema::table('pajaks', function (Blueprint $table) {
-//             $table->enum('metode_bayar', ['cash', 'transfer bank', 'internet banking', 'mobile banking', 'virtual account', 'online credit card', 'rekening bersama', 'payPal', 'e-money']);
-//         });
+        //         Schema::table('pajaks', function (Blueprint $table) {
+        //             $table->enum('metode_bayar', ['cash', 'transfer bank', 'internet banking', 'mobile banking', 'virtual account', 'online credit card', 'rekening bersama', 'payPal', 'e-money']);
+        //         });
         DB::statement("ALTER TABLE `pajaks` MODIFY  `metode_bayar` ENUM('cash', 'transfer bank', 'internet banking', 'mobile banking', 'virtual account', 'online credit card', 'rekening bersama', 'payPal', 'e-money') NULL");
     }
 
