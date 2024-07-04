@@ -57,7 +57,7 @@
                                     </div>
                                     <h6 class="product-year mb-0">{{ $kendaraan->seri_kendaraan->nomor_seri }}</h6>
                                 </div>
-                                <div class="wrapper-button d-none d-md-flex">
+                                <div class="wrapper-button d-flex">
                                     <a href="{{ route('servis.check', $kendaraan->id) }}"
                                         class="button-primary w-100">Servis
                                         Kendaraan</a>
