@@ -36,8 +36,9 @@
                         <div class="col-md-4 mb-4">
                             <div class="input-wrapper">
                                 <label for="waktu_sewa_minggu">Total Mingguan</label>
-                                <input min="0" type="number" id="waktu_sewa_minggu" class="input" autocomplete="off"
-                                    value="{{ old('total_mingguan') ?: '0' }}" name="total_mingguan" required>
+                                <input min="0" type="number" id="waktu_sewa_minggu" class="input"
+                                    autocomplete="off" value="{{ old('total_mingguan') ?: '0' }}" name="total_mingguan"
+                                    required>
                             </div>
                         </div>
                         <div class="col-md-4 mb-4">
