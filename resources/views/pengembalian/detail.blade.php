@@ -203,7 +203,7 @@
                                         value="{{ $pelepasan_pemesanan->pembayaran_pemesanan->keterangan }}">
                                 </div>
                             </div>
-                            <div class="col-12 d-none d-md-inline-block">
+                            <div class="col-12">
                                 <div class="button-wrapper d-flex">
                                     <a href="{{ route('pengembalian.restoration', $pelepasan_pemesanan->id) }}"
                                         class="button-primary">Lakukan Pengembalian</a>
@@ -216,11 +216,11 @@
                                         Pengembalian</a>
                                 </div>
                             </div>
-                            <div class="col-12">
+                            {{-- <div class="col-12">
                                 <div class="button-wrapper d-flex d-md-none">
                                     <a href="{{ route('pemesanan') }}" class="button-reverse">Kembali ke Halaman</a>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
