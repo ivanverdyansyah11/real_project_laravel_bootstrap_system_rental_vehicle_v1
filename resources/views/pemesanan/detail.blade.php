@@ -62,23 +62,25 @@
                     <div class="col-md-4 mb-4">
                         <div class="input-wrapper">
                             <label for="total_harian">Total Harian</label>
-                            <input min="0" type="number" id="total_harian" class="input" autocomplete="off" name="total_harian"
-                                disabled value="{{ $pemesanan->total_harian != 0 ? $pemesanan->total_harian : '0' }}">
+                            <input min="0" type="number" id="total_harian" class="input" autocomplete="off"
+                                name="total_harian" disabled
+                                value="{{ $pemesanan->total_harian != 0 ? $pemesanan->total_harian : '0' }}">
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="input-wrapper">
                             <label for="total_mingguan">Total Mingguan</label>
-                            <input min="0" type="number" id="total_mingguan" class="input" autocomplete="off" disabled
-                                name="total_mingguan"
+                            <input min="0" type="number" id="total_mingguan" class="input" autocomplete="off"
+                                disabled name="total_mingguan"
                                 value="{{ $pemesanan->total_mingguan != 0 ? $pemesanan->total_mingguan : '0' }}">
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="input-wrapper">
                             <label for="total_bulanan">Total Bulanan</label>
-                            <input min="0" type="number" id="total_bulanan" class="input" autocomplete="off" name="total_bulanan"
-                                disabled value="{{ $pemesanan->total_bulanan != 0 ? $pemesanan->total_bulanan : '0' }}">
+                            <input min="0" type="number" id="total_bulanan" class="input" autocomplete="off"
+                                name="total_bulanan" disabled
+                                value="{{ $pemesanan->total_bulanan != 0 ? $pemesanan->total_bulanan : '0' }}">
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
@@ -172,7 +174,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-12 d-none d-md-inline-block">
+                    <div class="col-12">
                         <div class="button-wrapper d-flex">
                             <a href="{{ route('pemesanan.release', $pemesanan->id) }}" class="button-primary">Pesan
                                 Kendaraan</a>
@@ -180,11 +182,11 @@
                                 Pesan</a>
                         </div>
                     </div>
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <div class="button-wrapper d-flex d-md-none">
                             <a href="{{ route('pemesanan') }}" class="button-reverse">Kembali ke Halaman</a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
