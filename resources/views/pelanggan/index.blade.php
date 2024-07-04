@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col-12 d-flex justify-content-between align-items-center">
+            <div class="col-12 d-flex justify-content-between align-items-center gap-2">
                 <form class="form-search d-inline-block" method="POST" action="{{ route('pelanggan.search') }}">
                     @csrf
                     <div class="wrapper-search">
@@ -28,7 +28,7 @@
                         </label>
                     </div>
                 </form>
-                <a href="{{ route('pelanggan.create') }}" class="button-primary d-none d-md-flex align-items-center">
+                <a href="{{ route('pelanggan.create') }}" class="button-primary d-flex align-items-center">
                     <img src="{{ asset('assets/img/button/add.svg') }}" alt="Button Tambah Icon"
                         class="img-fluid button-icon">
                     Tambah
@@ -77,11 +77,11 @@
                                         <div class="detail-icon"></div>
                                     </a>
                                     <a href="{{ route('pelanggan.edit', $pelanggan->id) }}"
-                                        class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
+                                        class="button-action button-edit d-flex justify-content-center align-items-center">
                                         <div class="edit-icon"></div>
                                     </a>
                                     <button type="button"
-                                        class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
+                                        class="button-action button-delete d-flex justify-content-center align-items-center"
                                         data-bs-toggle="modal" data-bs-target="#hapusPelangganModal"
                                         data-id="{{ $pelanggan->id }}">
                                         <div class="delete-icon"></div>
