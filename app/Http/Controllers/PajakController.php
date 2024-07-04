@@ -73,7 +73,10 @@ class PajakController extends Controller
                 'finance' => 'required|string',
             ]);
 
+            $validatedData['jumlah_bayar'] = str_replace('Rp. ', '', $validatedData['jumlah_bayar']);
+            $validatedData['jumlah_bayar'] = (int) str_replace('.', '', $validatedData['jumlah_bayar']);
             $validatedData['kendaraans_id'] = $id;
+
             $kendaraan = Kendaraan::where('id', $validatedData['kendaraans_id'])->first();
             if ($validatedData['jenis_pajak'] == 'samsat') {
                 $kendaraan->update(['terakhir_samsat' => Carbon::parse($kendaraan->terakhir_samsat)->addYears($validatedData['lama_pajak'])]);
