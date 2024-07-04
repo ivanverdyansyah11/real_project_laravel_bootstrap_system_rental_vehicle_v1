@@ -86,6 +86,13 @@ class PengembalianController extends Controller
                 'keterangan' => 'nullable|string',
             ]);
 
+            $validatedData['total_bayar'] = str_replace('Rp. ', '', $validatedData['total_bayar']);
+            $validatedData['total_bayar'] = (int) str_replace('.', '', $validatedData['total_bayar']);
+            $validatedData['total_kembalian'] = str_replace('Rp. ', '', $validatedData['total_kembalian']);
+            $validatedData['total_kembalian'] = (int) str_replace('.', '', $validatedData['total_kembalian']);
+            $validatedData['biaya_tambahan'] = str_replace('Rp. ', '', $validatedData['biaya_tambahan']);
+            $validatedData['biaya_tambahan'] = (int) str_replace('.', '', $validatedData['biaya_tambahan']);
+
             $validatedData['pelepasan_pemesanans_id'] = $pemesanan->id;
             if ($request->metode_bayar == "-") {
                 $validatedData['metode_bayar'] = null;
