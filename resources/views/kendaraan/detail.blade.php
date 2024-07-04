@@ -39,11 +39,11 @@
                 <h5 class="subtitle">Detail Kendaraan</h5>
                 <div class="wrapper d-flex gap-2">
                     <a href="{{ route('kendaraan.edit', $kendaraan->id) }}"
-                        class="button-action button-edit d-none d-md-flex justify-content-center align-items-center">
+                        class="button-action button-edit d-flex justify-content-center align-items-center">
                         <div class="edit-icon"></div>
                     </a>
                     <button type="button"
-                        class="button-action button-delete d-none d-md-flex justify-content-center align-items-center"
+                        class="button-action button-delete d-flex justify-content-center align-items-center"
                         data-bs-toggle="modal" data-bs-target="#hapusKendaraanModal" data-id="{{ $kendaraan->id }}">
                         <div class="delete-icon"></div>
                     </button>
