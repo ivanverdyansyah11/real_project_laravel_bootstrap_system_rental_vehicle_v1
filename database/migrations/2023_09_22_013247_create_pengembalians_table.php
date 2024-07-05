@@ -28,6 +28,7 @@ class CreatePengembaliansTable extends Migration
             $table->enum('karpet', ['ada', 'tidak ada', 'kosong']);
             $table->enum('kondisi_kendaraan', ['baik', 'rusak ringan', 'rusak berat']);
             $table->enum('ban_serep', ['ada', 'tidak ada', 'kosong'])->nullable();
+            $table->string('metode_bayar');
             $table->string('biaya_tambahan')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
