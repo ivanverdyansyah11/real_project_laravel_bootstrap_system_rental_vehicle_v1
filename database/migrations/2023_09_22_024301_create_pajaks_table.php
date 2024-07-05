@@ -19,6 +19,7 @@ class CreatePajaksTable extends Migration
             $table->enum('jenis_pajak', ['samsat', 'angsuran', 'ganti nomor polisi']);
             $table->date('tanggal_bayar');
             $table->integer('lama_pajak');
+            $table->string('metode_bayar');
             $table->string('jumlah_bayar');
             $table->timestamps();
             $table->softDeletes();
