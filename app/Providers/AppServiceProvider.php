@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use App\Types\EnumType;
+use Doctrine\DBAL\Types\Type;
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +28,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+        if (!Type::hasType('enum')) {
+            Type::addType('enum', EnumType::class);
+        }
+
+        $platform = DB::getDoctrineConnection()->getDatabasePlatform();
+        $platform->markDoctrineTypeCommented(Type::getType('enum'));
     }
 }
