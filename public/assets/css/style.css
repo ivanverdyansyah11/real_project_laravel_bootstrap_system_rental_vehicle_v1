@@ -606,6 +606,12 @@ body {
     z-index: 2;
 }
 
+.input-wrapper > p.label {
+    font-size: 0.813rem;
+    font-family: var(--urbanist-regular);
+    color: rgba(var(--dark-color), 0.52);
+}
+
 .input-wrapper > .input-line p {
     font-size: 0.913rem;
     color: rgba(var(--dark-color), 0.52);
