@@ -4,6 +4,9 @@
     <div class="content">
         <div class="row">
             <div class="col-12">
+                @php
+                    $today = Carbon\Carbon::now()->format('Y-m-d');
+                @endphp
                 @if (session()->has('success'))
                     <div class="alert alert-success mb-4" role="alert">
                         {{ session('success') }}
@@ -11,6 +14,10 @@
                 @elseif(session()->has('failed'))
                     <div class="alert alert-danger mb-4" role="alert">
                         {{ session('failed') }}
+                    </div>
+                @elseif($pelepasan_pemesanan->pemesanan->tanggal_akhir < $today)
+                    <div class="alert alert-danger mb-4" role="alert">
+                        Tanggal pengembalian sudah lewat!
                     </div>
                 @endif
             </div>
