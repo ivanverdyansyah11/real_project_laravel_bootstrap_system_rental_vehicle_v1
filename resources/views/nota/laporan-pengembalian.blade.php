@@ -51,7 +51,8 @@
                                 <div class="input-wrapper">
                                     <label for="total_bayar">Total Bayar Sebelumnya</label>
                                     <input type="text" id="total_bayar" class="input" autocomplete="off"
-                                        value="Rp. {{ $pengembalian->pelepasan_pemesanan->pembayaran_pemesanan->total_bayar ? number_format($pengembalian->pelepasan_pemesanan->pembayaran_pemesanan->total_bayar, 2, ",", ".") : '0' }}" readonly>
+                                        value="Rp. {{ $pengembalian->pelepasan_pemesanan->pembayaran_pemesanan->total_bayar ? number_format($pengembalian->pelepasan_pemesanan->pembayaran_pemesanan->total_bayar, 2, ',', '.') : '0' }}"
+                                        readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
@@ -66,7 +67,7 @@
                                 <div class="input-wrapper">
                                     <label for="total_tarif_sewa">Total Tarif Sewa</label>
                                     <input type="text" id="total_tarif_sewa" class="input"
-                                        value="Rp. {{ number_format($pengembalian->pelepasan_pemesanan->pembayaran_pemesanan->total_tarif_sewa, 2, ",", ".") }}"
+                                        value="Rp. {{ number_format($pengembalian->pelepasan_pemesanan->pembayaran_pemesanan->total_tarif_sewa, 2, ',', '.') }}"
                                         readonly>
                                 </div>
                             </div>
@@ -95,7 +96,14 @@
                                 <div class="input-wrapper">
                                     <label for="total_bayar">Total Bayar</label>
                                     <input type="text" id="total_bayar" class="input"
-                                        value="Rp. {{ number_format($pengembalian->total_bayar, 2, ",", ".") }}" readonly>
+                                        value="Rp. {{ number_format($pengembalian->total_bayar, 2, ',', '.') }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="kilometer">Kilometer Awal (Km)</label>
+                                    <input type="number" id="kilometer" class="input" autocomplete="off"
+                                        value="{{ $pengembalian->pelepasan_pemesanan->kendaraan->kilometer }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
@@ -107,9 +115,16 @@
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="input-wrapper">
-                                    <label for="bensin_kembali">Bensin Kembali</label>
+                                    <label for="bensin_awal">Bensin Awal (Bar)</label>
+                                    <input type="text" id="bensin_awal" class="input"
+                                        value="{{ $pengembalian->pelepasan_pemesanan->bensin_keluar }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="input-wrapper">
+                                    <label for="bensin_kembali">Bensin Kembali (Bar)</label>
                                     <input type="text" id="bensin_kembali" class="input"
-                                        value="{{ $pengembalian->bensin_kembali }} Strip Bar" readonly>
+                                        value="{{ $pengembalian->bensin_kembali }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
@@ -158,7 +173,8 @@
                                 <div class="input-wrapper">
                                     <label for="biaya_tambahan">Biaya Tambahan</label>
                                     <input type="text" id="biaya_tambahan" class="input"
-                                        value="Rp. {{ $pengembalian->biaya_tambahan ? number_format($pengembalian->biaya_tambahan, 2, ",", ".") : '0' }}" readonly>
+                                        value="Rp. {{ $pengembalian->biaya_tambahan ? number_format($pengembalian->biaya_tambahan, 2, ',', '.') : '0' }}"
+                                        readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
