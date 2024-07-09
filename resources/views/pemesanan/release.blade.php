@@ -74,16 +74,24 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="sarung_jok">Sarung Jok</label>
-                                        <select id="sarung_jok" class="input" name="sarung_jok" required>
-                                            <option value="">Pilih kelengkapan sarung jok</option>
-                                            <option value="ada" {{ old('sarung_jok') == 'ada' ? 'selected' : '' }}>Ada
-                                            </option>
-                                            <option value="tidak ada"
-                                                {{ old('sarung_jok') == 'tidak ada' ? 'selected' : '' }}>Tidak Ada</option>
-                                            <option value="kosong" {{ old('sarung_jok') == 'kosong' ? 'selected' : '' }}>
-                                                Kosong</option>
-                                        </select>
+                                        <p class="label">Sarung Jok</p>
+                                        <div class="wrapper d-flex gap-4 align-items-center">
+                                            <div class="wrapper-checkbox d-flex gap-1 align-items-center">
+                                                <input type="radio" id="ada_jok" name="sarung_jok" value="ada"
+                                                    {{ old('sarung_jok') == 'ada' ? 'checked' : '' }} />
+                                                <label for="ada_jok">Ada</label>
+                                            </div>
+                                            <div class="wrapper-checkbox d-flex gap-1 align-items-center">
+                                                <input type="radio" id="tidak_ada_jok" name="sarung_jok" value="tidak ada"
+                                                    {{ old('sarung_jok') == 'tidak_ada' ? 'checked' : '' }} />
+                                                <label for="tidak_ada_jok">Tidak Ada</label>
+                                            </div>
+                                            <div class="wrapper-checkbox d-flex gap-1 align-items-center">
+                                                <input type="radio" id="kosong_jok" name="sarung_jok" value="kosong"
+                                                    {{ old('sarung_jok') == 'kosong' ? 'checked' : '' }} />
+                                                <label for="kosong_jok">Kosong</label>
+                                            </div>
+                                        </div>
                                         @error('sarung_jok')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -91,17 +99,25 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="karpet">Karpet</label>
-                                        <select id="karpet" class="input" name="karpet" value="{{ old('karpet') }}"
-                                            required>
-                                            <option value="">Pilih kelengkapan karpet</option>
-                                            <option value="ada" {{ old('karpet') == 'ada' ? 'selected' : '' }}>Ada
-                                            </option>
-                                            <option value="tidak ada" {{ old('karpet') == 'tidak ada' ? 'selected' : '' }}>
-                                                Tidak Ada</option>
-                                            <option value="kosong" {{ old('karpet') == 'kosong' ? 'selected' : '' }}>
-                                                Kosong</option>
-                                        </select>
+                                        <p class="label">Karpet</p>
+                                        <div class="wrapper d-flex gap-4 align-items-center">
+                                            <div class="wrapper-checkbox d-flex gap-1 align-items-center">
+                                                <input type="radio" id="ada_karpet" name="karpet" value="ada"
+                                                    {{ old('karpet') == 'ada' ? 'checked' : '' }} />
+                                                <label for="ada_karpet">Ada</label>
+                                            </div>
+                                            <div class="wrapper-checkbox d-flex gap-1 align-items-center">
+                                                <input type="radio" id="tidak_ada_karpet" name="karpet"
+                                                    value="tidak ada"
+                                                    {{ old('karpet') == 'tidak_ada' ? 'checked' : '' }} />
+                                                <label for="tidak_ada_karpet">Tidak Ada</label>
+                                            </div>
+                                            <div class="wrapper-checkbox d-flex gap-1 align-items-center">
+                                                <input type="radio" id="kosong_karpet" name="karpet" value="kosong"
+                                                    {{ old('karpet') == 'kosong' ? 'checked' : '' }} />
+                                                <label for="kosong_karpet">Kosong</label>
+                                            </div>
+                                        </div>
                                         @error('karpet')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
@@ -109,37 +125,53 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="kondisi_kendaraan">Kondisi Kendaraan</label>
-                                        <select id="kondisi_kendaraan" class="input" name="kondisi_kendaraan"
-                                            value="{{ old('kondisi_kendaraan') }}" required>
-                                            <option value="">Pilih kondisi kendaraan</option>
-                                            <option value="baik"
-                                                {{ old('kondisi_kendaraan') == 'baik' ? 'selected' : '' }}>Baik</option>
-                                            <option value="rusak ringan"
-                                                {{ old('kondisi_kendaraan') == 'rusak ringan' ? 'selected' : '' }}>Rusak
-                                                Ringan</option>
-                                            <option value="rusak berat"
-                                                {{ old('kondisi_kendaraan') == 'rusak berat' ? 'selected' : '' }}>Rusak
-                                                Berat</option>
-                                        </select>
+                                        <p class="label">Kondisi Kendaraan</p>
+                                        <div class="wrapper d-flex gap-4 align-items-center">
+                                            <div class="wrapper-checkbox d-flex gap-1 align-items-center">
+                                                <input type="radio" id="baik" name="kondisi_kendaraan"
+                                                    value="baik"
+                                                    {{ old('kondisi_kendaraan') == 'baik' ? 'checked' : '' }} />
+                                                <label for="baik">Baik</label>
+                                            </div>
+                                            <div class="wrapper-checkbox d-flex gap-1 align-items-center">
+                                                <input type="radio" id="rusak_ringan" name="kondisi_kendaraan"
+                                                    value="rusak ringan"
+                                                    {{ old('kondisi_kendaraan') == 'rusak_ringan' ? 'checked' : '' }} />
+                                                <label for="rusak_ringan">Rusak Ringan</label>
+                                            </div>
+                                            <div class="wrapper-checkbox d-flex gap-1 align-items-center">
+                                                <input type="radio" id="rusak_berat" name="kondisi_kendaraan"
+                                                    value="rusak berat"
+                                                    {{ old('kondisi_kendaraan') == 'rusak_berat' ? 'checked' : '' }} />
+                                                <label for="rusak_berat">Rusak Berat</label>
+                                            </div>
+                                        </div>
                                         @error('kondisi_kendaraan')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-4">
                                     <div class="input-wrapper">
-                                        <label for="ban_serep">Ban Serep</label>
-                                        <select id="ban_serep" class="input" name="ban_serep"
-                                            value="{{ old('ban_serep') }}" required>
-                                            <option value="">Pilih ban serep</option>
-                                            <option value="ada" {{ old('ban_serep') == 'ada' ? 'selected' : '' }}>Ada
-                                            </option>
-                                            <option value="tidak ada"
-                                                {{ old('ban_serep') == 'tidak ada' ? 'selected' : '' }}>Tidak Ada</option>
-                                            <option value="kosong" {{ old('ban_serep') == 'kosong' ? 'selected' : '' }}>
-                                                Kosong</option>
-                                        </select>
+                                        <p class="label">Ban Serep</p>
+                                        <div class="wrapper d-flex gap-4 align-items-center">
+                                            <div class="wrapper-checkbox d-flex gap-1 align-items-center">
+                                                <input type="radio" id="ada_ban" name="ban_serep" value="ada"
+                                                    {{ old('ban_serep') == 'ada' ? 'checked' : '' }} />
+                                                <label for="ada_ban">Ada</label>
+                                            </div>
+                                            <div class="wrapper-checkbox d-flex gap-1 align-items-center">
+                                                <input type="radio" id="tidak_ada_ban" name="ban_serep"
+                                                    value="tidak ada"
+                                                    {{ old('ban_serep') == 'tidak_ada' ? 'checked' : '' }} />
+                                                <label for="tidak_ada_ban">Tidak Ada</label>
+                                            </div>
+                                            <div class="wrapper-checkbox d-flex gap-1 align-items-center">
+                                                <input type="radio" id="kosong_ban" name="ban_serep" value="kosong"
+                                                    {{ old('ban_serep') == 'kosong' ? 'checked' : '' }} />
+                                                <label for="kosong_ban">Kosong</label>
+                                            </div>
+                                        </div>
                                         @error('ban_serep')
                                             <p class="caption-error mt-2">{{ $message }}</p>
                                         @enderror
