@@ -244,11 +244,10 @@ class PemesananController extends Controller
 
             PembayaranPemesanan::where('pelepasan_pemesanans_id', $pelepasan_pemesanan->id)->first()->update($validatedDataPembayaran);
             $pelepasan_pemesanan->update($validatedData);
-
-            return redirect(route('pemesanan'))->with('success', 'Berhasil Edit Pelepasan Kendaraan!');
+            return redirect()->back()->with('success', 'Berhasil Edit Pelepasan Kendaraan!');
         } catch (\Exception $e) {
             logger($e->getMessage());
-            return redirect(route('pemesanan'))->with('failed', 'Gagal Edit Pelepasan Kendaraan!');
+            return redirect()->back()->with('failed', 'Gagal Edit Pelepasan Kendaraan!');
         }
     }
 }
