@@ -37,8 +37,8 @@
                                     <img src="{{ $pemesanan->foto_nota ? asset('assets/img/nota-images/' . $pemesanan->foto_nota) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-nota" alt="Nota Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input {{ $pemesanan->foto_nota ? '' : 'required' }} type="file" id="image" class="input-create-nota" name="foto_nota"
-                                            style="opacity: 0;">
+                                        <input {{ $pemesanan->foto_nota ? '' : 'required' }} type="file" id="image"
+                                            class="input-create-nota" name="foto_nota" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-nota">Pilih Foto
                                             Nota</button>
                                     </div>
@@ -55,8 +55,9 @@
                                     <img src="{{ $pemesanan->foto_nota_ttd ? asset('assets/img/nota-ttd-images/' . $pemesanan->foto_nota_ttd) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-nota-ttd" alt="Nota Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input {{ $pemesanan->foto_nota_ttd ? '' : 'required' }} type="file" id="image" class="input-create-nota-ttd"
-                                            name="foto_nota_ttd" style="opacity: 0;">
+                                        <input {{ $pemesanan->foto_nota_ttd ? '' : 'required' }} type="file"
+                                            id="image" class="input-create-nota-ttd" name="foto_nota_ttd"
+                                            style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-nota-ttd">Pilih Foto
                                             Nota TTD</button>
                                     </div>
@@ -73,8 +74,9 @@
                                     <img src="{{ $pemesanan->foto_dokumen ? asset('assets/img/pemesanan-dokumen-images/' . $pemesanan->foto_dokumen) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-document" alt="Dokumen Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input {{ $pemesanan->foto_dokumen ? '' : 'required' }} type="file" id="image" class="input-create-document"
-                                            name="foto_dokumen" value="{{ old('foto_dokumen') }}" style="opacity: 0;">
+                                        <input {{ $pemesanan->foto_dokumen ? '' : 'required' }} type="file"
+                                            id="image" class="input-create-document" name="foto_dokumen"
+                                            value="{{ old('foto_dokumen') }}" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-document">Pilih Foto
                                             Dokumen</button>
                                     </div>
@@ -91,8 +93,9 @@
                                     <img src="{{ $pemesanan->foto_kendaraan ? asset('assets/img/pemesanan-kendaraan-images/' . $pemesanan->foto_kendaraan) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-vehicle" alt="Kendaraan Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input {{ $pemesanan->foto_kendaraan ? '' : 'required' }} type="file" id="image" class="input-create-vehicle"
-                                            name="foto_kendaraan" value="{{ old('foto_kendaraan') }}" style="opacity: 0;">
+                                        <input {{ $pemesanan->foto_kendaraan ? '' : 'required' }} type="file"
+                                            id="image" class="input-create-vehicle" name="foto_kendaraan"
+                                            value="{{ old('foto_kendaraan') }}" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-vehicle">Pilih Foto
                                             Kendaraan</button>
                                     </div>
@@ -109,9 +112,9 @@
                                     <img src="{{ $pemesanan->foto_pelanggan ? asset('assets/img/pemesanan-pelanggan-images/' . $pemesanan->foto_pelanggan) : asset('assets/img/default/image-notfound.svg') }}"
                                         class="img-fluid tag-create-customer" alt="Pelanggan Image" width="80">
                                     <div class="wrapper-image w-100">
-                                        <input {{ $pemesanan->foto_pelanggan ? '' : 'required' }} type="file" id="image" class="input-create-customer"
-                                            name="foto_pelanggan" value="{{ old('foto_pelanggan') }}"
-                                            style="opacity: 0;">
+                                        <input {{ $pemesanan->foto_pelanggan ? '' : 'required' }} type="file"
+                                            id="image" class="input-create-customer" name="foto_pelanggan"
+                                            value="{{ old('foto_pelanggan') }}" style="opacity: 0;">
                                         <button type="button" class="button-reverse button-create-customer">Pilih Foto
                                             Pelanggan</button>
                                     </div>
@@ -183,21 +186,24 @@
                                     <div class="input-wrapper">
                                         <label for="tarif_sewa_hari">Tarif Sewa Kendaran Harian</label>
                                         <input type="text" id="tarif_sewa_hari" class="input" autocomplete="off"
-                                            value="Rp. {{ number_format($pemesanan->kendaraan->tarif_sewa_hari, 2, ",", ".") }}" readonly>
+                                            value="Rp. {{ number_format($pemesanan->kendaraan->tarif_sewa_hari, 2, ',', '.') }}"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="input-wrapper">
                                         <label for="tarif_sewa_minggu">Tarif Sewa Kendaran Mingguan</label>
                                         <input type="text" id="tarif_sewa_minggu" class="input" autocomplete="off"
-                                            value="Rp. {{ number_format($pemesanan->kendaraan->tarif_sewa_minggu, 2, ",", ".") }}" readonly>
+                                            value="Rp. {{ number_format($pemesanan->kendaraan->tarif_sewa_minggu, 2, ',', '.') }}"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <div class="input-wrapper">
                                         <label for="tarif_sewa_bulan">Tarif Sewa Kendaran Bulanan</label>
                                         <input type="text" id="tarif_sewa_bulan" class="input" autocomplete="off"
-                                            value="Rp. {{ number_format($pemesanan->kendaraan->tarif_sewa_bulan, 2, ",", ".") }}" readonly>
+                                            value="Rp. {{ number_format($pemesanan->kendaraan->tarif_sewa_bulan, 2, ',', '.') }}"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
@@ -264,7 +270,8 @@
                             <div class="input-wrapper">
                                 <label for="total_tarif_sewa">Total Tarif Sewa</label>
                                 <input type="text" id="total_tarif_sewa" class="input"
-                                    value="Rp. {{ number_format($pemesanan->pembayaran_pemesanan->total_tarif_sewa, 2, ",", ".") }}" readonly>
+                                    value="Rp. {{ number_format($pemesanan->pembayaran_pemesanan->total_tarif_sewa, 2, ',', '.') }}"
+                                    readonly>
                             </div>
                         </div>
                         <div class="col-md-6 mb-4">
@@ -278,7 +285,7 @@
                             <div class="input-wrapper">
                                 <label for="total_bayar">Total Bayar</label>
                                 <input type="text" id="total_bayar" class="input"
-                                    value="Rp. {{ $pemesanan->pembayaran_pemesanan->total_bayar ? number_format($pemesanan->pembayaran_pemesanan->total_bayar, 2, ",", ".") : '0' }}"
+                                    value="Rp. {{ $pemesanan->pembayaran_pemesanan->total_bayar ? number_format($pemesanan->pembayaran_pemesanan->total_bayar, 2, ',', '.') : '0' }}"
                                     readonly>
                             </div>
                         </div>
